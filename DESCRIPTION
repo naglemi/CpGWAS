@@ -1,0 +1,34 @@
+Package: CpGWAS
+Title: Build and deploy models for methylome-wide association studies
+Version: 0.0.0.9000
+Authors@R: c(
+    person(given = "Michael", family = "Nagle", email = "michael.nagle@libd.org", role = c("aut", "cre")),
+    person(given = "Shizhong", family = "Han", email = "shizhong.han@libd.org", role = "aut"))
+Description: CpGWAS is used to support methylome-wide association studies. Similar
+    to commonly-used TWAS methods, this package works by first constructing models
+    to predict methylation as a function of single-nucleotide polymorphisms (SNPs)
+    with training on a population segment for which both methylation and SNP data
+    are available. Next, this prediction model is used to predict methylation for the
+    remainder of the population, for which SNP data is available but methylation data
+    is not. Finally, the predicted methylation values can be used as explanatory
+    variables to predict phenotypes of interest.
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
+Imports:
+    data.table,
+    glmnet,
+    e1071,
+    doParallel,
+    parallel,
+    future.apply,
+    optparse,
+    pgenlibr,
+    bsseq,
+    tools,
+    Matrix,
+    GenomicRanges,
+    SummarizedExperiment,
+    stats,
+    methods
