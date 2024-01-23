@@ -1,0 +1,10 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.csv
+*.rds
+*.png
+scripts/model_a5.R
+scripts/.ipynb_checkpoints/CLI-checkpoint.R
+*.Rproj
