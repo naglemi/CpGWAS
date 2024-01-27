@@ -4,18 +4,18 @@
 \alias{rm_missing_observations}
 \title{Remove Observations with Missing Response Values}
 \usage{
-rm_missing_observations(yhat_train, X_train, verbose = FALSE)
+rm_missing_observations(y, X, verbose)
 }
 \arguments{
-\item{yhat_train}{Numeric vector representing the response variable (methylation levels) in the training set.}
+\item{y}{Numeric vector representing the response variable (methylation levels).}
 
-\item{X_train}{Matrix or data frame of predictors (SNP data) in the training set.
+\item{X}{Matrix or data frame of predictors (SNP data).
 Dimensions: Observations (rows) x SNPs (columns).}
 
 \item{verbose}{Logical indicating whether to print warnings about removed NAs.}
 }
 \value{
-A list containing two elements: 'yhat_train' and 'X_train', both filtered to exclude
+A list containing two elements: 'y' and 'X', both filtered to exclude
 observations with missing response values.
 }
 \description{
@@ -25,6 +25,6 @@ which is crucial in subsequent analyses of methylome-wide association studies.
 }
 \examples{
 \dontrun{
-filtered_data <- rm_missing_observations(yhat_train, X_train, verbose = TRUE)
+filtered_data <- rm_missing_observations(y, X, verbose = TRUE)
 }
 }

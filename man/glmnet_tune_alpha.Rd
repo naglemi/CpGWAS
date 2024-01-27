@@ -5,20 +5,24 @@
 \title{Hyperparameter Tuning for Elastic Net Model}
 \usage{
 glmnet_tune_alpha(
-  X_train,
-  yhat_train,
-  n_fold = 5,
-  verbose = FALSE,
-  lambda_choice = "1se",
-  alphas = seq(0, 1, 0.1)
+  X,
+  y,
+  n_fold,
+  verbose,
+  lambda_choice,
+  alphas,
+  cores_per_alpha,
+  num_cores,
+  allow_inefficient_parallelization,
+  ...
 )
 }
 \arguments{
-\item{X_train}{A matrix or data frame of SNP data used as predictors in the training set.
-Dimensions: Number of Observations (rows) x Number of SNPs (columns).}
+\item{X}{A matrix or data frame of predictors.
+Dimensions: Number of Observations (rows) x Number of Predictors (columns).}
 
-\item{yhat_train}{A numeric vector representing the response variable (methylation levels)
-in the training set. Length should match the number of rows in X_train.}
+\item{y}{A numeric vector representing the response variable.
+Length should match the number of rows in X.}
 
 \item{n_fold}{Integer, specifying the number of folds for cross-validation.}
 
@@ -28,20 +32,38 @@ in the training set. Length should match the number of rows in X_train.}
 ('min' for minimum MSE, '1se' for one-standard-error rule).}
 
 \item{alphas}{Numeric vector, specifying the alpha values to iterate over in tuning.}
+
+\item{cores_per_alpha}{Can be "all" or 1. "all" uses all cores for parallel processing
+within cv.glmnet (default setting). 1 uses all cores for parallel
+processing of alpha values.}
+
+\item{num_cores}{Integer, specifying the number of cores to use. Defaults to all
+available cores if not provided.}
+
+\item{allow_inefficient_parallelization}{Logical, allows inefficient parallelization
+when cores_per_alpha is 1 and there are
+more available cores than alpha values.
+Default is FALSE.}
 }
 \value{
 A list containing the fitted model, non-zero coefficients, optimal parameters,
 and correlation on test data.
 }
 \description{
-This function performs hyperparameter tuning for an elastic net model. It is particularly
-designed for methylome-wide association studies where the relationship between SNPs (Single
-Nucleotide Polymorphisms) and methylation levels is being modeled. The function iterates over
-a range of alpha values to find the optimal lambda using cross-validation.
+This function performs hyperparameter tuning for an elastic net model using glmnet.
+It iterates over a range of alpha values to find the optimal lambda using cross-validation.
+The function adapts its parallelization strategy based on the cores_per_alpha parameter
+and the number of cores specified.
 }
 \examples{
 \dontrun{
-fit <- glmnet_tune_alpha(X_train, yhat_train, n_fold = 5, verbose = TRUE,
-                         lambda_choice = "1se", alphas = seq(0, 1, 0.1))
+# Default example using all cores within cv.glmnet
+fit_default <- glmnet_tune_alpha(X, y, n_fold = 5, verbose = TRUE,
+                                 lambda_choice = "1se", alphas = seq(0, 1, 0.1))
+
+# Example with parallel processing of alpha values using all available cores
+fit_parallel <- glmnet_tune_alpha(X, y, n_fold = 5, verbose = TRUE,
+                                  lambda_choice = "1se", alphas = seq(0, 1, 0.1),
+                                  cores_per_alpha = 1)
 }
 }

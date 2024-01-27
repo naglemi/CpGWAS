@@ -5,8 +5,8 @@
 #'
 #' @slot methylations Matrix of methylation data.
 #' @slot genotype_IDs Vector of genotype IDs.
-#' @slot pvar1 Object representing variant information.
-#' @slot pvar2 Data table of variant information.
+#' @slot pvar_pointer Object representing variant information.
+#' @slot pvar_dt Data table of variant information.
 #' @slot pgen Object representing genotype information.
 #' @slot psam Data table of sample information.
 #' @slot cov Data frame of covariates.
@@ -17,8 +17,8 @@ setClass(
   slots = c(
     methylations = "matrix",
     genotype_IDs = "character",
-    pvar1 = "ANY",
-    pvar2 = "data.frame",
+    pvar_pointer = "ANY",
+    pvar_dt = "data.frame",
     pgen = "ANY",
     psam = "data.frame",
     cov = "matrix"
@@ -43,14 +43,19 @@ setClass(
 #' @importFrom GenomicRanges ranges start
 #'
 #' @examples
-#' \dontrun{
-#' methInput <- new("MethylationInput", BSseq_obj = BSseq_obj,
-#'                  snp_data_path = "path/to/snp_data", args = list(...))
-#' }
+#'
+#' # Where is SNP data in pgen format to be loaded?
+#' pgen_path = system.file("extdata", "chr1_sample_subset.pgen", package = "CpGWAS")
+#'
+#' data(chr1_methylation_sample_subset, package = "CpGWAS") # Load BSseq_sample
+#'
+#' methInput <- new("MethylationInput", BSseq_obj = BSobj_sample,
+#'                  snp_data_path = pgen_path)
+#'
 setMethod(
   "initialize",
   "MethylationInput",
-  function(.Object, BSseq_obj, snp_data_path, args) {
+  function(.Object, BSseq_obj, snp_data_path) {
     if (is.null(snp_data_path) || is.null(BSseq_obj)) {
       stop("A BSseq object and the path to SNP data are required.")
     }
@@ -77,9 +82,9 @@ setMethod(
       stop("One or more SNP data files not found at the specified paths.")
     }
 
-    pvar.1 <- pgenlibr::NewPvar(pvar_path)
-    pvar.2 <- fread(pvar_path)
-    pgen <- pgenlibr::NewPgen(pgen_path, pvar = pvar.1)
+    pvar_pointer <- pgenlibr::NewPvar(pvar_path)
+    pvar_dt <- fread(pvar_path)
+    pgen <- pgenlibr::NewPgen(pgen_path, pvar = pvar_pointer)
     psam <- fread(psam_path)
     psam_in_wgbs <- psam[which(psam$`#IID` %in% rownames(methylations))]
     genotype_IDs <- psam_in_wgbs$`#IID`
@@ -96,8 +101,8 @@ setMethod(
 
     .Object@methylations <- methylations
     .Object@genotype_IDs <- genotype_IDs
-    .Object@pvar1 <- pvar.1
-    .Object@pvar2 <- pvar.2
+    .Object@pvar_pointer <- pvar_pointer
+    .Object@pvar_dt <- pvar_dt
     .Object@pgen <- pgen
     .Object@psam <- psam
     .Object@cov <- cov
@@ -227,12 +232,12 @@ regress_out_cov_parallel <- function(methylations, cov_matrix, n_benchmarks = NU
     stop("Error: methylation data not found")
   }
 
-  cat("Dimensions of methylations: ", dim(methylations), "\n")
+  #cat("Dimensions of methylations: ", dim(methylations), "\n")
 
-  cat("Dimensions of cov_matrix: ", dim(cov_matrix), "\n")
+  #cat("Dimensions of cov_matrix: ", dim(cov_matrix), "\n")
 
   pseudoinv <- solve(t(cov_matrix) %*% cov_matrix) %*% t(cov_matrix)
-  cat("Dimensions of pseudoinv: ", dim(pseudoinv), "\n")
+  #cat("Dimensions of pseudoinv: ", dim(pseudoinv), "\n")
 
   n_tests <- if (is.null(n_benchmarks)) ncol(methylations) else n_benchmarks
   chunk_size <- ceiling(n_tests / no_cores)

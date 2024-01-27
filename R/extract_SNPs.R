@@ -30,8 +30,8 @@ extract_SNPs <- function(methInput, meth_site_pos, window_size) {
   lower_bound <- meth_site_pos - window_size - 1
   upper_bound <- meth_site_pos + window_size - 1
 
-  snp_indices <- which(methInput@pvar2$POS >= lower_bound & methInput@pvar2$POS <= upper_bound)
-  snp_IDs <- methInput@pvar2$ID[snp_indices]
+  snp_indices <- which(methInput@pvar_dt$POS >= lower_bound & methInput@pvar_dt$POS <= upper_bound)
+  snp_IDs <- methInput@pvar_dt$ID[snp_indices]
 
   if (length(snp_indices) <= 1) {
     return(NULL)  # No SNPs found in the specified window

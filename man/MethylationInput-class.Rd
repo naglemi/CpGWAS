@@ -15,9 +15,9 @@ It includes methods for loading and processing methylation and SNP data, along w
 
 \item{\code{genotype_IDs}}{Vector of genotype IDs.}
 
-\item{\code{pvar1}}{Object representing variant information.}
+\item{\code{pvar_pointer}}{Object representing variant information.}
 
-\item{\code{pvar2}}{Data table of variant information.}
+\item{\code{pvar_dt}}{Data table of variant information.}
 
 \item{\code{pgen}}{Object representing genotype information.}
 

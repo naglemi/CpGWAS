@@ -4,7 +4,7 @@
 \alias{extract_non_zero_coefs}
 \title{Extract Non-Zero Coefficients from an Elastic Net Model}
 \usage{
-extract_non_zero_coefs(model_fit)
+extract_non_zero_coefs(fitted_model)
 }
 \arguments{
 \item{model_fit}{The fitted elastic net model object from 'glmnet'.}
@@ -21,6 +21,6 @@ markers.
 }
 \examples{
 \dontrun{
-significant_snps <- extract_non_zero_coefs(fitted_model)
+features <- extract_non_zero_coefs(fitted_model)
 }
 }

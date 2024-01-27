@@ -25,90 +25,41 @@ impute_missing_values <- function(SNPs) {
   return(SNPs)
 }
 
-
-#' Tuning Function for Elastic Net Hyperparameters
-#'
-#' Performs hyperparameter tuning for elastic net models, specifically tailored for
-#' methylome-wide association studies. It iterates over a range of alpha values to find the optimal
-#' lambda using cross-validation.
-#'
-#' @param alpha Numeric value representing the alpha parameter in elastic net, controlling the mix
-#'              of L1 and L2 regularization. Expected range: [0, 1].
-#' @param X_train Training predictors, a matrix or data frame of SNP data.
-#'                Dimensions: Observations (rows) x SNPs (columns).
-#' @param yhat_train Numeric vector representing the response variable in the training set.
-#'                   Length should match the number of rows in X_train.
-#' @param fold_id Numeric vector specifying fold assignments for cross-validation.
-#' @param lambda_choice Character string indicating the method for choosing lambda
-#'                      ('min' for minimum MSE, '1se' for one-standard-error rule).
-#'
-#' @return A numeric vector containing the mean squared error, optimal lambda, and alpha.
-#'
-#' @importFrom glmnet glmnet cv.glmnet
-#'
-#' @examples
-#' \dontrun{
-#' optimal_parameters <- tuning_function(alpha, X_train, yhat_train, fold_id, lambda_choice)
-#' }
-tuning_function <- function(alpha, X_train, yhat_train, fold_id, lambda_choice) {
-  if (!is.numeric(alpha) || alpha < 0 || alpha > 1) {
-    stop("Alpha should be a numeric value between 0 and 1.")
-  }
-  if (!is.matrix(X_train) && !is.data.frame(X_train)) {
-    stop("X_train should be a matrix or data frame.")
-  }
-  if (!is.numeric(yhat_train)) {
-    stop("yhat_train should be a numeric vector.")
-  }
-  if (!is.character(lambda_choice) || !lambda_choice %in% c("min", "1se")) {
-    stop("lambda_choice should be 'min' or '1se'.")
-  }
-  cv <- cv.glmnet(X_train, yhat_train, foldid = fold_id, type.measure = "mse", alpha = alpha)
-  lambda_index <- if (lambda_choice == "min") {
-    cv$lambda == cv$lambda.min
-  } else {
-    cv$lambda == cv$lambda.1se
-  }
-  cv_mean_mse <- cv$cvm[lambda_index]
-  lambda <- cv$lambda[lambda_index]
-  return(c(cv_mean_mse, lambda, alpha))
-}
-
 #' Remove Observations with Missing Response Values
 #'
 #' Removes any observations in the training set where the response variable (methylation levels)
 #' is missing. This function ensures that both predictor (SNPs) and response datasets are aligned,
 #' which is crucial in subsequent analyses of methylome-wide association studies.
 #'
-#' @param yhat_train Numeric vector representing the response variable (methylation levels) in the training set.
-#' @param X_train Matrix or data frame of predictors (SNP data) in the training set.
-#'                Dimensions: Observations (rows) x SNPs (columns).
+#' @param y Numeric vector representing the response variable (methylation levels).
+#' @param X Matrix or data frame of predictors (SNP data).
+#'          Dimensions: Observations (rows) x SNPs (columns).
 #' @param verbose Logical indicating whether to print warnings about removed NAs.
 #'
-#' @return A list containing two elements: 'yhat_train' and 'X_train', both filtered to exclude
+#' @return A list containing two elements: 'y' and 'X', both filtered to exclude
 #'         observations with missing response values.
 #'
 #' @examples
 #' \dontrun{
-#' filtered_data <- rm_missing_observations(yhat_train, X_train, verbose = TRUE)
+#' filtered_data <- rm_missing_observations(y, X, verbose = TRUE)
 #' }
-rm_missing_observations <- function(yhat_train, X_train, verbose = FALSE) {
-  if (!is.numeric(yhat_train)) {
-    stop("yhat_train should be a numeric vector.")
+rm_missing_observations <- function(y, X, verbose) {
+  if (!is.numeric(y)) {
+    stop("y should be a numeric vector.")
   }
-  if (!is.matrix(X_train) && !is.data.frame(X_train)) {
-    stop("X_train should be a matrix or data frame.")
+  if (!is.matrix(X) && !is.data.frame(X)) {
+    stop("X should be a matrix or data frame.")
   }
-  n_na <- sum(is.na(yhat_train))
+  n_na <- sum(is.na(y))
   if(n_na > 0) {
     if(verbose) {
-      warning(paste("There are", n_na, "NA values in yhat_train, which will be removed"))
+      warning(paste("There are", n_na, "NA values in y, which will be removed"))
     }
-    idx <- !is.na(yhat_train)
-    yhat_train <- yhat_train[idx]
-    X_train <- X_train[idx, ]
+    idx <- !is.na(y)
+    y <- y[idx]
+    X <- X[idx, ]
   }
-  return(list(yhat_train = yhat_train, X_train = X_train))
+  return(list(y = y, X = X))
 }
 
 #' Extract Non-Zero Coefficients from an Elastic Net Model
@@ -127,302 +78,293 @@ rm_missing_observations <- function(yhat_train, X_train, verbose = FALSE) {
 #'
 #' @examples
 #' \dontrun{
-#' significant_snps <- extract_non_zero_coefs(fitted_model)
+#' features <- extract_non_zero_coefs(fitted_model)
 #' }
-extract_non_zero_coefs <- function(model_fit) {
-  if (!inherits(model_fit, "glmnet")) {
-    stop("model_fit must be an object of class 'glmnet'.")
+extract_non_zero_coefs <- function(fitted_model) {
+  if (!inherits(fitted_model, "glmnet")) {
+    stop("fitted_model must be an object of class 'glmnet'.")
   }
-  coef_data <- coef(model_fit)
-  valid_coefs <- coef_data[-1]  # Drop intercept and keep non-zero coefficients
-  non_zero_indices <- valid_coefs != 0
-  data.frame(v = rownames(coef_data)[-1][non_zero_indices], coefs = valid_coefs[non_zero_indices])
-}
+  # extract feature names and effects
+  coef <- coef(fitted_model)[-1, ]
+  if(sum(coef == 0) >= 1){
+    coef <- coef[which(coef != 0)]
+  }
 
-# Calculate correlation between predicted and observed responses
-#
-# This function uses a model to predict values, then provides the correlation
-# between predicted and observed values, as a measure of model performance.
-#
-# Args:
-#   fit: The fitted elastic net model object.
-#   X_test: Subset of SNP matrix assigned for validation.
-#   y: Observed response variable (portion in validation dataset).
-#
-# Returns:
-#   The correlation value, or NA if the variance of predictions is zero or NA.
-
-#' Calculate Correlation Between Predicted and Observed Responses
-#'
-#' Uses a fitted elastic net model to predict values and then computes the correlation
-#' between these predicted values and the observed response values. This function is used
-#' as a measure of model performance in methylome-wide association studies.
-#'
-#' @param fit The fitted elastic net model object from 'glmnet'.
-#' @param X_test Test set predictors, a subset of SNP matrix assigned for validation.
-#'               Dimensions: Observations (rows) x SNPs (columns).
-#' @param yhat_test Numeric vector of observed response variable in the validation dataset.
-#'
-#' @return The correlation value between predicted and observed responses, or NA
-#'         if the variance of predictions is zero or NA.
-#'
-#' @importFrom glmnet glmnet cv.glmnet
-#' @importFrom stats cor
-#' @importFrom stats var
-#'
-#' @examples
-#' \dontrun{
-#' model_performance <- calculate_correlation(fitted_model, X_test, yhat_test)
-#' }
-calculate_correlation <- function(fit, X_test, yhat_test) {
-  if (!inherits(fit, "glmnet")) {
-    stop("fit must be an object of class 'glmnet'.")
-  }
-  if (!is.matrix(X_test) && !is.data.frame(X_test)) {
-    stop("X_test should be a matrix or data frame.")
-  }
-  if (!is.numeric(yhat_test)) {
-    stop("yhat_test should be a numeric vector.")
-  }
-  predY <- predict(fit, X_test)
-  if (var(predY) > 0) {
-    return(cor(yhat_test, predY))
-  } else {
-    warning("Variance of predY is 0 or NA, setting correlation to NA")
-    return(NA)
-  }
+  return(coef)
 }
 
 #' Hyperparameter Tuning for Elastic Net Model
 #'
-#' This function performs hyperparameter tuning for an elastic net model. It is particularly
-#' designed for methylome-wide association studies where the relationship between SNPs (Single
-#' Nucleotide Polymorphisms) and methylation levels is being modeled. The function iterates over
-#' a range of alpha values to find the optimal lambda using cross-validation.
+#' This function performs hyperparameter tuning for an elastic net model using glmnet.
+#' It iterates over a range of alpha values to find the optimal lambda using cross-validation.
+#' The function adapts its parallelization strategy based on the cores_per_alpha parameter
+#' and the number of cores specified.
 #'
-#' @param X_train A matrix or data frame of SNP data used as predictors in the training set.
-#'                Dimensions: Number of Observations (rows) x Number of SNPs (columns).
-#' @param yhat_train A numeric vector representing the response variable (methylation levels)
-#'                   in the training set. Length should match the number of rows in X_train.
+#' @param X A matrix or data frame of predictors.
+#'          Dimensions: Number of Observations (rows) x Number of Predictors (columns).
+#' @param y A numeric vector representing the response variable.
+#'          Length should match the number of rows in X.
 #' @param n_fold Integer, specifying the number of folds for cross-validation.
 #' @param verbose Logical, indicating whether to print detailed tuning results.
 #' @param lambda_choice Character, specifying the method for choosing lambda
 #'                      ('min' for minimum MSE, '1se' for one-standard-error rule).
 #' @param alphas Numeric vector, specifying the alpha values to iterate over in tuning.
+#' @param cores_per_alpha Can be "all" or 1. "all" uses all cores for parallel processing
+#'                        within cv.glmnet (default setting). 1 uses all cores for parallel
+#'                        processing of alpha values.
+#' @param num_cores Integer, specifying the number of cores to use. Defaults to all
+#'                  available cores if not provided.
+#' @param allow_inefficient_parallelization Logical, allows inefficient parallelization
+#'                                          when cores_per_alpha is 1 and there are
+#'                                          more available cores than alpha values.
+#'                                          Default is FALSE.
 #'
 #' @return A list containing the fitted model, non-zero coefficients, optimal parameters,
 #'         and correlation on test data.
 #'
-#' @importFrom future.apply future_sapply
+#' @importFrom future plan availableCores
+#' @importFrom future.apply future_lapply
 #' @importFrom glmnet glmnet cv.glmnet
+#' @importFrom doParallel registerDoParallel
 #'
 #' @examples
 #' \dontrun{
-#' fit <- glmnet_tune_alpha(X_train, yhat_train, n_fold = 5, verbose = TRUE,
-#'                          lambda_choice = "1se", alphas = seq(0, 1, 0.1))
+#' # Default example using all cores within cv.glmnet
+#' fit_default <- glmnet_tune_alpha(X, y, n_fold = 5, verbose = TRUE,
+#'                                  lambda_choice = "1se", alphas = seq(0, 1, 0.1))
+#'
+#' # Example with parallel processing of alpha values using all available cores
+#' fit_parallel <- glmnet_tune_alpha(X, y, n_fold = 5, verbose = TRUE,
+#'                                   lambda_choice = "1se", alphas = seq(0, 1, 0.1),
+#'                                   cores_per_alpha = 1)
 #' }
-glmnet_tune_alpha <- function(X_train, yhat_train, n_fold = 5, verbose = FALSE,
-                              lambda_choice = "1se",
-                              alphas = seq(0, 1, 0.1)) {
-  # Choice of lambda:
-  # lambda.min: Minimum CV error; empirically best model.
-  #lambda.1se: Largest lambda within 1 SE of minimum; simpler, more generalizable model.
-  set.seed(2023)
+glmnet_tune_alpha <- function(X, y, n_fold, verbose, lambda_choice, alphas,
+                              cores_per_alpha, num_cores,
+                              allow_inefficient_parallelization, ...) {
 
-  if (nrow(X_train) != length(yhat_train)) {
-    stop("Number of samples is different")
+  #set.seed(2023)
+
+  if (cores_per_alpha == "all") {
+    plan("sequential")
+    registerDoParallel(cores = num_cores)
+    if (verbose) {
+      message("Parallelization within cv.glmnet using all available cores (",
+              num_cores, ").")
+    }
+  } else if (cores_per_alpha == 1) {
+    if(length(alphas) < num_cores && !allow_inefficient_parallelization) {
+      stop(paste("Parallelization scheme is inefficient: number of alphas is",
+                 "less than available cores. Consider using cores_per_alpha =",
+                 "'all' or setting allow_inefficient_parallelization to TRUE."))
+    }
+    plan("multisession", workers = num_cores)
+    if (verbose) {
+      message("Parallel processing of alpha values using all available cores (",
+              num_cores, ").")
+    }
+  } else {
+    stop("Invalid value for cores_per_alpha. Only 'all' and 1 are allowed.")
   }
 
-  results <- rm_missing_observations(yhat_train, X_train, verbose = TRUE)
-  yhat_train <- results$yhat_train
-  X_train <- results$X_train
-  results <- NULL
+  if (nrow(X) != length(y)) {
+    stop("Number of samples is different from length of response variable")
+  }
 
-  fold_id <- sample(rep(1:n_fold, length.out = length(yhat_train)))
+  # remove missing data
+  idx <- !is.na(y)
+  y <- y[idx]
+  X <- X[idx,]
 
-  # Pre-allocate data fram
-  tuning_results <- data.frame(cv_mean_mse = numeric(length(alphas)),
-                     lambda = numeric(length(alphas)),
-                     alpha = alphas)
+  # define fold membership of each sample for k-fold cross-validation
+  fold_id <- sample(rep(1:n_fold, length.out = length(y)))
 
-  # Parallel processing
-  tuning_results_to_be_parsed <-
-    future_sapply(X = alphas, FUN = tuning_function,
-                  X_train = X_train, yhat_train = yhat_train,
-                  fold_id = fold_id, lambda_choice = lambda_choice,
-                  simplify = "array")
+  tuning_results <- future_lapply(alphas, function(alpha) {
+    cv <- cv.glmnet(
+      X,
+      y,
+      foldid = fold_id,
+      type.measure = "mse",
+      parallel = (cores_per_alpha == "all"),
+      alpha = alpha
+    )
 
-  # Assign results to pre-allocated data frame
-  tuning_results$cv_mean_mse <- tuning_results_to_be_parsed[1,]
-  tuning_results$lambda <- tuning_results_to_be_parsed[2,]
+    if(lambda_choice == "1se") {
+      lambda_selected <- cv$lambda.1se
+    } else if(lambda_choice == "min") {
+      lambda_selected <- cv$lambda.min
+    } else {
+      stop("Invalid lambda_choice: choose either '1se' or 'min'")
+    }
 
-  optimal_model <- tuning_results[which.min(tuning_results$cv_mean_mse),]
+    data.frame(
+      cvm = cv$cvm[cv$lambda == lambda_selected],
+      lambda = lambda_selected,
+      alpha = alpha
+    )
+  })
+
+  # Combine the results
+  tuning_results <- do.call(rbind, tuning_results)
+
+  cv.opt <- tuning_results[which.min(tuning_results$cvm),]
+
+  # fit final model
+  fitted_model <- glmnet(
+    X,
+    y,
+    lambda = cv.opt$lambda,
+    alpha = cv.opt$alpha
+  )
+
+  features <- extract_non_zero_coefs(fitted_model)
+
+  pred <- predict(fitted_model, X)
+
+  r <- cor(pred, y)
 
   # Debug: Check tuning results
   if (verbose) {
-    cat("Tuning results - Lambda:", optimal_model$lambda,
-        "Alpha:", optimal_model$alpha, "\n")
+    cat("Tuning results - Lambda:", cv.opt$lambda,
+        "Alpha:", cv.opt$alpha, "\n")
   }
 
-  # fit final model on the whole training set
-  fit = glmnet(X_train, yhat_train,
-               lambda = optimal_model$lambda,
-               alpha = optimal_model$alpha)
-
-  fs <- extract_non_zero_coefs(fit)
-
-  return(list(model = fit, features = fs, para = optimal_model))
+  return(list(model = fitted_model, features = features,
+              para = cv.opt, cor = r))
 }
 
-#' Cross-Validation for Elastic Net Model in Methylation Studies
-#'
-#' Conducts k-fold cross-validation on SNP data against methylation levels using an elastic net model.
-#' This function splits the data into k folds, trains the model on k-1 folds, and evaluates it on the
-#' remaining fold, iterating through all folds. It selects the best model based on MSE, and outputs
-#' the corresponding correlation, MSE, and SNP weight vector for the best model.
-#'
-#' @param SNPs A matrix or data frame representing SNP data.
-#'             Dimensions: Number of Observations (rows) x Number of SNPs (columns).
-#' @param y A numeric vector representing methylation levels corresponding to each SNP observation.
-#'          Length should match the number of rows in SNPs.
-#' @param n_fold Integer, specifying the number of folds for cross-validation.
-#' @param omit_folds_with_na_r Logical, indicating whether to omit folds with NA in results.
-#' @param record_runtime Logical, indicating whether to record the runtime of the function.
-#'
-#' @return A list containing the best model, its MSE, correlation, SNP weights (with names),
-#'         and total runtime if record_runtime is TRUE.
-#'
-#' @importFrom stats cor
-#'
-#' @examples
-#' \dontrun{
-#' cv_results <- cv.pred(SNPs, y, n_fold = 5, omit_folds_with_na_r = FALSE, record_runtime = TRUE)
-#' }
+cv_eval <- function(X, y, n_fold, cv_eval_mode, verbose, alphas, cores_per_alpha, num_cores,
+                    allow_inefficient_parallelization, omit_folds_with_na_r = FALSE,
+                    best_alpha = NULL, best_lambda = NULL, ...) {
+  #set.seed(2018)
 
-cv.pred <- function(SNPs, y, n_fold = 5, omit_folds_with_na_r = FALSE, record_runtime = TRUE) {
-  set.seed(2018)
-
-  if (nrow(SNPs) != length(y)) {
+  if (nrow(X) != length(y)) {
     stop("Number of observations is different")
   }
 
-  # Tune alpha and lambda using the entire dataset and get the best model
-  tuned_params <- glmnet_tune_alpha(SNPs, y, n_fold = 5)
-  best_model <- tuned_params$model
-  best_alpha <- tuned_params$para$alpha
-  best_lambda <- tuned_params$para$lambda
+  #cat("Initial NA check - X:", sum(is.na(X)), "\n")
+  if (sum(is.na(X)) > 0) {
+    X <- impute_missing_values(X)
+  }
+  #cat("Post imputation - X:", sum(is.na(X)), "\n")
 
-  # Set up for cross-validation
   fold_id <- sample(rep(1:n_fold, length.out = length(y)))
-  cv <- matrix(NA, nrow = n_fold, ncol = 2)
-  colnames(cv) <- c("cor", "mse")
 
-  if (record_runtime) {
-    start_time <- Sys.time()
+  if(cv_eval_mode == "dynamic"){
+    evaluation_results <- cv_eval_dynamic(X = X, y = y, n_fold = n_fold, fold_id,
+                                          verbose = verbose, alphas = alphas,
+                                          cores_per_alpha = cores_per_alpha,
+                                          num_cores = num_cores,
+                                          allow_inefficient_parallelization = allow_inefficient_parallelization, ...)
+  } else if(cv_eval_mode == "static"){
+    evaluation_results <- cv_eval_static(X = X, y = y, n_fold = n_fold, fold_id,
+                                         best_alpha = best_alpha, best_lambda = best_lambda,
+                                         verbose = verbose, ...)
+  } else {
+    stop("Invalid cv_eval_mode: choose either 'dynamic' or 'static'")
+  }
+}
+
+cv_eval_static <- function(X, y, n_fold, fold_id, cores_per_alpha,
+                           num_cores, allow_inefficient_parallelization,
+                           omit_folds_with_na_r = FALSE,
+                           best_alpha = NULL, best_lambda = NULL, ...) {
+
+  if(is.null(best_lambda) || is.null(best_alpha)){
+    stop(paste("Error: best_lambda and best_alpha must be specified for k-fold",
+               "validation to evaluate model in `static` mode. If you want to",
+               "evaluate performance without specifying best_lambda and best_alpha,",
+               "use cv_eval_mode = `dynamic` instead."))
   }
 
-  # Outer k-fold cross-validation
+  cv <- matrix(NA, nrow = n_fold, ncol = 4,
+               dimnames = list(NULL, c("cor", "mse", "alpha", "lambda")))
+
+  cv[, 3] <- best_alpha
+  cv[, 4] <- best_lambda
+
+  # Let's not doing this part in parallel because it will run in less than
+  #  a second on one core in this mode. Here, parameters are known and we only
+  #  need to fit one model per fold.
+
   for (fold in 1:n_fold) {
     testIndices <- which(fold_id == fold, arr.ind = TRUE)
-    X_test <- SNPs[testIndices,]
-    yhat_test <- y[testIndices]
+    X_train <- X[-testIndices,]
+    y_train <- y[-testIndices]
+    X_test <- X[testIndices,]
+    y_test <- y[testIndices]
 
-    predictions <- predict(best_model, X_test)
-    cv[fold, 1] <- cor(predictions, yhat_test)
-    cv[fold, 2] <- mean((predictions - yhat_test) ^ 2)
+    fit <- glmnet(x = X,
+                  y = y,
+                  alpha = best_alpha,
+                  lambda = best_lambda)
+    browser()
+    pred <- predict(fit$model,
+                    X_test)
+
+    cv[fold, 1] <- cor(pred,
+                       y_test)
+
+    cv[fold, 2] <- mean((pred - y_test)^2)
+
+    browser()
+
+    # Make sure we get same result with calculate_correlation(), and make sure
+    # fit$para$alpha and lambda match best.
   }
 
   if(omit_folds_with_na_r == TRUE) {
     cv <- na.omit(cv)
   }
 
-  cvm <- apply(cv, 2, mean)
-  snp_weights <- coef(best_model)
+  cvm <- colMeans(cv[, 1:2])
 
-  if (record_runtime) {
-    end_time <- Sys.time()
-    total_runtime <- as.numeric(end_time - start_time)
-    cvm <- c(cvm, total_runtime = total_runtime)
-  }
-
-  return(list(
-    cor = cvm[1],
-    mse = cvm[2],
-    alpha = best_alpha,
-    lambda = best_lambda,
-    runtime = total_runtime,
-    snp_weights = snp_weights,
-    model = best_model
-  ))
+  return(list(eval_cv = cv,
+              eval_cvm = cvm))
 }
 
 
-cv.pred.3nest <- function(SNPs, y, n_fold = 5, omit_folds_with_na_r = FALSE, record_runtime = TRUE) {
+cv_eval_dynamic <- function(X, y, n_fold, fold_id, verbose, alphas, cores_per_alpha,
+                            num_cores, allow_inefficient_parallelization,
+                            omit_folds_with_na_r = FALSE, ...) {
+
+  cv <- matrix(NA, nrow = n_fold, ncol = 4,
+               dimnames = list(NULL, c("cor", "mse", "alpha", "lambda")))
+
   set.seed(2018)
-  if (record_runtime) {
-    start_time <- Sys.time()
-  }
-
-  if (nrow(SNPs) != length(y)) {
-    stop("Number of observations is different")
-  }
-
-  #cat("Initial NA check - SNPs:", sum(is.na(SNPs)), "\n")
-  if (sum(is.na(SNPs)) > 0) {
-    SNPs <- impute_missing_values(SNPs)
-  }
-  #cat("Post imputation - SNPs:", sum(is.na(SNPs)), "\n")
-
-  fold_id <- sample(rep(1:n_fold, length.out = length(y)))
-  cv <- matrix(NA, nrow = n_fold, ncol = 3)
-  colnames(cv) <- c("cor", "mse", "alpha")
-  models <- list()
 
   for (fold in 1:n_fold) {
     testIndices <- which(fold_id == fold, arr.ind = TRUE)
-    X_train <- SNPs[-testIndices,]
-    yhat_train <- y[-testIndices]
-    X_test <- SNPs[testIndices,]
-    yhat_test <- y[testIndices]
+    X_train <- X[-testIndices,]
+    y_train <- y[-testIndices]
+    X_test <- X[testIndices,]
+    y_test <- y[testIndices]
 
-    #print(paste0("Outer fold: ", fold))
-    fit <- glmnet_tune_alpha(X_train, yhat_train, n_fold = 5)
-    #print(fit$para)
-    models[[fold]] <- fit$model
-    predictions <- predict(fit$model, X_test)
+    fit <- glmnet_tune_alpha(X = X_train, y = y_train, n_fold = n_fold,
+                             verbose = verbose, alphas = alphas,
+                             cores_per_alpha = cores_per_alpha,
+                             num_cores = num_cores,
+                             allow_inefficient_parallelization = allow_inefficient_parallelization, ...)
 
-    cv[fold, 1] <- cor(predictions, yhat_test)
-    cv[fold, 2] <- mean((predictions - yhat_test) ^ 2)
+
+    pred <- predict(fit$model,
+                    X_test)
+
+    cv[fold, 1] <- cor(pred,
+                       y_test)
+
+    cv[fold, 2] <- mean((pred - y_test)^2)
+
     cv[fold, 3] <- fit$para$alpha
+
+    cv[fold, 4] <- fit$para$lambda
   }
 
   if(omit_folds_with_na_r == TRUE) {
     cv <- na.omit(cv)
   }
-  #browser() # Why is alpha NULL?
-  # Select the best model based on performance metrics
-  best_model_idx <- which.min(cv[, "mse"])
-  best_model <- models[[best_model_idx]]
-  best_mse <- cv[best_model_idx, "mse"]
-  best_cor <- cv[best_model_idx, "cor"]
-  best_alpha <- cv[best_model_idx, "alpha"]
-  best_lambda <- best_model$lambda
 
-  # Extract and store SNP weights (coefficients) from the best model
-  snp_weights <- coef(best_model)
+  cvm <- colMeans(cv[, 1:2])
 
-  if (record_runtime) {
-    end_time <- Sys.time()
-    total_runtime <- as.numeric(end_time - start_time)
-  }
-
-  return(list(
-    cor = best_cor,
-    mse = best_mse,
-    alpha = best_alpha,
-    lambda = best_lambda,
-    runtime = total_runtime,
-    snp_weights = snp_weights,
-    model = best_model
-  ))
+  return(list(eval_cv = cv,
+              eval_cvm = cvm))
 }
