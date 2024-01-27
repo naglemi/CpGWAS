@@ -23,6 +23,8 @@ and statistical metrics.
 
 \item{\code{snpWeights}}{list List of SNP weight vectors (obtained from \code{glmnet}).}
 
+\item{\code{intercept}}{numeric Intercept term from \code{glmnet} model.}
+
 \item{\code{cor}}{numeric Correlation coefficient between predicted, observed values.}
 
 \item{\code{mse}}{numeric Mean squared error of prediction for methylation.}

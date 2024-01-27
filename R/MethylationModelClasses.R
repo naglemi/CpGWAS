@@ -10,6 +10,7 @@
 #' @slot n_SNPs numeric Number of SNPs in the window surrounding methylation site.
 #' @slot glmnetModel list List of `glmnet` model objects.
 #' @slot snpWeights list List of SNP weight vectors (obtained from `glmnet`).
+#' @slot intercept numeric Intercept term from `glmnet` model.
 #' @slot cor numeric Correlation coefficient between predicted, observed values.
 #' @slot mse numeric Mean squared error of prediction for methylation.
 #' @slot alpha numeric Alpha parameter from `glmnet` model (tuned with `glmnet_tune_alpha`).
@@ -25,29 +26,12 @@ setClass(
     n_SNPs = "numeric",
     glmnetModel = "ANY",
     snpWeights = "ANY",
-    cor = "numeric",
-    mse = "numeric",
+    intercept = "numeric",
     alpha = "numeric",
     lambda = "numeric",
-    runtime = "numeric"
+    evaluation_results = "ANY"
   )
 )
-
-setValidity("MethylationBase", function(object) {
-  if (!inherits(object@glmnetModel, c("elnet", "glmnet"))) {
-    return("glmnetModel must contain a glmnet model object")
-  }
-  TRUE
-})
-
-
-setValidity("MethylationBase", function(object) {
-  if (!inherits(object@snpWeights, c("dgCMatrix"))) {
-    return("snpWeights must contain a dgCMatrix object")
-  }
-  TRUE
-})
-
 
 #' MethylationScaff Class
 #'

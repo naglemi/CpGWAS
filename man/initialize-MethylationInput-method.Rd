@@ -4,7 +4,7 @@
 \alias{initialize,MethylationInput-method}
 \title{Constructor for MethylationInput Class}
 \usage{
-\S4method{initialize}{MethylationInput}(.Object, BSseq_obj, snp_data_path, args)
+\S4method{initialize}{MethylationInput}(.Object, BSseq_obj, snp_data_path)
 }
 \arguments{
 \item{BSseq_obj}{BSseq The BSseq object containing methylation data.}
@@ -20,8 +20,13 @@ MethylationInput object.
 Initializes a MethylationInput object by processing methylation and SNP data.
 }
 \examples{
-\dontrun{
-methInput <- new("MethylationInput", BSseq_obj = BSseq_obj,
-                 snp_data_path = "path/to/snp_data", args = list(...))
-}
+
+# Where is SNP data in pgen format to be loaded?
+pgen_path = system.file("extdata", "chr1_sample_subset.pgen", package = "CpGWAS")
+
+data(chr1_methylation_sample_subset, package = "CpGWAS") # Load BSseq_sample
+
+methInput <- new("MethylationInput", BSseq_obj = BSobj_sample,
+                 snp_data_path = pgen_path)
+
 }
