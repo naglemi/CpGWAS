@@ -140,6 +140,8 @@ fit_MWAS_models <- function(BSobj, methInput, window_sizes, chunk1, chunk2,
     stop("This should not happen. There is a bug involving the exclusion of windows with no SNPs.")
   }
 
+  #recover()
+
   methScaff <- new("MethylationScaff",
                    scaffoldIdentifier = scaffoldIdentifier,
                    models = methBaseModels[1:(counter - 1)])
