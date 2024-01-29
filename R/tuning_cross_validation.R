@@ -297,8 +297,8 @@ cv_eval_static <- function(X, y, n_fold, fold_id, cores_per_alpha,
                   y = y,
                   alpha = best_alpha,
                   lambda = best_lambda)
-    browser()
-    pred <- predict(fit$model,
+
+    pred <- predict(fit,
                     X_test)
 
     cv[fold, 1] <- cor(pred,
@@ -306,7 +306,7 @@ cv_eval_static <- function(X, y, n_fold, fold_id, cores_per_alpha,
 
     cv[fold, 2] <- mean((pred - y_test)^2)
 
-    browser()
+
 
     # Make sure we get same result with calculate_correlation(), and make sure
     # fit$para$alpha and lambda match best.

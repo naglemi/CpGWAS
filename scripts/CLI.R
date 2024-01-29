@@ -1,20 +1,23 @@
 #!/usr/bin/env Rscript
 
+#options(error = recover)
+
 start_time <- Sys.time()  # Start time capture
 
 library(CpGWAS)
+library(optparse)
 
 # Pt. 1: Load libraries and accept, parse user arguments -------------------------------------
 
 # Check if running in RStudio or via command line
-if(Sys.getenv("RSTUDIO") == "0") {
+if(Sys.getenv("RSTUDIO") != "1") {
   # Define command line options
   option_list <- list(
-    make_option(c("-o", "--outdir"), type = "character", default = "./output/",
+    make_option(c("--outdir"), type = "character", default = "./output/",
                 help = "Output directory, default is './output/'"),
-    make_option(c("-c1", "--chunk1"), type = "integer", default = 1,
+    make_option(c("--chunk1"), type = "integer", default = 1,
                 help = "Starting methylation site index for processing, default is 1"),
-    make_option(c("-c2", "--chunk2"), type = "integer", default = NA,
+    make_option(c("--chunk2"), type = "integer", default = NA,
                 help = "Ending methylation site index for processing, default is NA (all sites)"),
     make_option(c("-s", "--snp_data_path"), type = "character", default = NULL,
                 help = "Path to SNP data (required)"),
@@ -26,23 +29,23 @@ if(Sys.getenv("RSTUDIO") == "0") {
                 help = "Method for choosing lambda ('min' for minimum MSE, '1se' for one-standard-error rule), default is '1se'"),
     make_option(c("-a", "--alphas"), type = "character", default = "0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1",
                 help = "Comma-separated list of alpha values to iterate over in tuning, default is '0,0.1,...,1'"),
-    make_option(c("-cpa", "--cores_per_alpha"), type = "character", default = "all",
+    make_option(c("-c", "--cores_per_alpha"), type = "character", default = "all",
                 help = "Can be 'all' or '1'. 'all' uses all cores for parallel processing within cv.glmnet (default). '1' uses all cores for parallel processing of alpha values"),
-    make_option(c("-nc", "--num_cores"), type = "integer", default = future::availableCores(),
+    make_option(c("-n", "--num_cores"), type = "integer", default = future::availableCores(),
                 help = "Number of cores to use, defaults to all available cores"),
-    make_option(c("-aip", "--allow_inefficient_parallelization"), type = "logical", default = FALSE,
+    make_option(c("--allow_inefficient_parallelization"), type = "logical", default = FALSE,
                 help = "Logical, allows inefficient parallelization when cores_per_alpha is 1 and there are more available cores than alpha values. Default is FALSE"),
-    make_option(c("-nf", "--n_fold"), type = "integer", default = 5,
+    make_option(c("-f", "--n_fold"), type = "integer", default = 5,
                 help = "Integer, specifying the number of folds for cross-validation, default is 5"),
     make_option(c("-w", "--window_sizes"), type = "character", default = "1000,2000,5000,10000,20000,50000,100000,200000,500000",
                 help = "Comma-separated list of window sizes, default is '1000,2000,5000,10000,20000,50000,100000,200000,500000'"),
     make_option(c("-t", "--tag"), type = "character", default = format(Sys.time(), "%Y%m%d-%H%M%S"),
                 help = "Tag to append to scaffoldIdentifier, default is current date-time stamp"),
-    make_option(c("-srf", "--save_evaluation_results_each_fold"), type = "logical", default = FALSE,
+    make_option(c("-e", "--save_evaluation_results_each_fold"), type = "logical", default = FALSE,
                 help = "Logical, indicating whether to save MSE, R^2, alpha, lambda for each evaluation fold, default is FALSE"),
-    make_option(c("-sgo", "--save_glmnet_object"), type = "logical", default = FALSE,
+    make_option(c("-g", "--save_glmnet_object"), type = "logical", default = FALSE,
                 help = "Logical, indicating whether to save the glmnet object, default is FALSE"),
-    make_option(c("-cve", "--cv_eval_mode"), type = "character", default = "dynamic",
+    make_option(c("--cv_eval_mode"), type = "character", default = "dynamic",
                 help = paste("Character, indicating whether to use 'dynamic' or 'static' cross-validation for",
                 "model evaluation; allow lambda and alpha to vary (dynamic) or keep static after optimization, default is 'dynamic'"))
   )
@@ -50,18 +53,24 @@ if(Sys.getenv("RSTUDIO") == "0") {
   # Parse options
   args <- parse_args(OptionParser(option_list = option_list))
   args$alphas <- as.numeric(unlist(strsplit(args$alphas, ",")))
+  args$window_sizes <- as.numeric(unlist(strsplit(args$window_sizes, ",")))
+
+  if(args$verbose) {
+    print("Args from command line: ")
+  }
+
 } else {
   args <- list(
     outdir = "./output/",
     chunk1 = 1000000,
-    chunk2 = 1000010,
+    chunk2 = 1000002,
     snp_data_path = "/Users/michaelnagle/code/mwas/gwas/libd_chr1.pgen",
     methylation_data_path = "/Users/michaelnagle/code/mwas/pheno/dlpfc/out/chr1_AA.rda",
     verbose = TRUE,
     lambda_choice = "1se",
     alphas = c(0,1),#seq(0, 1, 0.25),
     cores_per_alpha = "all",
-    num_cores = 2, #future::availableCores(),
+    num_cores = "all", #future::availableCores(),
     allow_inefficient_parallelization = FALSE,
     n_fold = 5,
     window_sizes = c(1000, 2000),# 5000, 10000, 20000, 50000, 100000, 200000, 500000),
@@ -70,6 +79,20 @@ if(Sys.getenv("RSTUDIO") == "0") {
     save_glmnet_object = FALSE,
     cv_eval_mode = "dynamic"
   )
+
+  if(args$verbose) {
+    print("Args from RStudio: ")
+  }
+}
+
+#saveRDS(args, file = file.path(args$outdir, paste0(args$tag, "-args.rds")))
+#args <- readRDS("output/libd_chr1-chr1_AA-static-1core-20240129-123107-args.rds")
+if(args$num_cores == "all"){
+  args$num_cores <- future::availableCores()
+}
+
+if(args$verbose) {
+  print(args)
 }
 
 if(!dir.exists(args$outdir)) {
