@@ -64,8 +64,8 @@ if(Sys.getenv("RSTUDIO") != "1") {
     outdir = "./output/",
     chunk1 = 1000000,
     chunk2 = 1000002,
-    snp_data_path = "/Users/michaelnagle/code/mwas/gwas/libd_chr1.pgen",
-    methylation_data_path = "/Users/michaelnagle/code/mwas/pheno/dlpfc/out/chr1_AA.rda",
+    snp_data_path = "/Users/mnagle6/data/libd_chr1.pgen",
+    methylation_data_path = "/Users/mnagle6/data/chr1_AA.rda",
     verbose = TRUE,
     lambda_choice = "1se",
     alphas = c(0,1),#seq(0, 1, 0.25),
@@ -110,7 +110,9 @@ load(args$methylation_data_path)
 
 methInput <- new("MethylationInput",
                  BSseq_obj = BSobj2,
-                 snp_data_path = args$snp_data_path)
+                 snp_data_path = args$snp_data_path,
+                 start_site = args$chunk1,
+                 end_site = args$chunk2)
 
 # Pt. 3: Main loop to process SNP data for each methylation site ----------
 

@@ -15,10 +15,10 @@
 setClass(
   "MethylationInput",
   slots = c(
-    methylations = "matrix",
+    methylations = "ANY",
     genotype_IDs = "character",
     pvar_pointer = "ANY",
-    pvar_dt = "data.frame",
+    pvar_dt = "ANY",
     pgen = "ANY",
     psam = "data.frame",
     cov = "matrix"
@@ -55,24 +55,18 @@ setClass(
 setMethod(
   "initialize",
   "MethylationInput",
-  function(.Object, BSseq_obj, snp_data_path) {
+  function(.Object, BSseq_obj, snp_data_path, start_site = NULL, end_site = NULL) {
     if (is.null(snp_data_path) || is.null(BSseq_obj)) {
       stop("A BSseq object and the path to SNP data are required.")
     }
 
-    # Ensure BSseq_obj is a valid BSseq object
     if (!inherits(BSseq_obj, "BSseq")) {
       stop("BSseq_obj must be a BSseq object.")
     }
 
-    # Processing methylation data from BSseq object
-    methylations <- t(as.matrix(getMeth(BSseq_obj, type = "smooth", what = "perBase")))
-    colnames(methylations) <- paste0("pos_",
-                                     GenomicRanges::start(
-                                       GenomicRanges::ranges(
-                                         SummarizedExperiment::rowRanges(BSseq_obj))))
-
-    # Read SNP data using pgenlibr with error handling
+    methylations_full <- t(as.matrix(getMeth(BSseq_obj, type = "smooth", what = "perBase")))
+    colnames(methylations_full) <- paste0("pos_", GenomicRanges::start(GenomicRanges::ranges(SummarizedExperiment::rowRanges(BSseq_obj))))
+    
     scaffold_name <- tools::file_path_sans_ext(basename(snp_data_path))
     pgen_path <- gsub(snp_data_path, pattern = "pvar", replacement = "pgen")
     pvar_path <- gsub(snp_data_path, pattern = "pgen", replacement = "pvar")
@@ -83,32 +77,65 @@ setMethod(
     }
 
     pvar_pointer <- pgenlibr::NewPvar(pvar_path)
-    pvar_dt <- fread(pvar_path)
+    pvar_dt_full <- fread(pvar_path)
     pgen <- pgenlibr::NewPgen(pgen_path, pvar = pvar_pointer)
     psam <- fread(psam_path)
-    psam_in_wgbs <- psam[which(psam$`#IID` %in% rownames(methylations))]
+    psam_in_wgbs <- psam[which(psam$`#IID` %in% rownames(methylations_full))]
     genotype_IDs <- psam_in_wgbs$`#IID`
-    genotype_IDs <- intersect(rownames(methylations), genotype_IDs)
+    genotype_IDs <- intersect(rownames(methylations_full), genotype_IDs)
     genotype_IDs <- genotype_IDs[order(genotype_IDs)]
 
     cov <- processCovariates(dataFrame = colData(BSseq_obj),
-                             colsToExclude = c("ID.", "DNum", "brnum",
-                                               "BrNum", "brnumerical"),
+                             colsToExclude = c("ID.", "DNum", "brnum", "BrNum", "brnumerical"),
                              genotype_IDs = genotype_IDs)
 
-    methylations <- methylations[which(rownames(methylations) %in% genotype_IDs), ]
-    methylations <- regress_out_cov_parallel(methylations, cov)
+    methylations_full <- methylations_full[which(rownames(methylations_full) %in% genotype_IDs), ]
+    methylations_full <- regress_out_cov_parallel(methylations_full, cov)
+    
+    if (!is.null(start_site) && !is.null(end_site)) {
+      
+      if (start_site > 1) {
+        methylations_full[, 1:(start_site-1)] <- 0
+      }
+      
+      if (end_site < ncol(methylations_full)) {
+        methylations_full[, (end_site+1):ncol(methylations_full)] <- 0
+      }
 
-    .Object@methylations <- methylations
+      .Object@methylations <- Matrix(methylations_full, sparse = TRUE)
+
+
+      # # Sparse matrix for methylations
+      # for (col in start_site:end_site) {
+      #   rows_with_data <- which(methylations_full[, col] != 0)
+      #   .Object@methylations[rows_with_data, col] <- methylations_full[rows_with_data, col]
+      # }
+      # 
+      # # Assuming pvar_dt_full is a data.frame or data.table
+      # for (row in start_site:end_site) {
+      #   cols_with_data <- which(!is.na(pvar_dt_full[row, ]))
+      #   # Convert the subset of pvar_dt_full to a numeric vector
+      #   numeric_values <- as.numeric(pvar_dt_full[row, ..cols_with_data])
+      #   # Assign to sparse matrix
+      #   .Object@pvar_dt[row, cols_with_data] <- numeric_values
+      # }
+
+    } else {
+      .Object@methylations <- methylations_full
+    }
+    
+    .Object@pvar_dt <- pvar_dt_full[, 1:3]
     .Object@genotype_IDs <- genotype_IDs
     .Object@pvar_pointer <- pvar_pointer
-    .Object@pvar_dt <- pvar_dt
     .Object@pgen <- pgen
     .Object@psam <- psam
     .Object@cov <- cov
     .Object
   }
 )
+
+
+
 
 
 processCovariates <- function(dataFrame,
