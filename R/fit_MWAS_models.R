@@ -4,7 +4,6 @@
 #' across different window sizes surrounding methylation sites. The function processes a range of
 #' methylation sites, fits a model for each, and compiles the results into a MethylationScaff object.
 #'
-#' @param BSobj A BSseq object containing methylation data.
 #' @param methInput A MethylationInput object containing SNP and methylation data.
 #' @param window_sizes A vector of integers representing the sizes of windows surrounding methylation sites.
 #' @param chunk1 The starting index of methylation sites to process.
@@ -26,10 +25,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' build_prediction_model(BSobj, methInput, c(1000, 2000), 1, 10, 5, "double", "scaffold1", tempdir(), TRUE)
+#' build_prediction_model(methInput, c(1000, 2000), 1, 10, 5, "double", "scaffold1", tempdir(), TRUE)
 #' }
 #'
-fit_MWAS_models <- function(BSobj, methInput, window_sizes, chunk1, chunk2,
+fit_MWAS_models <- function(methInput, window_sizes, chunk1, chunk2,
                             n_fold, scaffoldIdentifier, outdir, alphas,
                             save_evaluation_results_each_fold,
                             save_glmnet_object, cores_per_alpha, num_cores,
@@ -44,7 +43,7 @@ fit_MWAS_models <- function(BSobj, methInput, window_sizes, chunk1, chunk2,
   for(i in chunk1:chunk2) {
 
     methylation <- methInput@methylations[, i]  # Extracting methylation for current site
-    meth_site_pos <- start(ranges(granges(BSobj)))[i]
+    meth_site_pos <- methInput@methylations_positions[i]
 
     for(window_size in window_sizes) {
 

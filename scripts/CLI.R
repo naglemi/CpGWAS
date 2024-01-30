@@ -1,4 +1,4 @@
-#!/usr/bin/env Rscript
+profvis({#!/usr/bin/env Rscript
 
 #options(error = recover)
 
@@ -114,6 +114,8 @@ methInput <- new("MethylationInput",
                  start_site = args$chunk1,
                  end_site = args$chunk2)
 
+BSobj2 <- means <- sds <- NULL
+
 # Pt. 3: Main loop to process SNP data for each methylation site ----------
 
 scaffoldIdentifier <- paste0(tools::file_path_sans_ext(basename(args$snp_data_path)),
@@ -121,13 +123,12 @@ scaffoldIdentifier <- paste0(tools::file_path_sans_ext(basename(args$snp_data_pa
                              tools::file_path_sans_ext(basename(args$methylation_data_path)),
                              "-",
                              args$tag)
-
 scaffold_models <- fit_MWAS_models(
   BSobj = BSobj2,
   methInput = methInput,
   window_sizes = args$window_sizes,
-  chunk1 = args$chunk1,
-  chunk2 = args$chunk2,
+  chunk1 = 1,
+  chunk2 = length(methInput@methylations_positions),
   n_fold = args$n_fold,
   scaffoldIdentifier = scaffoldIdentifier,
   outdir = args$outdir,
@@ -141,7 +142,6 @@ scaffold_models <- fit_MWAS_models(
   save_glmnet_object = args$save_glmnet_object,
   cv_eval_mode = args$cv_eval_mode
 )
-
 #df <- as.data.frame(scaffold_models)
 
 pgenlibr::ClosePgen(methInput@pgen)
@@ -230,3 +230,4 @@ summary_df <- summary_df[, c("Parameter", "Value")]
 summary_file_path <- file.path(args$outdir, paste0(scaffoldIdentifier, "-summary.csv"))
 write.csv(summary_df, summary_file_path, row.names = FALSE, quote = TRUE)
 
+})
