@@ -27,8 +27,8 @@ extract_SNPs <- function(methInput, meth_site_pos, window_size) {
     stop("window_size must be a single numeric value.")
   }
 
-  lower_bound <- meth_site_pos - window_size - 1
-  upper_bound <- meth_site_pos + window_size - 1
+  lower_bound <- meth_site_pos - window_size
+  upper_bound <- meth_site_pos + window_size
 
   snp_indices <- which(methInput@pvar_dt$POS >= lower_bound & methInput@pvar_dt$POS <= upper_bound)
   snp_IDs <- methInput@pvar_dt$ID[snp_indices]
