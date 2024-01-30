@@ -1,4 +1,4 @@
-profvis({#!/usr/bin/env Rscript
+#!/usr/bin/env Rscript
 
 #options(error = recover)
 
@@ -229,5 +229,3 @@ summary_df <- summary_df[, c("Parameter", "Value")]
 # Define the output file path and save to CSV
 summary_file_path <- file.path(args$outdir, paste0(scaffoldIdentifier, "-summary.csv"))
 write.csv(summary_df, summary_file_path, row.names = FALSE, quote = TRUE)
-
-})
