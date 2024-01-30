@@ -15,7 +15,8 @@
 setClass(
   "MethylationInput",
   slots = c(
-    methylations = "ANY",
+    methylations = "matrix",
+    methylations_positions = "integer",
     genotype_IDs = "character",
     pvar_pointer = "ANY",
     pvar_dt = "ANY",
@@ -63,73 +64,47 @@ setMethod(
     if (!inherits(BSseq_obj, "BSseq")) {
       stop("BSseq_obj must be a BSseq object.")
     }
-
-    methylations_full <- t(as.matrix(getMeth(BSseq_obj, type = "smooth", what = "perBase")))
-    colnames(methylations_full) <- paste0("pos_", GenomicRanges::start(GenomicRanges::ranges(SummarizedExperiment::rowRanges(BSseq_obj))))
     
     scaffold_name <- tools::file_path_sans_ext(basename(snp_data_path))
     pgen_path <- gsub(snp_data_path, pattern = "pvar", replacement = "pgen")
     pvar_path <- gsub(snp_data_path, pattern = "pgen", replacement = "pvar")
     psam_path <- gsub(pvar_path, pattern = "pvar", replacement = "psam")
-
+    
     if (!file.exists(pgen_path) || !file.exists(pvar_path) || !file.exists(psam_path)) {
       stop("One or more SNP data files not found at the specified paths.")
     }
-
-    pvar_pointer <- pgenlibr::NewPvar(pvar_path)
-    pvar_dt_full <- fread(pvar_path)
-    pgen <- pgenlibr::NewPgen(pgen_path, pvar = pvar_pointer)
-    psam <- fread(psam_path)
-    psam_in_wgbs <- psam[which(psam$`#IID` %in% rownames(methylations_full))]
-    genotype_IDs <- psam_in_wgbs$`#IID`
-    genotype_IDs <- intersect(rownames(methylations_full), genotype_IDs)
-    genotype_IDs <- genotype_IDs[order(genotype_IDs)]
-
-    cov <- processCovariates(dataFrame = colData(BSseq_obj),
-                             colsToExclude = c("ID.", "DNum", "brnum", "BrNum", "brnumerical"),
-                             genotype_IDs = genotype_IDs)
-
-    methylations_full <- methylations_full[which(rownames(methylations_full) %in% genotype_IDs), ]
-    methylations_full <- regress_out_cov_parallel(methylations_full, cov)
+    
+    .Object@pvar_pointer <- pgenlibr::NewPvar(pvar_path)
+    .Object@pvar_dt <- fread(pvar_path)[, 1:3]
+    .Object@pgen <- pgenlibr::NewPgen(pgen_path, pvar = .Object@pvar_pointer)
+    .Object@psam <- fread(psam_path)
+    
+    #recover()
     
     if (!is.null(start_site) && !is.null(end_site)) {
       
-      if (start_site > 1) {
-        methylations_full[, 1:(start_site-1)] <- 0
-      }
+      .Object@methylations <- t(as.matrix(getMeth(BSseq_obj, type = "smooth", what = "perBase")))[, (start_site:end_site)]
+      .Object@methylations_positions <- start(ranges(granges(BSseq_obj)))[(start_site:end_site)]     
       
-      if (end_site < ncol(methylations_full)) {
-        methylations_full[, (end_site+1):ncol(methylations_full)] <- 0
-      }
-
-      .Object@methylations <- Matrix(methylations_full, sparse = TRUE)
-
-
-      # # Sparse matrix for methylations
-      # for (col in start_site:end_site) {
-      #   rows_with_data <- which(methylations_full[, col] != 0)
-      #   .Object@methylations[rows_with_data, col] <- methylations_full[rows_with_data, col]
-      # }
-      # 
-      # # Assuming pvar_dt_full is a data.frame or data.table
-      # for (row in start_site:end_site) {
-      #   cols_with_data <- which(!is.na(pvar_dt_full[row, ]))
-      #   # Convert the subset of pvar_dt_full to a numeric vector
-      #   numeric_values <- as.numeric(pvar_dt_full[row, ..cols_with_data])
-      #   # Assign to sparse matrix
-      #   .Object@pvar_dt[row, cols_with_data] <- numeric_values
-      # }
-
     } else {
-      .Object@methylations <- methylations_full
+      .Object@methylations <- t(as.matrix(getMeth(BSseq_obj, type = "smooth", what = "perBase")))
+      .Object@methylations_positions <- start(ranges(granges(BSseq_obj)))
     }
     
-    .Object@pvar_dt <- pvar_dt_full[, 1:3]
-    .Object@genotype_IDs <- genotype_IDs
-    .Object@pvar_pointer <- pvar_pointer
-    .Object@pgen <- pgen
-    .Object@psam <- psam
-    .Object@cov <- cov
+    colnames(.Object@methylations) <- paste0("pos_", .Object@methylations_positions)
+    
+
+    psam_in_wgbs <- .Object@psam[which(.Object@psam$`#IID` %in% rownames(.Object@methylations))]
+    genotype_IDs <- psam_in_wgbs$`#IID`
+    genotype_IDs <- intersect(rownames(.Object@methylations), genotype_IDs)
+    .Object@genotype_IDs <- genotype_IDs[order(genotype_IDs)]
+
+    .Object@cov <- processCovariates(dataFrame = colData(BSseq_obj),
+                                     colsToExclude = c("ID.", "DNum", "brnum", "BrNum", "brnumerical"),
+                                     genotype_IDs = genotype_IDs)
+
+    .Object@methylations <- .Object@methylations[which(rownames(.Object@methylations) %in% genotype_IDs), ]
+    .Object@methylations <- regress_out_cov_parallel(.Object@methylations, .Object@cov)
     .Object
   }
 )
@@ -268,31 +243,42 @@ regress_out_cov_parallel <- function(methylations, cov_matrix, n_benchmarks = NU
 
   n_tests <- if (is.null(n_benchmarks)) ncol(methylations) else n_benchmarks
   chunk_size <- ceiling(n_tests / no_cores)
-  chunks <- lapply(1:no_cores, function(i) {
+  chunks <- lapply(1:min(no_cores, n_tests), function(i) {
     start_col <- (i - 1) * chunk_size + 1
     end_col <- min(i * chunk_size, n_tests)
-    methylations[, start_col:end_col]
+    list(
+      data = methylations[, start_col:end_col],
+      colnames = colnames(methylations)[start_col:end_col]
+    )
   })
 
-  residuals_computation <- function(chunk, cov_matrix, pseudoinv) {
+  residuals_computation <- function(chunk_list, cov_matrix, pseudoinv) {
     tryCatch({
+      chunk <- chunk_list$data
       # Compute the fitted values for the entire matrix
       fitted_values <- cov_matrix %*% (pseudoinv %*% chunk)
       # Compute the residuals for the entire matrix
       residuals <- chunk - fitted_values
-      return(residuals)
+      return(list(
+        data = residuals,
+        colnames = chunk_list$colnames
+      ))
     }, error = function(e) {
       cat("Error occurred: ", e$message, "\n")
       cat("Dimensions of cov_matrix: ", dim(cov_matrix), "\n")
       cat("Dimensions of pseudoinv: ", dim(pseudoinv), "\n")
       cat("Dimensions of chunk: ", dim(chunk), "\n")
-      matrix(NA, nrow = nrow(chunk), ncol = ncol(chunk))
+      list(
+        data = matrix(NA, nrow = nrow(chunk), ncol = ncol(chunk)),
+        colnames = chunk_list$colnames
+      )
     })
   }
 
   start_time <- Sys.time()
   results <- future_lapply(chunks, residuals_computation, cov_matrix, pseudoinv)
-  residuals_matrix <- do.call(cbind, results)
+  residuals_matrix <- do.call(cbind, lapply(results, `[[`, "data"))
+  colnames(residuals_matrix) <- unlist(lapply(results, `[[`, "colnames"))
 
   if (!is.null(n_benchmarks)) {
     end_time <- Sys.time()
