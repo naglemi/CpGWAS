@@ -56,7 +56,7 @@ setClass(
 setMethod(
   "initialize",
   "MethylationInput",
-  function(.Object, BSseq_obj, snp_data_path, start_site = NULL, end_site = NULL) {
+  function(.Object, BSseq_obj, snp_data_path, no_cores = detectCores(), start_site = NULL, end_site = NULL) {
     if (is.null(snp_data_path) || is.null(BSseq_obj)) {
       stop("A BSseq object and the path to SNP data are required.")
     }
@@ -104,7 +104,8 @@ setMethod(
                                      genotype_IDs = genotype_IDs)
 
     .Object@methylations <- .Object@methylations[which(rownames(.Object@methylations) %in% genotype_IDs), ]
-    .Object@methylations <- regress_out_cov_parallel(.Object@methylations, .Object@cov)
+    .Object@methylations <- regress_out_cov_parallel(.Object@methylations, .Object@cov,
+                                                     no_cores = no_cores)
     .Object
   }
 )
@@ -215,7 +216,6 @@ reorder_and_filter_geno <- function(geno, genotype_IDs) {
 #'
 #' @param methylations matrix of methylation rates, n x m for n samples, m sites
 #' @param cov_matrix matrix of covariates, n x p for n samples, p covariates
-#' @param n_benchmarks integer number of sites to compute residuals for, if benchmarking
 #'
 #' @return matrix of residuals, n x m for n samples, m sites
 #' @export
@@ -227,63 +227,36 @@ reorder_and_filter_geno <- function(geno, genotype_IDs) {
 #' \dontrun{
 #' adjusted_methylations <- regress_out_cov_parallel(methylations, cov_matrix)
 #' }
-regress_out_cov_parallel <- function(methylations, cov_matrix, n_benchmarks = NULL,
+regress_out_cov_parallel <- function(methylations, cov_matrix,
                                      no_cores = detectCores() - 1) {
+  
+  residuals_computation <- function(chunk, cov_matrix, pseudoinv) {
+    fitted_values <- cov_matrix %*% (pseudoinv %*% chunk)
+    chunk - fitted_values
+  }
 
   if(is.null(methylations)){
     stop("Error: methylation data not found")
   }
 
-  #cat("Dimensions of methylations: ", dim(methylations), "\n")
-
-  #cat("Dimensions of cov_matrix: ", dim(cov_matrix), "\n")
-
   pseudoinv <- solve(t(cov_matrix) %*% cov_matrix) %*% t(cov_matrix)
-  #cat("Dimensions of pseudoinv: ", dim(pseudoinv), "\n")
 
-  n_tests <- if (is.null(n_benchmarks)) ncol(methylations) else n_benchmarks
-  chunk_size <- ceiling(n_tests / no_cores)
-  chunks <- lapply(1:min(no_cores, n_tests), function(i) {
-    start_col <- (i - 1) * chunk_size + 1
-    end_col <- min(i * chunk_size, n_tests)
-    list(
-      data = methylations[, start_col:end_col],
-      colnames = colnames(methylations)[start_col:end_col]
-    )
-  })
-
-  residuals_computation <- function(chunk_list, cov_matrix, pseudoinv) {
-    tryCatch({
-      chunk <- chunk_list$data
-      # Compute the fitted values for the entire matrix
-      fitted_values <- cov_matrix %*% (pseudoinv %*% chunk)
-      # Compute the residuals for the entire matrix
-      residuals <- chunk - fitted_values
-      return(list(
-        data = residuals,
-        colnames = chunk_list$colnames
-      ))
-    }, error = function(e) {
-      cat("Error occurred: ", e$message, "\n")
-      cat("Dimensions of cov_matrix: ", dim(cov_matrix), "\n")
-      cat("Dimensions of pseudoinv: ", dim(pseudoinv), "\n")
-      cat("Dimensions of chunk: ", dim(chunk), "\n")
-      list(
-        data = matrix(NA, nrow = nrow(chunk), ncol = ncol(chunk)),
-        colnames = chunk_list$colnames
-      )
+  chunk_size <- ceiling(ncol(methylations) / no_cores)
+  
+  if(no_cores > 1 && (ncol(methylations) > no_cores)){
+    chunks <- lapply(1:min(no_cores, ncol(methylations)), function(i) {
+      start_col <- (i - 1) * chunk_size + 1
+      end_col <- min(i * chunk_size, ncol(methylations))
+      data = methylations[, start_col:end_col]
     })
+    results <- future_lapply(chunks, residuals_computation, cov_matrix, pseudoinv)
+    residuals_matrix <- do.call(cbind, results)
+  } else {
+    residuals_matrix <- residuals_computation(methylations, cov_matrix, pseudoinv)
   }
-
-  start_time <- Sys.time()
-  results <- future_lapply(chunks, residuals_computation, cov_matrix, pseudoinv)
-  residuals_matrix <- do.call(cbind, lapply(results, `[[`, "data"))
-  colnames(residuals_matrix) <- unlist(lapply(results, `[[`, "colnames"))
-
-  if (!is.null(n_benchmarks)) {
-    end_time <- Sys.time()
-    elapsed_time <- end_time - start_time
-    cat("Elapsed time: ", elapsed_time, "\n")
+  
+  if(!all(colnames(methylations) == colnames(residuals_matrix))) {
+    stop("Error: `regress_out_cov` is broken. Residuals in different order than inputs.")
   }
 
   return(residuals_matrix)
