@@ -63,7 +63,7 @@ if(Sys.getenv("RSTUDIO") != "1") {
   args <- list(
     outdir = "./output/",
     chunk1 = 1000000,
-    chunk2 = 1000002,
+    chunk2 = 1000100,
     snp_data_path = "/Users/mnagle6/data/libd_chr1.pgen",
     methylation_data_path = "/Users/mnagle6/data/chr1_AA.rda",
     verbose = TRUE,
@@ -112,7 +112,8 @@ methInput <- new("MethylationInput",
                  BSseq_obj = BSobj2,
                  snp_data_path = args$snp_data_path,
                  start_site = args$chunk1,
-                 end_site = args$chunk2)
+                 end_site = args$chunk2,
+                 no_cores = args$num_cores)
 
 BSobj2 <- means <- sds <- NULL
 
