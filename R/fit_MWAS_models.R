@@ -44,6 +44,10 @@ fit_MWAS_models <- function(methInput, window_sizes, chunk1, chunk2,
 
     methylation <- methInput@methylations[, i]  # Extracting methylation for current site
     meth_site_pos <- methInput@methylations_positions[i]
+    
+    if(verbose == TRUE) {
+      cat(paste0("Running methylation site #", i, " at position ", meth_site_pos))
+    }
 
     for(window_size in window_sizes) {
 
@@ -57,6 +61,15 @@ fit_MWAS_models <- function(methInput, window_sizes, chunk1, chunk2,
         if (verbose) {
           message(paste0("For site at position ", meth_site_pos,
                          ", no SNPs were found in the window of size ",
+                         window_size, "\n\n"))
+        }
+        next
+      }
+      
+      if (are_columns_identical(SNPs)) {
+        if (verbose) {
+          message(paste0("For site at position ", meth_site_pos,
+                         ", all SNPs are identical in the window of size ",
                          window_size, "\n\n"))
         }
         next
@@ -110,7 +123,20 @@ fit_MWAS_models <- function(methInput, window_sizes, chunk1, chunk2,
       } else { # only save model coefficients
         model_to_save <- NULL
       }
-
+      
+      # Set up predict on full model here
+      pred <- predict(tuning_results$model, SNPs)
+      
+      if(length(levels(factor(pred))) > 1){
+        r <- cor(pred, methylation)
+      } else {
+        r <- NA
+      }
+      
+      mse <- mean((pred - methylation)^2)
+      
+      full_model_metrics <- c(r = r, mse = mse)
+      
       methBase <- new("MethylationBase",
                       methylationPosition = meth_site_pos,
                       windowSize = window_size,
@@ -120,7 +146,9 @@ fit_MWAS_models <- function(methInput, window_sizes, chunk1, chunk2,
                       glmnetModel = model_to_save,
                       snpWeights = tuning_results$features,
                       intercept = tuning_results$model$a0,
-                      evaluation_results = evaluation_results_to_save)
+                      evaluation_results = evaluation_results_to_save,
+                      cv_eval_mode = cv_eval_mode,
+                      full_model_metrics = full_model_metrics)
 
       methBaseModels[[counter]] <- methBase
       counter <- counter + 1

@@ -15,7 +15,8 @@
 #' @slot mse numeric Mean squared error of prediction for methylation.
 #' @slot alpha numeric Alpha parameter from `glmnet` model (tuned with `glmnet_tune_alpha`).
 #' @slot lambda numeric Lambda parameter from `glmnet` model (tuned with `cv.glmnet`).
-#' @slot runtime numeric Computation time for the model (including tuning, cross-validation).
+#' @slot evaluation_metrics list statistics for model fit, based on k-fold cross-validation.
+#' @slot full_model_metrics list statistics for model fit on whole data without cross-validation.
 #' @export
 #'
 setClass(
@@ -29,7 +30,9 @@ setClass(
     intercept = "numeric",
     alpha = "numeric",
     lambda = "numeric",
-    evaluation_results = "ANY"
+    evaluation_results = "ANY",
+    cv_eval_mode = "character",
+    full_model_metrics = "ANY"
   )
 )
 
@@ -189,11 +192,10 @@ convertToDataFrame <- function(object) {
       methylationPosition = model@methylationPosition,
       windowSize = model@windowSize,
       nSNPs = model@n_SNPs,
-      cor = model@cor,
-      mse = model@mse,
+      cor = model@evaluation_results$cor,
+      mse = model@evaluation_results$mse,
       alpha = model@alpha,
-      lambda = model@lambda,
-      runtime = model@runtime
+      lambda = model@lambda
     )
   })
 
