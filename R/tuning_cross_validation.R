@@ -202,6 +202,41 @@ glmnet_tune_alpha <- function(X, y, n_fold, verbose, lambda_choice, alphas,
       alpha = alpha
     )
   })
+  
+  # loop version so we can use debugger (commented out when not debugging)
+  
+  # Initialize an empty list to store the results
+  # tuning_results <- list()
+  # 
+  # # Loop through each alpha
+  # for(i in seq_along(alphas)) {
+  #   alpha <- alphas[i]
+  #   cv <- cv.glmnet(
+  #     X,
+  #     y,
+  #     foldid = fold_id,
+  #     type.measure = "mse",
+  #     parallel = FALSE,
+  #     alpha = alpha
+  #   )
+  #   
+  #   if(lambda_choice == "1se") {
+  #     lambda_selected <- cv$lambda.1se
+  #   } else if(lambda_choice == "min") {
+  #     lambda_selected <- cv$lambda.min
+  #   } else {
+  #     stop("Invalid lambda_choice: choose either '1se' or 'min'")
+  #   }
+  #   
+  #   # Store the result in the list
+  #   tuning_results[[i]] <- data.frame(
+  #     cvm = cv$cvm[cv$lambda == lambda_selected],
+  #     lambda = lambda_selected,
+  #     alpha = alpha
+  #   )
+  # }
+  
+  # end loop version to be commented out when we're not using debugger
 
   # Combine the results
   tuning_results <- do.call(rbind, tuning_results)
@@ -220,8 +255,12 @@ glmnet_tune_alpha <- function(X, y, n_fold, verbose, lambda_choice, alphas,
 
   pred <- predict(fitted_model, X)
 
-  r <- cor(pred, y)
-
+  if(length(levels(factor(pred))) > 1){
+    r <- cor(pred, y)
+  } else {
+    r <- NA
+  }
+  
   # Debug: Check tuning results
   if (verbose) {
     cat("Tuning results - Lambda:", cv.opt$lambda,
@@ -300,13 +339,14 @@ cv_eval_static <- function(X, y, n_fold, fold_id, cores_per_alpha,
 
     pred <- predict(fit,
                     X_test)
-
-    cv[fold, 1] <- cor(pred,
-                       y_test)
+    
+    if(length(levels(factor(pred))) > 1){
+      cv[fold, 1] <- cor(pred, y_test)
+    } else {
+      cv[fold, 1] <- NA
+    }
 
     cv[fold, 2] <- mean((pred - y_test)^2)
-
-
 
     # Make sure we get same result with calculate_correlation(), and make sure
     # fit$para$alpha and lambda match best.
@@ -349,8 +389,11 @@ cv_eval_dynamic <- function(X, y, n_fold, fold_id, verbose, alphas, cores_per_al
     pred <- predict(fit$model,
                     X_test)
 
-    cv[fold, 1] <- cor(pred,
-                       y_test)
+    if(length(levels(factor(pred))) > 1){
+      cv[fold, 1] <- cor(pred, y_test)
+    } else {
+      cv[fold, 1] <- NA
+    }
 
     cv[fold, 2] <- mean((pred - y_test)^2)
 

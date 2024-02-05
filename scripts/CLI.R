@@ -1,4 +1,5 @@
 #!/usr/bin/env Rscript
+#profvis({
 
 #options(error = recover)
 
@@ -62,8 +63,8 @@ if(Sys.getenv("RSTUDIO") != "1") {
 } else {
   args <- list(
     outdir = "./output/",
-    chunk1 = 1000000,
-    chunk2 = 1000100,
+    chunk1 = 1002630,
+    chunk2 = 1002730,
     snp_data_path = "/Users/mnagle6/data/libd_chr1.pgen",
     methylation_data_path = "/Users/mnagle6/data/chr1_AA.rda",
     verbose = TRUE,
@@ -77,7 +78,7 @@ if(Sys.getenv("RSTUDIO") != "1") {
     tag = format(Sys.time(), "%Y%m%d-%H%M%S"),
     save_evaluation_results_each_fold = FALSE,
     save_glmnet_object = FALSE,
-    cv_eval_mode = "dynamic"
+    cv_eval_mode = "static"
   )
 
   if(args$verbose) {
@@ -124,6 +125,7 @@ scaffoldIdentifier <- paste0(tools::file_path_sans_ext(basename(args$snp_data_pa
                              tools::file_path_sans_ext(basename(args$methylation_data_path)),
                              "-",
                              args$tag)
+
 scaffold_models <- fit_MWAS_models(
   BSobj = BSobj2,
   methInput = methInput,
@@ -230,3 +232,4 @@ summary_df <- summary_df[, c("Parameter", "Value")]
 # Define the output file path and save to CSV
 summary_file_path <- file.path(args$outdir, paste0(scaffoldIdentifier, "-summary.csv"))
 write.csv(summary_df, summary_file_path, row.names = FALSE, quote = TRUE)
+#})

@@ -44,3 +44,9 @@ extract_SNPs <- function(methInput, meth_site_pos, window_size) {
 
   return(SNPs)
 }
+
+are_columns_identical <- function(X) {
+  # Use rowSums to check if the sum of absolute differences from the first column is zero
+  identical_cols <- all(rowSums(abs(X - X[, 1]) == 0) == ncol(X))
+  return(identical_cols)
+}
