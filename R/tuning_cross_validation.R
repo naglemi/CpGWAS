@@ -355,11 +355,7 @@ cv_eval_static <- function(X, y, n_fold, fold_id, cores_per_alpha,
     # fit$para$alpha and lambda match best.
   }
 
-  if(omit_folds_with_na_r == TRUE) {
-    cv <- na.omit(cv)
-  }
-
-  cvm <- colMeans(cv[, 1:2])
+  cvm <- colMeans(cv[, 1:2], na.rm = omit_folds_with_na_r)
 
   return(list(eval_cv = cv,
               eval_cvm = cvm))
@@ -404,11 +400,7 @@ cv_eval_dynamic <- function(X, y, n_fold, fold_id, verbose, alphas, cores_per_al
     cv[fold, 4] <- fit$para$lambda
   }
 
-  if(omit_folds_with_na_r == TRUE) {
-    cv <- na.omit(cv)
-  }
-
-  cvm <- colMeans(cv[, 1:2])
+  cvm <- colMeans(cv[, 1:2], na.rm = omit_folds_with_na_r)
 
   return(list(eval_cv = cv,
               eval_cvm = cvm))

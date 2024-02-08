@@ -65,8 +65,8 @@ if(Sys.getenv("RSTUDIO") != "1") {
 } else {
   args <- list(
     outdir = "./output/",
-    chunk1 = 1002630,
-    chunk2 = 1002730,
+    chunk1 = 1011000,
+    chunk2 = 1011999,
     snp_data_path = "/Users/mnagle6/data/libd_chr1.pgen",
     methylation_data_path = "/Users/mnagle6/data/chr1_AA.rda",
     verbose = TRUE,
@@ -76,7 +76,7 @@ if(Sys.getenv("RSTUDIO") != "1") {
     num_cores = "all", #future::availableCores(),
     allow_inefficient_parallelization = FALSE,
     n_fold = 5,
-    window_sizes = c(1000, 2000),# 5000, 10000, 20000, 50000, 100000, 200000, 500000),
+    window_sizes = c(500000),# 5000, 10000, 20000, 50000, 100000, 200000, 500000),
     tag = format(Sys.time(), "%Y%m%d-%H%M%S"),
     save_evaluation_results_each_fold = FALSE,
     save_glmnet_object = FALSE,
