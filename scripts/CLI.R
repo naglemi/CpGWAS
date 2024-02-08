@@ -48,7 +48,9 @@ if(Sys.getenv("RSTUDIO") != "1") {
                 help = "Logical, indicating whether to save the glmnet object, default is FALSE"),
     make_option(c("--cv_eval_mode"), type = "character", default = "dynamic",
                 help = paste("Character, indicating whether to use 'dynamic' or 'static' cross-validation for",
-                "model evaluation; allow lambda and alpha to vary (dynamic) or keep static after optimization, default is 'dynamic'"))
+                "model evaluation; allow lambda and alpha to vary (dynamic) or keep static after optimization, default is 'dynamic'")),
+    make_option(c("--omit_folds_with_na_r"), type = "logical", default = TRUE,
+                help = "Logical, indicating whether to omit folds with NA R values, default is TRUE")
   )
 
   # Parse options
@@ -78,7 +80,8 @@ if(Sys.getenv("RSTUDIO") != "1") {
     tag = format(Sys.time(), "%Y%m%d-%H%M%S"),
     save_evaluation_results_each_fold = FALSE,
     save_glmnet_object = FALSE,
-    cv_eval_mode = "static"
+    cv_eval_mode = "static",
+    omit_folds_with_na_r = TRUE
   )
 
   if(args$verbose) {
@@ -143,7 +146,8 @@ scaffold_models <- fit_MWAS_models(
   allow_inefficient_parallelization = args$allow_inefficient_parallelization,
   save_evaluation_results_each_fold = args$save_evaluation_results_each_fold,
   save_glmnet_object = args$save_glmnet_object,
-  cv_eval_mode = args$cv_eval_mode
+  cv_eval_mode = args$cv_eval_mode,
+  omit_folds_with_na_r = args$omit_folds_with_na_r
 )
 #df <- as.data.frame(scaffold_models)
 

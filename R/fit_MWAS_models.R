@@ -33,6 +33,7 @@ fit_MWAS_models <- function(methInput, window_sizes, chunk1, chunk2,
                             save_evaluation_results_each_fold,
                             save_glmnet_object, cores_per_alpha, num_cores,
                             allow_inefficient_parallelization,
+                            omit_folds_with_na_r = TRUE,
                             cv_eval_mode = "dynamic", verbose = FALSE, ...) {
   requireNamespace("data.table")
 
@@ -98,6 +99,7 @@ fit_MWAS_models <- function(methInput, window_sizes, chunk1, chunk2,
                                       best_alpha = tuning_results$para$alpha,
                                       best_lambda = tuning_results$para$lambda,
                                       verbose = verbose,
+                                      omit_folds_with_na_r = omit_folds_with_na_r,
                                       ...)
       }
       if(cv_eval_mode == "dynamic"){
@@ -109,6 +111,7 @@ fit_MWAS_models <- function(methInput, window_sizes, chunk1, chunk2,
                                       alphas = alphas,
                                       cores_per_alpha, num_cores,
                                       allow_inefficient_parallelization,
+                                      omit_folds_with_na_r = omit_folds_with_na_r,
                                       ...)
       }
 
@@ -123,6 +126,8 @@ fit_MWAS_models <- function(methInput, window_sizes, chunk1, chunk2,
       } else { # only save model coefficients
         model_to_save <- NULL
       }
+      
+      #recover()
       
       # Set up predict on full model here
       pred <- predict(tuning_results$model, SNPs)
