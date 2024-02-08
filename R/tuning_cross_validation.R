@@ -272,7 +272,7 @@ glmnet_tune_alpha <- function(X, y, n_fold, verbose, lambda_choice, alphas,
 }
 
 cv_eval <- function(X, y, n_fold, cv_eval_mode, verbose, alphas, cores_per_alpha, num_cores,
-                    allow_inefficient_parallelization, omit_folds_with_na_r = FALSE,
+                    allow_inefficient_parallelization, omit_folds_with_na_r,
                     best_alpha = NULL, best_lambda = NULL, ...) {
   #set.seed(2018)
 
@@ -293,10 +293,12 @@ cv_eval <- function(X, y, n_fold, cv_eval_mode, verbose, alphas, cores_per_alpha
                                           verbose = verbose, alphas = alphas,
                                           cores_per_alpha = cores_per_alpha,
                                           num_cores = num_cores,
+                                          omit_folds_with_na_r = omit_folds_with_na_r,
                                           allow_inefficient_parallelization = allow_inefficient_parallelization, ...)
   } else if(cv_eval_mode == "static"){
     evaluation_results <- cv_eval_static(X = X, y = y, n_fold = n_fold, fold_id,
                                          best_alpha = best_alpha, best_lambda = best_lambda,
+                                         omit_folds_with_na_r = omit_folds_with_na_r,
                                          verbose = verbose, ...)
   } else {
     stop("Invalid cv_eval_mode: choose either 'dynamic' or 'static'")
@@ -305,7 +307,7 @@ cv_eval <- function(X, y, n_fold, cv_eval_mode, verbose, alphas, cores_per_alpha
 
 cv_eval_static <- function(X, y, n_fold, fold_id, cores_per_alpha,
                            num_cores, allow_inefficient_parallelization,
-                           omit_folds_with_na_r = FALSE,
+                           omit_folds_with_na_r,
                            best_alpha = NULL, best_lambda = NULL, ...) {
 
   if(is.null(best_lambda) || is.null(best_alpha)){
@@ -343,6 +345,7 @@ cv_eval_static <- function(X, y, n_fold, fold_id, cores_per_alpha,
     if(length(levels(factor(pred))) > 1){
       cv[fold, 1] <- cor(pred, y_test)
     } else {
+      #recover()
       cv[fold, 1] <- NA
     }
 
@@ -365,12 +368,12 @@ cv_eval_static <- function(X, y, n_fold, fold_id, cores_per_alpha,
 
 cv_eval_dynamic <- function(X, y, n_fold, fold_id, verbose, alphas, cores_per_alpha,
                             num_cores, allow_inefficient_parallelization,
-                            omit_folds_with_na_r = FALSE, ...) {
+                            omit_folds_with_na_r, ...) {
 
   cv <- matrix(NA, nrow = n_fold, ncol = 4,
                dimnames = list(NULL, c("cor", "mse", "alpha", "lambda")))
 
-  set.seed(2018)
+  #set.seed(2018)
 
   for (fold in 1:n_fold) {
     testIndices <- which(fold_id == fold, arr.ind = TRUE)
@@ -384,7 +387,6 @@ cv_eval_dynamic <- function(X, y, n_fold, fold_id, verbose, alphas, cores_per_al
                              cores_per_alpha = cores_per_alpha,
                              num_cores = num_cores,
                              allow_inefficient_parallelization = allow_inefficient_parallelization, ...)
-
 
     pred <- predict(fit$model,
                     X_test)
