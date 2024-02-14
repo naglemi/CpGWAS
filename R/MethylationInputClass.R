@@ -110,10 +110,71 @@ setMethod(
   }
 )
 
+setGeneric("sampleMethylationSites", function(object, num_sites) {
+  standardGeneric("sampleMethylationSites")
+})
 
+setMethod(
+  "sampleMethylationSites",
+  "MethylationInput",
+  function(object, num_sites) {
+    if (num_sites <= 0 || num_sites > length(object@methylations_positions)) {
+      stop("The number of sites must be greater than 0 and less than or equal to the total number of methylation sites.")
+    }
+# 
+    set.seed(42)
+    selected_indices <- sample(x = 1:length(object@methylations_positions),
+                               size = num_sites, replace = FALSE)
+    
+    # Subset methylations and methylations_positions using selected_indices
+    object@methylations <- object@methylations[, selected_indices, drop = FALSE]
+    object@methylations_positions <- object@methylations_positions[selected_indices]
+    
+    object
+  }
+)
 
+reinitializeMethylationInput <- function(rds_path, snp_data_path, no_cores = detectCores()) {
+  if (!file.exists(rds_path)) {
+    stop("RDS file does not exist: ", rds_path)
+  }
+  
+  # Load the MethylationInput object from RDS
+  loadedObject <- readRDS(rds_path)
+  
+  # Validate loaded object
+  if (!inherits(loadedObject, "MethylationInput")) {
+    stop("Loaded object is not a MethylationInput.")
+  }
+  
+  # Re-setup the paths
+  pgen_path <- gsub(snp_data_path, pattern = "pvar", replacement = "pgen")
+  pvar_path <- gsub(snp_data_path, pattern = "pgen", replacement = "pvar")
+  psam_path <- gsub(pvar_path, pattern = "pvar", replacement = "psam")
+  
+  if (!file.exists(pgen_path) || !file.exists(pvar_path) || !file.exists(psam_path)) {
+    stop("One or more SNP data files not found at the specified paths.")
+  }
+  
+  # Reinitialize external pointers
+  loadedObject@pvar_pointer <- pgenlibr::NewPvar(pvar_path)
+  loadedObject@pvar_dt <- fread(pvar_path)[, 1:3]
+  loadedObject@pgen <- pgenlibr::NewPgen(pgen_path, pvar = loadedObject@pvar_pointer)
+  loadedObject@psam <- fread(psam_path)
+  
+  # Reinitialize genotype_IDs based on intersection with methylations
+  psam_in_wgbs <- loadedObject@psam[which(loadedObject@psam$`#IID` %in% rownames(loadedObject@methylations))]
+  genotype_IDs <- psam_in_wgbs$`#IID`
+  genotype_IDs <- intersect(rownames(loadedObject@methylations), genotype_IDs)
+  loadedObject@genotype_IDs <- genotype_IDs[order(genotype_IDs)]
+  
+  # Ensure methylations are filtered and ordered according to the new genotype_IDs, if necessary
+  loadedObject@methylations <- loadedObject@methylations[which(rownames(loadedObject@methylations) %in% genotype_IDs), ]
+  
+  return(loadedObject)
+}
 
-
+    
 processCovariates <- function(dataFrame,
                               colsToExclude = c("ID.", "DNum", "BrNum",
                                                 "brnum", "brnumerical"),
@@ -158,6 +219,26 @@ processCovariates <- function(dataFrame,
   final_data <- as.matrix(cbind(one_hot_encoded, dataFrame[, !factor_columns]))
 
   return(final_data)
+}
+
+sanityCheckMethylationInput <- function(methInput) {
+  # Extract methylations_positions
+  positions <- methInput@methylations_positions
+  
+  # Extract column names from methylations, removing the 'pos_' prefix
+  colnames_without_prefix <- gsub("pos_", "", colnames(methInput@methylations))
+  
+  # Convert column names to numeric for comparison
+  colnames_as_numeric <- as.numeric(colnames_without_prefix)
+  
+  # Check if the positions match the numeric column names
+  all_equal <- all(positions == colnames_as_numeric)
+  
+  if (all_equal) {
+    message("Sanity check passed: Positions match column names.")
+  } else {
+    stop("Sanity check failed: Positions do not match column names.")
+  }
 }
 
 reorder_and_filter_geno <- function(geno, genotype_IDs) {

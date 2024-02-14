@@ -42,6 +42,11 @@ extract_SNPs <- function(methInput, meth_site_pos, window_size) {
   colnames(SNPs) <- snp_IDs
   SNPs <- reorder_and_filter_geno(geno = SNPs, genotype_IDs = methInput@genotype_IDs)
 
+  if(length(which(is.na(SNPs), arr.ind = TRUE)) > 0) {
+    print("removing NA columns")
+    SNPs <- SNPs[, colSums(!is.na(SNPs)) > 0]
+  }
+
   return(SNPs)
 }
 
