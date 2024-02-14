@@ -57,6 +57,10 @@ fit_MWAS_models <- function(methInput, window_sizes, chunk1, chunk2,
       SNPs <- extract_SNPs(methInput,
                            meth_site_pos = meth_site_pos,
                            window_size = window_size)
+      
+      if(i == 53){
+        recover()
+      }
 
       if (is.null(SNPs)) {
         if (verbose) {

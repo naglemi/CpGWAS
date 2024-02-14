@@ -50,7 +50,9 @@ if(Sys.getenv("RSTUDIO") != "1") {
                 help = paste("Character, indicating whether to use 'dynamic' or 'static' cross-validation for",
                 "model evaluation; allow lambda and alpha to vary (dynamic) or keep static after optimization, default is 'dynamic'")),
     make_option(c("--omit_folds_with_na_r"), type = "logical", default = TRUE,
-                help = "Logical, indicating whether to omit folds with NA R values, default is TRUE")
+                help = "Logical, indicating whether to omit folds with NA R values, default is TRUE"),
+    make_option(c("-r", "--methInput_rds_path"), type = "character", default = NULL,
+                help = "Path to an RDS file containing a pre-existing MethylationInput object. If provided, this object will be loaded instead of creating a new one.")
   )
 
   # Parse options
@@ -65,8 +67,8 @@ if(Sys.getenv("RSTUDIO") != "1") {
 } else {
   args <- list(
     outdir = "./output/",
-    chunk1 = 1011000,
-    chunk2 = 1011999,
+    chunk1 = 1,
+    chunk2 = 200,
     snp_data_path = "/Users/mnagle6/data/libd_chr1.pgen",
     methylation_data_path = "/Users/mnagle6/data/chr1_AA.rda",
     verbose = TRUE,
@@ -81,7 +83,8 @@ if(Sys.getenv("RSTUDIO") != "1") {
     save_evaluation_results_each_fold = FALSE,
     save_glmnet_object = FALSE,
     cv_eval_mode = "static",
-    omit_folds_with_na_r = TRUE
+    omit_folds_with_na_r = TRUE,
+    methInput_rds_path = "~/data/chr1_AA_methylation_10k_samples.rds"
   )
 
   if(args$verbose) {
@@ -110,16 +113,26 @@ if (is.null(args$snp_data_path) || is.null(args$methylation_data_path)) {
 
 load(args$methylation_data_path)
 
-# Pt. 2: Initialize MethylationInput object -------------------------------
+# Pt. 2: Initialize (or load) MethylationInput object -------------------------------
 
-methInput <- new("MethylationInput",
-                 BSseq_obj = BSobj2,
-                 snp_data_path = args$snp_data_path,
-                 start_site = args$chunk1,
-                 end_site = args$chunk2,
-                 no_cores = args$num_cores)
-
-BSobj2 <- means <- sds <- NULL
+if (!is.null(args$methInput_rds_path) && file.exists(args$methInput_rds_path)) {
+  if(args$verbose) {
+    message("Loading MethylationInput object from RDS file: ", args$methInput_rds_path)
+  }
+  methInput <- reinitializeMethylationInput(rds_path = args$methInput_rds_path,
+                                            snp_data_path = args$snp_data_path,
+                                            no_cores = args$num_cores)
+} else {
+  if(args$verbose) {
+    message("Creating new MethylationInput object")
+  }
+  methInput <- new("MethylationInput",
+                   BSseq_obj = BSobj2,
+                   snp_data_path = args$snp_data_path,
+                   no_cores = args$num_cores)
+  BSobj2 <- means <- sds <- NULL
+  #saveRDS(methInput, "~/data/chr1_AA_methylation_10k_samples.rds")
+}
 
 # Pt. 3: Main loop to process SNP data for each methylation site ----------
 
