@@ -1,15 +1,18 @@
 #' MethylationInput Class
 #'
-#' This class encapsulates the input data processing for methylation analysis.
-#' It includes methods for loading and processing methylation and SNP data, along with covariates.
+#' Encapsulates the processing of input data for methylation analysis in a genomic context. This class facilitates
+#' the integration of methylation data, SNP (Single Nucleotide Polymorphism) data in PLINK2 binary format, and
+#' covariate information. It supports operations such as data loading, preprocessing, and alignment for subsequent
+#' analysis stages.
 #'
-#' @slot methylations Matrix of methylation data.
-#' @slot genotype_IDs Vector of genotype IDs.
-#' @slot pvar_pointer Object representing variant information.
-#' @slot pvar_dt Data table of variant information.
-#' @slot pgen Object representing genotype information.
-#' @slot psam Data table of sample information.
-#' @slot cov Data frame of covariates.
+#' @slot methylations A matrix containing methylation beta values or intensities for genomic positions.
+#' @slot methylations_positions An integer vector indicating the genomic positions of methylation sites.
+#' @slot genotype_IDs A character vector listing the IDs of genotypes corresponding to the samples in the methylation data.
+#' @slot pvar_pointer An external pointer to variant information, compatible with PLINK2 binary format.
+#' @slot pvar_dt A data table summarizing variant information, typically including variant IDs, chromosomes, and positions.
+#' @slot pgen An external pointer to genotype information, facilitating access to SNP data in PLINK2 binary format.
+#' @slot psam A data frame containing sample information extracted from PLINK2 sample (PSAM) file.
+#' @slot cov A matrix of covariates to be considered in the analysis, potentially including age, sex, and batch effects.
 #'
 #' @export
 setClass(
@@ -28,30 +31,28 @@ setClass(
 
 #' Constructor for MethylationInput Class
 #'
-#' Initializes a MethylationInput object by processing methylation and SNP data.
+#' Creates a new MethylationInput object by loading and processing methylation and SNP data from specified paths.
+#' This method integrates methylation data from a BSseq object and SNP data in PLINK2 binary format, aligning
+#' both data types alongside specified covariates for comprehensive analysis.
 #'
-#' @param BSseq_obj BSseq The BSseq object containing methylation data.
-#' @param snp_data_path character Path to the SNP data.
-#' @param args list Additional arguments.
-#' @return MethylationInput object.
+#' @param BSseq_obj A BSseq object containing methylation data.
+#' @param snp_data_path A character string specifying the path to the directory containing SNP data in PLINK2 binary format.
+#' @param no_cores Integer, the number of cores to use for parallel operations (defaults to available core count).
+#' @param start_site Optional, the start site for subsetting methylation data based on genomic positions.
+#' @param end_site Optional, the end site for subsetting methylation data based on genomic positions.
+#' @return An object of class MethylationInput, ready for methylation analysis.
 #'
 #' @import pgenlibr
-#'
-#' @importFrom tools file_path_sans_ext
-#' @importFrom data.table fread
-#' @importFrom pgenlibr NewPvar NewPgen
-#' @importFrom SummarizedExperiment colData rowRanges
-#' @importFrom GenomicRanges ranges start
+#' @importFrom tools file_path_sans_ext  # To manipulate file paths
+#' @importFrom data.table fread  # To read data tables efficiently
+#' @importFrom SummarizedExperiment colData, rowRanges  # For working with experimental data summaries
+#' @importFrom GenomicRanges ranges, start  # For handling genomic ranges
 #'
 #' @examples
-#'
-#' # Where is SNP data in pgen format to be loaded?
-#' pgen_path = system.file("extdata", "chr1_sample_subset.pgen", package = "CpGWAS")
-#'
-#' data(chr1_methylation_sample_subset, package = "CpGWAS") # Load BSseq_sample
-#'
-#' methInput <- new("MethylationInput", BSseq_obj = BSobj_sample,
-#'                  snp_data_path = pgen_path)
+#' # Example of initializing a MethylationInput object with methylation and SNP data
+#' pgen_path = system.file("extdata", "chr1_sample_subset.pgen", package = "YourPackage")
+#' data(chr1_methylation_sample_subset, package = "YourPackage")
+#' methInput <- new("MethylationInput", BSseq_obj = BSseq_sample, snp_data_path = pgen_path)
 #'
 setMethod(
   "initialize",
@@ -134,6 +135,24 @@ setMethod(
   }
 )
 
+
+
+#' Reinitialize MethylationInput Object
+#'
+#' Reloads and updates a MethylationInput object from a saved RDS file, refreshing its SNP data links
+#' to reflect new paths or updates in the SNP data stored in PLINK2 binary format.
+#'
+#' @param rds_path Character string specifying the path to the RDS file containing a previously saved MethylationInput object.
+#' @param snp_data_path Character string specifying the new path to the SNP data in PLINK2 binary format.
+#' @param no_cores Integer specifying the number of cores to use for parallel operations (defaults to the number of available cores).
+#' @return A reinitialized MethylationInput object with updated links to SNP data.
+#'
+#' @export
+#'
+#' @examples
+#' # Reinitialize a MethylationInput object with a new SNP data path
+#' reinitMethInput <- reinitializeMethylationInput("path/to/saved/object.rds", "new/path/to/snp_data", no_cores = 4)
+#'
 reinitializeMethylationInput <- function(rds_path, snp_data_path, no_cores = detectCores()) {
   if (!file.exists(rds_path)) {
     stop("RDS file does not exist: ", rds_path)

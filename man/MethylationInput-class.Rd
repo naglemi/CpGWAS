@@ -5,24 +5,28 @@
 \alias{MethylationInput-class}
 \title{MethylationInput Class}
 \description{
-This class encapsulates the input data processing for methylation analysis.
-It includes methods for loading and processing methylation and SNP data, along with covariates.
+Encapsulates the processing of input data for methylation analysis in a genomic context. This class facilitates
+the integration of methylation data, SNP (Single Nucleotide Polymorphism) data in PLINK2 binary format, and
+covariate information. It supports operations such as data loading, preprocessing, and alignment for subsequent
+analysis stages.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{methylations}}{Matrix of methylation data.}
+\item{\code{methylations}}{A matrix containing methylation beta values or intensities for genomic positions.}
 
-\item{\code{genotype_IDs}}{Vector of genotype IDs.}
+\item{\code{methylations_positions}}{An integer vector indicating the genomic positions of methylation sites.}
 
-\item{\code{pvar_pointer}}{Object representing variant information.}
+\item{\code{genotype_IDs}}{A character vector listing the IDs of genotypes corresponding to the samples in the methylation data.}
 
-\item{\code{pvar_dt}}{Data table of variant information.}
+\item{\code{pvar_pointer}}{An external pointer to variant information, compatible with PLINK2 binary format.}
 
-\item{\code{pgen}}{Object representing genotype information.}
+\item{\code{pvar_dt}}{A data table summarizing variant information, typically including variant IDs, chromosomes, and positions.}
 
-\item{\code{psam}}{Data table of sample information.}
+\item{\code{pgen}}{An external pointer to genotype information, facilitating access to SNP data in PLINK2 binary format.}
 
-\item{\code{cov}}{Data frame of covariates.}
+\item{\code{psam}}{A data frame containing sample information extracted from PLINK2 sample (PSAM) file.}
+
+\item{\code{cov}}{A matrix of covariates to be considered in the analysis, potentially including age, sex, and batch effects.}
 }}
 
