@@ -4,29 +4,38 @@
 \alias{initialize,MethylationInput-method}
 \title{Constructor for MethylationInput Class}
 \usage{
-\S4method{initialize}{MethylationInput}(.Object, BSseq_obj, snp_data_path)
+\S4method{initialize}{MethylationInput}(
+  .Object,
+  BSseq_obj,
+  snp_data_path,
+  no_cores = detectCores(),
+  start_site = NULL,
+  end_site = NULL
+)
 }
 \arguments{
-\item{BSseq_obj}{BSseq The BSseq object containing methylation data.}
+\item{BSseq_obj}{A BSseq object containing methylation data.}
 
-\item{snp_data_path}{character Path to the SNP data.}
+\item{snp_data_path}{A character string specifying the path to the directory containing SNP data in PLINK2 binary format.}
 
-\item{args}{list Additional arguments.}
+\item{no_cores}{Integer, the number of cores to use for parallel operations (defaults to available core count).}
+
+\item{start_site}{Optional, the start site for subsetting methylation data based on genomic positions.}
+
+\item{end_site}{Optional, the end site for subsetting methylation data based on genomic positions.}
 }
 \value{
-MethylationInput object.
+An object of class MethylationInput, ready for methylation analysis.
 }
 \description{
-Initializes a MethylationInput object by processing methylation and SNP data.
+Creates a new MethylationInput object by loading and processing methylation and SNP data from specified paths.
+This method integrates methylation data from a BSseq object and SNP data in PLINK2 binary format, aligning
+both data types alongside specified covariates for comprehensive analysis.
 }
 \examples{
-
-# Where is SNP data in pgen format to be loaded?
-pgen_path = system.file("extdata", "chr1_sample_subset.pgen", package = "CpGWAS")
-
-data(chr1_methylation_sample_subset, package = "CpGWAS") # Load BSseq_sample
-
-methInput <- new("MethylationInput", BSseq_obj = BSobj_sample,
-                 snp_data_path = pgen_path)
+# Example of initializing a MethylationInput object with methylation and SNP data
+pgen_path = system.file("extdata", "chr1_sample_subset.pgen", package = "YourPackage")
+data(chr1_methylation_sample_subset, package = "YourPackage")
+methInput <- new("MethylationInput", BSseq_obj = BSseq_sample, snp_data_path = pgen_path)
 
 }

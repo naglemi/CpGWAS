@@ -5,7 +5,6 @@
 \title{Build Prediction Model for Methylation Sites}
 \usage{
 fit_MWAS_models(
-  BSobj,
   methInput,
   window_sizes,
   chunk1,
@@ -19,14 +18,13 @@ fit_MWAS_models(
   cores_per_alpha,
   num_cores,
   allow_inefficient_parallelization,
+  omit_folds_with_na_r = TRUE,
   cv_eval_mode = "dynamic",
   verbose = FALSE,
   ...
 )
 }
 \arguments{
-\item{BSobj}{A BSseq object containing methylation data.}
-
 \item{methInput}{A MethylationInput object containing SNP and methylation data.}
 
 \item{window_sizes}{A vector of integers representing the sizes of windows surrounding methylation sites.}
@@ -69,7 +67,7 @@ methylation sites, fits a model for each, and compiles the results into a Methyl
 }
 \examples{
 \dontrun{
-build_prediction_model(BSobj, methInput, c(1000, 2000), 1, 10, 5, "double", "scaffold1", tempdir(), TRUE)
+build_prediction_model(methInput, c(1000, 2000), 1, 10, 5, "double", "scaffold1", tempdir(), TRUE)
 }
 
 }

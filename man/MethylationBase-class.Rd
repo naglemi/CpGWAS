@@ -33,6 +33,8 @@ and statistical metrics.
 
 \item{\code{lambda}}{numeric Lambda parameter from \code{glmnet} model (tuned with \code{cv.glmnet}).}
 
-\item{\code{runtime}}{numeric Computation time for the model (including tuning, cross-validation).}
+\item{\code{evaluation_metrics}}{list statistics for model fit, based on k-fold cross-validation.}
+
+\item{\code{full_model_metrics}}{list statistics for model fit on whole data without cross-validation.}
 }}
 

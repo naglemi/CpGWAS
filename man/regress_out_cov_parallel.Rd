@@ -7,7 +7,6 @@
 regress_out_cov_parallel(
   methylations,
   cov_matrix,
-  n_benchmarks = NULL,
   no_cores = detectCores() - 1
 )
 }
@@ -15,8 +14,6 @@ regress_out_cov_parallel(
 \item{methylations}{matrix of methylation rates, n x m for n samples, m sites}
 
 \item{cov_matrix}{matrix of covariates, n x p for n samples, p covariates}
-
-\item{n_benchmarks}{integer number of sites to compute residuals for, if benchmarking}
 }
 \value{
 matrix of residuals, n x m for n samples, m sites
