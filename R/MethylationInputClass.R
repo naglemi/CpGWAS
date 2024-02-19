@@ -38,8 +38,8 @@ setClass(
 #' @param BSseq_obj A BSseq object containing methylation data.
 #' @param snp_data_path A character string specifying the path to the directory containing SNP data in PLINK2 binary format.
 #' @param no_cores Integer, the number of cores to use for parallel operations (defaults to available core count).
-#' @param start_site Optional, the start site for subsetting methylation data based on genomic positions.
-#' @param end_site Optional, the end site for subsetting methylation data based on genomic positions.
+#' @param start_site Optional, the start site for subsetting methylation data based on indices in the file.
+#' @param end_site Optional, the end site for subsetting methylation data based on indices in the file.
 #' @return An object of class MethylationInput, ready for methylation analysis.
 #'
 #' @import pgenlibr
@@ -61,55 +61,40 @@ setMethod(
     if (is.null(snp_data_path) || is.null(BSseq_obj)) {
       stop("A BSseq object and the path to SNP data are required.")
     }
-
+    
     if (!inherits(BSseq_obj, "BSseq")) {
       stop("BSseq_obj must be a BSseq object.")
     }
     
-    scaffold_name <- tools::file_path_sans_ext(basename(snp_data_path))
-    pgen_path <- gsub(snp_data_path, pattern = "pvar", replacement = "pgen")
-    pvar_path <- gsub(snp_data_path, pattern = "pgen", replacement = "pvar")
-    psam_path <- gsub(pvar_path, pattern = "pvar", replacement = "psam")
+    paths <- constructSNPFilePaths(snp_data_path)
+    checkFilesExist(c(paths$pgen_path, paths$pvar_path, paths$psam_path))
     
-    if (!file.exists(pgen_path) || !file.exists(pvar_path) || !file.exists(psam_path)) {
-      stop("One or more SNP data files not found at the specified paths.")
-    }
+    snp_data <- loadSNPData(paths$pvar_path, paths$pgen_path, paths$psam_path)
+    .Object@pvar_pointer <- snp_data$pvar_pointer
+    .Object@pvar_dt <- snp_data$pvar_dt
+    .Object@pgen <- snp_data$pgen
+    .Object@psam <- snp_data$psam
     
-    .Object@pvar_pointer <- pgenlibr::NewPvar(pvar_path)
-    .Object@pvar_dt <- fread(pvar_path)[, 1:3]
-    .Object@pgen <- pgenlibr::NewPgen(pgen_path, pvar = .Object@pvar_pointer)
-    .Object@psam <- fread(psam_path)
-    
-    #recover()
-    
-    if (!is.null(start_site) && !is.null(end_site)) {
-      
-      .Object@methylations <- t(as.matrix(getMeth(BSseq_obj, type = "smooth", what = "perBase")))[, (start_site:end_site)]
-      .Object@methylations_positions <- start(ranges(granges(BSseq_obj)))[(start_site:end_site)]     
-      
-    } else {
-      .Object@methylations <- t(as.matrix(getMeth(BSseq_obj, type = "smooth", what = "perBase")))
-      .Object@methylations_positions <- start(ranges(granges(BSseq_obj)))
-    }
-    
+    meth_data <- processMethylationData(BSseq_obj, start_site, end_site)
+    .Object@methylations <- meth_data$methylations
+    .Object@methylations_positions <- meth_data$methylations_positions
     colnames(.Object@methylations) <- paste0("pos_", .Object@methylations_positions)
+
+    .Object@genotype_IDs <- selectGenotypeIDs(.Object@psam, .Object@methylations)
     
-
-    psam_in_wgbs <- .Object@psam[which(.Object@psam$`#IID` %in% rownames(.Object@methylations))]
-    genotype_IDs <- psam_in_wgbs$`#IID`
-    genotype_IDs <- intersect(rownames(.Object@methylations), genotype_IDs)
-    .Object@genotype_IDs <- genotype_IDs[order(genotype_IDs)]
-
+    # Filter and order methylations by genotype IDs
+    .Object@methylations <- filterOrderMethylations(.Object@methylations, .Object@genotype_IDs)
+    
     .Object@cov <- processCovariates(dataFrame = colData(BSseq_obj),
                                      colsToExclude = c("ID.", "DNum", "brnum", "BrNum", "brnumerical"),
-                                     genotype_IDs = genotype_IDs)
-
-    .Object@methylations <- .Object@methylations[which(rownames(.Object@methylations) %in% genotype_IDs), ]
-    .Object@methylations <- regress_out_cov_parallel(.Object@methylations, .Object@cov,
-                                                     no_cores = no_cores)
-    .Object
-  }
-)
+                                     genotype_IDs = .Object@genotype_IDs)
+    
+    # Regress out covariates in parallel
+    .Object@methylations <- regress_out_cov_parallel(.Object@methylations, .Object@cov, no_cores = no_cores)
+    
+    return(.Object)
+    }
+  )
 
 setGeneric("sampleMethylationSites", function(object, num_sites) {
   standardGeneric("sampleMethylationSites")
@@ -145,6 +130,8 @@ setMethod(
 #' @param rds_path Character string specifying the path to the RDS file containing a previously saved MethylationInput object.
 #' @param snp_data_path Character string specifying the new path to the SNP data in PLINK2 binary format.
 #' @param no_cores Integer specifying the number of cores to use for parallel operations (defaults to the number of available cores).
+#' @param start_site Optional, the start site for subsetting methylation data based on indices in the file.
+#' @param end_site Optional, the end site for subsetting methylation data based on indices in the file.
 #' @return A reinitialized MethylationInput object with updated links to SNP data.
 #'
 #' @export
@@ -153,7 +140,7 @@ setMethod(
 #' # Reinitialize a MethylationInput object with a new SNP data path
 #' reinitMethInput <- reinitializeMethylationInput("path/to/saved/object.rds", "new/path/to/snp_data", no_cores = 4)
 #'
-reinitializeMethylationInput <- function(rds_path, snp_data_path, no_cores = detectCores()) {
+reinitializeMethylationInput <- function(rds_path, snp_data_path, no_cores = detectCores(), start_site = NULL, end_site = NULL) {
   if (!file.exists(rds_path)) {
     stop("RDS file does not exist: ", rds_path)
   }
@@ -166,31 +153,87 @@ reinitializeMethylationInput <- function(rds_path, snp_data_path, no_cores = det
     stop("Loaded object is not a MethylationInput.")
   }
   
-  # Re-setup the paths
-  pgen_path <- gsub(snp_data_path, pattern = "pvar", replacement = "pgen")
-  pvar_path <- gsub(snp_data_path, pattern = "pgen", replacement = "pvar")
-  psam_path <- gsub(pvar_path, pattern = "pvar", replacement = "psam")
+  # Utilize helper functions for SNP path setup and validation
+  paths <- constructSNPFilePaths(snp_data_path)
+  checkFilesExist(c(paths$pgen_path, paths$pvar_path, paths$psam_path))
   
-  if (!file.exists(pgen_path) || !file.exists(pvar_path) || !file.exists(psam_path)) {
-    stop("One or more SNP data files not found at the specified paths.")
+  # Load SNP data using helper function
+  snp_data <- loadSNPData(paths$pvar_path, paths$pgen_path, paths$psam_path)
+  loadedObject@pvar_pointer <- snp_data$pvar_pointer
+  loadedObject@pvar_dt <- snp_data$pvar_dt
+  loadedObject@pgen <- snp_data$pgen
+  loadedObject@psam <- snp_data$psam
+  
+  # Assuming BSseq object is part of the loadedObject, and you want to reprocess methylation data
+  if (!is.null(start_site) && !is.null(end_site)) {
+    loadedObject@methylations <- loadedObject@methylations[, (start_site:end_site)]
+    loadedObject@methylations_positions <- loadedObject@methylations_positions[(start_site:end_site)]
   }
   
-  # Reinitialize external pointers
-  loadedObject@pvar_pointer <- pgenlibr::NewPvar(pvar_path)
-  loadedObject@pvar_dt <- fread(pvar_path)[, 1:3]
-  loadedObject@pgen <- pgenlibr::NewPgen(pgen_path, pvar = loadedObject@pvar_pointer)
-  loadedObject@psam <- fread(psam_path)
+  # Utilize helper functions for genotype IDs update
+  loadedObject@genotype_IDs <- selectGenotypeIDs(loadedObject@psam, loadedObject@methylations)
   
-  # Reinitialize genotype_IDs based on intersection with methylations
-  psam_in_wgbs <- loadedObject@psam[which(loadedObject@psam$`#IID` %in% rownames(loadedObject@methylations))]
-  genotype_IDs <- psam_in_wgbs$`#IID`
-  genotype_IDs <- intersect(rownames(loadedObject@methylations), genotype_IDs)
-  loadedObject@genotype_IDs <- genotype_IDs[order(genotype_IDs)]
-  
-  # Ensure methylations are filtered and ordered according to the new genotype_IDs, if necessary
-  loadedObject@methylations <- loadedObject@methylations[which(rownames(loadedObject@methylations) %in% genotype_IDs), ]
+  # Filter and order methylations by genotype IDs
+  loadedObject@methylations <- filterOrderMethylations(loadedObject@methylations, loadedObject@genotype_IDs)
   
   return(loadedObject)
+}
+
+# Helper function to select genotype IDs based on methylation data
+selectGenotypeIDs <- function(psam_data, methylation_data) {
+  psam_in_wgbs <- psam_data[which(psam_data$`#IID` %in% rownames(methylation_data))]
+  genotype_IDs <- psam_in_wgbs$`#IID`
+  intersected_genotype_IDs <- intersect(rownames(methylation_data), genotype_IDs)
+  ordered_genotype_IDs <- intersected_genotype_IDs[order(intersected_genotype_IDs)]
+  
+  return(ordered_genotype_IDs)
+}
+
+# Helper function to filter and order methylations by genotype IDs
+filterOrderMethylations <- function(methylations, genotype_IDs) {
+  filtered_methylations <- methylations[which(rownames(methylations) %in% genotype_IDs), ]
+  
+  return(filtered_methylations)
+}
+
+# Helper function to construct SNP file paths
+constructSNPFilePaths <- function(base_path) {
+  pgen_path <- gsub(base_path, pattern = "pvar", replacement = "pgen")
+  pvar_path <- gsub(base_path, pattern = "pgen", replacement = "pvar")
+  psam_path <- gsub(pvar_path, pattern = "pvar", replacement = "psam")
+  
+  list(pgen_path = pgen_path, pvar_path = pvar_path, psam_path = psam_path)
+}
+
+# Helper function to check file existence
+checkFilesExist <- function(paths) {
+  if (!all(file.exists(paths))) {
+    stop("One or more SNP data files not found at the specified paths.")
+  }
+}
+
+# Helper function to load SNP data
+loadSNPData <- function(pvar_path, pgen_path, psam_path) {
+  pvar_pointer <- pgenlibr::NewPvar(pvar_path)
+  list(
+    pvar_pointer = pvar_pointer,
+    pvar_dt = fread(pvar_path)[, 1:3],
+    pgen = pgenlibr::NewPgen(pgen_path, pvar = pvar_pointer),
+    psam = fread(psam_path)
+  )
+}
+
+# Helper function to process methylation data
+processMethylationData <- function(BSseq_obj, start_site = NULL, end_site = NULL) {
+  if (!is.null(start_site) && !is.null(end_site)) {
+    methylations <- t(as.matrix(getMeth(BSseq_obj, type = "smooth", what = "perBase")))[, (start_site:end_site)]
+    methylations_positions <- start(ranges(granges(BSseq_obj)))[(start_site:end_site)]
+  } else {
+    methylations <- t(as.matrix(getMeth(BSseq_obj, type = "smooth", what = "perBase")))
+    methylations_positions <- start(ranges(granges(BSseq_obj)))
+  }
+  
+  list(methylations = methylations, methylations_positions = methylations_positions)
 }
 
     
@@ -284,32 +327,35 @@ reorder_and_filter_geno <- function(geno, genotype_IDs) {
   return(reordered_geno)
 }
 
-# regress_out_cov <- function(methylations, cov, n_benchmarks = NULL) {
-#   print("We just entered regress_out_cov()")
-#
-#   if(is.null(methylations)){
-#     stop("Error: methylation data not found")
-#   }
-#
-#   cat("Dimensions of methylations: ", dim(methylations), "\n")
-#
-#   # Creating the model formula
-#   colnames(cov) <- gsub("\\(Intercept\\)", "Intercept", colnames(cov))
-#   cov <- as.data.frame(cov)
-#   model_formula <- as.formula(paste("y ~ ", paste(colnames(cov), collapse=" + ")))
-#
-#   n_tests <- if (is.null(n_benchmarks)) ncol(methylations) else n_benchmarks
-#   residuals_matrix <- matrix(NA, nrow = nrow(methylations), ncol = n_tests)
-#
-#   for(i in 1:n_tests) {
-#     y <- methylations[, i]
-#     lm_model <- lm(model_formula, data = cbind(y, cov))
-#     residuals_matrix[, i] <- residuals(lm_model)
-#   }
-#
-#   cat("Residuals computed for ", n_tests, " tests.\n")
-#   return(residuals_matrix)
-# }
+regress_out_cov <- function(methylations, cov, n_benchmarks = NULL) {
+  #print("We just entered regress_out_cov()")
+
+  if(is.null(methylations)){
+    stop("Error: methylation data not found")
+  }
+
+  #cat("Dimensions of methylations: ", dim(methylations), "\n")
+
+  # Creating the model formula
+  colnames(cov) <- gsub("\\(Intercept\\)", "Intercept", colnames(cov))
+  cov <- as.data.frame(cov)
+  model_formula <- as.formula(paste("y ~ ", paste(colnames(cov), collapse=" + ")))
+
+  n_tests <- if (is.null(n_benchmarks)) ncol(methylations) else n_benchmarks
+  residuals_matrix <- matrix(NA, nrow = nrow(methylations), ncol = n_tests)
+
+  for(i in 1:n_tests) {
+    y <- methylations[, i]
+    lm_model <- lm(model_formula, data = cbind(y, cov))
+    residuals_matrix[, i] <- residuals(lm_model)
+  }
+  
+  colnames(residuals_matrix) <- colnames(methylations)
+  rownames(residuals_matrix) <- rownames(methylations)
+
+  #cat("Residuals computed for ", n_tests, " tests.\n")
+  return(residuals_matrix)
+}
 
 
 #' Regress trait (methylation) values on covariates and output residuals
@@ -327,37 +373,45 @@ reorder_and_filter_geno <- function(geno, genotype_IDs) {
 #' \dontrun{
 #' adjusted_methylations <- regress_out_cov_parallel(methylations, cov_matrix)
 #' }
-regress_out_cov_parallel <- function(methylations, cov_matrix,
-                                     no_cores = detectCores() - 1) {
+regress_out_cov_parallel <- function(methylations, cov_matrix, no_cores = detectCores() - 1) {
   
   residuals_computation <- function(chunk, cov_matrix, pseudoinv) {
     fitted_values <- cov_matrix %*% (pseudoinv %*% chunk)
-    chunk - fitted_values
+    return(chunk - fitted_values)
   }
-
+  
   if(is.null(methylations)){
     stop("Error: methylation data not found")
   }
-
+  
   pseudoinv <- solve(t(cov_matrix) %*% cov_matrix) %*% t(cov_matrix)
-
-  chunk_size <- ceiling(ncol(methylations) / no_cores)
+  
+  # Calculate the number of columns per chunk
+  # Ensure there's no division by zero or incorrect chunk size when no_cores > ncol(methylations)
+  no_cores <- min(no_cores, ncol(methylations))
+  chunk_size <- max(1, ceiling(ncol(methylations) / no_cores))
+  
+  chunks <- list()
+  for (i in 1:no_cores) {
+    start_col <- (i - 1) * chunk_size + 1
+    end_col <- min(i * chunk_size, ncol(methylations))
+    if (start_col <= ncol(methylations)) { # Ensure start_col is within the column range
+      chunks[[i]] <- methylations[, start_col:end_col, drop = FALSE]
+    }
+  }
   
   if(no_cores > 1 && (ncol(methylations) > no_cores)){
-    chunks <- lapply(1:min(no_cores, ncol(methylations)), function(i) {
-      start_col <- (i - 1) * chunk_size + 1
-      end_col <- min(i * chunk_size, ncol(methylations))
-      data = methylations[, start_col:end_col]
-    })
-    results <- future_lapply(chunks, residuals_computation, cov_matrix, pseudoinv)
+    results <- future_lapply(chunks, residuals_computation, cov_matrix = cov_matrix, pseudoinv = pseudoinv)
     residuals_matrix <- do.call(cbind, results)
   } else {
     residuals_matrix <- residuals_computation(methylations, cov_matrix, pseudoinv)
   }
   
+  # Ensure the column names of the residuals_matrix match those of the original methylations matrix
   if(!all(colnames(methylations) == colnames(residuals_matrix))) {
-    stop("Error: `regress_out_cov` is broken. Residuals in different order than inputs.")
+    stop("Error: Residuals in different order than inputs.")
   }
-
+  
   return(residuals_matrix)
 }
+
