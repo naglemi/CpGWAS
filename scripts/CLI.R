@@ -68,7 +68,7 @@ if(Sys.getenv("RSTUDIO") != "1") {
   args <- list(
     outdir = "./output/",
     chunk1 = 1,
-    chunk2 = 200,
+    chunk2 = 5,
     snp_data_path = "/Users/mnagle6/data/libd_chr1.pgen",
     methylation_data_path = "/Users/mnagle6/data/chr1_AA.rda",
     verbose = TRUE,
@@ -78,11 +78,11 @@ if(Sys.getenv("RSTUDIO") != "1") {
     num_cores = "all", #future::availableCores(),
     allow_inefficient_parallelization = FALSE,
     n_fold = 5,
-    window_sizes = c(500000),# 5000, 10000, 20000, 50000, 100000, 200000, 500000),
+    window_sizes = c(10000,20000,40000,60000,80000,100000,150000,200000,250000,300000,350000,400000,450000,500000),# 5000, 10000, 20000, 50000, 100000, 200000, 500000),
     tag = format(Sys.time(), "%Y%m%d-%H%M%S"),
     save_evaluation_results_each_fold = FALSE,
     save_glmnet_object = FALSE,
-    cv_eval_mode = "static",
+    cv_eval_mode = "dynamic",
     omit_folds_with_na_r = TRUE,
     methInput_rds_path = "~/data/chr1_AA_methylation_10k_samples.rds"
   )
@@ -121,6 +121,8 @@ if (!is.null(args$methInput_rds_path) && file.exists(args$methInput_rds_path)) {
   }
   methInput <- reinitializeMethylationInput(rds_path = args$methInput_rds_path,
                                             snp_data_path = args$snp_data_path,
+                                            start_site = args$chunk1,
+                                            end_site = args$chunk2,
                                             no_cores = args$num_cores)
 } else {
   if(args$verbose) {
@@ -129,6 +131,8 @@ if (!is.null(args$methInput_rds_path) && file.exists(args$methInput_rds_path)) {
   methInput <- new("MethylationInput",
                    BSseq_obj = BSobj2,
                    snp_data_path = args$snp_data_path,
+                   start_site = args$chunk1,
+                   end_site = args$chunk2,
                    no_cores = args$num_cores)
   BSobj2 <- means <- sds <- NULL
   #saveRDS(methInput, "~/data/chr1_AA_methylation_10k_samples.rds")
