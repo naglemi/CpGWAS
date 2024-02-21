@@ -42,9 +42,19 @@ extract_SNPs <- function(methInput, meth_site_pos, window_size) {
   colnames(SNPs) <- snp_IDs
   SNPs <- reorder_and_filter_geno(geno = SNPs, genotype_IDs = methInput@genotype_IDs)
 
+  # Edge case resulting from when multiple alternative alleles at same position,
+  #  which can be filtered out and replaced with NA
   if(length(which(is.na(SNPs), arr.ind = TRUE)) > 0) {
     print("removing NA columns")
     SNPs <- SNPs[, colSums(!is.na(SNPs)) > 0]
+  }
+  
+  # If minor allele count for a given SNP is not above 1, exclude
+  #  to avoid edge case that causes error:
+  #  "from glmnet C++ code (error code 7777); All used predictors have zero variance"
+  if(any(colSums(SNPs, na.rm = TRUE) <= 1)) {
+    print("removing SNPs with minor allele count <= 1")
+    SNPs <- SNPs[, colSums(SNPs, na.rm = TRUE) > 1, drop = FALSE]
   }
 
   return(SNPs)
