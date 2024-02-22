@@ -52,7 +52,9 @@ if(Sys.getenv("RSTUDIO") != "1") {
     make_option(c("--omit_folds_with_na_r"), type = "logical", default = TRUE,
                 help = "Logical, indicating whether to omit folds with NA R values, default is TRUE"),
     make_option(c("-r", "--methInput_rds_path"), type = "character", default = NULL,
-                help = "Path to an RDS file containing a pre-existing MethylationInput object. If provided, this object will be loaded instead of creating a new one.")
+                help = "Path to an RDS file containing a pre-existing MethylationInput object. If provided, this object will be loaded instead of creating a new one."),
+    make_option(c("--maf"), type = "numeric", default = 0.01,
+                help = "Minor allele frequency threshold for filtering SNPs, default is 0.01")
   )
 
   # Parse options
@@ -67,8 +69,8 @@ if(Sys.getenv("RSTUDIO") != "1") {
 } else {
   args <- list(
     outdir = "./output/",
-    chunk1 = 7751,
-    chunk2 = 8000,
+    chunk1 = 5751+193,
+    chunk2 = 6000,
     snp_data_path = "/Users/mnagle6/data/libd_chr1.pgen",
     methylation_data_path = "/Users/mnagle6/data/chr1_AA.rda",
     verbose = TRUE,
@@ -78,13 +80,14 @@ if(Sys.getenv("RSTUDIO") != "1") {
     num_cores = "all", #future::availableCores(),
     allow_inefficient_parallelization = FALSE,
     n_fold = 5,
-    window_sizes = c(2000,4000,6000,8000),# 5000, 10000, 20000, 50000, 100000, 200000, 500000),
+    window_sizes = c(2000,4000,6000,8000),
     tag = format(Sys.time(), "%Y%m%d-%H%M%S"),
     save_evaluation_results_each_fold = FALSE,
     save_glmnet_object = FALSE,
     cv_eval_mode = "dynamic",
     omit_folds_with_na_r = TRUE,
-    methInput_rds_path = "~/data/chr1_AA_methylation_10k_samples.rds"
+    methInput_rds_path = "~/data/chr1_AA_methylation_10k_samples.rds",
+    maf = 0.01
   )
 
   if(args$verbose) {
@@ -164,7 +167,8 @@ scaffold_models <- fit_MWAS_models(
   save_evaluation_results_each_fold = args$save_evaluation_results_each_fold,
   save_glmnet_object = args$save_glmnet_object,
   cv_eval_mode = args$cv_eval_mode,
-  omit_folds_with_na_r = args$omit_folds_with_na_r
+  omit_folds_with_na_r = args$omit_folds_with_na_r,
+  maf = args$maf
 )
 #df <- as.data.frame(scaffold_models)
 
