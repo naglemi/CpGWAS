@@ -11,6 +11,7 @@
 #' @param n_fold Integer, the number of folds for cross-validation.
 #' @param scaffoldIdentifier Character, a unique identifier for the scaffold being processed.
 #' @param outdir Character, directory path to save the output files.
+#' @param maf Numeric, minor allele frequency threshold for filtering SNPs.
 #' @param ... Additional arguments passed to `glmnet_tune_alpha` and `cv_eval`.
 #' @inheritParams glmnet_tune_alpha
 #'
@@ -32,7 +33,7 @@ fit_MWAS_models <- function(methInput, window_sizes, chunk1, chunk2,
                             n_fold, scaffoldIdentifier, outdir, alphas,
                             save_evaluation_results_each_fold,
                             save_glmnet_object, cores_per_alpha, num_cores,
-                            allow_inefficient_parallelization,
+                            allow_inefficient_parallelization, maf,
                             omit_folds_with_na_r = TRUE,
                             cv_eval_mode = "dynamic", verbose = FALSE, ...) {
   requireNamespace("data.table")
@@ -56,21 +57,14 @@ fit_MWAS_models <- function(methInput, window_sizes, chunk1, chunk2,
 
       SNPs <- extract_SNPs(methInput,
                            meth_site_pos = meth_site_pos,
-                           window_size = window_size)
+                           window_size = window_size,
+                           verbose = verbose,
+                           maf = maf)
 
       if (is.null(SNPs)) {
         if (verbose) {
           message(paste0("For site at position ", meth_site_pos,
-                         ", no SNPs were found in the window of size ",
-                         window_size, "\n\n"))
-        }
-        next
-      }
-      
-      if (are_columns_identical(SNPs)) {
-        if (verbose) {
-          message(paste0("For site at position ", meth_site_pos,
-                         ", all SNPs are identical in the window of size ",
+                         ", no SNPs meeting criteria found in the window of size ",
                          window_size, "\n\n"))
         }
         next
