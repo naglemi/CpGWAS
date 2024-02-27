@@ -96,14 +96,18 @@ setMethod(
     }
   )
 
-setGeneric("sampleMethylationSites", function(object, num_sites) {
+setGeneric("sampleMethylationSites", function(object, num_sites, seed) {
   standardGeneric("sampleMethylationSites")
 })
 
 setMethod(
   "sampleMethylationSites",
   "MethylationInput",
-  function(object, num_sites) {
+  function(object, num_sites, seed = NULL) {
+    if (!is.null(seed)) {
+      set.seed(seed)
+    }
+    
     if (num_sites <= 0 || num_sites > length(object@methylations_positions)) {
       stop("The number of sites must be greater than 0 and less than or equal to the total number of methylation sites.")
     }
@@ -120,6 +124,62 @@ setMethod(
   }
 )
 
+setGeneric(
+  "validatePositionOverlap",
+  signature = "object",
+  def = function(object, window_size) {
+    standardGeneric("validatePositionOverlap")
+  }
+)
+
+#' Validate Position Overlap Between Methylation Sites and SNPs
+#'
+#' This method checks if there is an overlap between methylation sites and SNP positions
+#' given a specified window size. It ensures that the methylation data being used for analysis
+#' has relevant SNP data within the defined proximity.
+#' 
+#' @param object MethylationInput object containing methylation positions and SNP data.
+#' @param window_size Numeric value defining the window size around methylation sites to check for SNP overlap.
+#' 
+#' @return Invisible. The function stops with an error message if there is no overlap within the specified window size.
+#' 
+#' @examples
+#' # Assuming `methInput` is a MethylationInput object
+#' validatePositionOverlap(methInput, 1000)
+#' 
+#' @details
+#' The function calculates the maximum and minimum positions for methylation sites and SNP data,
+#' adjusted by the window size, to determine if any SNP falls within the vicinity of the methylation sites.
+#' If not, then there's no overlap and the function stops with an error message.
+#'
+#' @note
+#' This method is specific to MethylationInput objects. Ensure that your MethylationInput object
+#' is properly initialized with valid methylation positions and SNP data before calling this method.
+setMethod(
+  "validatePositionOverlap",
+  signature(object = "MethylationInput"),
+  definition = function(object, window_size) {
+    last_possible_position_given_methylation <- max(object@methylations_positions) + window_size
+    first_possible_position_given_methylation <- min(object@methylations_positions) - window_size
+    
+    last_possible_position_given_SNPs <- max(object@pvar_dt$POS)
+    first_possible_position_given_SNPs <- min(object@pvar_dt$POS)
+    
+    if (last_possible_position_given_methylation < first_possible_position_given_SNPs) {
+      stop(paste0("There is no overlap between selected methylation sites and given SNP data\n",
+                  "with window size of ", window_size, ".\n\n",
+                  "The last possible position given methylation sites is ", last_possible_position_given_methylation,
+                  ", and the first possible position given SNPs is ", first_possible_position_given_SNPs, "."))
+    }
+    
+    if (first_possible_position_given_methylation > last_possible_position_given_SNPs) {
+      stop(paste0("There is no overlap between selected methylation sites and given SNP data\n",
+                  "with window size of ", window_size, ".\n\n",
+                  "The first possible position given methylation sites is ", first_possible_position_given_methylation,
+                  ", and the last possible position given SNPs is ", last_possible_position_given_SNPs, "."))
+    }
+  }
+)
 
 
 #' Reinitialize MethylationInput Object
