@@ -45,6 +45,16 @@ extract_SNPs <- function(methInput, meth_site_pos, window_size, verbose, maf) {
   colnames(SNPs) <- snp_IDs
   SNPs <- reorder_and_filter_geno(geno = SNPs, genotype_IDs = methInput@genotype_IDs)
   
+  # Edge case resulting from when multiple alternative alleles at same position,
+  #  which can be filtered out and replaced with NA
+  if (length(which(is.na(SNPs), arr.ind = TRUE)) > 0) {
+    if (verbose) {
+      message(paste0("removing NA columns for site at position ", meth_site_pos,
+                     " with window size ", window_size, ".\n\n"))
+    }
+    SNPs <- SNPs[, colSums(!is.na(SNPs)) > 0]
+  }
+  
   # Filter by maf
   if (maf > 0){
     mafs <- colMeans(SNPs, na.rm = TRUE) / 2
@@ -67,16 +77,6 @@ extract_SNPs <- function(methInput, meth_site_pos, window_size, verbose, maf) {
                      window_size, ".\n\n"))
     }
     return(NULL)
-  }
-  
-  # Edge case resulting from when multiple alternative alleles at same position,
-  #  which can be filtered out and replaced with NA
-  if (length(which(is.na(SNPs), arr.ind = TRUE)) > 0) {
-    if (verbose) {
-      message(paste0("removing NA columns for site at position ", meth_site_pos,
-                     " with window size ", window_size, ".\n\n"))
-    }
-    SNPs <- SNPs[, colSums(!is.na(SNPs)) > 0]
   }
   
   # If minor allele count for a given SNP is not above 1, exclude
