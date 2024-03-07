@@ -5,6 +5,7 @@ library(bsseq)
 pgen_path = system.file("extdata", "chr1_sample_subset.pgen", package = "CpGWAS")
 pvar_path = system.file("extdata", "chr1_sample_subset.pvar", package = "CpGWAS")
 psam_path = system.file("extdata", "chr1_sample_subset.psam", package = "CpGWAS")
+cov_path = system.file("extdata", "all_caud.csv", package = "CpGWAS")
 
 scaffold_name <- "unit_test_scaffold"
 
@@ -28,10 +29,13 @@ genotype_IDs <- psam_in_wgbs$`#IID`
 genotype_IDs <- intersect(rownames(methylations), genotype_IDs)
 genotype_IDs <- genotype_IDs[order(genotype_IDs)]
 
-cov <- processCovariates(dataFrame = colData(BSobj_sample),
-                         colsToExclude = c("ID.", "DNum", "brnum",
-                                           "BrNum", "brnumerical"),
-                         genotype_IDs = genotype_IDs)
+#cov <- processCovariatesFromBSseq(dataFrame = colData(BSobj_sample),
+#                                  colsToExclude = c("ID.", "DNum", "brnum",
+#                                                    "BrNum", "brnumerical"),
+#                                  genotype_IDs = genotype_IDs)
+
+cov <- fread(cov_path)
+rownames(cov) <- cov[, 1]
 
 # Begin tests for data loaded without use of `MethylationInput`
 test_that("Without using `MethylationInput`, methylation data has 112 samples", {
@@ -115,7 +119,8 @@ data(chr1_methylation_sample_subset, package = "CpGWAS")
 
 # Assuming MethylationInput has been properly defined and includes methods
 # for accessing processed methylations, genotype IDs, and covariates
-methInput <- new("MethylationInput", BSseq_obj = BSobj_sample, snp_data_path = pgen_path)
+methInput <- new("MethylationInput", BSseq_obj = BSobj_sample,
+                 snp_data_path = pgen_path, cov_path = cov_path)
 
 # Assuming MethylationInput handles filtering based on genotype IDs internally
 test_that("Using `MethylationInput`, after filtering, methylation data has 111 samples", {

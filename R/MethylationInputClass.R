@@ -57,13 +57,26 @@ setClass(
 setMethod(
   "initialize",
   "MethylationInput",
-  function(.Object, BSseq_obj, snp_data_path, no_cores = detectCores(), start_site = NULL, end_site = NULL) {
+  function(.Object, BSseq_obj, snp_data_path, no_cores = detectCores(), cov_path = NULL, start_site = NULL, end_site = NULL) {
+
     if (is.null(snp_data_path) || is.null(BSseq_obj)) {
       stop("A BSseq object and the path to SNP data are required.")
     }
     
     if (!inherits(BSseq_obj, "BSseq")) {
       stop("BSseq_obj must be a BSseq object.")
+    }
+    
+    if (is.null(cov_path)) {
+      message("No covariate file provided. Covariates will not be included in the analysis.")
+    } else {
+      if (!file.exists(cov_path)) {
+        stop("Covariate file does not exist: ", cov_path)
+      }
+      if (file.exists(cov_path)) {
+        cov_data <- fread(cov_path)
+#        colnames(cov_data) <- gsub("\\(Intercept\\)", "Intercept", colnames(cov_data))
+      }
     }
     
     paths <- constructSNPFilePaths(snp_data_path)
@@ -85,9 +98,25 @@ setMethod(
     # Filter and order methylations by genotype IDs
     .Object@methylations <- filterOrderMethylations(.Object@methylations, .Object@genotype_IDs)
     
-    .Object@cov <- processCovariates(dataFrame = colData(BSseq_obj),
-                                     colsToExclude = c("ID.", "DNum", "brnum", "BrNum", "brnumerical"),
-                                     genotype_IDs = .Object@genotype_IDs)
+    cov <- fread(cov_path)
+    rownames(cov) <- cov$ID
+    
+    # Get the indices of the factor columns
+    factor_columns <- sapply(cov, is.factor)
+    
+    # One-hot encode the factor columns using model.matrix
+    one_hot_encoded <- model.matrix(~., data = cov[, factor_columns])
+    
+    # Combine the one-hot encoded columns with the numeric columns
+    cov <- as.matrix(cbind(one_hot_encoded, cov[, !factor_columns]))
+    
+    cov <- as.matrix(cov[, -1, with = FALSE])
+    
+    .Object@cov <- cov
+    
+    #.Object@cov <- processCovariatesFromBSseq(dataFrame = colData(BSseq_obj),
+    #                                 colsToExclude = c("ID.", "DNum", "brnum", "BrNum", "brnumerical"),
+    #                                 genotype_IDs = .Object@genotype_IDs)
     
     # Regress out covariates in parallel
     .Object@methylations <- regress_out_cov_parallel(.Object@methylations, .Object@cov, no_cores = no_cores)
@@ -109,6 +138,7 @@ setMethod(
     }
     
     if (num_sites <= 0 || num_sites > length(object@methylations_positions)) {
+      recover()
       stop("The number of sites must be greater than 0 and less than or equal to the total number of methylation sites.")
     }
 # 
@@ -224,7 +254,6 @@ reinitializeMethylationInput <- function(rds_path, snp_data_path, no_cores = det
   loadedObject@pgen <- snp_data$pgen
   loadedObject@psam <- snp_data$psam
   
-  # Assuming BSseq object is part of the loadedObject, and you want to reprocess methylation data
   if (!is.null(start_site) && !is.null(end_site)) {
     loadedObject@methylations <- loadedObject@methylations[, (start_site:end_site)]
     loadedObject@methylations_positions <- loadedObject@methylations_positions[(start_site:end_site)]
@@ -297,13 +326,13 @@ processMethylationData <- function(BSseq_obj, start_site = NULL, end_site = NULL
 }
 
     
-processCovariates <- function(dataFrame,
+processCovariatesFromBSseq <- function(dataFrame,
                               colsToExclude = c("ID.", "DNum", "BrNum",
                                                 "brnum", "brnumerical"),
                               genotype_IDs = NULL) {
 
   if(is.null(genotype_IDs)){
-    stop(paste0("`processCovariates must receive a vector of genotype IDs",
+    stop(paste0("`processCovariatesFromBSseq must receive a vector of genotype IDs",
                 " with order matching methylation trait file."))
   }
 
