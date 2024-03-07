@@ -4,7 +4,13 @@
 \alias{reinitializeMethylationInput}
 \title{Reinitialize MethylationInput Object}
 \usage{
-reinitializeMethylationInput(rds_path, snp_data_path, no_cores = detectCores())
+reinitializeMethylationInput(
+  rds_path,
+  snp_data_path,
+  no_cores = detectCores(),
+  start_site = NULL,
+  end_site = NULL
+)
 }
 \arguments{
 \item{rds_path}{Character string specifying the path to the RDS file containing a previously saved MethylationInput object.}
@@ -12,6 +18,10 @@ reinitializeMethylationInput(rds_path, snp_data_path, no_cores = detectCores())
 \item{snp_data_path}{Character string specifying the new path to the SNP data in PLINK2 binary format.}
 
 \item{no_cores}{Integer specifying the number of cores to use for parallel operations (defaults to the number of available cores).}
+
+\item{start_site}{Optional, the start site for subsetting methylation data based on indices in the file.}
+
+\item{end_site}{Optional, the end site for subsetting methylation data based on indices in the file.}
 }
 \value{
 A reinitialized MethylationInput object with updated links to SNP data.
