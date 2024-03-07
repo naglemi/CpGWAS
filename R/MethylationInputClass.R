@@ -112,6 +112,7 @@ setMethod(
     }
   )
 
+#' @export
 setGeneric("sampleMethylationSites", function(object, num_sites, seed) {
   standardGeneric("sampleMethylationSites")
 })

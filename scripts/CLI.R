@@ -75,8 +75,8 @@ if(Sys.getenv("RSTUDIO") != "1") {
     chunk1 = 7801,
     chunk2 = 8000,
     snp_data_path = "/Users/michael.nagle/data/libd_chr1.pgen",
-    methylation_data_path = "/Users/michael.nagle/data/chr1_all_dlpfc.rda",
-    cov = "/Users/michael.nagle/code/CpGWAS/inst/extdata/all_cov_dlpfc.csv",
+    methylation_data_path = "/Users/michael.nagle/data/chr1_AA.rda",
+    cov = "/Users/michael.nagle/code/CpGWAS/inst/extdata/AA_dlpfc.csv",
     verbose = TRUE,
     lambda_choice = "1se",
     alphas = seq(0, 1, 0.25),
@@ -139,12 +139,17 @@ if (!is.null(args$methInput_rds_path) && file.exists(args$methInput_rds_path)) {
                    BSseq_obj = BSobj2,
                    snp_data_path = args$snp_data_path,
                    cov_path = args$cov,
-                   start_site = 1, #args$chunk1,
-                   end_site = length(BSobj2@rowRanges@seqnames), #args$chunk2,
+                   start_site = args$chunk1,
+                   end_site = args$chunk2,
                    no_cores = args$num_cores)
   BSobj2 <- means <- sds <- NULL
-  methInput <- sampleMethylationSites(methInput, n = 10000, seed = 42)
-  saveRDS(methInput, "~/data/chr1_dfplc_all_methylation_10k_samples_a3.rds")
+  #methInput <- sampleMethylationSites(methInput, n = 10000, seed = 42)
+  #saveRDS(methInput, "~/data/chr1_dfplc_all_methylation_10k_samples_a3.rds")
+  
+  #BSobj_sample <- methInput
+  
+  #save(methInput, file = "~/code/CpGWAS/inst/extdata/chr1_methylation_sample_subset.rda")
+  
 }
 
 validatePositionOverlap(methInput, max(args$window_sizes))
@@ -161,7 +166,7 @@ scaffold_models <- fit_MWAS_models(
   BSobj = BSobj2,
   methInput = methInput,
   window_sizes = args$window_sizes,
-  chunk1 = 107,
+  chunk1 = 1,
   chunk2 = length(methInput@methylations_positions),
   n_fold = args$n_fold,
   scaffoldIdentifier = scaffoldIdentifier,

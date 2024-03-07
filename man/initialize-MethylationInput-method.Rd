@@ -9,6 +9,7 @@
   BSseq_obj,
   snp_data_path,
   no_cores = detectCores(),
+  cov_path = NULL,
   start_site = NULL,
   end_site = NULL
 )
@@ -20,9 +21,9 @@
 
 \item{no_cores}{Integer, the number of cores to use for parallel operations (defaults to available core count).}
 
-\item{start_site}{Optional, the start site for subsetting methylation data based on genomic positions.}
+\item{start_site}{Optional, the start site for subsetting methylation data based on indices in the file.}
 
-\item{end_site}{Optional, the end site for subsetting methylation data based on genomic positions.}
+\item{end_site}{Optional, the end site for subsetting methylation data based on indices in the file.}
 }
 \value{
 An object of class MethylationInput, ready for methylation analysis.

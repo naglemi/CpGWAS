@@ -18,6 +18,7 @@ fit_MWAS_models(
   cores_per_alpha,
   num_cores,
   allow_inefficient_parallelization,
+  maf,
   omit_folds_with_na_r = TRUE,
   cv_eval_mode = "dynamic",
   verbose = FALSE,
@@ -52,6 +53,8 @@ available cores if not provided.}
 when cores_per_alpha is 1 and there are
 more available cores than alpha values.
 Default is FALSE.}
+
+\item{maf}{Numeric, minor allele frequency threshold for filtering SNPs.}
 
 \item{verbose}{Logical, indicating whether to print detailed tuning results.}
 
