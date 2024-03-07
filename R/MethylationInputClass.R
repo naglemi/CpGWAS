@@ -92,27 +92,14 @@ setMethod(
     .Object@methylations <- meth_data$methylations
     .Object@methylations_positions <- meth_data$methylations_positions
     colnames(.Object@methylations) <- paste0("pos_", .Object@methylations_positions)
+    
+    .Object@cov <- processCovariates(cov_path)
 
-    .Object@genotype_IDs <- selectGenotypeIDs(.Object@psam, .Object@methylations)
+    .Object@genotype_IDs <- selectGenotypeIDs(.Object@psam, .Object@methylations,
+                                              .Object@cov)
     
     # Filter and order methylations by genotype IDs
     .Object@methylations <- filterOrderMethylations(.Object@methylations, .Object@genotype_IDs)
-    
-    cov <- fread(cov_path)
-    rownames(cov) <- cov$ID
-    
-    # Get the indices of the factor columns
-    factor_columns <- sapply(cov, is.factor)
-    
-    # One-hot encode the factor columns using model.matrix
-    one_hot_encoded <- model.matrix(~., data = cov[, factor_columns])
-    
-    # Combine the one-hot encoded columns with the numeric columns
-    cov <- as.matrix(cbind(one_hot_encoded, cov[, !factor_columns]))
-    
-    cov <- as.matrix(cov[, -1, with = FALSE])
-    
-    .Object@cov <- cov
     
     #.Object@cov <- processCovariatesFromBSseq(dataFrame = colData(BSseq_obj),
     #                                 colsToExclude = c("ID.", "DNum", "brnum", "BrNum", "brnumerical"),
@@ -211,6 +198,22 @@ setMethod(
   }
 )
 
+processCovariates <- function(cov_path){
+  cov <- read.csv(cov_path, stringsAsFactors = TRUE)
+  rownames(cov) <- cov$ID
+  cov <- cov[, -1]
+  
+  # Get the indices of the factor columns
+  factor_columns <- sapply(cov, is.factor)
+  
+  # One-hot encode the factor columns using model.matrix
+  one_hot_encoded <- model.matrix(~., data = cov[, factor_columns])
+  
+  # Combine the one-hot encoded columns with the numeric columns
+  cov <- as.matrix(cbind(one_hot_encoded, cov[, !factor_columns]))
+  
+  cov <- as.matrix(cov)
+}
 
 #' Reinitialize MethylationInput Object
 #'
@@ -269,8 +272,11 @@ reinitializeMethylationInput <- function(rds_path, snp_data_path, no_cores = det
 }
 
 # Helper function to select genotype IDs based on methylation data
-selectGenotypeIDs <- function(psam_data, methylation_data) {
+selectGenotypeIDs <- function(psam_data, methylation_data, cov_data = NULL) {
   psam_in_wgbs <- psam_data[which(psam_data$`#IID` %in% rownames(methylation_data))]
+  if (!is.null(cov_data)){
+    psam_in_wgbs <- psam_in_wgbs[which(psam_in_wgbs$`#IID` %in% rownames(cov_data))]
+  }
   genotype_IDs <- psam_in_wgbs$`#IID`
   intersected_genotype_IDs <- intersect(rownames(methylation_data), genotype_IDs)
   ordered_genotype_IDs <- intersected_genotype_IDs[order(intersected_genotype_IDs)]
@@ -463,6 +469,10 @@ regress_out_cov <- function(methylations, cov, n_benchmarks = NULL) {
 #' adjusted_methylations <- regress_out_cov_parallel(methylations, cov_matrix)
 #' }
 regress_out_cov_parallel <- function(methylations, cov_matrix, no_cores = detectCores() - 1) {
+
+  if(!all(rownames(methylations) == rownames(cov_matrix))) {
+    stop("Error: Row names of methylation data and covariates do not match.")
+  }
   
   residuals_computation <- function(chunk, cov_matrix, pseudoinv) {
     fitted_values <- cov_matrix %*% (pseudoinv %*% chunk)
@@ -472,7 +482,7 @@ regress_out_cov_parallel <- function(methylations, cov_matrix, no_cores = detect
   if(is.null(methylations)){
     stop("Error: methylation data not found")
   }
-  
+
   pseudoinv <- solve(t(cov_matrix) %*% cov_matrix) %*% t(cov_matrix)
   
   # Calculate the number of columns per chunk
