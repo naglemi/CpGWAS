@@ -142,6 +142,7 @@ setMethod(
   }
 )
 
+#' @export
 setGeneric(
   "validatePositionOverlap",
   signature = "object",
