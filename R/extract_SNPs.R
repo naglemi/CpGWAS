@@ -8,7 +8,8 @@
 #' @param window_size numeric Window size for SNPs surrounding methylation site.
 #' @param verbose logical Whether to print messages.
 #' @param maf numeric Minor allele frequency threshold for filtering SNPs.
-#'
+#' @param na.action character Whether to remove or impute missing data. Options are "remove" or "impute" (to mean).
+#' 
 #' @return matrix Matrix of SNP data, with row for each sample, column for each SNP (alternative allele count)
 #'
 #' @examples
@@ -19,7 +20,8 @@
 #'
 #'
 
-extract_SNPs <- function(methInput, meth_site_pos, window_size, verbose, maf) {
+extract_SNPs <- function(methInput, meth_site_pos, window_size, verbose, maf,
+                         na.action) {
   if (!inherits(methInput, "MethylationInput")) {
     stop("methInput must be a MethylationInput object.")
   }
@@ -45,14 +47,40 @@ extract_SNPs <- function(methInput, meth_site_pos, window_size, verbose, maf) {
   colnames(SNPs) <- snp_IDs
   SNPs <- reorder_and_filter_geno(geno = SNPs, genotype_IDs = methInput@genotype_IDs)
   
-  # Edge case resulting from when multiple alternative alleles at same position,
-  #  which can be filtered out and replaced with NA
-  if (length(which(is.na(SNPs), arr.ind = TRUE)) > 0) {
-    if (verbose) {
-      message(paste0("removing NA columns for site at position ", meth_site_pos,
-                     " with window size ", window_size, ".\n\n"))
+  # If we have remaining NAs in any column, either remove column or impute to mean
+  # depending on user preference
+  
+  na_col_sums <- colSums(is.na(SNPs))
+  
+  if (any(na_col_sums > 0)) {
+    
+    # If the entire column is NA, remove the column
+    # Edge case resulting from when multiple alternative alleles at same position,
+    #  which can be filtered out and replaced with NA
+    if (any(na_col_sums == nrow(SNPs))) {
+      SNPs <- SNPs[, na_col_sums < nrow(SNPs), drop = FALSE]
+      
+      if (verbose) {
+        message(paste0("removing SNP(s) with all missing data for position ", meth_site_pos,
+                       " with window size ", window_size, ".\n\n"))
+      }
+      na_col_sums <- colSums(is.na(SNPs))
     }
-    SNPs <- SNPs[, colSums(!is.na(SNPs)) > 0]
+      
+    # If we still have columns with some NA, impute to mean or remove
+    if (any(na_col_sums > 0)) {
+      if (verbose) {
+        message(paste0("imputing missing data with mean for position ", meth_site_pos,
+                       " with window size ", window_size, ".\n\n"))
+      }
+      # Impute to mean
+      if(na.action == "impute") {
+        SNPs[is.na(SNPs)] <- rowMeans(SNPs, na.rm = TRUE)[row(SNPs)[is.na(SNPs)]]
+      }
+      if(na.action == "remove") {
+        SNPs <- SNPs[, na_col_sums == 0, drop = FALSE]
+      }
+    }
   }
   
   # Filter by maf

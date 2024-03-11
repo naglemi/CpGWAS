@@ -33,7 +33,7 @@ fit_MWAS_models <- function(methInput, window_sizes, chunk1, chunk2,
                             n_fold, scaffoldIdentifier, outdir, alphas,
                             save_evaluation_results_each_fold,
                             save_glmnet_object, cores_per_alpha, num_cores,
-                            allow_inefficient_parallelization, maf,
+                            allow_inefficient_parallelization, maf, na.action,
                             omit_folds_with_na_r = TRUE,
                             cv_eval_mode = "dynamic", verbose = FALSE, ...) {
   requireNamespace("data.table")
@@ -59,7 +59,8 @@ fit_MWAS_models <- function(methInput, window_sizes, chunk1, chunk2,
                            meth_site_pos = meth_site_pos,
                            window_size = window_size,
                            verbose = verbose,
-                           maf = maf)
+                           maf = maf,
+                           na.action = na.action)
 
       if (is.null(SNPs)) {
         if (verbose) {

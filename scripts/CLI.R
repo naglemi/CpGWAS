@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 #profvis({
 
-#options(error = recover)
+options(error = recover)
 #options(error = traceback)
 
 start_time <- Sys.time()  # Start time capture
@@ -57,7 +57,9 @@ if(Sys.getenv("RSTUDIO") != "1") {
     make_option(c("--maf"), type = "numeric", default = 0.01,
                 help = "Minor allele frequency threshold for filtering SNPs, default is 0.01"),
     make_option(c("--cov"), type = "character", default = NULL,
-                help = "Path(s) to file(s) containing covariates to be regressed out of the methylation data, separated by commas if multiple. Default is NULL")
+                help = "Path(s) to file(s) containing covariates to be regressed out of the methylation data, separated by commas if multiple. Default is NULL"),
+    make_option(c("--na_action"), type = "character", default = "remove",
+                help = "Character, indicating how to handle missing data in the SNP data. Can be 'remove' or 'impute', default is 'remove'")
   )
 
   # Parse options
@@ -72,26 +74,27 @@ if(Sys.getenv("RSTUDIO") != "1") {
 } else {
   args <- list(
     outdir = "./output/",
-    chunk1 = 7801,
-    chunk2 = 8000,
+    chunk1 = 9559,
+    chunk2 = 9600,
     snp_data_path = "/Users/michael.nagle/data/libd_chr1.pgen",
     methylation_data_path = "/Users/michael.nagle/data/chr1_AA.rda",
     cov = "/Users/michael.nagle/code/CpGWAS/inst/extdata/AA_dlpfc.csv",
     verbose = TRUE,
     lambda_choice = "1se",
-    alphas = seq(0, 1, 0.25),
+    alphas = c(0.5),#seq(0, 1, 0.25),
     cores_per_alpha = "all",
     num_cores = "all", #future::availableCores(),
     allow_inefficient_parallelization = FALSE,
     n_fold = 5,
-    window_sizes = c(2000, 4000, 6000, 8000, 10000),
+    window_sizes = c(100000),
     tag = format(Sys.time(), "%Y%m%d-%H%M%S"),
     save_evaluation_results_each_fold = FALSE,
     save_glmnet_object = FALSE,
     cv_eval_mode = "dynamic",
     omit_folds_with_na_r = TRUE,
-    #methInput_rds_path = "~/data/chr1_AA_methylation_10k_samples.rds",
-    maf = 0.01
+    methInput_rds_path = "~/data/chr1_dfplc_all_methylation_10k_samples_a3.rds",
+    maf = 0.01,
+    na.action = "remove"
   )
 
   if(args$verbose) {
@@ -181,7 +184,8 @@ scaffold_models <- fit_MWAS_models(
   save_glmnet_object = args$save_glmnet_object,
   cv_eval_mode = args$cv_eval_mode,
   omit_folds_with_na_r = args$omit_folds_with_na_r,
-  maf = args$maf
+  maf = args$maf,
+  na.action = args$na.action
 )
 #df <- as.data.frame(scaffold_models)
 
