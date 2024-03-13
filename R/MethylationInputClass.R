@@ -99,7 +99,13 @@ setMethod(
                                               .Object@cov)
     
     # Filter and order methylations by genotype IDs
-    .Object@methylations <- filterOrderMethylations(.Object@methylations, .Object@genotype_IDs)
+    if(!identical(rownames(.Object@methylations), .Object@genotype_IDs)){
+      .Object@methylations <- .Object@methylations[which(rownames(.Object@methylations) %in% .Object@genotype_IDs), ]
+    }
+
+    if(!identical(rownames(.Object@cov), .Object@genotype_IDs)){
+      .Object@cov <- .Object@cov[which(rownames(.Object@cov) %in% .Object@genotype_IDs), ]
+    }
     
     #.Object@cov <- processCovariatesFromBSseq(dataFrame = colData(BSseq_obj),
     #                                 colsToExclude = c("ID.", "DNum", "brnum", "BrNum", "brnumerical"),
@@ -200,6 +206,7 @@ setMethod(
   }
 )
 
+#' @export
 processCovariates <- function(cov_path){
   cov <- read.csv(cov_path, stringsAsFactors = TRUE)
   rownames(cov) <- cov$ID
@@ -268,7 +275,13 @@ reinitializeMethylationInput <- function(rds_path, snp_data_path, no_cores = det
   loadedObject@genotype_IDs <- selectGenotypeIDs(loadedObject@psam, loadedObject@methylations)
   
   # Filter and order methylations by genotype IDs
-  loadedObject@methylations <- filterOrderMethylations(loadedObject@methylations, loadedObject@genotype_IDs)
+  if(!identical(rownames(loadedObject@methylations), loadedObject@genotype_IDs)){
+    loadedObject@methylations <- loadedObject@methylations[which(rownames(loadedObject@methylations) %in% loadedObject@genotype_IDs), ]
+  }
+  
+  if(!identical(rownames(loadedObject@cov), loadedObject@genotype_IDs)){
+    loadedObject@cov <- loadedObject@cov[which(rownames(loadedObject@cov) %in% loadedObject@genotype_IDs), ]
+  }
   
   return(loadedObject)
 }
@@ -284,13 +297,6 @@ selectGenotypeIDs <- function(psam_data, methylation_data, cov_data = NULL) {
   ordered_genotype_IDs <- intersected_genotype_IDs[order(intersected_genotype_IDs)]
   
   return(ordered_genotype_IDs)
-}
-
-# Helper function to filter and order methylations by genotype IDs
-filterOrderMethylations <- function(methylations, genotype_IDs) {
-  filtered_methylations <- methylations[which(rownames(methylations) %in% genotype_IDs), ]
-  
-  return(filtered_methylations)
 }
 
 # Helper function to construct SNP file paths
@@ -424,6 +430,7 @@ reorder_and_filter_geno <- function(geno, genotype_IDs) {
   return(reordered_geno)
 }
 
+#' @export
 regress_out_cov <- function(methylations, cov, n_benchmarks = NULL) {
   #print("We just entered regress_out_cov()")
 

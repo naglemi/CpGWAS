@@ -3,6 +3,8 @@
 export(convertToDataFrame)
 export(extract_SNPs)
 export(fit_MWAS_models)
+export(processCovariates)
+export(regress_out_cov)
 export(regress_out_cov_parallel)
 export(reinitializeMethylationInput)
 export(sampleMethylationSites)

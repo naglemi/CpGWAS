@@ -4,7 +4,7 @@
 \alias{extract_SNPs}
 \title{Extract SNPs within a specified window around a methylation site}
 \usage{
-extract_SNPs(methInput, meth_site_pos, window_size, verbose, maf)
+extract_SNPs(methInput, meth_site_pos, window_size, verbose, maf, na.action)
 }
 \arguments{
 \item{methInput}{MethylationInput The MethylationInput object containing SNP and methylation data.}
@@ -16,6 +16,8 @@ extract_SNPs(methInput, meth_site_pos, window_size, verbose, maf)
 \item{verbose}{logical Whether to print messages.}
 
 \item{maf}{numeric Minor allele frequency threshold for filtering SNPs.}
+
+\item{na.action}{character Whether to remove or impute missing data. Options are "remove" or "impute" (to mean).}
 }
 \value{
 matrix Matrix of SNP data, with row for each sample, column for each SNP (alternative allele count)
