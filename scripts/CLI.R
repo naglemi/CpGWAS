@@ -185,7 +185,7 @@ scaffold_models <- fit_MWAS_models(
   cv_eval_mode = args$cv_eval_mode,
   omit_folds_with_na_r = args$omit_folds_with_na_r,
   maf = args$maf,
-  na.action = args$na.action
+  na.action = args$na_action
 )
 #df <- as.data.frame(scaffold_models)
 
