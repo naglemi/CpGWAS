@@ -5,7 +5,7 @@ library(bsseq)
 pgen_path = system.file("extdata", "chr1_sample_subset.pgen", package = "CpGWAS")
 pvar_path = system.file("extdata", "chr1_sample_subset.pvar", package = "CpGWAS")
 psam_path = system.file("extdata", "chr1_sample_subset.psam", package = "CpGWAS")
-cov_path = system.file("extdata", "all_cov_dlpfc.csv", package = "CpGWAS")
+cov_path = system.file("extdata", "AA_cov_dlpfc.csv", package = "CpGWAS")
 
 scaffold_name <- "unit_test_scaffold"
 
@@ -27,6 +27,9 @@ psam_in_wgbs <- psam[which(psam$`#IID` %in% rownames(methylations))]
 genotype_IDs <- psam_in_wgbs$`#IID`
 
 genotype_IDs <- intersect(rownames(methylations), genotype_IDs)
+
+cov <- processCovariates(cov_path)
+
 genotype_IDs <- intersect(rownames(cov), genotype_IDs)
 genotype_IDs <- genotype_IDs[order(genotype_IDs)]
 
@@ -35,7 +38,7 @@ genotype_IDs <- genotype_IDs[order(genotype_IDs)]
 #                                                    "BrNum", "brnumerical"),
 #                                  genotype_IDs = genotype_IDs)
 
-cov <- processCovariates(cov_path)
+
 
 # Begin tests for data loaded without use of `MethylationInput`
 test_that("Without using `MethylationInput`, methylation data has 112 samples", {
@@ -72,7 +75,7 @@ test_that("cov has correct column names and types", {
 
 # 2. Test for Correct Number of Rows
 test_that("cov has the correct number of rows (samples)", {
-  expected_row_count <- 163
+  expected_row_count <- 111
   expect_equal(nrow(cov), expected_row_count)
 })
 
@@ -113,8 +116,8 @@ test_that("After regressing out covariates, values in methylations are within ex
 # 4. Test for Specific Known Values
 test_that("After regressing out covariates, specific values in methylations are as expected", {
   tolerance <- 1e-6
-  expect_true(abs(methylations["Br1003", 1] - 0.008495257) < tolerance)
-  expect_true(abs(methylations["Br1004", 2] - (-0.02956259)) < tolerance)
+  expect_true(abs(methylations["Br1003", 1] - 0.01174306) < tolerance)
+  expect_true(abs(methylations["Br1004", 2] - (-0.02924786)) < tolerance)
 })
 
 pgen_path = system.file("extdata", "chr1_sample_subset.pgen", package = "CpGWAS")
@@ -126,40 +129,43 @@ methInput <- new("MethylationInput", BSseq_obj = BSobj_sample,
                  snp_data_path = pgen_path, cov_path = cov_path)
 
 # Assuming MethylationInput handles filtering based on genotype IDs internally
-test_that("Using `MethylationInput`, after filtering, methylation data has 111 samples", {
+test_that("Using `MethylationInput`, after filtering, methylation data has 110 samples", {
   # This line mimics the filtering done inside MethylationInput; actual implementation may vary
   filtered_methylations <- methInput@methylations[which(rownames(methInput@methylations) %in% methInput@genotype_IDs), ]
-  expect_equal(length(rownames(filtered_methylations)), 111)
+  expect_equal(length(rownames(filtered_methylations)), 110)
 })
 
 test_that("Using `MethylationInput`, SNP data has 2189 samples as expected", {
   expect_equal(length(methInput@psam$`#IID`), 2189)
 })
 
-test_that("Using `MethylationInput`, intersection of methylation, SNP data has 111 samples as expected", {
-  expect_equal(length(methInput@genotype_IDs), 111)
+test_that("Using `MethylationInput`, intersection of methylation, SNP data has 110 samples as expected", {
+  expect_equal(length(methInput@genotype_IDs), 110)
 })
 
 # Tests for covariate loading and processing using `MethylationInput`
 test_that("cov using `MethylationInput` has correct column names and types", {
   expect_true(is.matrix(methInput@cov))
-  expected_column_names <- c("(Intercept)", "sexM", "primarydxSchizo", "agedeath", "pmi")
+  expected_column_names <- c("(Intercept)", "DxSCZ", "SexM", "genoPC1", "genoPC2",
+                             "genoPC3", "methPC1", "methPC2", "methPC3","methPC4",   
+                             "methPC5", "methPC6", "methPC7", "methPC8", "methPC9",
+                             "methPC10", "Age")
   expect_equal(colnames(methInput@cov), expected_column_names)
   expect_true(is.numeric(methInput@cov[, 2]))
 })
 
 test_that("cov using `MethylationInput` has the correct number of rows (samples)", {
-  expect_equal(nrow(methInput@cov), 111)
+  expect_equal(nrow(methInput@cov), 110)
 })
 
 test_that("Selected specific values in cov using `MethylationInput` are as expected", {
-  expect_equal(methInput@cov["Br1003", "sexM"], 0)
-  expect_equal(methInput@cov["Br1004", "primarydxSchizo"], 0)
+  expect_equal(methInput@cov["Br1003", "SexM"], 0)
+  expect_equal(methInput@cov["Br1004", "DxSCZ"], 0)
   # Add more checks as needed for other specific values
 })
 
 test_that("After regressing out covariates using `MethylationInput`, methylations has correct dimensions", {
-  expected_dimensions <- c(111, 11) # Replace with expected dimensions
+  expected_dimensions <- c(110, 11) # Replace with expected dimensions
   expect_equal(dim(methInput@methylations), expected_dimensions)
 })
 
@@ -173,8 +179,8 @@ test_that("After regressing out covariates using `MethylationInput`, values in m
 
 test_that("After regressing out covariates using `MethylationInput`, specific values in methylations are as expected", {
   tolerance <- 1e-6
-  expect_true(abs(methInput@methylations["Br1003", 1] - 0.0427085754) < tolerance)
-  expect_true(abs(methInput@methylations["Br1004", 2] - (-0.0200391506)) < tolerance)
+  expect_true(abs(methInput@methylations["Br1003", 1] - 0.01174306) < tolerance)
+  expect_true(abs(methInput@methylations["Br1004", 2] - (-0.02924786)) < tolerance)
 })
 
 # Test for identical methylations and methInput@methylations

@@ -19,6 +19,7 @@ fit_MWAS_models(
   num_cores,
   allow_inefficient_parallelization,
   maf,
+  na.action,
   omit_folds_with_na_r = TRUE,
   cv_eval_mode = "dynamic",
   verbose = FALSE,
