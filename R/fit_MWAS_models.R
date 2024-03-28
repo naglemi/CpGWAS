@@ -70,6 +70,15 @@ fit_MWAS_models <- function(methInput, window_sizes, chunk1, chunk2,
         }
         next
       }
+      
+      # Save the original function before making changes
+      original_cv_glmnet_raw <- get("cv.glmnet.raw", envir = asNamespace('glmnet'))
+
+      # Step 1: Set the environment of your custom function to the namespace of glmnet
+      environment(my_cv_glmnet_raw) <- asNamespace('glmnet')
+
+      # Step 2: Replace the original function in the glmnet namespace with your custom function
+      assignInNamespace("cv.glmnet.raw", my_cv_glmnet_raw, ns = "glmnet")
 
       # 2. Find best parameters model with glmnet.tune.alpha.
       #   This function will also fit final model on full data with best parameters
@@ -82,7 +91,17 @@ fit_MWAS_models <- function(methInput, window_sizes, chunk1, chunk2,
                                           cores_per_alpha = cores_per_alpha,
                                           num_cores = num_cores,
                                           allow_inefficient_parallelization = allow_inefficient_parallelization)
-
+      
+      # Step 3: Revert to the default version of the function
+      assignInNamespace("cv.glmnet.raw", original_cv_glmnet_raw, ns = "glmnet")
+      
+      if (is.null(tuning_results)) {
+          message(paste0("For site at position ", meth_site_pos,
+                         "with window size ", window_size,
+                         "early termination during k-fold fitting due to low R",
+                         " for all alpha values tested\n\n"))
+        next
+      }
 
       # 3. Run `cv_eval` (formerly named `cv.pred`) to obtain metrics for model performance
 

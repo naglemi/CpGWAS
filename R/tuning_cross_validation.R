@@ -89,7 +89,7 @@ extract_non_zero_coefs <- function(fitted_model) {
   if(sum(coef == 0) >= 1){
     coef <- coef[which(coef != 0)]
   }
-
+  
   return(coef)
 }
 
@@ -141,9 +141,9 @@ extract_non_zero_coefs <- function(fitted_model) {
 glmnet_tune_alpha <- function(X, y, n_fold, verbose, lambda_choice, alphas,
                               cores_per_alpha, num_cores,
                               allow_inefficient_parallelization, ...) {
-
+  
   #set.seed(2023)
-
+  
   if (cores_per_alpha == "all") {
     plan("sequential")
     registerDoParallel(cores = num_cores)
@@ -165,20 +165,22 @@ glmnet_tune_alpha <- function(X, y, n_fold, verbose, lambda_choice, alphas,
   } else {
     stop("Invalid value for cores_per_alpha. Only 'all' and 1 are allowed.")
   }
-
+  
   if (nrow(X) != length(y)) {
     stop("Number of samples is different from length of response variable")
   }
-
+  
   # remove missing data
   idx <- !is.na(y)
   y <- y[idx]
   X <- X[idx,]
-
+  
   # define fold membership of each sample for k-fold cross-validation
   fold_id <- sample(rep(1:n_fold, length.out = length(y)))
-
-  tuning_results <- future_lapply(alphas, function(alpha) {
+  
+  custom_env <- setup_custom_env()
+  
+  tune_model_for_future <- function(alpha) {
     cv <- cv.glmnet(
       X,
       y,
@@ -187,7 +189,15 @@ glmnet_tune_alpha <- function(X, y, n_fold, verbose, lambda_choice, alphas,
       parallel = (cores_per_alpha == "all"),
       alpha = alpha
     )
-
+    
+    if(is.null(cv)) {
+      return(data.frame(
+        cvm = NA,
+        lambda = NA,
+        alpha = alpha
+      ))
+    }
+    
     if(lambda_choice == "1se") {
       lambda_selected <- cv$lambda.1se
     } else if(lambda_choice == "min") {
@@ -195,17 +205,22 @@ glmnet_tune_alpha <- function(X, y, n_fold, verbose, lambda_choice, alphas,
     } else {
       stop("Invalid lambda_choice: choose either '1se' or 'min'")
     }
-
-    data.frame(
+    
+    return(data.frame(
       cvm = cv$cvm[cv$lambda == lambda_selected],
       lambda = lambda_selected,
       alpha = alpha
-    )
-  })
+    ))
+  }
   
+  tuning_results <- future_lapply(alphas, tune_model_for_future)
+
   # loop version so we can use debugger (commented out when not debugging)
-  
-  # Initialize an empty list to store the results
+
+  # Tried this approach but not robust in parallel?
+  ### attach(custom_env, name = "myCustomEnv")
+
+  # # Initialize an empty list to store the results
   # tuning_results <- list()
   # 
   # # Loop through each alpha
@@ -219,7 +234,16 @@ glmnet_tune_alpha <- function(X, y, n_fold, verbose, lambda_choice, alphas,
   #     parallel = FALSE,
   #     alpha = alpha
   #   )
-  #   
+  # 
+  #   if(is.null(cv)) {
+  #     tuning_results[[i]] <- data.frame(
+  #       cvm = NA,
+  #       lambda = NA,
+  #       alpha = alpha
+  #     )
+  #     next
+  #   }
+  # 
   #   if(lambda_choice == "1se") {
   #     lambda_selected <- cv$lambda.1se
   #   } else if(lambda_choice == "min") {
@@ -227,7 +251,7 @@ glmnet_tune_alpha <- function(X, y, n_fold, verbose, lambda_choice, alphas,
   #   } else {
   #     stop("Invalid lambda_choice: choose either '1se' or 'min'")
   #   }
-  #   
+  # 
   #   # Store the result in the list
   #   tuning_results[[i]] <- data.frame(
   #     cvm = cv$cvm[cv$lambda == lambda_selected],
@@ -235,14 +259,18 @@ glmnet_tune_alpha <- function(X, y, n_fold, verbose, lambda_choice, alphas,
   #     alpha = alpha
   #   )
   # }
-  
+  # 
   # end loop version to be commented out when we're not using debugger
-
+  
   # Combine the results
   tuning_results <- do.call(rbind, tuning_results)
-
+  
+  if(all(is.na(tuning_results$cvm))) {
+    return(NULL)
+  }
+  
   cv.opt <- tuning_results[which.min(tuning_results$cvm),]
-
+  
   # fit final model
   fitted_model <- glmnet(
     X,
@@ -250,11 +278,11 @@ glmnet_tune_alpha <- function(X, y, n_fold, verbose, lambda_choice, alphas,
     lambda = cv.opt$lambda,
     alpha = cv.opt$alpha
   )
-
+  
   features <- extract_non_zero_coefs(fitted_model)
-
+  
   pred <- predict(fitted_model, X)
-
+  
   if(length(levels(factor(pred))) > 1){
     r <- cor(pred, y)
   } else {
@@ -266,7 +294,7 @@ glmnet_tune_alpha <- function(X, y, n_fold, verbose, lambda_choice, alphas,
     cat("Tuning results - Lambda:", cv.opt$lambda,
         "Alpha:", cv.opt$alpha, "\n")
   }
-
+  
   return(list(model = fitted_model, features = features,
               para = cv.opt, cor = r))
 }
@@ -275,19 +303,19 @@ cv_eval <- function(X, y, n_fold, cv_eval_mode, verbose, alphas, cores_per_alpha
                     allow_inefficient_parallelization, omit_folds_with_na_r,
                     best_alpha = NULL, best_lambda = NULL, ...) {
   #set.seed(2018)
-
+  
   if (nrow(X) != length(y)) {
     stop("Number of observations is different")
   }
-
+  
   #cat("Initial NA check - X:", sum(is.na(X)), "\n")
   if (sum(is.na(X)) > 0) {
     X <- impute_missing_values(X)
   }
   #cat("Post imputation - X:", sum(is.na(X)), "\n")
-
+  
   fold_id <- sample(rep(1:n_fold, length.out = length(y)))
-
+  
   if(cv_eval_mode == "dynamic"){
     evaluation_results <- cv_eval_dynamic(X = X, y = y, n_fold = n_fold, fold_id,
                                           verbose = verbose, alphas = alphas,
@@ -309,36 +337,36 @@ cv_eval_static <- function(X, y, n_fold, fold_id, cores_per_alpha,
                            num_cores, allow_inefficient_parallelization,
                            omit_folds_with_na_r,
                            best_alpha = NULL, best_lambda = NULL, ...) {
-
+  
   if(is.null(best_lambda) || is.null(best_alpha)){
     stop(paste("Error: best_lambda and best_alpha must be specified for k-fold",
                "validation to evaluate model in `static` mode. If you want to",
                "evaluate performance without specifying best_lambda and best_alpha,",
                "use cv_eval_mode = `dynamic` instead."))
   }
-
+  
   cv <- matrix(NA, nrow = n_fold, ncol = 4,
                dimnames = list(NULL, c("cor", "mse", "alpha", "lambda")))
-
+  
   cv[, 3] <- best_alpha
   cv[, 4] <- best_lambda
-
+  
   # Let's not doing this part in parallel because it will run in less than
   #  a second on one core in this mode. Here, parameters are known and we only
   #  need to fit one model per fold.
-
+  
   for (fold in 1:n_fold) {
     testIndices <- which(fold_id == fold, arr.ind = TRUE)
     X_train <- X[-testIndices,]
     y_train <- y[-testIndices]
     X_test <- X[testIndices,]
     y_test <- y[testIndices]
-
+    
     fit <- glmnet(x = X,
                   y = y,
                   alpha = best_alpha,
                   lambda = best_lambda)
-
+    
     pred <- predict(fit,
                     X_test)
     
@@ -348,15 +376,15 @@ cv_eval_static <- function(X, y, n_fold, fold_id, cores_per_alpha,
       #recover()
       cv[fold, 1] <- NA
     }
-
+    
     cv[fold, 2] <- mean((pred - y_test)^2)
-
+    
     # Make sure we get same result with calculate_correlation(), and make sure
     # fit$para$alpha and lambda match best.
   }
-
+  
   cvm <- colMeans(cv[, 1:2], na.rm = omit_folds_with_na_r)
-
+  
   return(list(eval_cv = cv,
               eval_cvm = cvm))
 }
@@ -365,43 +393,43 @@ cv_eval_static <- function(X, y, n_fold, fold_id, cores_per_alpha,
 cv_eval_dynamic <- function(X, y, n_fold, fold_id, verbose, alphas, cores_per_alpha,
                             num_cores, allow_inefficient_parallelization,
                             omit_folds_with_na_r, ...) {
-
+  
   cv <- matrix(NA, nrow = n_fold, ncol = 4,
                dimnames = list(NULL, c("cor", "mse", "alpha", "lambda")))
-
+  
   #set.seed(2018)
-
+  
   for (fold in 1:n_fold) {
     testIndices <- which(fold_id == fold, arr.ind = TRUE)
     X_train <- X[-testIndices,]
     y_train <- y[-testIndices]
     X_test <- X[testIndices,]
     y_test <- y[testIndices]
-
+    
     fit <- glmnet_tune_alpha(X = X_train, y = y_train, n_fold = n_fold,
                              verbose = verbose, alphas = alphas,
                              cores_per_alpha = cores_per_alpha,
                              num_cores = num_cores,
                              allow_inefficient_parallelization = allow_inefficient_parallelization, ...)
-
+    
     pred <- predict(fit$model,
                     X_test)
-
+    
     if(length(levels(factor(pred))) > 1){
       cv[fold, 1] <- cor(pred, y_test)
     } else {
       cv[fold, 1] <- NA
     }
-
+    
     cv[fold, 2] <- mean((pred - y_test)^2)
-
+    
     cv[fold, 3] <- fit$para$alpha
-
+    
     cv[fold, 4] <- fit$para$lambda
   }
-
+  
   cvm <- colMeans(cv[, 1:2], na.rm = omit_folds_with_na_r)
-
+  
   return(list(eval_cv = cv,
               eval_cvm = cvm))
 }
