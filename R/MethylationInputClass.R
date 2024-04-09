@@ -107,6 +107,14 @@ setMethod(
       .Object@cov <- .Object@cov[which(rownames(.Object@cov) %in% .Object@genotype_IDs), ]
     }
     
+    # alphabetize rows by name in methylation matrix if not already
+    if(!identical(rownames(.Object@methylations),
+                  rownames(.Object@methylations[order(rownames(.Object@methylations))]))){
+      .Object@methylations <- .Object@methylations[order(rownames(.Object@methylations)), ]
+    }
+    
+    #recover()
+    
     #.Object@cov <- processCovariatesFromBSseq(dataFrame = colData(BSseq_obj),
     #                                 colsToExclude = c("ID.", "DNum", "brnum", "BrNum", "brnumerical"),
     #                                 genotype_IDs = .Object@genotype_IDs)
@@ -296,6 +304,20 @@ selectGenotypeIDs <- function(psam_data, methylation_data, cov_data = NULL) {
   intersected_genotype_IDs <- intersect(rownames(methylation_data), genotype_IDs)
   ordered_genotype_IDs <- intersected_genotype_IDs[order(intersected_genotype_IDs)]
   
+  # Print warning if there are missing genotype IDs for any object
+  if(nrow(methylation_data) != length(ordered_genotype_IDs)){
+    warning("Mismatch between methylation data and overlapping genotype IDs:")
+    print(setdiff(rownames(methylation_data), ordered_genotype_IDs))
+  }
+  if(!is.null(cov_data) && nrow(cov_data) != length(ordered_genotype_IDs)){
+    warning("Mismatch between covariate data and overlapping genotype IDs:")
+    print(setdiff(rownames(cov_data), ordered_genotype_IDs))
+  }
+  if(nrow(psam_in_wgbs) != length(ordered_genotype_IDs)){
+    warning("Mismatch between genotype data and overlapping genotype IDs:")
+    print(setdiff(genotype_IDs, psam_in_wgbs$`#IID`))
+  }
+  
   return(ordered_genotype_IDs)
 }
 
@@ -335,6 +357,18 @@ processMethylationData <- function(BSseq_obj, start_site = NULL, end_site = NULL
     methylations <- t(as.matrix(getMeth(BSseq_obj, type = "smooth", what = "perBase")))
     methylations_positions <- start(ranges(granges(BSseq_obj)))
   }
+  
+  if(is.null(rownames(methylations))){
+    warning("Row names not found in methylation matrix of BSseq object. Retrieving from $colData$brnum.")
+    rownames(methylations) <- colData(BSseq_obj)$brnum
+  }
+  
+  # Patch for data consistency: If rownames have any leading zeros (Br0...) replace with Br
+  if(any(grepl("^Br0", rownames(methylations)))){
+    rownames(methylations) <- gsub("Br0", "Br", rownames(methylations))
+  }
+  
+  #recover()
   
   list(methylations = methylations, methylations_positions = methylations_positions)
 }
