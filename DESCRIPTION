@@ -19,7 +19,7 @@ RoxygenNote: 7.3.1
 Imports:
     bsseq,
     data.table,
-    doParallel,
+    doMC,
     e1071,
     future,
     future.apply,
