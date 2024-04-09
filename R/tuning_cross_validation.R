@@ -125,7 +125,7 @@ extract_non_zero_coefs <- function(fitted_model) {
 #' @importFrom future plan availableCores
 #' @importFrom future.apply future_lapply
 #' @importFrom glmnet glmnet cv.glmnet
-#' @importFrom doParallel registerDoParallel
+#' @importFrom doMC registerDoMC
 #'
 #' @examples
 #' \dontrun{
@@ -146,7 +146,7 @@ glmnet_tune_alpha <- function(X, y, n_fold, verbose, lambda_choice, alphas,
   
   if (cores_per_alpha == "all") {
     plan("sequential")
-    registerDoParallel(cores = num_cores)
+    registerDoMC(num_cores)
     if (verbose) {
       message("Parallelization within cv.glmnet using all available cores (",
               num_cores, ").")
@@ -180,7 +180,14 @@ glmnet_tune_alpha <- function(X, y, n_fold, verbose, lambda_choice, alphas,
   
   custom_env <- setup_custom_env()
   
-  tune_model_for_future <- function(alpha) {
+  tune_model_for_future <- function(X, y, fold_id, cores_per_alpha,
+                                    alpha, lambda_choice) {
+    
+    # if(verbose){
+    #   message(paste0("Parallelizing within cv.glmnet: ",
+    #                  cores_per_alpha == "all"))
+    # }
+    
     cv <- cv.glmnet(
       X,
       y,
@@ -213,7 +220,19 @@ glmnet_tune_alpha <- function(X, y, n_fold, verbose, lambda_choice, alphas,
     ))
   }
   
-  tuning_results <- future_lapply(alphas, tune_model_for_future)
+  if(cores_per_alpha == 1) {
+    if(verbose) message("Parallelizing over alphas")
+    tuning_results <- future_lapply(
+      alphas, function(alpha) tune_model_for_future(X, y, fold_id,
+                                                    cores_per_alpha, alpha, lambda_choice))
+  } else {
+    if(verbose) message("Parallelizing within cv.glmnet")
+    tuning_results <- lapply(
+      alphas, function(alpha) tune_model_for_future(X, y, fold_id,
+                                                    cores_per_alpha, alpha, lambda_choice))
+  }
+  
+
 
   # loop version so we can use debugger (commented out when not debugging)
 
