@@ -16,7 +16,7 @@ BiocManager::install("bsseq")
 
 Next, install CpGWAS from the GitHub repository.
 ```r
-If `devtools` isn't already installed:
+# If `devtools` isn't already installed:
 install.packages("devtools")
 
 devtools::install_github("https://github.com/naglemi/CpGWAS.git")
