@@ -22,7 +22,7 @@ install.packages("devtools")
 devtools::install_github("https://github.com/naglemi/CpGWAS.git")
 ```
 
-* If using `conda`, you might need to install some libraries before Bioconductor dependencies can be installed:
+\* If using `conda`, you might need to install some libraries before Bioconductor dependencies can be installed:
 ```bash
 conda install -c conda-forge pkg-config
 ```
