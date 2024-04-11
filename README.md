@@ -3,7 +3,7 @@ Tools to support Methylome-wide Association Studies (MWAS), not to be confused w
 
 ## Installation
 
-Bioconductor dependencies need to be installed first.
+Bioconductor dependencies need to be installed first*.
 
 ```r
 if (!requireNamespace("BiocManager", quietly = TRUE))
@@ -20,4 +20,9 @@ Next, install CpGWAS from the GitHub repository.
 install.packages("devtools")
 
 devtools::install_github("https://github.com/naglemi/CpGWAS.git")
+```
+
+* If using `conda`, you might need to install some libraries before Bioconductor dependencies can be installed:
+```bash
+conda install -c conda-forge pkg-config
 ```
