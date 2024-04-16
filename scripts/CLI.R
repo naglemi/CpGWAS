@@ -1,5 +1,4 @@
 #!/usr/bin/env Rscript
-#profvis({
 
 options(error = recover)
 #options(error = traceback)
@@ -8,6 +7,8 @@ start_time <- Sys.time()  # Start time capture
 
 library(CpGWAS)
 library(optparse)
+
+set.seed(42)
 
 # Pt. 1: Load libraries and accept, parse user arguments -------------------------------------
 
@@ -74,11 +75,14 @@ if(Sys.getenv("RSTUDIO") != "1") {
 } else {
   args <- list(
     outdir = "./output/",
-    chunk1 = 8982,
-    chunk2 = 28981,
-    snp_data_path = "/Users/michael.nagle/data/gwas/libd_chr1.pgen",#/Users/michael.nagle/data/libd_chr1.pgen",
-    methylation_data_path = "/Users/michael.nagle/data/pheno/caud/out/chr1_AA.rda", #/Users/michael.nagle/data/chr1_AA.rda",
-    cov = "/Users/michael.nagle/data/full_covariates/AA_caud.csv", #"/Users/michael.nagle/code/CpGWAS/inst/extdata/AA_cov_dlpfc.csv",
+    chunk1 = 1248982,
+    chunk2 = 1268981,
+    #snp_data_path = "/Users/michael.nagle/data/gwas/libd_chr1.pgen",#/Users/michael.nagle/data/libd_chr1.pgen",
+    #methylation_data_path = "/Users/michael.nagle/data/pheno/caud/out/chr1_AA.rda", #/Users/michael.nagle/data/chr1_AA.rda",
+    #cov = "/Users/michael.nagle/data/full_covariates/AA_caud.csv", #"/Users/michael.nagle/code/CpGWAS/inst/extdata/AA_cov_dlpfc.csv",
+    snp_data_path = "/Users/michael.nagle/data/libd_chr1.pgen",
+    methylation_data_path = "/Users/michael.nagle/data/chr1_AA.rda",
+    cov = "/Users/michael.nagle/code/CpGWAS/inst/extdata/AA_cov_dlpfc.csv",
     verbose = TRUE,
     lambda_choice = "1se",
     alphas = c(0.5),#seq(0, 1, 0.25),
@@ -120,7 +124,7 @@ if(!dir.exists(args$outdir)) {
 if (is.null(args$snp_data_path) || is.null(args$methylation_data_path)) {
   stop("Paths to both SNP and methylation data are required.")
 }
-
+#profvis::profvis({
 load(args$methylation_data_path)
 
 # Pt. 2: Initialize (or load) MethylationInput object -------------------------------
@@ -154,6 +158,8 @@ if (!is.null(args$methInput_rds_path) && file.exists(args$methInput_rds_path)) {
   #save(methInput, file = "~/code/CpGWAS/inst/extdata/chr1_methylation_sample_subset.rda")
   
 }
+  
+#})
 
 validatePositionOverlap(methInput, max(args$window_sizes))
 
@@ -187,6 +193,7 @@ scaffold_models <- fit_MWAS_models(
   maf = args$maf,
   na.action = args$na_action
 )
+
 #df <- as.data.frame(scaffold_models)
 
 pgenlibr::ClosePgen(methInput@pgen)
