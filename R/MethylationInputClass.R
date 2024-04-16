@@ -350,6 +350,7 @@ loadSNPData <- function(pvar_path, pgen_path, psam_path) {
 
 # Helper function to process methylation data
 processMethylationData <- function(BSseq_obj, start_site = NULL, end_site = NULL) {
+  #recover()
   if (!is.null(start_site) && !is.null(end_site)) {
     methylations <- t(as.matrix(getMeth(BSseq_obj, type = "smooth", what = "perBase")))[, (start_site:end_site)]
     methylations_positions <- start(ranges(granges(BSseq_obj)))[(start_site:end_site)]
