@@ -124,8 +124,6 @@ if(!dir.exists(args$outdir)) {
 if (is.null(args$snp_data_path) || is.null(args$methylation_data_path)) {
   stop("Paths to both SNP and methylation data are required.")
 }
-#profvis::profvis({
-load(args$methylation_data_path)
 
 # Pt. 2: Initialize (or load) MethylationInput object -------------------------------
 
@@ -142,6 +140,7 @@ if (!is.null(args$methInput_rds_path) && file.exists(args$methInput_rds_path)) {
   if(args$verbose) {
     message("Creating new MethylationInput object")
   }
+  load(args$methylation_data_path)
   methInput <- new("MethylationInput",
                    BSseq_obj = BSobj2,
                    snp_data_path = args$snp_data_path,
