@@ -188,6 +188,18 @@ glmnet_tune_alpha <- function(X, y, n_fold, verbose, lambda_choice, alphas,
     #                  cores_per_alpha == "all"))
     # }
     
+    #recover()
+    
+    if(sum((rowVars <- apply(X, 1, var)) > 0) <= 1){
+      # Nonzero variance in training set after subsetting
+      #. recall we already checked for full data in `extract_SNPs` but must again
+      return(data.frame(
+        cvm = NA,
+        lambda = NA,
+        alpha = alpha
+      ))
+    }
+    
     cv <- cv.glmnet(
       X,
       y,
@@ -430,6 +442,14 @@ cv_eval_dynamic <- function(X, y, n_fold, fold_id, verbose, alphas, cores_per_al
                              cores_per_alpha = cores_per_alpha,
                              num_cores = num_cores,
                              allow_inefficient_parallelization = allow_inefficient_parallelization, ...)
+    
+    if(is.null(fit$model)){
+      cv[fold, 1] <- NA
+      cv[fold, 2] <- NA
+      cv[fold, 3] <- NA
+      cv[fold, 4] <- NA
+      next
+    }
     
     pred <- predict(fit$model,
                     X_test)
