@@ -187,13 +187,28 @@ fit_MWAS_models <- function(methInput, window_sizes, chunk1, chunk2,
   }
 
   #recover()
-
-  methScaff <- new("MethylationScaff",
-                   scaffoldIdentifier = scaffoldIdentifier,
-                   models = methBaseModels[1:(counter - 1)])
-
-  saveMethylationScaff(methScaff, outputDir = outdir)
-  # data.table::fwrite(convertToDataFrame(methScaff),
-  #                    file.path(outdir, paste0(scaffoldIdentifier, ".csv")), row.names = FALSE)
+  
+  if(!all(sapply(methBaseModels, is.null))){
+    methScaff <- new("MethylationScaff",
+                     scaffoldIdentifier = scaffoldIdentifier,
+                     models = methBaseModels[1:(counter - 1)])
+    
+    saveMethylationScaff(methScaff, outputDir = outdir)
+    # data.table::fwrite(convertToDataFrame(methScaff),
+    #                    file.path(outdir, paste0(scaffoldIdentifier, ".csv")), row.names = FALSE)
+  } else {
+    # This is not very good coding practice
+    #. but it's an acceptable patch since we're relying on checking for RDS files
+    #. to see if job completed or not
+    message("No models were fitted.")
+    fileName <- paste0(scaffoldIdentifier, "-empty.rds")
+    filePath <- file.path(outdir, fileName)
+    
+    filler <- "No models in region"
+    
+    saveRDS(filler, file = filePath)
+    
+    message(paste("(Dummy) MethylationScaff object saved to", filePath))
+  }
 
 }
