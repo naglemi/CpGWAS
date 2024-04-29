@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-options(error = recover)
+#options(error = recover)
 #options(error = traceback)
 
 start_time <- Sys.time()  # Start time capture
