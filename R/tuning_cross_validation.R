@@ -200,14 +200,48 @@ glmnet_tune_alpha <- function(X, y, n_fold, verbose, lambda_choice, alphas,
       ))
     }
     
-    cv <- cv.glmnet(
-      X,
-      y,
-      foldid = fold_id,
-      type.measure = "mse",
-      parallel = (cores_per_alpha == "all"),
-      alpha = alpha
-    )
+    # Calculate variance for each variable within each fold and check for all zero variances
+    fold_variances_zero <- sapply(split(1:nrow(X), fold_id), function(idx) all(apply(X[idx, ], 2, var) == 0))
+    
+    # Identify if any fold has all zero variances
+    if(any(fold_variances_zero)) {
+      return(data.frame(
+        cvm = NA,
+        lambda = NA,
+        alpha = alpha
+      ))
+    } else { # build the model if not
+      cv <- cv.glmnet(
+        X,
+        y,
+        foldid = fold_id,
+        type.measure = "mse",
+        parallel = (cores_per_alpha == "all"),
+        alpha = alpha
+      )
+    }
+    
+    
+    # Attempt to run cv.glmnet with error handling
+    #. was hoping to avoid this, but it's otherwise tricky to handle cases
+    #. where internal cross-validation fold splits in cv.glmnet result in all
+    #. predictors having zero variance for a given fold.
+    # cv <- tryCatch({
+    #   cv.glmnet(
+    #     X,
+    #     y,
+    #     foldid = fold_id,
+    #     type.measure = "mse",
+    #     parallel = (cores_per_alpha == "all"),
+    #     alpha = alpha
+    #   )
+    # }, error = function(e) {
+    #   # Print the error message
+    #   print(paste("Error in cv.glmnet: ", e$message))
+    #   recover()
+    #   # Return NULL to handle the case where cv.glmnet fails
+    #   NULL
+    # })
     
     if(is.null(cv)) {
       return(data.frame(
