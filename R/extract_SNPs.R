@@ -139,6 +139,10 @@ extract_SNPs <- function(methInput, meth_site_pos, window_size, verbose, maf,
     }
     return(NULL)
   }
+  
+  # Edge case where all SNPs in perfect linkage
+  
+  
   return(SNPs)
 }
 
