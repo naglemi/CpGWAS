@@ -75,15 +75,15 @@ if(Sys.getenv("RSTUDIO") != "1") {
 } else {
   args <- list(
     outdir = "./output/",
-    chunk1 = 1295,
-    chunk2 = 20000,
+    chunk1 = 1,#1248982,
+    chunk2 = 20000,#1268981,
     #snp_data_path = "/Users/michael.nagle/data/gwas/libd_chr1.pgen",#/Users/michael.nagle/data/libd_chr1.pgen",
     #methylation_data_path = "/Users/michael.nagle/data/pheno/caud/out/chr1_AA.rda", #/Users/michael.nagle/data/chr1_AA.rda",
     #cov = "/Users/michael.nagle/data/full_covariates/AA_caud.csv", #"/Users/michael.nagle/code/CpGWAS/inst/extdata/AA_cov_dlpfc.csv",
     snp_data_path = "/Users/michael.nagle/data/libd_chr4.pgen",
     methylation_data_path = "/Users/michael.nagle/data/chr1_AA.rda",
     #cov = "/Users/michael.nagle/code/CpGWAS/inst/extdata/AA_cov_dlpfc.csv",
-    cov = "/Users/michael.nagle/data/full_covariates/EA_dlpfc.csv",
+    cov = "/Users/michael.nagle/data/full_covariates/EA_caud.csv",
     verbose = TRUE,
     lambda_choice = "1se",
     alphas = c(0.5),#seq(0, 1, 0.25),
