@@ -202,12 +202,11 @@ clean_and_standardize_colnames <- function(summary_stats) {
 #' @param summary_stats Data table of summary statistics
 #' @param paths List of paths to data files
 #' @param summary_stats_path Path to summary statistics file
-#' @param output_path Path to output file
 #' @return MWASresults object
 #' @export
 #' @importFrom progress progress_bar
 #' @importFrom data.table setkey
-process_MWAS_models <- function(my_rds, my_SNPs, paths, summary_stats_path, output_path, summary_stats = NULL) {
+process_MWAS_models <- function(my_rds, my_SNPs, paths, summary_stats_path, rds_path, summary_stats = NULL) {
   pb <- progress_bar$new(
     format = "[:bar] :percent eta: :eta",
     total = length(my_rds@models), clear = FALSE, width = 60
@@ -229,7 +228,7 @@ process_MWAS_models <- function(my_rds, my_SNPs, paths, summary_stats_path, outp
   # Ensure the lengths of my_rds@models and MWASmodels are the same
   stopifnot(length(my_rds@models) == length(MWASmodels))
   
-  results <- MWASresults(MWASmodels, paths$pvar_path, paths$pgen_path, paths$psam_path, summary_stats_path, output_path)
+  results <- MWASresults(MWASmodels, paths$pvar_path, paths$pgen_path, paths$psam_path, summary_stats_path, rds_path)
   
   return(results)
 }
