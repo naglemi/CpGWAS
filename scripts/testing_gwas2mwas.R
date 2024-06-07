@@ -1,6 +1,8 @@
 library(CpGWAS)
 
-my_rds <- readRDS("output/libd_chr1-chr1_AA-20240405-131028.rds")
+rds_path <- "output/libd_chr1-chr1_AA-20240405-131028.rds"
+
+my_rds <- readRDS(rds_path)
 MWASmodels <- list()
 
 paths <- list(pvar_path = "/Users/michael.nagle/data/ref_EUR_chr1.pvar",
@@ -10,7 +12,7 @@ paths <- list(pvar_path = "/Users/michael.nagle/data/ref_EUR_chr1.pvar",
 my_SNPs <- loadSNPData(paths$pvar_path, paths$pgen_path, paths$psam_path)
 
 summary_stats_path <- "/Users/michael.nagle/data/gwas_stat_bp"
-summary_stats_path <- "/Users/michael.nagle/data/gwas_stat_scz"
+#summary_stats_path <- "/Users/michael.nagle/data/gwas_stat_scz"
 #summary_stats_path <- "/Users/michael.nagle/data/gwas_stat_mdd"
 #summary_stats <- data.table::fread(summary_stats_path)
 
@@ -26,7 +28,7 @@ summary_stats_path <- "/Users/michael.nagle/data/gwas_stat_scz"
 ### Loop over RDS files containing our MethylationBase objects with SNP->CpG models
 results <- process_MWAS_models(my_rds = my_rds, my_SNPs = my_SNPs, paths = paths,
                                summary_stats_path = summary_stats_path,
-                               "output/libd_chr1-chr1_AA-20240405-131028.rds")
+                               rds_path = rds_path)
 
 # save results object as RDS with filename same as results@rds_path but with _results appended
 saveRDS(results, 
