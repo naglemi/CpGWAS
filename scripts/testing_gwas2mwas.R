@@ -9,12 +9,12 @@ paths <- list(pvar_path = "/Users/michael.nagle/data/ref_EUR_chr1.pvar",
 
 my_SNPs <- loadSNPData(paths$pvar_path, paths$pgen_path, paths$psam_path)
 
-#summary_stats_path <- "/Users/michael.nagle/data/gwas_stat_bp"
+summary_stats_path <- "/Users/michael.nagle/data/gwas_stat_bp"
 summary_stats_path <- "/Users/michael.nagle/data/gwas_stat_scz"
 #summary_stats_path <- "/Users/michael.nagle/data/gwas_stat_mdd"
-summary_stats <- data.table::fread(summary_stats_path)
+#summary_stats <- data.table::fread(summary_stats_path)
 
-summary_stats <- clean_and_standardize_colnames(summary_stats)
+#summary_stats <- clean_and_standardize_colnames(summary_stats)
 
 # Loop over chromosome genome files (pvar/pgen/psam)
 #  make list of chromosome files
@@ -24,14 +24,16 @@ summary_stats <- clean_and_standardize_colnames(summary_stats)
 #. loop over those, and for each....
 ##Loop over summary stat files
 ### Loop over RDS files containing our MethylationBase objects with SNP->CpG models
-
-results <- process_MWAS_models(my_rds, my_SNPs, summary_stats, paths, summary_stats_path, "output/libd_chr1-chr1_AA-20240405-131028.rds")
+results <- process_MWAS_models(my_rds = my_rds, my_SNPs = my_SNPs, paths = paths,
+                               summary_stats_path = summary_stats_path,
+                               "output/libd_chr1-chr1_AA-20240405-131028.rds")
 
 # save results object as RDS with filename same as results@rds_path but with _results appended
-saveRDS(results, gsub(".rds",
-                      paste0("_",
-                             basename(tools::file_path_sans_ext(results@summary_stats_path)),
-                             "_results.rds", results@rds_path)))
+saveRDS(results, 
+        gsub("\\.rds$", 
+             paste0("_", basename(tools::file_path_sans_ext(results@summary_stats_path)), "_results.rds"), 
+             results@rds_path))
+
 
 #results
 
