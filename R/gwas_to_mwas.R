@@ -7,7 +7,7 @@
 #' @param G SNP genotype matrix.
 #' @return Named vector containing z-score, p-value, and the number of weights.
 #' @export
-mwas <- function(z, w, G){
+mwas <- function(z, w, G){   
   if(length(w) > 1){
     # z-scores for effect of SNPs on external phenotype
     #. are weighted according to weights for effect of SNPs on methylation
@@ -39,7 +39,7 @@ setClass(
   "MWASmodel",
   representation(
     methylationBase = "MethylationBase",
-    summary_stats = "data.table",
+    #summary_stats = "data.table",
     mwas_out = "numeric"
   )
 )
@@ -50,10 +50,12 @@ setClass(
 #' @param mwas_out Numeric vector of MWAS output
 #' @return MWASmodel object
 #' @export
-MWASmodel <- function(methylationBase, summary_stats, mwas_out) {
+MWASmodel <- function(methylationBase,
+                      #summary_stats,
+                      mwas_out) {
   new("MWASmodel",
       methylationBase = methylationBase,
-      summary_stats = summary_stats,
+      #summary_stats = summary_stats,
       mwas_out = mwas_out)
 }
 
@@ -117,11 +119,13 @@ process_model <- function(methylationBase, my_SNPs, summary_stats) {
   G <- pgenlibr::ReadList(my_SNPs$pgen,
                           variant_subset = relevant_SNP_indices)
   
-  mwas_out <- mwas(z = summary_stats_sub$logOR,
+  mwas_out <- mwas(z = summary_stats_sub$BETA,
                    w = methylationBase@snpWeights,
                    G = G)
   
-  MWASmodel(methylationBase, summary_stats_sub, mwas_out)
+  MWASmodel(methylationBase,
+            #summary_stats_sub,
+            mwas_out)
 }
 
 #' MWASresults class
@@ -173,12 +177,20 @@ clean_and_standardize_colnames <- function(summary_stats) {
   # Standardize column names
   colnames(summary_stats) <- gsub("chr", "CHR", colnames(summary_stats))
   colnames(summary_stats) <- gsub("pos", "BP", colnames(summary_stats))
+  colnames(summary_stats) <- gsub("POS", "BP", colnames(summary_stats))
   colnames(summary_stats) <- gsub("MarkerName", "SNP", colnames(summary_stats))
+  colnames(summary_stats) <- gsub("ID", "SNP", colnames(summary_stats))
+  colnames(summary_stats) <- gsub("LogOR", "logOR", colnames(summary_stats))
   
   # If there's no logOR columns, create one, which will be log of OR column
-  if(!"logOR" %in% colnames(summary_stats)){
-    summary_stats[, logOR := log(OR)]
+  # but we only do this if there's already an OR column
+  if(!"logOR" %in% colnames(summary_stats)) {
+    if("OR" %in% colnames(summary_stats)) {
+      summary_stats[, logOR := log(OR)]
+    }
   }
+  
+  colnames(summary_stats) <- gsub("logOR", "BETA", colnames(summary_stats))
   
   return(summary_stats)
 }
@@ -195,7 +207,7 @@ clean_and_standardize_colnames <- function(summary_stats) {
 #' @export
 #' @importFrom progress progress_bar
 #' @importFrom data.table setkey
-process_MWAS_models <- function(my_rds, my_SNPs, summary_stats, paths, summary_stats_path, output_path) {
+process_MWAS_models <- function(my_rds, my_SNPs, paths, summary_stats_path, output_path, summary_stats = NULL) {
   pb <- progress_bar$new(
     format = "[:bar] :percent eta: :eta",
     total = length(my_rds@models), clear = FALSE, width = 60
@@ -203,6 +215,11 @@ process_MWAS_models <- function(my_rds, my_SNPs, summary_stats, paths, summary_s
   
   MWASmodels <- vector("list", length(my_rds@models))
   
+  if(is.null(summary_stats)) {
+    summary_stats <- suppressWarnings(fread(summary_stats_path))
+    summary_stats <- clean_and_standardize_colnames(summary_stats)
+  }
+
   for (i in seq_along(my_rds@models)) {
     this_MethylationBase <- my_rds@models[[i]]
     MWASmodels[[i]] <- process_model(this_MethylationBase, my_SNPs, summary_stats)
