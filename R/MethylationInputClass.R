@@ -337,7 +337,20 @@ checkFilesExist <- function(paths) {
   }
 }
 
-# Helper function to load SNP data
+#' Helper function to load SNP data in PLINK 2 formats
+#'
+#' @param pvar_path Path to the .pvar file
+#' @param pgen_path Path to the .pgen file
+#' @param psam_path Path to the .psam file
+#' 
+#' @return A list containing pointers and data.tables for SNP data
+#' @export
+#' 
+#' @examples
+#' \dontrun{
+#'   snp_data <- loadSNPData("data/example.pvar", "data/example.pgen", "data/example.psam")
+#' }
+
 loadSNPData <- function(pvar_path, pgen_path, psam_path) {
   pvar_pointer <- pgenlibr::NewPvar(pvar_path)
   list(
