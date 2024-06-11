@@ -87,7 +87,11 @@ process_model <- function(methylationBase, my_SNPs, summary_stats) {
   #. methylation site in our model
   relevant_ids <- my_SNPs$pvar_dt$ID[relevant_SNP_indices]
   
-  summary_stats_sub <- summary_stats[SNP %chin% relevant_ids]
+  # Subset summary_stats in constant time using a keyed join
+  #recover()
+  summary_stats_sub <- summary_stats[relevant_ids, nomatch = 0]
+  
+  #summary_stats_sub <- summary_stats[SNP %chin% relevant_ids]
   # # z is a vector of the SNP weights from GWAS summary statistics
   # z <- summary_stats_sub$logOR
   # 
@@ -191,6 +195,8 @@ clean_and_standardize_colnames <- function(summary_stats) {
   }
   
   colnames(summary_stats) <- gsub("logOR", "BETA", colnames(summary_stats))
+  # Convert summary_stats to a keyed data.table for fast lookups
+  setkey(summary_stats, SNP)
   
   return(summary_stats)
 }
