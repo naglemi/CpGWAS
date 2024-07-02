@@ -8,3 +8,11 @@
 scripts/model_a5.R
 scripts/.ipynb_checkpoints/CLI-checkpoint.R
 *.Rproj
+data/stage2_testing/paths.txt
+.DS_Store
+.DS_Store
+/data/stage2_testing
+.DS_Store
+20-IN_sanity_test_fold_id
+20-IN_sanity_test_Xmatrix
+20-IN_sanity_test_y
