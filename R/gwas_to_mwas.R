@@ -9,7 +9,7 @@
 #' @export
 mwas <- function(z, w, G){   
   if(length(w) > 1){
-    recover()
+    #recover()
     # z-scores for effect of SNPs on external phenotype
     #. are weighted according to weights for effect of SNPs on methylation
     z <- z %*% w
