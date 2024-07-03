@@ -225,6 +225,7 @@ clean_and_standardize_colnames <- function(summary_stats) {
   colnames(summary_stats) <- gsub("ID", "SNP", colnames(summary_stats))
   colnames(summary_stats) <- gsub("LogOR", "logOR", colnames(summary_stats))
   colnames(summary_stats) <- gsub("StdErrLogOR", "SE", colnames(summary_stats))
+  colnames(summary_stats) <- gsub("StdErrlogOR", "SE", colnames(summary_stats))
   
   # If there's no logOR columns, create one, which will be log of OR column
   # but we only do this if there's already an OR column
