@@ -9,6 +9,7 @@
 #' @export
 mwas <- function(z, w, G){   
   if(length(w) > 1){
+    #recover()
     # z-scores for effect of SNPs on external phenotype
     #. are weighted according to weights for effect of SNPs on methylation
     z <- z %*% w
@@ -98,25 +99,60 @@ process_model <- function(methylationBase, my_SNPs, summary_stats) {
   # # w is a vector of the SNP weights from the CpGWAS model
   # w <- methylationBase@snpWeights[relevant_SNP_indices]
   
-  # need to make sure order matches
-  if(!identical(summary_stats_sub$BP, as.integer(SNP_split[, 2]))){
+  # Ensuring the order matches and handling unmatched positions
+  if(!identical(summary_stats_sub$BP, SNP_split_dt$post)){
+    # Order summary_stats_sub by BP
     summary_stats_sub <- summary_stats_sub[order(summary_stats_sub$BP), ]
-    if(!identical(summary_stats_sub$BP, as.integer(SNP_split[, 2]))){
-      stop("SNP order does not match even after subsetting. This should not happen. Code is broken.")
+    if(!identical(summary_stats_sub$BP, SNP_split_dt$post)){
+      # Identify positions in SNP_split not found in summary_stats_sub$BP
+      unmatched_positions <- !SNP_split_dt$post %in% summary_stats_sub$BP
+      if (any(unmatched_positions)) {
+        #recover()
+        # Remove rows from SNP_split where positions do not match any in summary_stats_sub$BP
+        SNP_split_dt <- SNP_split_dt[!unmatched_positions, ]
+        methylationBase@snpWeights <- methylationBase@snpWeights[!unmatched_positions]
+        # Assuming you would need to recompute the relevant SNP indices and stats
+        relevant_SNP_indices <- my_SNPs$pvar_dt[SNP_split_dt, on = .(`#CHROM` = chr, POS = post), which = TRUE, nomatch = 0]
+        relevant_ids <- my_SNPs$pvar_dt$ID[relevant_SNP_indices]
+        summary_stats_sub <- summary_stats[relevant_ids, nomatch = 0]
+      }
+      # Check again after removing unmatched positions
+      if(!identical(summary_stats_sub$BP, SNP_split_dt$post)) {
+        stop("SNP order does not match even after removing unmatched positions. This should not happen. Code is broken.")
+      }
     }
   }
   
-  # need to make sure direction is right
-  if(!identical(SNP_split[, 4], summary_stats_sub$A2) |
-     !identical(SNP_split[, 3], summary_stats_sub$A1)){
-    not_matching <- which(SNP_split[, 4] != summary_stats_sub$A2)
+  
+  # # need to make sure direction is right
+  # if(!identical(SNP_split[, 4], summary_stats_sub$A2) |
+  #    !identical(SNP_split[, 3], summary_stats_sub$A1)){
+  #   recover()
+  #   not_matching <- which(SNP_split[, 4] != summary_stats_sub$A2)
+  #   # Flip our data to match the summary stats for these
+  #   summary_stats_ref_flipped <- SNP_split[, 3][not_matching]
+  #   summary_stats_alt_flipped <- SNP_split[, 4][not_matching]
+  #   SNP_split[, 3][not_matching] <- summary_stats_alt_flipped
+  #   SNP_split[, 4][not_matching] <- summary_stats_ref_flipped
+  #   methylationBase@snpWeights[not_matching] <-
+  #     methylationBase@snpWeights[not_matching] * -1
+  # }
+  
+  # need to make sure direction is right but use SNP_split_dt now
+  if(!identical(SNP_split_dt$alt, summary_stats_sub$A2) |
+     !identical(SNP_split_dt$ref, summary_stats_sub$A1)){
+    #recover()
+    not_matching <- which(SNP_split_dt$alt != summary_stats_sub$A2)
     # Flip our data to match the summary stats for these
-    summary_stats_ref_flipped <- SNP_split[, 3][not_matching]
-    summary_stats_alt_flipped <- SNP_split[, 4][not_matching]
-    SNP_split[, 3][not_matching] <- summary_stats_alt_flipped
-    SNP_split[, 4][not_matching] <- summary_stats_ref_flipped
-    methylationBase@snpWeights[not_matching] <-
-      methylationBase@snpWeights[not_matching] * -1
+    summary_stats_A1_flipped <- summary_stats_sub$A1[not_matching]
+    summary_stats_A2_flipped <- summary_stats_sub$A2[not_matching]
+    summary_stats_sub$A1[not_matching] <- summary_stats_A2_flipped
+    summary_stats_sub$A2[not_matching] <- summary_stats_A1_flipped
+    
+    # actually instead flip in summary_stats_sub
+    #methylationBase@snpWeights[not_matching] <-
+    #  methylationBase@snpWeights[not_matching] * -1
+    summary_stats_sub$BETA[not_matching] <- summary_stats_sub$BETA[not_matching] * -1
   }
   
   # Subset the genotype data
@@ -131,6 +167,7 @@ process_model <- function(methylationBase, my_SNPs, summary_stats) {
             #summary_stats_sub,
             mwas_out)
 }
+
 
 #' MWASresults class
 #' @export
@@ -171,6 +208,7 @@ MWASresults <- function(MWASmodels, pvar_path, pgen_path, psam_path, summary_sta
 #' @return Data table with standardized column names
 #' @export
 #' @importFrom stringr str_split
+#' @importFrom data.table setkey
 clean_and_standardize_colnames <- function(summary_stats) {
   # Check if the header is tab-delimited while the rest is space-delimited
   if (grepl("\t", colnames(summary_stats)[1])) {
@@ -180,11 +218,14 @@ clean_and_standardize_colnames <- function(summary_stats) {
   
   # Standardize column names
   colnames(summary_stats) <- gsub("chr", "CHR", colnames(summary_stats))
+  colnames(summary_stats) <- gsub("#CHROM", "CHR", colnames(summary_stats))
   colnames(summary_stats) <- gsub("pos", "BP", colnames(summary_stats))
   colnames(summary_stats) <- gsub("POS", "BP", colnames(summary_stats))
   colnames(summary_stats) <- gsub("MarkerName", "SNP", colnames(summary_stats))
   colnames(summary_stats) <- gsub("ID", "SNP", colnames(summary_stats))
   colnames(summary_stats) <- gsub("LogOR", "logOR", colnames(summary_stats))
+  colnames(summary_stats) <- gsub("StdErrLogOR", "SE", colnames(summary_stats))
+  colnames(summary_stats) <- gsub("StdErrlogOR", "SE", colnames(summary_stats))
   
   # If there's no logOR columns, create one, which will be log of OR column
   # but we only do this if there's already an OR column
@@ -194,8 +235,12 @@ clean_and_standardize_colnames <- function(summary_stats) {
     }
   }
   
-  colnames(summary_stats) <- gsub("logOR", "BETA", colnames(summary_stats))
+  #colnames(summary_stats) <- gsub("logOR", "BETA", colnames(summary_stats))
+  if(!"BETA" %in% colnames(summary_stats)) {
+    summary_stats[, BETA := logOR/SE]
+  }
   # Convert summary_stats to a keyed data.table for fast lookups
+
   setkey(summary_stats, SNP)
   
   return(summary_stats)
@@ -213,10 +258,10 @@ clean_and_standardize_colnames <- function(summary_stats) {
 #' @importFrom progress progress_bar
 #' @importFrom data.table setkey
 process_MWAS_models <- function(my_rds, my_SNPs, paths, summary_stats_path, rds_path, summary_stats = NULL) {
-  pb <- progress_bar$new(
-    format = "[:bar] :percent eta: :eta",
-    total = length(my_rds@models), clear = FALSE, width = 60
-  )
+  # pb <- progress_bar$new(
+  #   format = "[:bar] :percent eta: :eta",
+  #   total = length(my_rds@models), clear = FALSE, width = 60
+  # )
   
   MWASmodels <- vector("list", length(my_rds@models))
   
@@ -228,7 +273,7 @@ process_MWAS_models <- function(my_rds, my_SNPs, paths, summary_stats_path, rds_
   for (i in seq_along(my_rds@models)) {
     this_MethylationBase <- my_rds@models[[i]]
     MWASmodels[[i]] <- process_model(this_MethylationBase, my_SNPs, summary_stats)
-    pb$tick()
+    #pb$tick()
   }
   
   # Ensure the lengths of my_rds@models and MWASmodels are the same
