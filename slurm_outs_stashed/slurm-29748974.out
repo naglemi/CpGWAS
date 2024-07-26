@@ -1,0 +1,157 @@
+Fail to get yarn configuration. /home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyterlab/staging/yarn.js:4
+(()=>{var Qge=Object.create;var AS=Object.defineProperty;var bge=Object.getOwnPropertyDescriptor;var Sge=Object.getOwnPropertyNames;var vge=Object.getPrototypeOf,xge=Object.prototype.hasOwnProperty;var J=(r=>typeof require<"u"?require:typeof Proxy<"u"?new Proxy(r,{get:(e,t)=>(typeof require<"u"?require:e)[t]}):r)(function(r){if(typeof require<"u")return require.apply(this,arguments);throw new Error('Dynamic require of "'+r+'" is not supported')});var Pge=(r,e)=>()=>(r&&(e=r(r=0)),e);var w=(r,e)=>()=>(e||r((e={exports:{}}).exports,e),e.exports),ut=(r,e)=>{for(var t in e)AS(r,t,{get:e[t],enumerable:!0})},Dge=(r,e,t,i)=>{if(e&&typeof e=="object"||typeof e=="function")for(let n of Sge(e))!xge.call(r,n)&&n!==t&&AS(r,n,{get:()=>e[n],enumerable:!(i=bge(e,n))||i.enumerable});return r};var Pe=(r,e,t)=>(t=r!=null?Qge(vge(r)):{},Dge(e||!r||!r.__esModule?AS(t,"default",{value:r,enumerable:!0}):t,r));var QK=w((GXe,BK)=>{BK.expor
+
+SyntaxError: Unexpected token {
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.runMain (module.js:611:10)
+    at run (bootstrap_node.js:387:7)
+    at startup (bootstrap_node.js:153:9)
+
+[I 2024-04-08 09:47:13.745 ServerApp] Package jupyterlab took 0.0000s to import
+[I 2024-04-08 09:47:13.768 ServerApp] Package jupyter_lsp took 0.0217s to import
+[W 2024-04-08 09:47:13.768 ServerApp] A `_jupyter_server_extension_points` function was not found in jupyter_lsp. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2024-04-08 09:47:13.777 ServerApp] Package jupyter_server_terminals took 0.0092s to import
+[I 2024-04-08 09:47:13.778 ServerApp] Package notebook took 0.0000s to import
+[I 2024-04-08 09:47:13.780 ServerApp] Package notebook_shim took 0.0000s to import
+[W 2024-04-08 09:47:13.780 ServerApp] A `_jupyter_server_extension_points` function was not found in notebook_shim. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2024-04-08 09:47:13.781 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2024-04-08 09:47:13.788 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2024-04-08 09:47:13.794 ServerApp] jupyterlab | extension was successfully linked.
+[W 2024-04-08 09:47:13.798 JupyterNotebookApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2024-04-08 09:47:13.800 ServerApp] ServerApp.password config is deprecated in 2.0. Use PasswordIdentityProvider.hashed_password.
+[I 2024-04-08 09:47:13.800 ServerApp] notebook | extension was successfully linked.
+[I 2024-04-08 09:47:14.150 ServerApp] notebook_shim | extension was successfully linked.
+[I 2024-04-08 09:47:14.179 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2024-04-08 09:47:14.182 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2024-04-08 09:47:14.183 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2024-04-08 09:47:14.190 LabApp] JupyterLab extension loaded from /home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyterlab
+[I 2024-04-08 09:47:14.190 LabApp] JupyterLab application directory is /home/naglemi/miniconda3/envs/mwas/share/jupyter/lab
+[I 2024-04-08 09:47:14.190 LabApp] Extension Manager is 'pypi'.
+[I 2024-04-08 09:47:14.192 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2024-04-08 09:47:14.196 ServerApp] notebook | extension was successfully loaded.
+[I 2024-04-08 09:47:14.196 ServerApp] Serving notebooks from local directory: /expanse/lustre/projects/jhu152/naglemi/mwas/CpGWAS
+[I 2024-04-08 09:47:14.196 ServerApp] Jupyter Server 2.10.0 is running at:
+[I 2024-04-08 09:47:14.196 ServerApp] http://localhost:8888/lab
+[I 2024-04-08 09:47:14.196 ServerApp]     http://127.0.0.1:8888/lab
+[I 2024-04-08 09:47:14.196 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[?1049h[22;0;0t[1;24r(B[m[4l[?7h[?1h=[39;49m[39;49m[37m[40m[H[2J[37m[40m[J(B[m[39;49m[37m[40m[39;49m[37m[40m[J[39;49m(B[m[22d[93m[44mGetting file://localhost/home/naglemi/.local/share/jupyter/runtime/jpserver-171[K[39;49m(B[m
+
+[24;1H[?1049l[23;0;0t[?1l>[I 2024-04-08 09:47:15.125 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+[W 2024-04-08 09:49:59.996 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2024-04-08 09:51:07.221 ServerApp] Kernel started: c7146df6-d15d-4004-854f-1f99b713d3db
+[I 2024-04-08 09:51:08.035 ServerApp] Connecting to kernel c7146df6-d15d-4004-854f-1f99b713d3db.
+[I 2024-04-08 09:51:08.037 ServerApp] Connecting to kernel c7146df6-d15d-4004-854f-1f99b713d3db.
+[I 2024-04-08 09:51:08.038 ServerApp] Connecting to kernel c7146df6-d15d-4004-854f-1f99b713d3db.
+[I 2024-04-08 09:55:21.224 ServerApp] Kernel restarted: c7146df6-d15d-4004-854f-1f99b713d3db
+[I 2024-04-08 09:55:21.298 ServerApp] Starting buffering for c7146df6-d15d-4004-854f-1f99b713d3db:2a2c17b0-2781-4d40-ada2-a298943c2140
+[I 2024-04-08 09:55:21.437 ServerApp] Connecting to kernel c7146df6-d15d-4004-854f-1f99b713d3db.
+[I 2024-04-08 09:55:21.437 ServerApp] Restoring connection for c7146df6-d15d-4004-854f-1f99b713d3db:2a2c17b0-2781-4d40-ada2-a298943c2140
+[I 2024-04-08 09:56:06.786 ServerApp] Kernel restarted: c7146df6-d15d-4004-854f-1f99b713d3db
+[I 2024-04-08 09:56:06.858 ServerApp] Starting buffering for c7146df6-d15d-4004-854f-1f99b713d3db:2a2c17b0-2781-4d40-ada2-a298943c2140
+[I 2024-04-08 09:56:06.997 ServerApp] Connecting to kernel c7146df6-d15d-4004-854f-1f99b713d3db.
+[I 2024-04-08 09:56:06.997 ServerApp] Restoring connection for c7146df6-d15d-4004-854f-1f99b713d3db:2a2c17b0-2781-4d40-ada2-a298943c2140
+[I 2024-04-08 09:57:07.086 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 09:59:07.948 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 10:23:08.396 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 10:25:08.876 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 10:27:09.439 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 10:28:36.881 ServerApp] Kernel restarted: c7146df6-d15d-4004-854f-1f99b713d3db
+[I 2024-04-08 10:28:36.957 ServerApp] Starting buffering for c7146df6-d15d-4004-854f-1f99b713d3db:2a2c17b0-2781-4d40-ada2-a298943c2140
+[I 2024-04-08 10:28:37.093 ServerApp] Connecting to kernel c7146df6-d15d-4004-854f-1f99b713d3db.
+[I 2024-04-08 10:28:37.093 ServerApp] Restoring connection for c7146df6-d15d-4004-854f-1f99b713d3db:2a2c17b0-2781-4d40-ada2-a298943c2140
+[I 2024-04-08 10:29:09.884 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 10:33:10.348 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 11:25:11.308 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 11:35:12.194 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 11:37:13.447 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 11:38:24.240 ServerApp] Kernel interrupted: c7146df6-d15d-4004-854f-1f99b713d3db
+
+Execution halted
+[I 2024-04-08 11:38:27.872 ServerApp] AsyncIOLoopKernelRestarter: restarting kernel (1/5), keep random ports
+[W 2024-04-08 11:38:27.872 ServerApp] kernel c7146df6-d15d-4004-854f-1f99b713d3db restarted
+[I 2024-04-08 11:38:28.058 ServerApp] Starting buffering for c7146df6-d15d-4004-854f-1f99b713d3db:2a2c17b0-2781-4d40-ada2-a298943c2140
+[I 2024-04-08 11:38:28.230 ServerApp] Connecting to kernel c7146df6-d15d-4004-854f-1f99b713d3db.
+[I 2024-04-08 11:38:28.230 ServerApp] Restoring connection for c7146df6-d15d-4004-854f-1f99b713d3db:2a2c17b0-2781-4d40-ada2-a298943c2140
+[I 2024-04-08 11:39:14.768 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 11:41:15.675 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 11:43:16.492 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 11:45:17.323 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 11:47:17.835 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 11:57:18.592 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 12:05:19.175 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 12:07:19.736 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 12:22:02.110 ServerApp] Copying scripts/07_Deploy_SLURM_a3_EXPANSE.ipynb to /scripts
+[I 2024-04-08 12:22:19.821 ServerApp] Kernel started: cce564ac-9ac5-4874-8953-feb00b4090f6
+[I 2024-04-08 12:22:20.510 ServerApp] Connecting to kernel cce564ac-9ac5-4874-8953-feb00b4090f6.
+[I 2024-04-08 12:23:10.659 ServerApp] Kernel started: 2f849e4e-af1f-4fc3-8b9b-3e96a3d64d18
+[I 2024-04-08 12:23:11.387 ServerApp] Connecting to kernel 2f849e4e-af1f-4fc3-8b9b-3e96a3d64d18.
+[I 2024-04-08 12:23:24.709 ServerApp] Kernel started: 9f97f915-8e62-4fbf-97a6-5db190a7e8e5
+[I 2024-04-08 12:23:25.431 ServerApp] Connecting to kernel 9f97f915-8e62-4fbf-97a6-5db190a7e8e5.
+[W 2024-04-08 12:23:29.697 ServerApp] Notebook scripts/07_Deploy_SLURM.ipynb is not trusted
+[I 2024-04-08 12:23:30.435 ServerApp] Kernel started: 61544f34-292b-441e-ac54-266838c3d4fb
+[I 2024-04-08 12:23:31.088 ServerApp] Connecting to kernel 61544f34-292b-441e-ac54-266838c3d4fb.
+[I 2024-04-08 12:23:33.001 ServerApp] Starting buffering for 61544f34-292b-441e-ac54-266838c3d4fb:4ab2d76b-031f-4f90-a6ca-1ea5510ac5a7
+[I 2024-04-08 12:23:34.068 ServerApp] Starting buffering for 9f97f915-8e62-4fbf-97a6-5db190a7e8e5:d12b9c83-bb66-4fb8-a3a2-be44b13f15f5
+[I 2024-04-08 12:23:35.233 ServerApp] Starting buffering for 2f849e4e-af1f-4fc3-8b9b-3e96a3d64d18:3fe1ff39-84ed-4ada-bc61-a659bccf311f
+[I 2024-04-08 12:23:37.512 ServerApp] Starting buffering for c7146df6-d15d-4004-854f-1f99b713d3db:2a2c17b0-2781-4d40-ada2-a298943c2140
+[I 2024-04-08 12:24:13.325 ServerApp] Kernel restarted: cce564ac-9ac5-4874-8953-feb00b4090f6
+[I 2024-04-08 12:24:13.407 ServerApp] Starting buffering for cce564ac-9ac5-4874-8953-feb00b4090f6:60900ff5-8a4d-4a20-81f4-219f48792916
+[I 2024-04-08 12:24:13.552 ServerApp] Connecting to kernel cce564ac-9ac5-4874-8953-feb00b4090f6.
+[I 2024-04-08 12:24:13.552 ServerApp] Restoring connection for cce564ac-9ac5-4874-8953-feb00b4090f6:60900ff5-8a4d-4a20-81f4-219f48792916
+[I 2024-04-08 12:24:19.618 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr1_test.ipynb
+[I 2024-04-08 12:26:20.432 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr1_test.ipynb
+[I 2024-04-08 12:35:14.592 ServerApp] Connecting to kernel c7146df6-d15d-4004-854f-1f99b713d3db.
+[I 2024-04-08 12:37:14.402 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 12:39:15.158 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 12:41:12.909 ServerApp] Kernel restarted: c7146df6-d15d-4004-854f-1f99b713d3db
+[I 2024-04-08 12:41:12.987 ServerApp] Starting buffering for c7146df6-d15d-4004-854f-1f99b713d3db:38be3c3e-20b2-43a7-a328-73e6249b3c3f
+[I 2024-04-08 12:41:13.123 ServerApp] Connecting to kernel c7146df6-d15d-4004-854f-1f99b713d3db.
+[I 2024-04-08 12:41:13.123 ServerApp] Restoring connection for c7146df6-d15d-4004-854f-1f99b713d3db:38be3c3e-20b2-43a7-a328-73e6249b3c3f
+[I 2024-04-08 12:41:15.807 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 12:43:16.442 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 12:51:17.330 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 12:51:20.099 ServerApp] Kernel restarted: c7146df6-d15d-4004-854f-1f99b713d3db
+[I 2024-04-08 12:51:20.172 ServerApp] Starting buffering for c7146df6-d15d-4004-854f-1f99b713d3db:38be3c3e-20b2-43a7-a328-73e6249b3c3f
+[I 2024-04-08 12:51:20.310 ServerApp] Connecting to kernel c7146df6-d15d-4004-854f-1f99b713d3db.
+[I 2024-04-08 12:51:20.310 ServerApp] Restoring connection for c7146df6-d15d-4004-854f-1f99b713d3db:38be3c3e-20b2-43a7-a328-73e6249b3c3f
+[I 2024-04-08 12:53:17.941 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[W 2024-04-08 12:53:18.280 ServerApp] /expanse/lustre/projects/jhu152/naglemi/mwas/CpGWAS/scripts/.~09_Match_SNP_methylation_files_a2_EXPANSE.ipynb doesn't exist
+[I 2024-04-08 13:12:20.865 ServerApp] Kernel interrupted: c7146df6-d15d-4004-854f-1f99b713d3db
+[I 2024-04-08 13:12:21.877 ServerApp] Kernel interrupted: c7146df6-d15d-4004-854f-1f99b713d3db
+[I 2024-04-08 13:12:25.581 ServerApp] Kernel restarted: c7146df6-d15d-4004-854f-1f99b713d3db
+[I 2024-04-08 13:12:25.706 ServerApp] Starting buffering for c7146df6-d15d-4004-854f-1f99b713d3db:38be3c3e-20b2-43a7-a328-73e6249b3c3f
+[I 2024-04-08 13:12:25.842 ServerApp] Connecting to kernel c7146df6-d15d-4004-854f-1f99b713d3db.
+[I 2024-04-08 13:12:25.842 ServerApp] Restoring connection for c7146df6-d15d-4004-854f-1f99b713d3db:38be3c3e-20b2-43a7-a328-73e6249b3c3f
+[I 2024-04-08 13:12:30.376 ServerApp] Kernel restarted: c7146df6-d15d-4004-854f-1f99b713d3db
+[I 2024-04-08 13:12:30.448 ServerApp] Starting buffering for c7146df6-d15d-4004-854f-1f99b713d3db:38be3c3e-20b2-43a7-a328-73e6249b3c3f
+[I 2024-04-08 13:12:30.589 ServerApp] Connecting to kernel c7146df6-d15d-4004-854f-1f99b713d3db.
+[I 2024-04-08 13:12:30.589 ServerApp] Restoring connection for c7146df6-d15d-4004-854f-1f99b713d3db:38be3c3e-20b2-43a7-a328-73e6249b3c3f
+[I 2024-04-08 13:13:18.944 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 13:15:21.671 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 13:17:23.904 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 13:19:11.163 ServerApp] Kernel restarted: c7146df6-d15d-4004-854f-1f99b713d3db
+[I 2024-04-08 13:19:11.316 ServerApp] Starting buffering for c7146df6-d15d-4004-854f-1f99b713d3db:38be3c3e-20b2-43a7-a328-73e6249b3c3f
+[I 2024-04-08 13:19:11.450 ServerApp] Connecting to kernel c7146df6-d15d-4004-854f-1f99b713d3db.
+[I 2024-04-08 13:19:11.450 ServerApp] Restoring connection for c7146df6-d15d-4004-854f-1f99b713d3db:38be3c3e-20b2-43a7-a328-73e6249b3c3f
+[I 2024-04-08 13:19:25.128 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[W 2024-04-08 13:19:40.001 ServerApp] /expanse/lustre/projects/jhu152/naglemi/mwas/CpGWAS/scripts/.~09_Match_SNP_methylation_files_a2_EXPANSE.ipynb doesn't exist
+[I 2024-04-08 13:22:12.895 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[W 2024-04-08 13:22:13.188 ServerApp] /expanse/lustre/projects/jhu152/naglemi/mwas/CpGWAS/scripts/.~09_Match_SNP_methylation_files_a2_EXPANSE.ipynb doesn't exist
+[I 2024-04-08 13:24:13.590 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2_EXPANSE.ipynb
+[I 2024-04-08 14:16:06.605 ServerApp] Kernel shutdown: c7146df6-d15d-4004-854f-1f99b713d3db
+[I 2024-04-08 14:16:06.742 ServerApp] Kernel shutdown: cce564ac-9ac5-4874-8953-feb00b4090f6
+[I 2024-04-08 14:16:06.884 ServerApp] Kernel shutdown: 2f849e4e-af1f-4fc3-8b9b-3e96a3d64d18
+[I 2024-04-08 14:16:06.951 ServerApp] Kernel shutdown: 9f97f915-8e62-4fbf-97a6-5db190a7e8e5
+[I 2024-04-08 14:16:07.093 ServerApp] Kernel shutdown: 61544f34-292b-441e-ac54-266838c3d4fb
+[I 2024-04-08 14:16:07.445 ServerApp] Shutting down on /api/shutdown request.
+[I 2024-04-08 14:16:07.462 ServerApp] Shutting down 5 extensions

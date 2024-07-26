@@ -1,0 +1,1038 @@
+Fail to get yarn configuration. /home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyterlab/staging/yarn.js:4
+(()=>{var Qge=Object.create;var AS=Object.defineProperty;var bge=Object.getOwnPropertyDescriptor;var Sge=Object.getOwnPropertyNames;var vge=Object.getPrototypeOf,xge=Object.prototype.hasOwnProperty;var J=(r=>typeof require<"u"?require:typeof Proxy<"u"?new Proxy(r,{get:(e,t)=>(typeof require<"u"?require:e)[t]}):r)(function(r){if(typeof require<"u")return require.apply(this,arguments);throw new Error('Dynamic require of "'+r+'" is not supported')});var Pge=(r,e)=>()=>(r&&(e=r(r=0)),e);var w=(r,e)=>()=>(e||r((e={exports:{}}).exports,e),e.exports),ut=(r,e)=>{for(var t in e)AS(r,t,{get:e[t],enumerable:!0})},Dge=(r,e,t,i)=>{if(e&&typeof e=="object"||typeof e=="function")for(let n of Sge(e))!xge.call(r,n)&&n!==t&&AS(r,n,{get:()=>e[n],enumerable:!(i=bge(e,n))||i.enumerable});return r};var Pe=(r,e,t)=>(t=r!=null?Qge(vge(r)):{},Dge(e||!r||!r.__esModule?AS(t,"default",{value:r,enumerable:!0}):t,r));var QK=w((GXe,BK)=>{BK.expor
+
+SyntaxError: Unexpected token {
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.runMain (module.js:611:10)
+    at run (bootstrap_node.js:387:7)
+    at startup (bootstrap_node.js:153:9)
+
+[I 2024-05-13 12:05:11.598 ServerApp] Package jupyterlab took 0.0000s to import
+[I 2024-05-13 12:05:12.131 ServerApp] Package jupyter_lsp took 0.5322s to import
+[W 2024-05-13 12:05:12.131 ServerApp] A `_jupyter_server_extension_points` function was not found in jupyter_lsp. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2024-05-13 12:05:12.305 ServerApp] Package jupyter_server_terminals took 0.1737s to import
+[I 2024-05-13 12:05:12.305 ServerApp] Package notebook took 0.0000s to import
+[I 2024-05-13 12:05:12.321 ServerApp] Package notebook_shim took 0.0000s to import
+[W 2024-05-13 12:05:12.321 ServerApp] A `_jupyter_server_extension_points` function was not found in notebook_shim. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2024-05-13 12:05:12.342 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2024-05-13 12:05:12.348 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2024-05-13 12:05:12.356 ServerApp] jupyterlab | extension was successfully linked.
+[W 2024-05-13 12:05:12.379 JupyterNotebookApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2024-05-13 12:05:12.382 ServerApp] ServerApp.password config is deprecated in 2.0. Use PasswordIdentityProvider.hashed_password.
+[I 2024-05-13 12:05:12.382 ServerApp] notebook | extension was successfully linked.
+[I 2024-05-13 12:05:17.875 ServerApp] notebook_shim | extension was successfully linked.
+[I 2024-05-13 12:05:18.079 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2024-05-13 12:05:18.082 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2024-05-13 12:05:18.083 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2024-05-13 12:05:18.181 LabApp] JupyterLab extension loaded from /home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyterlab
+[I 2024-05-13 12:05:18.181 LabApp] JupyterLab application directory is /home/naglemi/miniconda3/envs/mwas/share/jupyter/lab
+[I 2024-05-13 12:05:18.182 LabApp] Extension Manager is 'pypi'.
+[I 2024-05-13 12:05:18.185 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2024-05-13 12:05:18.189 ServerApp] notebook | extension was successfully loaded.
+[I 2024-05-13 12:05:18.190 ServerApp] Serving notebooks from local directory: /expanse/lustre/projects/jhu152/naglemi/mwas/CpGWAS
+[I 2024-05-13 12:05:18.190 ServerApp] Jupyter Server 2.10.0 is running at:
+[I 2024-05-13 12:05:18.190 ServerApp] http://localhost:8888/lab
+[I 2024-05-13 12:05:18.190 ServerApp]     http://127.0.0.1:8888/lab
+[I 2024-05-13 12:05:18.190 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[?1049h[22;0;0t[1;24r(B[m[4l[?7h[?1h=[39;49m[39;49m[37m[40m[H[2J[37m[40m[J(B[m[39;49m[37m[40m[39;49m[37m[40m[J[39;49m(B[m[22d[93m[44mGetting file://localhost/home/naglemi/.local/share/jupyter/runtime/jpserver-269[K[39;49m(B[m
+
+[24;1H[?1049l[23;0;0t[?1l>[I 2024-05-13 12:05:27.991 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+0.03s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+[W 2024-05-13 12:05:45.837 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2024-05-13 12:08:31.911 ServerApp] Kernel started: 0fc2e16a-470f-4632-a730-a5a03465fdf9
+[I 2024-05-13 12:08:35.772 ServerApp] Connecting to kernel 0fc2e16a-470f-4632-a730-a5a03465fdf9.
+[I 2024-05-13 12:08:35.774 ServerApp] Connecting to kernel 0fc2e16a-470f-4632-a730-a5a03465fdf9.
+[I 2024-05-13 12:08:35.776 ServerApp] Connecting to kernel 0fc2e16a-470f-4632-a730-a5a03465fdf9.
+[I 2024-05-13 12:10:40.398 ServerApp] Kernel restarted: 0fc2e16a-470f-4632-a730-a5a03465fdf9
+[I 2024-05-13 12:10:40.487 ServerApp] Starting buffering for 0fc2e16a-470f-4632-a730-a5a03465fdf9:6404f70e-1c00-4d5f-a67a-5f3e35058f1c
+[I 2024-05-13 12:10:40.649 ServerApp] Connecting to kernel 0fc2e16a-470f-4632-a730-a5a03465fdf9.
+[I 2024-05-13 12:10:40.649 ServerApp] Restoring connection for 0fc2e16a-470f-4632-a730-a5a03465fdf9:6404f70e-1c00-4d5f-a67a-5f3e35058f1c
+[I 2024-05-13 12:12:31.701 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30506865
+Submitted batch job 30506876
+[I 2024-05-13 12:14:32.428 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30506905
+Submitted batch job 30506918
+[I 2024-05-13 12:16:32.886 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30506942
+Submitted batch job 30506967
+[I 2024-05-13 12:18:33.482 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30506978
+Submitted batch job 30506995
+[I 2024-05-13 12:20:34.514 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507007
+Submitted batch job 30507019
+[I 2024-05-13 12:22:35.137 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507040
+Submitted batch job 30507058
+[I 2024-05-13 12:24:35.606 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507073
+Submitted batch job 30507080
+[I 2024-05-13 12:26:36.403 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507104
+Submitted batch job 30507118
+[I 2024-05-13 12:28:36.980 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+[I 2024-05-13 12:28:58.770 ServerApp] New terminal with automatic name: 1
+Submitted batch job 30507140
+Submitted batch job 30507153
+[I 2024-05-13 12:30:37.568 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507173
+Submitted batch job 30507185
+[I 2024-05-13 12:32:38.098 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507206
+Submitted batch job 30507221
+[I 2024-05-13 12:34:38.765 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507231
+Submitted batch job 30507236
+[I 2024-05-13 12:36:39.426 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507247
+Submitted batch job 30507260
+[I 2024-05-13 12:38:40.024 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507283
+Submitted batch job 30507299
+[I 2024-05-13 12:40:52.643 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507317
+Submitted batch job 30507340
+[I 2024-05-13 12:43:00.790 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507358
+Submitted batch job 30507378
+[I 2024-05-13 12:45:04.967 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507392
+Submitted batch job 30507407
+Submitted batch job 30507419
+[I 2024-05-13 12:47:57.679 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507433
+Submitted batch job 30507443
+Submitted batch job 30507454
+Submitted batch job 30507479
+Submitted batch job 30507496
+Submitted batch job 30507519
+Submitted batch job 30507538
+Submitted batch job 30507557
+[I 2024-05-13 12:56:00.709 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507580
+Submitted batch job 30507594
+[I 2024-05-13 12:58:02.526 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507610
+Submitted batch job 30507617
+[I 2024-05-13 13:00:04.373 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507638
+Submitted batch job 30507652
+[I 2024-05-13 13:02:09.067 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507669
+Submitted batch job 30507698
+[I 2024-05-13 13:04:10.924 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+[I 2024-05-13 13:04:29.289 ServerApp] New terminal with automatic name: 2
+Submitted batch job 30507707
+Submitted batch job 30507718
+[I 2024-05-13 13:06:12.707 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507726
+[I 2024-05-13 13:08:14.668 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507743
+Submitted batch job 30507754
+[I 2024-05-13 13:10:16.617 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507764
+Submitted batch job 30507781
+[I 2024-05-13 13:12:18.512 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507800
+Submitted batch job 30507829
+[I 2024-05-13 13:14:19.635 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507847
+Submitted batch job 30507866
+[I 2024-05-13 13:16:21.338 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507890
+Submitted batch job 30507916
+[I 2024-05-13 13:18:22.009 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507935
+Submitted batch job 30507960
+[I 2024-05-13 13:20:23.057 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30507992
+Submitted batch job 30508010
+Submitted batch job 30508036
+[I 2024-05-13 13:22:32.396 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508050
+[I 2024-05-13 13:24:33.172 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508062
+Submitted batch job 30508073
+[I 2024-05-13 13:26:33.924 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508087
+Submitted batch job 30508114
+[I 2024-05-13 13:28:34.555 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508129
+Submitted batch job 30508141
+[I 2024-05-13 13:30:35.232 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508170
+Submitted batch job 30508188
+[I 2024-05-13 13:32:41.539 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508197
+Submitted batch job 30508211
+[I 2024-05-13 13:34:43.416 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508218
+Submitted batch job 30508237
+[I 2024-05-13 13:36:45.153 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508246
+Submitted batch job 30508256
+[I 2024-05-13 13:38:45.793 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508308
+Submitted batch job 30508326
+[I 2024-05-13 13:40:46.371 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508343
+Submitted batch job 30508354
+[I 2024-05-13 13:42:47.034 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508379
+Submitted batch job 30508390
+Submitted batch job 30508398
+[I 2024-05-13 13:44:58.270 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508404
+Submitted batch job 30508414
+[I 2024-05-13 13:46:58.917 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508422
+[I 2024-05-13 13:48:59.535 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508436
+Submitted batch job 30508444
+[I 2024-05-13 13:51:00.349 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508469
+Submitted batch job 30508514
+[I 2024-05-13 13:53:01.338 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508599
+Submitted batch job 30508619
+[I 2024-05-13 13:55:04.647 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508631
+Submitted batch job 30508642
+[I 2024-05-13 13:57:15.000 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508660
+Submitted batch job 30508675
+[I 2024-05-13 13:59:22.023 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508679
+Submitted batch job 30508683
+[I 2024-05-13 14:01:37.734 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508690
+Submitted batch job 30508702
+Submitted batch job 30508717
+[I 2024-05-13 14:04:15.764 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508736
+Submitted batch job 30508752
+[I 2024-05-13 14:06:16.525 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508785
+Submitted batch job 30508795
+[I 2024-05-13 14:08:50.990 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508808
+Submitted batch job 30508816
+Submitted batch job 30508820
+Submitted batch job 30508835
+Submitted batch job 30508852
+Submitted batch job 30508867
+[I 2024-05-13 14:14:39.086 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508884
+Submitted batch job 30508900
+[I 2024-05-13 14:16:40.255 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508915
+Submitted batch job 30508930
+[I 2024-05-13 14:18:41.244 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508946
+Submitted batch job 30508951
+[I 2024-05-13 14:20:42.500 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30508957
+Submitted batch job 30508966
+[I 2024-05-13 14:22:43.337 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30509022
+[I 2024-05-13 14:25:00.359 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30509065
+Submitted batch job 30509099
+Submitted batch job 30509119
+[I 2024-05-13 14:27:54.079 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30509150
+[I 2024-05-13 14:29:54.882 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30509172
+Submitted batch job 30509181
+[I 2024-05-13 14:31:55.744 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30509193
+Submitted batch job 30509208
+[I 2024-05-13 14:33:57.847 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30509220
+Submitted batch job 30509227
+[I 2024-05-13 14:35:58.803 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30509238
+Submitted batch job 30509260
+[I 2024-05-13 14:37:59.691 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30509293
+Submitted batch job 30509302
+[I 2024-05-13 14:40:00.620 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30509328
+Submitted batch job 30509388
+[I 2024-05-13 14:42:17.333 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30509404
+Submitted batch job 30509424
+[I 2024-05-13 14:44:40.646 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30509443
+Submitted batch job 30509498
+Submitted batch job 30509532
+Submitted batch job 30509546
+[I 2024-05-13 14:49:01.301 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30509565
+Submitted batch job 30509609
+Submitted batch job 30509636
+[I 2024-05-13 14:53:39.130 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30509679
+Submitted batch job 30509689
+Submitted batch job 30509743
+[I 2024-05-13 14:58:39.326 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30509811
+Submitted batch job 30509839
+Submitted batch job 30509854
+[I 2024-05-13 15:01:33.595 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30509890
+Submitted batch job 30509925
+Submitted batch job 30509950
+Submitted batch job 30509997
+Submitted batch job 30510005
+Submitted batch job 30510019
+Submitted batch job 30510053
+Submitted batch job 30510070
+Submitted batch job 30510098
+Submitted batch job 30510109
+Submitted batch job 30510122
+Submitted batch job 30510134
+Submitted batch job 30510158
+Submitted batch job 30510177
+Submitted batch job 30510190
+Submitted batch job 30510204
+Submitted batch job 30510214
+Submitted batch job 30510237
+Submitted batch job 30510263
+Submitted batch job 30510280
+Submitted batch job 30510300
+Submitted batch job 30510318
+Submitted batch job 30510334
+Submitted batch job 30510342
+Submitted batch job 30510351
+[I 2024-05-13 15:32:35.574 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30510358
+Submitted batch job 30510377
+[I 2024-05-13 15:34:36.839 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30510395
+Submitted batch job 30510406
+[I 2024-05-13 15:36:42.328 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30510418
+Submitted batch job 30510431
+[I 2024-05-13 15:38:43.764 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30510465
+Submitted batch job 30510475
+[I 2024-05-13 15:40:45.332 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30510483
+Submitted batch job 30510491
+[I 2024-05-13 15:42:46.686 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30510498
+Submitted batch job 30510511
+[I 2024-05-13 15:44:48.043 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30510522
+Submitted batch job 30510527
+[I 2024-05-13 15:46:49.350 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30510537
+Submitted batch job 30510564
+[I 2024-05-13 15:48:50.808 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30510590
+Submitted batch job 30510612
+[I 2024-05-13 15:50:56.702 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30510635
+Submitted batch job 30510660
+[I 2024-05-13 15:52:58.482 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30510711
+Submitted batch job 30510739
+[I 2024-05-13 15:55:10.348 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30510754
+Submitted batch job 30510770
+[I 2024-05-13 15:57:11.893 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30510780
+Submitted batch job 30510810
+Submitted batch job 30510858
+Submitted batch job 30510878
+Submitted batch job 30510895
+[I 2024-05-13 16:02:12.663 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30510914
+Submitted batch job 30510972
+[I 2024-05-13 16:04:14.256 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30510997
+Submitted batch job 30511022
+[I 2024-05-13 16:06:15.791 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511029
+Submitted batch job 30511039
+[I 2024-05-13 16:08:17.386 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511045
+Submitted batch job 30511062
+[I 2024-05-13 16:10:19.105 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511077
+Submitted batch job 30511091
+[I 2024-05-13 16:12:20.670 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511100
+Submitted batch job 30511131
+[I 2024-05-13 16:14:22.720 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511150
+Submitted batch job 30511173
+[I 2024-05-13 16:16:24.629 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511179
+Submitted batch job 30511194
+[I 2024-05-13 16:18:26.252 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511201
+Submitted batch job 30511210
+[I 2024-05-13 16:20:27.986 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511216
+Submitted batch job 30511226
+[I 2024-05-13 16:22:30.689 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511245
+Submitted batch job 30511253
+[I 2024-05-13 16:24:32.711 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511270
+Submitted batch job 30511278
+[I 2024-05-13 16:26:34.575 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511285
+Submitted batch job 30511305
+[I 2024-05-13 16:28:36.664 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511322
+Submitted batch job 30511332
+[I 2024-05-13 16:30:38.582 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511358
+Submitted batch job 30511393
+[I 2024-05-13 16:32:40.565 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511407
+Submitted batch job 30511423
+[I 2024-05-13 16:34:42.516 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511440
+Submitted batch job 30511453
+[I 2024-05-13 16:36:53.291 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511475
+Submitted batch job 30511493
+[I 2024-05-13 16:40:04.535 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511521
+Submitted batch job 30511571
+[I 2024-05-13 16:42:06.798 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511597
+Submitted batch job 30511609
+[I 2024-05-13 16:44:09.242 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511632
+Submitted batch job 30511651
+Submitted batch job 30511674
+[I 2024-05-13 16:46:26.332 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511700
+Submitted batch job 30511730
+[I 2024-05-13 16:49:17.605 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511742
+Submitted batch job 30511773
+[I 2024-05-13 16:51:20.383 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511799
+Submitted batch job 30511806
+[I 2024-05-13 16:53:22.792 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511823
+Submitted batch job 30511838
+[I 2024-05-13 16:55:25.791 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511848
+Submitted batch job 30511856
+[I 2024-05-13 16:57:28.552 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511864
+Submitted batch job 30511871
+[I 2024-05-13 16:59:32.021 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30511895
+Submitted batch job 30511903
+[I 2024-05-13 17:01:35.097 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513276
+Submitted batch job 30513297
+[I 2024-05-13 17:03:38.400 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513323
+Submitted batch job 30513342
+[I 2024-05-13 17:05:41.294 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513357
+Submitted batch job 30513361
+[I 2024-05-13 17:07:44.507 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513369
+Submitted batch job 30513388
+[I 2024-05-13 17:09:47.402 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513401
+Submitted batch job 30513418
+[I 2024-05-13 17:11:50.526 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513430
+Submitted batch job 30513436
+[I 2024-05-13 17:13:53.378 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513460
+Submitted batch job 30513487
+[I 2024-05-13 17:16:06.102 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513495
+Submitted batch job 30513506
+[I 2024-05-13 17:18:09.021 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513517
+Submitted batch job 30513533
+[I 2024-05-13 17:20:11.885 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513550
+Submitted batch job 30513565
+[I 2024-05-13 17:22:15.581 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513583
+Submitted batch job 30513594
+[I 2024-05-13 17:24:19.006 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513610
+Submitted batch job 30513629
+[I 2024-05-13 17:26:22.457 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513634
+Submitted batch job 30513643
+[I 2024-05-13 17:28:25.727 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513664
+Submitted batch job 30513671
+[I 2024-05-13 17:30:28.521 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513704
+Submitted batch job 30513708
+[I 2024-05-13 17:32:31.517 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513711
+Submitted batch job 30513718
+Submitted batch job 30513749
+[I 2024-05-13 17:34:34.767 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513756
+Submitted batch job 30513760
+[I 2024-05-13 17:36:37.762 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513772
+Submitted batch job 30513778
+[I 2024-05-13 17:38:40.603 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513799
+Submitted batch job 30513822
+[I 2024-05-13 17:40:43.615 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513828
+Submitted batch job 30513833
+[I 2024-05-13 17:42:46.745 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513842
+Submitted batch job 30513855
+[I 2024-05-13 17:44:50.284 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513884
+Submitted batch job 30513890
+[I 2024-05-13 17:46:53.070 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513903
+Submitted batch job 30513914
+[I 2024-05-13 17:48:55.786 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513930
+Submitted batch job 30513939
+Submitted batch job 30513955
+Submitted batch job 30513962
+Submitted batch job 30513973
+Submitted batch job 30513985
+[I 2024-05-13 17:55:31.693 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30513991
+Submitted batch job 30514007
+[I 2024-05-13 17:57:35.785 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30514019
+Submitted batch job 30514030
+[I 2024-05-13 17:59:42.110 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30514044
+Submitted batch job 30514257
+[I 2024-05-13 18:01:47.921 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30514261
+Submitted batch job 30514311
+[I 2024-05-13 18:03:55.538 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30514320
+Submitted batch job 30514351
+[I 2024-05-13 18:05:58.232 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30514363
+Submitted batch job 30514379
+[I 2024-05-13 18:08:05.422 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30514398
+Submitted batch job 30514413
+[I 2024-05-13 18:10:16.824 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30514429
+Submitted batch job 30514435
+[I 2024-05-13 18:12:19.540 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30514443
+Submitted batch job 30514453
+[I 2024-05-13 18:14:22.239 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30514464
+Submitted batch job 30514486
+[I 2024-05-13 18:16:25.133 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30514492
+Submitted batch job 30514621
+Submitted batch job 30514627
+[I 2024-05-13 18:19:21.278 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30514639
+Submitted batch job 30514657
+[I 2024-05-13 18:21:24.080 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30514662
+Submitted batch job 30514667
+[I 2024-05-13 18:23:26.889 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30514686
+Submitted batch job 30514696
+Submitted batch job 30514706
+Submitted batch job 30514715
+[I 2024-05-13 18:26:45.036 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30514744
+Submitted batch job 30514755
+[I 2024-05-13 18:28:49.260 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30514767
+Submitted batch job 30514789
+[I 2024-05-13 18:31:01.293 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30514803
+Submitted batch job 30514821
+[I 2024-05-13 18:33:05.777 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30514833
+Submitted batch job 30514845
+[I 2024-05-13 18:35:12.305 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30514857
+Submitted batch job 30514870
+[I 2024-05-13 18:37:15.542 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30514883
+Submitted batch job 30514906
+[I 2024-05-13 18:39:19.585 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30514919
+Submitted batch job 30514925
+[I 2024-05-13 18:41:50.493 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30514940
+Submitted batch job 30514961
+[I 2024-05-13 18:43:53.553 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30514976
+Submitted batch job 30514992
+[I 2024-05-13 18:45:57.178 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30514998
+Submitted batch job 30515007
+[I 2024-05-13 18:48:03.113 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515015
+Submitted batch job 30515027
+[I 2024-05-13 18:50:06.434 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515032
+Submitted batch job 30515037
+[I 2024-05-13 18:52:10.058 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515067
+Submitted batch job 30515073
+[I 2024-05-13 18:54:13.671 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515094
+Submitted batch job 30515104
+Submitted batch job 30515122
+[I 2024-05-13 18:56:52.246 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515129
+Submitted batch job 30515133
+[I 2024-05-13 18:58:55.642 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515144
+Submitted batch job 30515155
+[I 2024-05-13 19:00:59.753 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515157
+Submitted batch job 30515165
+[I 2024-05-13 19:03:04.365 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515178
+Submitted batch job 30515210
+Submitted batch job 30515228
+Submitted batch job 30515245
+Submitted batch job 30515252
+Submitted batch job 30515260
+Submitted batch job 30515282
+[I 2024-05-13 19:10:28.927 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515286
+Submitted batch job 30515293
+Submitted batch job 30515298
+Submitted batch job 30515300
+[I 2024-05-13 19:14:39.518 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515307
+Submitted batch job 30515336
+[I 2024-05-13 19:16:42.815 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515345
+Submitted batch job 30515358
+[I 2024-05-13 19:18:45.609 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515369
+Submitted batch job 30515381
+[I 2024-05-13 19:20:49.922 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515386
+Submitted batch job 30515404
+[I 2024-05-13 19:22:56.593 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515474
+Submitted batch job 30515484
+[I 2024-05-13 19:24:59.541 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515498
+Submitted batch job 30515507
+[I 2024-05-13 19:27:02.728 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515517
+Submitted batch job 30515540
+[I 2024-05-13 19:29:09.811 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515558
+Submitted batch job 30515576
+Submitted batch job 30515584
+[I 2024-05-13 19:31:13.007 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515595
+Submitted batch job 30515604
+[I 2024-05-13 19:33:15.937 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515614
+Submitted batch job 30515628
+[I 2024-05-13 19:35:22.132 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515636
+Submitted batch job 30515640
+[I 2024-05-13 19:37:25.027 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515645
+Submitted batch job 30515656
+[I 2024-05-13 19:39:27.998 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515679
+Submitted batch job 30515689
+[I 2024-05-13 19:41:32.909 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515698
+Submitted batch job 30515702
+[I 2024-05-13 19:43:36.939 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515715
+Submitted batch job 30515719
+[I 2024-05-13 19:45:40.395 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515722
+Submitted batch job 30515725
+[I 2024-05-13 19:47:43.761 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515730
+Submitted batch job 30515743
+[I 2024-05-13 19:49:47.973 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515755
+Submitted batch job 30515785
+[I 2024-05-13 19:51:49.980 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515791
+Submitted batch job 30515799
+[I 2024-05-13 19:53:52.884 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515817
+Submitted batch job 30515829
+[I 2024-05-13 19:55:58.517 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515833
+Submitted batch job 30515843
+[I 2024-05-13 19:58:00.635 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515856
+Submitted batch job 30515869
+[I 2024-05-13 20:00:03.451 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515878
+Submitted batch job 30515880
+[I 2024-05-13 20:02:07.482 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515890
+Submitted batch job 30515914
+[I 2024-05-13 20:04:18.672 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515923
+Submitted batch job 30515929
+[I 2024-05-13 20:06:21.436 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515936
+Submitted batch job 30515944
+[I 2024-05-13 20:08:30.539 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515956
+Submitted batch job 30515975
+[I 2024-05-13 20:10:35.078 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30515989
+Submitted batch job 30515994
+[I 2024-05-13 20:12:38.602 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516004
+Submitted batch job 30516015
+[I 2024-05-13 20:14:42.050 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516036
+Submitted batch job 30516056
+[I 2024-05-13 20:16:45.433 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516066
+Submitted batch job 30516074
+[I 2024-05-13 20:18:48.713 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516078
+Submitted batch job 30516090
+[I 2024-05-13 20:20:52.438 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516096
+Submitted batch job 30516101
+[I 2024-05-13 20:22:56.060 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516107
+Submitted batch job 30516111
+[I 2024-05-13 20:24:59.322 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516143
+Submitted batch job 30516155
+[I 2024-05-13 20:27:02.841 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516158
+Submitted batch job 30516173
+[I 2024-05-13 20:29:06.888 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516180
+Submitted batch job 30516194
+[I 2024-05-13 20:31:10.187 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516207
+Submitted batch job 30516215
+[I 2024-05-13 20:33:13.712 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516227
+Submitted batch job 30516232
+[I 2024-05-13 20:35:17.304 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516262
+Submitted batch job 30516268
+[I 2024-05-13 20:37:27.420 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516284
+Submitted batch job 30516298
+[I 2024-05-13 20:39:32.188 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516641
+Submitted batch job 30516664
+Submitted batch job 30516675
+[I 2024-05-13 20:41:36.871 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516680
+Submitted batch job 30516685
+[I 2024-05-13 20:43:41.832 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516687
+Submitted batch job 30516698
+[I 2024-05-13 20:45:46.848 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516705
+Submitted batch job 30516706
+Submitted batch job 30516718
+[I 2024-05-13 20:49:35.480 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516729
+Submitted batch job 30516736
+[I 2024-05-13 20:51:40.127 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516760
+Submitted batch job 30516772
+Submitted batch job 30516825
+Submitted batch job 30516850
+[I 2024-05-13 20:55:04.514 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516858
+Submitted batch job 30516863
+[I 2024-05-13 20:57:31.754 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516866
+Submitted batch job 30516872
+[I 2024-05-13 20:59:35.688 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516898
+Submitted batch job 30516908
+[I 2024-05-13 21:01:47.090 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516916
+Submitted batch job 30516934
+[I 2024-05-13 21:03:52.541 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30516955
+Submitted batch job 30516975
+Submitted batch job 30516999
+Submitted batch job 30517028
+[I 2024-05-13 21:08:17.124 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517041
+Submitted batch job 30517048
+Submitted batch job 30517057
+[I 2024-05-13 21:10:22.723 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517068
+Submitted batch job 30517082
+Submitted batch job 30517097
+[I 2024-05-13 21:14:08.207 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517109
+Submitted batch job 30517132
+[I 2024-05-13 21:16:13.520 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517158
+Submitted batch job 30517207
+[I 2024-05-13 21:18:18.824 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517216
+Submitted batch job 30517243
+[I 2024-05-13 21:20:24.092 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517266
+Submitted batch job 30517296
+[I 2024-05-13 21:22:29.501 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517313
+Submitted batch job 30517324
+Submitted batch job 30517333
+[I 2024-05-13 21:24:37.905 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517341
+Submitted batch job 30517350
+[I 2024-05-13 21:26:43.306 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517375
+Submitted batch job 30517384
+[I 2024-05-13 21:28:46.951 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517399
+Submitted batch job 30517415
+[I 2024-05-13 21:30:51.549 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517429
+Submitted batch job 30517453
+[I 2024-05-13 21:32:58.753 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517466
+Submitted batch job 30517504
+[I 2024-05-13 21:35:01.952 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517517
+Submitted batch job 30517537
+[I 2024-05-13 21:37:04.642 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517545
+Submitted batch job 30517549
+[I 2024-05-13 21:39:07.855 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517575
+Submitted batch job 30517580
+[I 2024-05-13 21:41:11.614 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517589
+Submitted batch job 30517607
+[I 2024-05-13 21:43:15.392 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517617
+Submitted batch job 30517639
+[I 2024-05-13 21:45:19.611 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517663
+Submitted batch job 30517695
+[I 2024-05-13 21:47:23.319 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517710
+Submitted batch job 30517717
+[I 2024-05-13 21:50:10.455 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517731
+Submitted batch job 30517743
+Submitted batch job 30517767
+[I 2024-05-13 21:52:14.492 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517777
+Submitted batch job 30517784
+[I 2024-05-13 21:54:24.024 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517796
+Submitted batch job 30517817
+[I 2024-05-13 21:56:32.248 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517864
+Submitted batch job 30517892
+[I 2024-05-13 21:58:36.276 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517900
+Submitted batch job 30517945
+[I 2024-05-13 22:00:39.315 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517954
+Submitted batch job 30517971
+[I 2024-05-13 22:02:42.323 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30517998
+Submitted batch job 30518018
+[I 2024-05-13 22:04:45.352 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30518027
+Submitted batch job 30518035
+[I 2024-05-13 22:06:48.351 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30518047
+Submitted batch job 30518058
+[I 2024-05-13 22:08:55.946 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30518078
+Submitted batch job 30518098
+[I 2024-05-13 22:10:59.482 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30518108
+Submitted batch job 30518124
+[I 2024-05-13 22:13:02.565 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30518140
+Submitted batch job 30518160
+[I 2024-05-13 22:15:06.071 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30518183
+Submitted batch job 30518200
+[I 2024-05-13 22:17:08.803 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30518212
+Submitted batch job 30518228
+[I 2024-05-13 22:19:11.577 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30518241
+Submitted batch job 30518256
+[I 2024-05-13 22:21:14.459 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30518266
+Submitted batch job 30518282
+[I 2024-05-13 22:23:17.359 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30518295
+Submitted batch job 30518318
+[I 2024-05-13 22:25:35.487 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30518335
+Submitted batch job 30518351
+[I 2024-05-13 22:27:38.297 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30518384
+Submitted batch job 30518405
+[I 2024-05-13 22:29:41.557 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30518423
+Submitted batch job 30518441
+[I 2024-05-13 22:31:46.183 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30518454
+Submitted batch job 30518480
+[I 2024-05-13 22:33:49.480 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30518490
+Submitted batch job 30518503
+[I 2024-05-13 22:35:52.510 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30518512
+Submitted batch job 30518522
+Submitted batch job 30518661
+[I 2024-05-13 22:38:41.866 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30518751
+Submitted batch job 30518770
+[I 2024-05-13 22:40:45.438 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30518785
+Submitted batch job 30518804
+[I 2024-05-13 22:42:48.864 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30518819
+Submitted batch job 30518834
+[I 2024-05-13 22:44:52.220 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30518849
+Submitted batch job 30518858
+[I 2024-05-13 22:47:00.085 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30518874
+Submitted batch job 30518882
+[I 2024-05-13 22:49:04.682 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30518890
+Submitted batch job 30518902
+[I 2024-05-13 22:51:09.062 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30518963
+Submitted batch job 30518991
+[I 2024-05-13 22:53:13.626 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30519005
+Submitted batch job 30519026
+[I 2024-05-13 22:55:17.970 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30519051
+Submitted batch job 30519072
+[I 2024-05-13 22:57:24.675 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30519087
+Submitted batch job 30519099
+Submitted batch job 30519120
+[W 2024-05-13 22:59:40.649 ServerApp] WebSocket ping timeout after 119903 ms.
+[I 2024-05-13 22:59:45.653 ServerApp] Starting buffering for 0fc2e16a-470f-4632-a730-a5a03465fdf9:6404f70e-1c00-4d5f-a67a-5f3e35058f1c
+[W 2024-05-13 22:59:59.124 TerminalsExtensionApp] WebSocket ping timeout after 119866 ms.
+[W 2024-05-13 22:59:59.698 TerminalsExtensionApp] WebSocket ping timeout after 119924 ms.
+Submitted batch job 30519131
+Submitted batch job 30519141
+Submitted batch job 30519160
+Submitted batch job 30519179
+Submitted batch job 30519198
+Submitted batch job 30519219
+Submitted batch job 30519234
+Submitted batch job 30519254
+Submitted batch job 30519264
+Submitted batch job 30519282
+Submitted batch job 30519299
+Submitted batch job 30519315
+Submitted batch job 30519338
+Submitted batch job 30519355
+Submitted batch job 30519376
+Submitted batch job 30519400
+Submitted batch job 30519409
+Submitted batch job 30519438
+Submitted batch job 30519457
+Submitted batch job 30519466
+Submitted batch job 30519471
+Submitted batch job 30519472
+Submitted batch job 30519480
+Submitted batch job 30519484
+Submitted batch job 30519491
+Submitted batch job 30519496
+Submitted batch job 30519507
+Submitted batch job 30519512
+Submitted batch job 30519523
+Submitted batch job 30519533
+Submitted batch job 30519535
+Submitted batch job 30519538
+Submitted batch job 30519545
+Submitted batch job 30519813
+Submitted batch job 30519841
+Submitted batch job 30519845
+Submitted batch job 30519849
+Submitted batch job 30519856
+Submitted batch job 30519865
+Submitted batch job 30519883
+Submitted batch job 30519890
+Submitted batch job 30519892
+Submitted batch job 30519901
+Submitted batch job 30519913
+Submitted batch job 30519919
+Submitted batch job 30519923
+Submitted batch job 30519930
+Submitted batch job 30519931
+Submitted batch job 30519932
+Submitted batch job 30519935
+Submitted batch job 30519946
+Submitted batch job 30519960
+Submitted batch job 30519965
+Submitted batch job 30519968
+Submitted batch job 30519979
+Submitted batch job 30519987
+Submitted batch job 30519994
+Submitted batch job 30519995
+Submitted batch job 30519997
+Submitted batch job 30520014
+Submitted batch job 30520017
+Submitted batch job 30520023
+Submitted batch job 30520041
+Submitted batch job 30520045
+Submitted batch job 30520049
+Submitted batch job 30520054
+Submitted batch job 30520063
+Submitted batch job 30520065
+Submitted batch job 30520066
+Submitted batch job 30520072
+Submitted batch job 30520074
+Submitted batch job 30520093
+slurmstepd: error: *** JOB 30506667 ON exp-1-32 CANCELLED AT 2024-05-15T12:04:47 DUE TO TIME LIMIT ***
+[C 2024-05-15 12:04:47.453 ServerApp] received signal 15, stopping
+[I 2024-05-15 12:04:47.580 ServerApp] Shutting down 5 extensions
+[I 2024-05-15 12:04:47.589 ServerApp] Shutting down 1 kernel
+[I 2024-05-15 12:04:47.658 ServerApp] Discarding 157 buffered messages for 0fc2e16a-470f-4632-a730-a5a03465fdf9:6404f70e-1c00-4d5f-a67a-5f3e35058f1c
+[I 2024-05-15 12:04:47.659 ServerApp] Kernel shutdown: 0fc2e16a-470f-4632-a730-a5a03465fdf9

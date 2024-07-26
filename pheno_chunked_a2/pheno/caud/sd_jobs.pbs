@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH --job-name=sd_jobs.txt
+#SBATCH --output=./sd_jobs.txt_err_out/jobs_%A_%a.out
+#SBATCH --error=./sd_jobs.txt_err_out/jobs_%A_%a.err
+#SBATCH --partition=shared
+#SBATCH --mem-per-cpu=20G --cpus-per-task=1
+#SBATCH --array=1-1%1
+
+
+echo "**** Job starts ****"
+date
+module load R/4.3
+perl /dcs04/lieber/statsgen/shizhong/scripts/jhpce3/job_batch.pl --jfile sd_jobs.txt --nrun 1 --n $SLURM_ARRAY_TASK_ID
+echo "**** Job ends ****"
+date

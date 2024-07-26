@@ -1,0 +1,323 @@
+Fail to get yarn configuration. /home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyterlab/staging/yarn.js:4
+(()=>{var Qge=Object.create;var AS=Object.defineProperty;var bge=Object.getOwnPropertyDescriptor;var Sge=Object.getOwnPropertyNames;var vge=Object.getPrototypeOf,xge=Object.prototype.hasOwnProperty;var J=(r=>typeof require<"u"?require:typeof Proxy<"u"?new Proxy(r,{get:(e,t)=>(typeof require<"u"?require:e)[t]}):r)(function(r){if(typeof require<"u")return require.apply(this,arguments);throw new Error('Dynamic require of "'+r+'" is not supported')});var Pge=(r,e)=>()=>(r&&(e=r(r=0)),e);var w=(r,e)=>()=>(e||r((e={exports:{}}).exports,e),e.exports),ut=(r,e)=>{for(var t in e)AS(r,t,{get:e[t],enumerable:!0})},Dge=(r,e,t,i)=>{if(e&&typeof e=="object"||typeof e=="function")for(let n of Sge(e))!xge.call(r,n)&&n!==t&&AS(r,n,{get:()=>e[n],enumerable:!(i=bge(e,n))||i.enumerable});return r};var Pe=(r,e,t)=>(t=r!=null?Qge(vge(r)):{},Dge(e||!r||!r.__esModule?AS(t,"default",{value:r,enumerable:!0}):t,r));var QK=w((GXe,BK)=>{BK.expor
+
+SyntaxError: Unexpected token {
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.runMain (module.js:611:10)
+    at run (bootstrap_node.js:387:7)
+    at startup (bootstrap_node.js:153:9)
+
+[I 2024-05-09 17:35:51.031 ServerApp] Package jupyterlab took 0.0000s to import
+[I 2024-05-09 17:35:51.528 ServerApp] Package jupyter_lsp took 0.4961s to import
+[W 2024-05-09 17:35:51.528 ServerApp] A `_jupyter_server_extension_points` function was not found in jupyter_lsp. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2024-05-09 17:35:51.772 ServerApp] Package jupyter_server_terminals took 0.2439s to import
+[I 2024-05-09 17:35:51.773 ServerApp] Package notebook took 0.0000s to import
+[I 2024-05-09 17:35:51.791 ServerApp] Package notebook_shim took 0.0000s to import
+[W 2024-05-09 17:35:51.791 ServerApp] A `_jupyter_server_extension_points` function was not found in notebook_shim. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2024-05-09 17:35:51.810 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2024-05-09 17:35:51.816 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2024-05-09 17:35:51.822 ServerApp] jupyterlab | extension was successfully linked.
+[W 2024-05-09 17:35:51.840 JupyterNotebookApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2024-05-09 17:35:51.842 ServerApp] ServerApp.password config is deprecated in 2.0. Use PasswordIdentityProvider.hashed_password.
+[I 2024-05-09 17:35:51.842 ServerApp] notebook | extension was successfully linked.
+[I 2024-05-09 17:35:56.948 ServerApp] notebook_shim | extension was successfully linked.
+[I 2024-05-09 17:35:57.138 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2024-05-09 17:35:57.140 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2024-05-09 17:35:57.141 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2024-05-09 17:35:57.217 LabApp] JupyterLab extension loaded from /home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyterlab
+[I 2024-05-09 17:35:57.217 LabApp] JupyterLab application directory is /home/naglemi/miniconda3/envs/mwas/share/jupyter/lab
+[I 2024-05-09 17:35:57.218 LabApp] Extension Manager is 'pypi'.
+[I 2024-05-09 17:35:57.220 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2024-05-09 17:35:57.223 ServerApp] notebook | extension was successfully loaded.
+[I 2024-05-09 17:35:57.224 ServerApp] Serving notebooks from local directory: /expanse/lustre/projects/jhu152/naglemi/mwas/CpGWAS
+[I 2024-05-09 17:35:57.224 ServerApp] Jupyter Server 2.10.0 is running at:
+[I 2024-05-09 17:35:57.224 ServerApp] http://localhost:8888/lab
+[I 2024-05-09 17:35:57.224 ServerApp]     http://127.0.0.1:8888/lab
+[I 2024-05-09 17:35:57.224 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[?1049h[22;0;0t[1;24r(B[m[4l[?7h[?1h=[39;49m[39;49m[37m[40m[H[2J[37m[40m[J(B[m[39;49m[37m[40m[39;49m[37m[40m[J[39;49m(B[m[22d[93m[44mGetting file://localhost/home/naglemi/.local/share/jupyter/runtime/jpserver-334[K[39;49m(B[m
+
+[24;1H[?1049l[23;0;0t[?1l>[I 2024-05-09 17:36:07.472 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+0.03s - Debugger warning: It seems that frozen modules are being used, which may
+0.05s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+[W 2024-05-09 18:32:07.605 LabApp] Could not determine jupyterlab build status without nodejs
+[W 2024-05-09 18:33:13.244 ServerApp] 404 GET /api/contents/Untitled.ipynb?content=0&1715304793147 (127.0.0.1): No such file or directory: Untitled.ipynb
+[W 2024-05-09 18:33:13.244 ServerApp] wrote error: 'No such file or directory: Untitled.ipynb'
+    Traceback (most recent call last):
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_server/services/contents/handlers.py", line 121, in get
+        model = await ensure_async(
+                ^^^^^^^^^^^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 189, in ensure_async
+        result = await obj
+                 ^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_server/services/contents/filemanager.py", line 863, in get
+        raise web.HTTPError(404, "No such file or directory: %s" % path)
+    tornado.web.HTTPError: HTTP 404: Not Found (No such file or directory: Untitled.ipynb)
+[W 2024-05-09 18:33:13.360 ServerApp] 404 GET /api/contents/Untitled.ipynb?content=0&1715304793147 (d6818ab044724054b7f803a0930cd20d@127.0.0.1) 117.15ms referer=http://localhost:8892/lab?
+[I 2024-05-09 18:36:05.657 ServerApp] Kernel started: 9295f7a5-bf6b-4e20-9ffd-63552db24fc1
+[I 2024-05-09 18:36:10.157 ServerApp] Connecting to kernel 9295f7a5-bf6b-4e20-9ffd-63552db24fc1.
+[I 2024-05-09 18:36:10.159 ServerApp] Connecting to kernel 9295f7a5-bf6b-4e20-9ffd-63552db24fc1.
+[I 2024-05-09 18:36:10.160 ServerApp] Connecting to kernel 9295f7a5-bf6b-4e20-9ffd-63552db24fc1.
+[I 2024-05-09 18:36:48.879 ServerApp] Kernel restarted: 9295f7a5-bf6b-4e20-9ffd-63552db24fc1
+[I 2024-05-09 18:36:49.003 ServerApp] Starting buffering for 9295f7a5-bf6b-4e20-9ffd-63552db24fc1:b72ec666-98f5-466d-bf4c-1681d49d1de5
+[I 2024-05-09 18:36:49.162 ServerApp] Connecting to kernel 9295f7a5-bf6b-4e20-9ffd-63552db24fc1.
+[I 2024-05-09 18:36:49.162 ServerApp] Restoring connection for 9295f7a5-bf6b-4e20-9ffd-63552db24fc1:b72ec666-98f5-466d-bf4c-1681d49d1de5
+[I 2024-05-09 18:38:05.337 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434063
+Submitted batch job 30434073
+[I 2024-05-09 18:40:05.797 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434105
+Submitted batch job 30434111
+[I 2024-05-09 18:42:06.276 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434121
+Submitted batch job 30434125
+[I 2024-05-09 18:44:07.035 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434133
+Submitted batch job 30434146
+[I 2024-05-09 18:46:07.544 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434165
+Submitted batch job 30434181
+[I 2024-05-09 18:48:10.984 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434191
+Submitted batch job 30434207
+[I 2024-05-09 18:50:11.556 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434221
+Submitted batch job 30434227
+[I 2024-05-09 18:52:12.036 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434234
+Submitted batch job 30434243
+[I 2024-05-09 18:54:15.891 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434245
+Submitted batch job 30434254
+[I 2024-05-09 18:56:16.305 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434263
+Submitted batch job 30434284
+[I 2024-05-09 18:58:18.660 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434298
+Submitted batch job 30434304
+[I 2024-05-09 19:00:19.178 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434323
+Submitted batch job 30434337
+[I 2024-05-09 19:02:19.561 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434346
+Submitted batch job 30434367
+[I 2024-05-09 19:04:20.092 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434377
+Submitted batch job 30434389
+[I 2024-05-09 19:06:20.592 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434399
+Submitted batch job 30434404
+[I 2024-05-09 19:08:29.267 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434409
+Submitted batch job 30434419
+[I 2024-05-09 19:10:29.859 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434431
+Submitted batch job 30434435
+[I 2024-05-09 19:12:30.702 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434437
+Submitted batch job 30434445
+[I 2024-05-09 19:14:31.196 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434470
+Submitted batch job 30434487
+[I 2024-05-09 19:16:31.760 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434503
+Submitted batch job 30434523
+[I 2024-05-09 19:18:32.693 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434536
+[I 2024-05-09 19:20:33.362 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434551
+Submitted batch job 30434568
+[I 2024-05-09 19:22:34.163 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434579
+Submitted batch job 30434588
+[I 2024-05-09 19:24:34.805 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434597
+Submitted batch job 30434865
+[I 2024-05-09 19:26:35.839 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434876
+Submitted batch job 30434918
+[I 2024-05-09 19:28:36.444 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30434960
+Submitted batch job 30435002
+[I 2024-05-09 19:30:37.163 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30435046
+Submitted batch job 30435106
+[I 2024-05-09 19:32:37.821 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30435172
+Submitted batch job 30435217
+[I 2024-05-09 19:34:38.553 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30435258
+Submitted batch job 30435307
+[I 2024-05-09 19:36:39.190 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30435359
+Submitted batch job 30435705
+[I 2024-05-09 19:38:40.014 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30435801
+Submitted batch job 30435863
+[I 2024-05-09 19:40:41.147 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30435937
+Submitted batch job 30436037
+[I 2024-05-09 19:42:42.106 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30436124
+Submitted batch job 30436186
+[I 2024-05-09 19:44:42.890 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30436275
+Submitted batch job 30436360
+[I 2024-05-09 19:46:43.701 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30436456
+Submitted batch job 30436516
+[I 2024-05-09 19:48:44.543 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30436560
+Submitted batch job 30436636
+[I 2024-05-09 19:50:45.430 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30436717
+Submitted batch job 30436785
+[I 2024-05-09 19:52:46.699 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30436839
+Submitted batch job 30436903
+[I 2024-05-09 19:54:47.811 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30436964
+Submitted batch job 30437014
+[I 2024-05-09 19:56:48.650 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30437061
+Submitted batch job 30437117
+[I 2024-05-09 19:58:49.492 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30437200
+Submitted batch job 30437222
+[I 2024-05-09 20:00:50.753 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30437223
+Submitted batch job 30437232
+[I 2024-05-09 20:02:58.736 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30437266
+Submitted batch job 30437320
+[I 2024-05-09 20:04:59.759 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30437451
+Submitted batch job 30437494
+[I 2024-05-09 20:07:19.852 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30437557
+Submitted batch job 30437611
+[I 2024-05-09 20:09:21.109 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30437661
+Submitted batch job 30437710
+[I 2024-05-09 20:11:22.607 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30437777
+Submitted batch job 30437833
+[I 2024-05-09 20:13:23.829 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30437880
+Submitted batch job 30437931
+[I 2024-05-09 20:15:25.541 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30437973
+Submitted batch job 30437991
+[I 2024-05-09 20:17:36.518 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30437999
+Submitted batch job 30438001
+[I 2024-05-09 20:19:37.766 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30438003
+Submitted batch job 30438006
+[I 2024-05-09 20:21:48.880 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30438010
+Submitted batch job 30438012
+[I 2024-05-09 20:23:57.804 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30438028
+Submitted batch job 30438031
+[I 2024-05-09 20:25:59.121 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30438034
+Submitted batch job 30438041
+[I 2024-05-09 20:28:00.564 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30438049
+Submitted batch job 30438060
+[I 2024-05-09 20:30:01.815 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30438063
+Submitted batch job 30438065
+[I 2024-05-09 20:32:02.881 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30438066
+Submitted batch job 30438068
+[I 2024-05-09 20:34:29.737 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30438070
+Submitted batch job 30438077
+[I 2024-05-09 20:36:31.109 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30438081
+Submitted batch job 30438084
+Submitted batch job 30438087
+[W 2024-05-09 20:39:19.163 ServerApp] WebSocket ping timeout after 119918 ms.
+[I 2024-05-09 20:39:24.168 ServerApp] Starting buffering for 9295f7a5-bf6b-4e20-9ffd-63552db24fc1:b72ec666-98f5-466d-bf4c-1681d49d1de5
+Submitted batch job 30438095
+Submitted batch job 30438098
+Submitted batch job 30438106
+Submitted batch job 30438108
+Submitted batch job 30438112
+Submitted batch job 30438114
+Submitted batch job 30438117
+Submitted batch job 30438123
+Submitted batch job 30438131
+[I 2024-05-09 20:48:40.886 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+[I 2024-05-09 20:48:41.252 ServerApp] Connecting to kernel 9295f7a5-bf6b-4e20-9ffd-63552db24fc1.
+[I 2024-05-09 20:48:41.252 ServerApp] Restoring connection for 9295f7a5-bf6b-4e20-9ffd-63552db24fc1:b72ec666-98f5-466d-bf4c-1681d49d1de5
+[I 2024-05-09 20:48:41.252 ServerApp] Replaying 18 buffered messages
+Submitted batch job 30438134
+Submitted batch job 30438135
+[W 2024-05-09 20:51:11.253 ServerApp] WebSocket ping timeout after 119909 ms.
+[I 2024-05-09 20:51:16.255 ServerApp] Starting buffering for 9295f7a5-bf6b-4e20-9ffd-63552db24fc1:b72ec666-98f5-466d-bf4c-1681d49d1de5
+Submitted batch job 30438137
+Submitted batch job 30438145
+Submitted batch job 30438153
+Submitted batch job 30438154
+Submitted batch job 30438157
+[I 2024-05-09 20:56:14.800 ServerApp] Connecting to kernel 9295f7a5-bf6b-4e20-9ffd-63552db24fc1.
+[I 2024-05-09 20:56:14.800 ServerApp] Restoring connection for 9295f7a5-bf6b-4e20-9ffd-63552db24fc1:b72ec666-98f5-466d-bf4c-1681d49d1de5
+[I 2024-05-09 20:56:14.800 ServerApp] Replaying 10 buffered messages
+Submitted batch job 30438158
+Submitted batch job 30438163
+Submitted batch job 30438167
+[W 2024-05-09 20:59:14.803 ServerApp] WebSocket ping timeout after 119870 ms.
+[I 2024-05-09 20:59:19.805 ServerApp] Starting buffering for 9295f7a5-bf6b-4e20-9ffd-63552db24fc1:b72ec666-98f5-466d-bf4c-1681d49d1de5
+Submitted batch job 30438173
+Submitted batch job 30438174
+[I 2024-05-10 09:23:22.798 ServerApp] Connecting to kernel 9295f7a5-bf6b-4e20-9ffd-63552db24fc1.
+[I 2024-05-10 09:23:22.868 ServerApp] Restoring connection for 9295f7a5-bf6b-4e20-9ffd-63552db24fc1:b72ec666-98f5-466d-bf4c-1681d49d1de5
+[I 2024-05-10 09:23:22.877 ServerApp] Replaying 23 buffered messages
+[I 2024-05-10 09:23:42.213 ServerApp] 302 GET / (@127.0.0.1) 0.39ms
+[I 2024-05-10 09:23:46.323 ServerApp] Connecting to kernel 9295f7a5-bf6b-4e20-9ffd-63552db24fc1.
+[W 2024-05-10 09:23:46.375 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2024-05-10 09:24:09.205 ServerApp] 302 GET / (@127.0.0.1) 0.41ms
+[I 2024-05-10 09:24:09.546 ServerApp] Starting buffering for 9295f7a5-bf6b-4e20-9ffd-63552db24fc1:b72ec666-98f5-466d-bf4c-1681d49d1de5
+[W 2024-05-10 09:24:11.300 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2024-05-10 09:24:11.328 ServerApp] Connecting to kernel 9295f7a5-bf6b-4e20-9ffd-63552db24fc1.
+[I 2024-05-10 09:24:11.508 ServerApp] Starting buffering for 9295f7a5-bf6b-4e20-9ffd-63552db24fc1:c3fadc44-17f3-4e59-b8cd-e58d85f0a997
+[I 2024-05-10 09:24:50.882 ServerApp] Connecting to kernel 9295f7a5-bf6b-4e20-9ffd-63552db24fc1.
+[I 2024-05-10 09:25:15.610 ServerApp] Kernel restarted: 9295f7a5-bf6b-4e20-9ffd-63552db24fc1
+[I 2024-05-10 09:25:15.694 ServerApp] Starting buffering for 9295f7a5-bf6b-4e20-9ffd-63552db24fc1:f48ab510-8762-4024-9f88-8f605392343a
+[I 2024-05-10 09:25:15.865 ServerApp] Connecting to kernel 9295f7a5-bf6b-4e20-9ffd-63552db24fc1.
+[I 2024-05-10 09:25:15.865 ServerApp] Restoring connection for 9295f7a5-bf6b-4e20-9ffd-63552db24fc1:f48ab510-8762-4024-9f88-8f605392343a
+[I 2024-05-10 09:26:49.739 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30451821
+Submitted batch job 30451828
+[I 2024-05-10 09:28:50.795 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30451841
+Submitted batch job 30451849
+[I 2024-05-10 09:30:51.250 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30451864
+Submitted batch job 30451870
+[I 2024-05-10 09:32:55.688 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30451883
+Submitted batch job 30451895
+[I 2024-05-10 09:34:56.056 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30451908
+Submitted batch job 30451924
+[I 2024-05-10 09:36:56.468 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+[I 2024-05-10 09:38:56.957 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+slurmstepd: error: *** JOB 30430830 ON exp-1-15 CANCELLED AT 2024-05-11T17:35:55 DUE TO TIME LIMIT ***
+[C 2024-05-11 17:35:55.951 ServerApp] received signal 15, stopping
+[I 2024-05-11 17:35:56.039 ServerApp] Shutting down 5 extensions
+[I 2024-05-11 17:35:56.040 ServerApp] Shutting down 1 kernel
+[I 2024-05-11 17:35:56.088 ServerApp] Kernel shutdown: 9295f7a5-bf6b-4e20-9ffd-63552db24fc1

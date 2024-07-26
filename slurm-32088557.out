@@ -1,0 +1,264 @@
+Fail to get yarn configuration. /home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyterlab/staging/yarn.js:4
+(()=>{var Qge=Object.create;var AS=Object.defineProperty;var bge=Object.getOwnPropertyDescriptor;var Sge=Object.getOwnPropertyNames;var vge=Object.getPrototypeOf,xge=Object.prototype.hasOwnProperty;var J=(r=>typeof require<"u"?require:typeof Proxy<"u"?new Proxy(r,{get:(e,t)=>(typeof require<"u"?require:e)[t]}):r)(function(r){if(typeof require<"u")return require.apply(this,arguments);throw new Error('Dynamic require of "'+r+'" is not supported')});var Pge=(r,e)=>()=>(r&&(e=r(r=0)),e);var w=(r,e)=>()=>(e||r((e={exports:{}}).exports,e),e.exports),ut=(r,e)=>{for(var t in e)AS(r,t,{get:e[t],enumerable:!0})},Dge=(r,e,t,i)=>{if(e&&typeof e=="object"||typeof e=="function")for(let n of Sge(e))!xge.call(r,n)&&n!==t&&AS(r,n,{get:()=>e[n],enumerable:!(i=bge(e,n))||i.enumerable});return r};var Pe=(r,e,t)=>(t=r!=null?Qge(vge(r)):{},Dge(e||!r||!r.__esModule?AS(t,"default",{value:r,enumerable:!0}):t,r));var QK=w((GXe,BK)=>{BK.expor
+
+SyntaxError: Unexpected token {
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.runMain (module.js:611:10)
+    at run (bootstrap_node.js:387:7)
+    at startup (bootstrap_node.js:153:9)
+
+[I 2024-07-11 10:55:56.500 ServerApp] Package jupyterlab took 0.0000s to import
+[I 2024-07-11 10:55:56.912 ServerApp] Package jupyter_lsp took 0.4112s to import
+[W 2024-07-11 10:55:56.912 ServerApp] A `_jupyter_server_extension_points` function was not found in jupyter_lsp. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2024-07-11 10:55:57.083 ServerApp] Package jupyter_server_terminals took 0.1709s to import
+[I 2024-07-11 10:55:57.083 ServerApp] Package notebook took 0.0000s to import
+[I 2024-07-11 10:55:57.094 ServerApp] Package notebook_shim took 0.0000s to import
+[W 2024-07-11 10:55:57.094 ServerApp] A `_jupyter_server_extension_points` function was not found in notebook_shim. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2024-07-11 10:55:57.105 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2024-07-11 10:55:57.170 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2024-07-11 10:55:57.175 ServerApp] jupyterlab | extension was successfully linked.
+[W 2024-07-11 10:55:57.195 JupyterNotebookApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2024-07-11 10:55:57.197 ServerApp] ServerApp.password config is deprecated in 2.0. Use PasswordIdentityProvider.hashed_password.
+[I 2024-07-11 10:55:57.197 ServerApp] notebook | extension was successfully linked.
+[I 2024-07-11 10:56:02.951 ServerApp] notebook_shim | extension was successfully linked.
+[I 2024-07-11 10:56:03.771 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2024-07-11 10:56:03.773 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2024-07-11 10:56:03.774 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2024-07-11 10:56:03.945 LabApp] JupyterLab extension loaded from /home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyterlab
+[I 2024-07-11 10:56:03.945 LabApp] JupyterLab application directory is /home/naglemi/miniconda3/envs/mwas/share/jupyter/lab
+[I 2024-07-11 10:56:03.946 LabApp] Extension Manager is 'pypi'.
+[I 2024-07-11 10:56:03.947 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2024-07-11 10:56:03.954 ServerApp] notebook | extension was successfully loaded.
+[I 2024-07-11 10:56:03.954 ServerApp] Serving notebooks from local directory: /expanse/lustre/projects/jhu152/naglemi/mwas/CpGWAS
+[I 2024-07-11 10:56:03.954 ServerApp] Jupyter Server 2.10.0 is running at:
+[I 2024-07-11 10:56:03.954 ServerApp] http://localhost:8888/lab
+[I 2024-07-11 10:56:03.954 ServerApp]     http://127.0.0.1:8888/lab
+[I 2024-07-11 10:56:03.954 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[?1049h[22;0;0t[1;24r(B[m[4l[?7h[?1h=[39;49m[39;49m[37m[40m[H[2J[37m[40m[J(B[m[39;49m[37m[40m[39;49m[37m[40m[J[39;49m(B[m[22d[93m[44mGetting file://localhost/home/naglemi/.local/share/jupyter/runtime/jpserver-386[K[39;49m(B[m
+
+[24;1H[?1049l[23;0;0t[?1l>[I 2024-07-11 10:56:11.481 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+[I 2024-07-11 11:00:24.092 ServerApp] 302 GET / (@127.0.0.1) 0.40ms
+0.03s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+[W 2024-07-11 11:00:33.128 LabApp] Could not determine jupyterlab build status without nodejs
+[W 2024-07-11 11:00:35.580 ServerApp] 404 GET /api/contents/CpGWAS/scripts/20a6_re-all_new_data_with_shizhongs_code.ipynb?content=0&1720720835512 (127.0.0.1): No such file or directory: CpGWAS/scripts/20a6_re-all_new_data_with_shizhongs_code.ipynb
+[W 2024-07-11 11:00:35.580 ServerApp] wrote error: 'No such file or directory: CpGWAS/scripts/20a6_re-all_new_data_with_shizhongs_code.ipynb'
+    Traceback (most recent call last):
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_server/services/contents/handlers.py", line 121, in get
+        model = await ensure_async(
+                ^^^^^^^^^^^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 189, in ensure_async
+        result = await obj
+                 ^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_server/services/contents/filemanager.py", line 863, in get
+        raise web.HTTPError(404, "No such file or directory: %s" % path)
+    tornado.web.HTTPError: HTTP 404: Not Found (No such file or directory: CpGWAS/scripts/20a6_re-all_new_data_with_shizhongs_code.ipynb)
+[W 2024-07-11 11:00:35.664 ServerApp] 404 GET /api/contents/CpGWAS/scripts/20a6_re-all_new_data_with_shizhongs_code.ipynb?content=0&1720720835512 (4639c631d1e7412dad2db633b71303b2@127.0.0.1) 85.11ms referer=http://localhost:8892/lab?
+[W 2024-07-11 11:00:36.696 ServerApp] 404 GET /api/contents/CpGWAS/scripts?1720720836628 (127.0.0.1): No such file or directory: CpGWAS/scripts
+[W 2024-07-11 11:00:36.696 ServerApp] wrote error: 'No such file or directory: CpGWAS/scripts'
+    Traceback (most recent call last):
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_server/services/contents/handlers.py", line 121, in get
+        model = await ensure_async(
+                ^^^^^^^^^^^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 189, in ensure_async
+        result = await obj
+                 ^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_server/services/contents/filemanager.py", line 863, in get
+        raise web.HTTPError(404, "No such file or directory: %s" % path)
+    tornado.web.HTTPError: HTTP 404: Not Found (No such file or directory: CpGWAS/scripts)
+[W 2024-07-11 11:00:36.696 ServerApp] 404 GET /api/contents/CpGWAS/scripts?1720720836628 (4639c631d1e7412dad2db633b71303b2@127.0.0.1) 0.92ms referer=http://localhost:8892/lab?
+[I 2024-07-11 11:01:57.375 ServerApp] Kernel started: 28bc89d0-2e06-4da0-ba83-135e62ade6e3
+[I 2024-07-11 11:01:59.750 ServerApp] Connecting to kernel 28bc89d0-2e06-4da0-ba83-135e62ade6e3.
+[I 2024-07-11 11:02:00.048 ServerApp] Connecting to kernel 28bc89d0-2e06-4da0-ba83-135e62ade6e3.
+[I 2024-07-11 11:02:00.242 ServerApp] Connecting to kernel 28bc89d0-2e06-4da0-ba83-135e62ade6e3.
+[I 2024-07-11 11:09:54.722 ServerApp] Kernel started: d7efef90-4ce4-4d4a-881c-10b56d29f809
+[I 2024-07-11 11:09:55.360 ServerApp] Connecting to kernel d7efef90-4ce4-4d4a-881c-10b56d29f809.
+[I 2024-07-11 11:09:57.321 ServerApp] Saving file at /scripts/20_re-test_covariates_and_stage1.ipynb
+[I 2024-07-11 11:10:07.071 ServerApp] Copying scripts/20a6_re-all_new_data_with_shizhongs_code.ipynb to /scripts
+[I 2024-07-11 11:10:38.006 ServerApp] Kernel started: c55450da-9ecc-467b-b93f-16064793f85f
+[I 2024-07-11 11:10:38.729 ServerApp] Connecting to kernel c55450da-9ecc-467b-b93f-16064793f85f.
+[I 2024-07-11 11:10:45.621 ServerApp] Starting buffering for 28bc89d0-2e06-4da0-ba83-135e62ade6e3:1d18c2ac-95c1-4ca6-9ebf-7099a0521846
+[I 2024-07-11 11:10:46.205 ServerApp] Starting buffering for d7efef90-4ce4-4d4a-881c-10b56d29f809:01020401-54a2-4bf6-84d7-9b059b620e60
+[I 2024-07-11 11:12:37.633 ServerApp] Saving file at /scripts/20a7_re-all_new_data_except_cov_with_shizhongs_code.ipynb
+[I 2024-07-11 11:16:09.457 ServerApp] Connecting to kernel 28bc89d0-2e06-4da0-ba83-135e62ade6e3.
+[I 2024-07-11 11:17:37.988 ServerApp] Kernel started: a9d9d820-72a9-4581-bc06-d37c0f897d41
+[I 2024-07-11 11:17:38.644 ServerApp] Connecting to kernel a9d9d820-72a9-4581-bc06-d37c0f897d41.
+[I 2024-07-11 11:28:38.400 ServerApp] Saving file at /scripts/20a7_re-all_new_data_except_cov_with_shizhongs_code.ipynb
+[I 2024-07-11 11:32:25.996 ServerApp] Kernel restarted: c55450da-9ecc-467b-b93f-16064793f85f
+[I 2024-07-11 11:32:26.076 ServerApp] Starting buffering for c55450da-9ecc-467b-b93f-16064793f85f:92461ca5-baa7-4e29-a10e-cffe32e55ed0
+[I 2024-07-11 11:32:26.231 ServerApp] Connecting to kernel c55450da-9ecc-467b-b93f-16064793f85f.
+[I 2024-07-11 11:32:26.231 ServerApp] Restoring connection for c55450da-9ecc-467b-b93f-16064793f85f:92461ca5-baa7-4e29-a10e-cffe32e55ed0
+[I 2024-07-11 11:32:32.614 ServerApp] Kernel restarted: c55450da-9ecc-467b-b93f-16064793f85f
+[I 2024-07-11 11:32:32.697 ServerApp] Starting buffering for c55450da-9ecc-467b-b93f-16064793f85f:92461ca5-baa7-4e29-a10e-cffe32e55ed0
+[I 2024-07-11 11:32:32.850 ServerApp] Connecting to kernel c55450da-9ecc-467b-b93f-16064793f85f.
+[I 2024-07-11 11:32:32.850 ServerApp] Restoring connection for c55450da-9ecc-467b-b93f-16064793f85f:92461ca5-baa7-4e29-a10e-cffe32e55ed0
+[I 2024-07-11 11:32:38.959 ServerApp] Saving file at /scripts/20a7_re-all_new_data_except_cov_with_shizhongs_code.ipynb
+[I 2024-07-11 11:34:47.307 ServerApp] Saving file at /scripts/20a7_re-all_new_data_except_cov_with_shizhongs_code.ipynb
+[I 2024-07-11 11:36:47.940 ServerApp] Saving file at /scripts/20a7_re-all_new_data_except_cov_with_shizhongs_code.ipynb
+[I 2024-07-11 11:38:48.453 ServerApp] Saving file at /scripts/20a7_re-all_new_data_except_cov_with_shizhongs_code.ipynb
+[I 2024-07-11 11:41:54.109 ServerApp] Kernel restarted: c55450da-9ecc-467b-b93f-16064793f85f
+[I 2024-07-11 11:41:54.199 ServerApp] Starting buffering for c55450da-9ecc-467b-b93f-16064793f85f:92461ca5-baa7-4e29-a10e-cffe32e55ed0
+[I 2024-07-11 11:41:54.367 ServerApp] Connecting to kernel c55450da-9ecc-467b-b93f-16064793f85f.
+[I 2024-07-11 11:41:54.367 ServerApp] Restoring connection for c55450da-9ecc-467b-b93f-16064793f85f:92461ca5-baa7-4e29-a10e-cffe32e55ed0
+[I 2024-07-11 11:42:49.050 ServerApp] Saving file at /scripts/20a7_re-all_new_data_except_cov_with_shizhongs_code.ipynb
+[I 2024-07-11 11:44:49.653 ServerApp] Saving file at /scripts/20a7_re-all_new_data_except_cov_with_shizhongs_code.ipynb
+[I 2024-07-11 11:46:50.742 ServerApp] Saving file at /scripts/20a7_re-all_new_data_except_cov_with_shizhongs_code.ipynb
+[I 2024-07-11 11:47:30.752 ServerApp] Kernel restarted: c55450da-9ecc-467b-b93f-16064793f85f
+[I 2024-07-11 11:47:30.837 ServerApp] Starting buffering for c55450da-9ecc-467b-b93f-16064793f85f:92461ca5-baa7-4e29-a10e-cffe32e55ed0
+[I 2024-07-11 11:47:30.999 ServerApp] Connecting to kernel c55450da-9ecc-467b-b93f-16064793f85f.
+[I 2024-07-11 11:47:30.999 ServerApp] Restoring connection for c55450da-9ecc-467b-b93f-16064793f85f:92461ca5-baa7-4e29-a10e-cffe32e55ed0
+[I 2024-07-11 11:48:26.223 ServerApp] Connecting to kernel d7efef90-4ce4-4d4a-881c-10b56d29f809.
+[I 2024-07-11 11:48:51.198 ServerApp] Saving file at /scripts/20a7_re-all_new_data_except_cov_with_shizhongs_code.ipynb
+[I 2024-07-11 11:50:11.234 ServerApp] Kernel restarted: d7efef90-4ce4-4d4a-881c-10b56d29f809
+[I 2024-07-11 11:50:11.315 ServerApp] Starting buffering for d7efef90-4ce4-4d4a-881c-10b56d29f809:8d99bfa3-252e-4d0a-88be-ad683563caa0
+[I 2024-07-11 11:50:11.469 ServerApp] Connecting to kernel d7efef90-4ce4-4d4a-881c-10b56d29f809.
+[I 2024-07-11 11:50:11.469 ServerApp] Restoring connection for d7efef90-4ce4-4d4a-881c-10b56d29f809:8d99bfa3-252e-4d0a-88be-ad683563caa0
+[I 2024-07-11 11:50:25.323 ServerApp] Saving file at /scripts/20a6_re-all_new_data_with_shizhongs_code.ipynb
+[I 2024-07-11 11:50:51.841 ServerApp] Saving file at /scripts/20a7_re-all_new_data_except_cov_with_shizhongs_code.ipynb
+[I 2024-07-11 11:51:04.370 ServerApp] Kernel restarted: c55450da-9ecc-467b-b93f-16064793f85f
+[I 2024-07-11 11:51:04.451 ServerApp] Starting buffering for c55450da-9ecc-467b-b93f-16064793f85f:92461ca5-baa7-4e29-a10e-cffe32e55ed0
+[I 2024-07-11 11:51:04.589 ServerApp] Connecting to kernel c55450da-9ecc-467b-b93f-16064793f85f.
+[I 2024-07-11 11:51:04.589 ServerApp] Restoring connection for c55450da-9ecc-467b-b93f-16064793f85f:92461ca5-baa7-4e29-a10e-cffe32e55ed0
+[I 2024-07-11 11:52:27.355 ServerApp] Saving file at /scripts/20a6_re-all_new_data_with_shizhongs_code.ipynb
+[I 2024-07-11 11:52:52.214 ServerApp] Saving file at /scripts/20a7_re-all_new_data_except_cov_with_shizhongs_code.ipynb
+[I 2024-07-11 11:52:57.422 ServerApp] Kernel restarted: c55450da-9ecc-467b-b93f-16064793f85f
+[I 2024-07-11 11:52:57.508 ServerApp] Starting buffering for c55450da-9ecc-467b-b93f-16064793f85f:92461ca5-baa7-4e29-a10e-cffe32e55ed0
+[I 2024-07-11 11:52:57.663 ServerApp] Connecting to kernel c55450da-9ecc-467b-b93f-16064793f85f.
+[I 2024-07-11 11:52:57.663 ServerApp] Restoring connection for c55450da-9ecc-467b-b93f-16064793f85f:92461ca5-baa7-4e29-a10e-cffe32e55ed0
+[I 2024-07-11 11:54:52.686 ServerApp] Saving file at /scripts/20a7_re-all_new_data_except_cov_with_shizhongs_code.ipynb
+[I 2024-07-11 12:01:58.249 ServerApp] Kernel restarted: c55450da-9ecc-467b-b93f-16064793f85f
+[I 2024-07-11 12:01:58.348 ServerApp] Starting buffering for c55450da-9ecc-467b-b93f-16064793f85f:92461ca5-baa7-4e29-a10e-cffe32e55ed0
+[I 2024-07-11 12:01:58.533 ServerApp] Connecting to kernel c55450da-9ecc-467b-b93f-16064793f85f.
+[I 2024-07-11 12:01:58.533 ServerApp] Restoring connection for c55450da-9ecc-467b-b93f-16064793f85f:92461ca5-baa7-4e29-a10e-cffe32e55ed0
+[I 2024-07-11 12:02:03.627 ServerApp] Kernel restarted: c55450da-9ecc-467b-b93f-16064793f85f
+[I 2024-07-11 12:02:03.712 ServerApp] Starting buffering for c55450da-9ecc-467b-b93f-16064793f85f:92461ca5-baa7-4e29-a10e-cffe32e55ed0
+[I 2024-07-11 12:02:03.867 ServerApp] Connecting to kernel c55450da-9ecc-467b-b93f-16064793f85f.
+[I 2024-07-11 12:02:03.867 ServerApp] Restoring connection for c55450da-9ecc-467b-b93f-16064793f85f:92461ca5-baa7-4e29-a10e-cffe32e55ed0
+[I 2024-07-11 12:02:53.159 ServerApp] Saving file at /scripts/20a7_re-all_new_data_except_cov_with_shizhongs_code.ipynb
+[I 2024-07-11 12:04:53.531 ServerApp] Saving file at /scripts/20a7_re-all_new_data_except_cov_with_shizhongs_code.ipynb
+[I 2024-07-11 12:13:31.897 ServerApp] Kernel started: 22337aa1-932e-44ca-b3f3-606884d8eafd
+[I 2024-07-11 12:13:32.561 ServerApp] Connecting to kernel 22337aa1-932e-44ca-b3f3-606884d8eafd.
+[I 2024-07-11 12:15:40.765 ServerApp] Kernel started: edf892b2-7050-4d04-a247-509baf39257e
+[I 2024-07-11 12:15:41.469 ServerApp] Connecting to kernel edf892b2-7050-4d04-a247-509baf39257e.
+[I 2024-07-11 12:16:00.487 ServerApp] Kernel started: d873b9cc-a0eb-487a-bc01-e21c6afe025c
+[I 2024-07-11 12:16:06.032 ServerApp] Connecting to kernel d873b9cc-a0eb-487a-bc01-e21c6afe025c.
+[W 2024-07-11 12:16:49.231 ServerApp] 404 GET /api/contents/scripts/20_re-test_covariates_and_stage1_a1v2-mygeno-rerun.ipynb?1720725409056 (127.0.0.1): No such file or directory: scripts/20_re-test_covariates_and_stage1_a1v2-mygeno-rerun.ipynb
+[W 2024-07-11 12:16:49.231 ServerApp] wrote error: 'No such file or directory: scripts/20_re-test_covariates_and_stage1_a1v2-mygeno-rerun.ipynb'
+    Traceback (most recent call last):
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_server/services/contents/handlers.py", line 121, in get
+        model = await ensure_async(
+                ^^^^^^^^^^^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 189, in ensure_async
+        result = await obj
+                 ^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_server/services/contents/filemanager.py", line 863, in get
+        raise web.HTTPError(404, "No such file or directory: %s" % path)
+    tornado.web.HTTPError: HTTP 404: Not Found (No such file or directory: scripts/20_re-test_covariates_and_stage1_a1v2-mygeno-rerun.ipynb)
+[W 2024-07-11 12:16:49.232 ServerApp] 404 GET /api/contents/scripts/20_re-test_covariates_and_stage1_a1v2-mygeno-rerun.ipynb?1720725409056 (4639c631d1e7412dad2db633b71303b2@127.0.0.1) 1.95ms referer=http://localhost:8892/lab/tree/scripts/20_re-test_covariates_and_stage1_a1v2-mygeno.ipynb
+[I 2024-07-11 12:16:49.444 ServerApp] Uploading file to /scripts/20_re-test_covariates_and_stage1_a1v2-mygeno-rerun.ipynb
+[I 2024-07-11 12:16:50.677 ServerApp] Starting buffering for d873b9cc-a0eb-487a-bc01-e21c6afe025c:f1312388-decc-49d9-ae52-a5eff697d31c
+[I 2024-07-11 12:16:52.049 ServerApp] Kernel started: 679d6e94-0aac-450b-96ae-35af98b82697
+[I 2024-07-11 12:16:52.758 ServerApp] Connecting to kernel 679d6e94-0aac-450b-96ae-35af98b82697.
+[I 2024-07-11 12:17:16.351 ServerApp] Kernel restarted: 679d6e94-0aac-450b-96ae-35af98b82697
+[I 2024-07-11 12:17:16.459 ServerApp] Starting buffering for 679d6e94-0aac-450b-96ae-35af98b82697:cc438987-5e8d-4870-9e31-9a8f949a183f
+[I 2024-07-11 12:17:16.617 ServerApp] Connecting to kernel 679d6e94-0aac-450b-96ae-35af98b82697.
+[I 2024-07-11 12:17:16.617 ServerApp] Restoring connection for 679d6e94-0aac-450b-96ae-35af98b82697:cc438987-5e8d-4870-9e31-9a8f949a183f
+[I 2024-07-11 12:18:51.883 ServerApp] Saving file at /scripts/20_re-test_covariates_and_stage1_a1v2-mygeno-rerun.ipynb
+[I 2024-07-11 12:20:53.153 ServerApp] Saving file at /scripts/20_re-test_covariates_and_stage1_a1v2-mygeno-rerun.ipynb
+[I 2024-07-11 12:21:38.743 ServerApp] Saving file at /scripts/20_re-test_covariates_and_stage1_a2-no-meth-cov.ipynb
+[I 2024-07-11 12:22:54.508 ServerApp] Saving file at /scripts/20_re-test_covariates_and_stage1_a1v2-mygeno-rerun.ipynb
+[I 2024-07-11 12:23:39.023 ServerApp] Kernel restarted: a9d9d820-72a9-4581-bc06-d37c0f897d41
+[I 2024-07-11 12:23:39.108 ServerApp] Starting buffering for a9d9d820-72a9-4581-bc06-d37c0f897d41:91aa75a1-536d-441b-8bcd-c8a4be91d70f
+[I 2024-07-11 12:23:39.268 ServerApp] Connecting to kernel a9d9d820-72a9-4581-bc06-d37c0f897d41.
+[I 2024-07-11 12:23:39.268 ServerApp] Restoring connection for a9d9d820-72a9-4581-bc06-d37c0f897d41:91aa75a1-536d-441b-8bcd-c8a4be91d70f
+[I 2024-07-11 12:23:39.830 ServerApp] Saving file at /scripts/20_re-test_covariates_and_stage1_a2-no-meth-cov.ipynb
+[I 2024-07-11 12:25:40.188 ServerApp] Saving file at /scripts/20_re-test_covariates_and_stage1_a2-no-meth-cov.ipynb
+[I 2024-07-11 12:27:40.953 ServerApp] Saving file at /scripts/20_re-test_covariates_and_stage1_a2-no-meth-cov.ipynb
+[I 2024-07-11 13:40:01.207 ServerApp] Creating new notebook in /scripts
+[I 2024-07-11 13:40:02.502 ServerApp] Kernel started: 87dbcb1d-f1b8-499e-b3ba-01add78f8af7
+[I 2024-07-11 13:40:07.417 ServerApp] Connecting to kernel 87dbcb1d-f1b8-499e-b3ba-01add78f8af7.
+[W 2024-07-11 13:40:25.700 ServerApp] 404 GET /api/contents/scripts/22_check_extreme_pvals.ipynb?1720730425455 (127.0.0.1): No such file or directory: scripts/22_check_extreme_pvals.ipynb
+[W 2024-07-11 13:40:25.701 ServerApp] wrote error: 'No such file or directory: scripts/22_check_extreme_pvals.ipynb'
+    Traceback (most recent call last):
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_server/services/contents/handlers.py", line 121, in get
+        model = await ensure_async(
+                ^^^^^^^^^^^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 189, in ensure_async
+        result = await obj
+                 ^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_server/services/contents/filemanager.py", line 863, in get
+        raise web.HTTPError(404, "No such file or directory: %s" % path)
+    tornado.web.HTTPError: HTTP 404: Not Found (No such file or directory: scripts/22_check_extreme_pvals.ipynb)
+[W 2024-07-11 13:40:25.702 ServerApp] 404 GET /api/contents/scripts/22_check_extreme_pvals.ipynb?1720730425455 (4639c631d1e7412dad2db633b71303b2@127.0.0.1) 1.86ms referer=http://localhost:8892/lab/tree/scripts/Untitled10.ipynb
+[I 2024-07-11 13:40:25.816 ServerApp] Uploading file to /scripts/22_check_extreme_pvals.ipynb
+[I 2024-07-11 13:41:23.929 ServerApp] Kernel started: 2b6526ae-ebf5-4149-a46b-90f73ad00b6e
+[I 2024-07-11 13:41:24.521 ServerApp] Connecting to kernel 2b6526ae-ebf5-4149-a46b-90f73ad00b6e.
+[I 2024-07-11 13:41:54.350 ServerApp] Starting buffering for 87dbcb1d-f1b8-499e-b3ba-01add78f8af7:f979a5c5-fcf6-4c61-bea0-070f43e4bd8c
+[I 2024-07-11 13:45:23.718 ServerApp] Saving file at /scripts/22_check_extreme_pvals.ipynb
+[I 2024-07-11 13:48:08.188 ServerApp] Starting buffering for a9d9d820-72a9-4581-bc06-d37c0f897d41:91aa75a1-536d-441b-8bcd-c8a4be91d70f
+[I 2024-07-11 13:48:08.210 ServerApp] Starting buffering for 679d6e94-0aac-450b-96ae-35af98b82697:cc438987-5e8d-4870-9e31-9a8f949a183f
+[I 2024-07-11 13:48:08.471 ServerApp] Saving file at /scripts/22_check_extreme_pvals.ipynb
+[I 2024-07-11 13:48:15.732 ServerApp] Starting buffering for 28bc89d0-2e06-4da0-ba83-135e62ade6e3:bd510c47-1722-4ffb-b782-af3ec83910c1
+[I 2024-07-11 13:48:16.458 ServerApp] Starting buffering for edf892b2-7050-4d04-a247-509baf39257e:f2e7b38d-298e-4274-9142-cd5527c0cb12
+[I 2024-07-11 13:56:45.539 ServerApp] Saving file at /scripts/22_check_extreme_pvals.ipynb
+[I 2024-07-11 14:00:46.403 ServerApp] Saving file at /scripts/22_check_extreme_pvals.ipynb
+[I 2024-07-11 14:02:46.975 ServerApp] Saving file at /scripts/22_check_extreme_pvals.ipynb
+[I 2024-07-11 14:04:03.801 ServerApp] Kernel restarted: 2b6526ae-ebf5-4149-a46b-90f73ad00b6e
+[I 2024-07-11 14:04:03.891 ServerApp] Starting buffering for 2b6526ae-ebf5-4149-a46b-90f73ad00b6e:2001556b-7e71-472c-8302-246c2d1d8827
+[I 2024-07-11 14:04:04.059 ServerApp] Connecting to kernel 2b6526ae-ebf5-4149-a46b-90f73ad00b6e.
+[I 2024-07-11 14:04:04.059 ServerApp] Restoring connection for 2b6526ae-ebf5-4149-a46b-90f73ad00b6e:2001556b-7e71-472c-8302-246c2d1d8827
+[W 2024-07-11 14:04:08.568 ServerApp] Nudge: attempt 10 on kernel 2b6526ae-ebf5-4149-a46b-90f73ad00b6e
+[I 2024-07-11 14:04:24.117 ServerApp] Kernel interrupted: 2b6526ae-ebf5-4149-a46b-90f73ad00b6e
+[I 2024-07-11 14:04:24.778 ServerApp] Kernel interrupted: 2b6526ae-ebf5-4149-a46b-90f73ad00b6e
+[I 2024-07-11 14:04:25.126 ServerApp] Kernel interrupted: 2b6526ae-ebf5-4149-a46b-90f73ad00b6e
+[I 2024-07-11 14:04:25.282 ServerApp] Kernel interrupted: 2b6526ae-ebf5-4149-a46b-90f73ad00b6e
+[I 2024-07-11 14:04:25.510 ServerApp] Kernel interrupted: 2b6526ae-ebf5-4149-a46b-90f73ad00b6e
+[I 2024-07-11 14:04:33.629 ServerApp] Kernel restarted: 2b6526ae-ebf5-4149-a46b-90f73ad00b6e
+[I 2024-07-11 14:04:33.711 ServerApp] Starting buffering for 2b6526ae-ebf5-4149-a46b-90f73ad00b6e:2001556b-7e71-472c-8302-246c2d1d8827
+[I 2024-07-11 14:04:33.867 ServerApp] Connecting to kernel 2b6526ae-ebf5-4149-a46b-90f73ad00b6e.
+[I 2024-07-11 14:04:33.867 ServerApp] Restoring connection for 2b6526ae-ebf5-4149-a46b-90f73ad00b6e:2001556b-7e71-472c-8302-246c2d1d8827
+[I 2024-07-11 14:04:55.111 ServerApp] Saving file at /scripts/22_check_extreme_pvals.ipynb
+[I 2024-07-11 14:05:04.388 ServerApp] Kernel restarted: 2b6526ae-ebf5-4149-a46b-90f73ad00b6e
+[I 2024-07-11 14:05:04.467 ServerApp] Starting buffering for 2b6526ae-ebf5-4149-a46b-90f73ad00b6e:2001556b-7e71-472c-8302-246c2d1d8827
+[I 2024-07-11 14:05:04.625 ServerApp] Connecting to kernel 2b6526ae-ebf5-4149-a46b-90f73ad00b6e.
+[I 2024-07-11 14:05:04.626 ServerApp] Restoring connection for 2b6526ae-ebf5-4149-a46b-90f73ad00b6e:2001556b-7e71-472c-8302-246c2d1d8827
+[I 2024-07-11 14:07:04.257 ServerApp] Saving file at /scripts/22_check_extreme_pvals.ipynb
+[I 2024-07-11 14:09:05.828 ServerApp] Saving file at /scripts/22_check_extreme_pvals.ipynb
+[I 2024-07-11 14:11:06.383 ServerApp] Saving file at /scripts/22_check_extreme_pvals.ipynb
+[I 2024-07-11 14:13:08.502 ServerApp] Saving file at /scripts/22_check_extreme_pvals.ipynb
+[I 2024-07-11 14:17:20.199 ServerApp] Kernel restarted: 2b6526ae-ebf5-4149-a46b-90f73ad00b6e
+[I 2024-07-11 14:17:20.283 ServerApp] Starting buffering for 2b6526ae-ebf5-4149-a46b-90f73ad00b6e:2001556b-7e71-472c-8302-246c2d1d8827
+[I 2024-07-11 14:17:20.437 ServerApp] Connecting to kernel 2b6526ae-ebf5-4149-a46b-90f73ad00b6e.
+[I 2024-07-11 14:17:20.437 ServerApp] Restoring connection for 2b6526ae-ebf5-4149-a46b-90f73ad00b6e:2001556b-7e71-472c-8302-246c2d1d8827
+[I 2024-07-11 14:17:21.739 ServerApp] Kernel shutdown: 28bc89d0-2e06-4da0-ba83-135e62ade6e3
+[I 2024-07-11 14:17:21.740 ServerApp] Kernel shutdown: d7efef90-4ce4-4d4a-881c-10b56d29f809
+[I 2024-07-11 14:17:21.811 ServerApp] Kernel shutdown: edf892b2-7050-4d04-a247-509baf39257e
+[I 2024-07-11 14:17:21.891 ServerApp] Kernel shutdown: c55450da-9ecc-467b-b93f-16064793f85f
+[I 2024-07-11 14:17:21.969 ServerApp] Kernel shutdown: d873b9cc-a0eb-487a-bc01-e21c6afe025c
+[I 2024-07-11 14:17:22.057 ServerApp] Kernel shutdown: 679d6e94-0aac-450b-96ae-35af98b82697
+[I 2024-07-11 14:17:22.058 ServerApp] Kernel shutdown: a9d9d820-72a9-4581-bc06-d37c0f897d41
+[I 2024-07-11 14:17:22.136 ServerApp] Kernel shutdown: 22337aa1-932e-44ca-b3f3-606884d8eafd
+[I 2024-07-11 14:17:22.190 ServerApp] Kernel shutdown: 87dbcb1d-f1b8-499e-b3ba-01add78f8af7
+[I 2024-07-11 14:17:22.191 ServerApp] Kernel shutdown: 2b6526ae-ebf5-4149-a46b-90f73ad00b6e
+[I 2024-07-11 14:17:22.733 ServerApp] Shutting down on /api/shutdown request.
+[I 2024-07-11 14:17:22.759 ServerApp] Shutting down 5 extensions

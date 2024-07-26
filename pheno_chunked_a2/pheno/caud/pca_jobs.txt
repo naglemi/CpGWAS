@@ -1,0 +1,3 @@
+Rscript pca_all.R
+Rscript pca_ea.R
+Rscript pca_aa.R

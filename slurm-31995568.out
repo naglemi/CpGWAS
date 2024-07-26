@@ -1,0 +1,92 @@
+Fail to get yarn configuration. /home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyterlab/staging/yarn.js:4
+(()=>{var Qge=Object.create;var AS=Object.defineProperty;var bge=Object.getOwnPropertyDescriptor;var Sge=Object.getOwnPropertyNames;var vge=Object.getPrototypeOf,xge=Object.prototype.hasOwnProperty;var J=(r=>typeof require<"u"?require:typeof Proxy<"u"?new Proxy(r,{get:(e,t)=>(typeof require<"u"?require:e)[t]}):r)(function(r){if(typeof require<"u")return require.apply(this,arguments);throw new Error('Dynamic require of "'+r+'" is not supported')});var Pge=(r,e)=>()=>(r&&(e=r(r=0)),e);var w=(r,e)=>()=>(e||r((e={exports:{}}).exports,e),e.exports),ut=(r,e)=>{for(var t in e)AS(r,t,{get:e[t],enumerable:!0})},Dge=(r,e,t,i)=>{if(e&&typeof e=="object"||typeof e=="function")for(let n of Sge(e))!xge.call(r,n)&&n!==t&&AS(r,n,{get:()=>e[n],enumerable:!(i=bge(e,n))||i.enumerable});return r};var Pe=(r,e,t)=>(t=r!=null?Qge(vge(r)):{},Dge(e||!r||!r.__esModule?AS(t,"default",{value:r,enumerable:!0}):t,r));var QK=w((GXe,BK)=>{BK.expor
+
+SyntaxError: Unexpected token {
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.runMain (module.js:611:10)
+    at run (bootstrap_node.js:387:7)
+    at startup (bootstrap_node.js:153:9)
+
+[I 2024-07-08 10:28:24.443 ServerApp] Package jupyterlab took 0.0000s to import
+[I 2024-07-08 10:28:25.612 ServerApp] Package jupyter_lsp took 1.1689s to import
+[W 2024-07-08 10:28:25.612 ServerApp] A `_jupyter_server_extension_points` function was not found in jupyter_lsp. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2024-07-08 10:28:25.906 ServerApp] Package jupyter_server_terminals took 0.2935s to import
+[I 2024-07-08 10:28:25.906 ServerApp] Package notebook took 0.0000s to import
+[I 2024-07-08 10:28:25.923 ServerApp] Package notebook_shim took 0.0000s to import
+[W 2024-07-08 10:28:25.923 ServerApp] A `_jupyter_server_extension_points` function was not found in notebook_shim. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2024-07-08 10:28:25.938 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2024-07-08 10:28:25.943 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2024-07-08 10:28:25.948 ServerApp] jupyterlab | extension was successfully linked.
+[W 2024-07-08 10:28:25.995 JupyterNotebookApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2024-07-08 10:28:25.997 ServerApp] ServerApp.password config is deprecated in 2.0. Use PasswordIdentityProvider.hashed_password.
+[I 2024-07-08 10:28:25.997 ServerApp] notebook | extension was successfully linked.
+[I 2024-07-08 10:28:33.426 ServerApp] notebook_shim | extension was successfully linked.
+[I 2024-07-08 10:28:33.663 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2024-07-08 10:28:33.666 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2024-07-08 10:28:33.666 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2024-07-08 10:28:33.785 LabApp] JupyterLab extension loaded from /home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyterlab
+[I 2024-07-08 10:28:33.785 LabApp] JupyterLab application directory is /home/naglemi/miniconda3/envs/mwas/share/jupyter/lab
+[I 2024-07-08 10:28:33.786 LabApp] Extension Manager is 'pypi'.
+[I 2024-07-08 10:28:33.788 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2024-07-08 10:28:33.791 ServerApp] notebook | extension was successfully loaded.
+[I 2024-07-08 10:28:33.791 ServerApp] Serving notebooks from local directory: /expanse/lustre/projects/jhu152/naglemi/mwas/CpGWAS
+[I 2024-07-08 10:28:33.791 ServerApp] Jupyter Server 2.10.0 is running at:
+[I 2024-07-08 10:28:33.791 ServerApp] http://localhost:8888/lab
+[I 2024-07-08 10:28:33.791 ServerApp]     http://127.0.0.1:8888/lab
+[I 2024-07-08 10:28:33.791 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[?1049h[22;0;0t[1;24r(B[m[4l[?7h[?1h=[39;49m[39;49m[37m[40m[H[2J[37m[40m[J(B[m[39;49m[37m[40m[39;49m[37m[40m[J[39;49m(B[m[22d[93m[44mGetting file://localhost/home/naglemi/.local/share/jupyter/runtime/jpserver-663[K[39;49m(B[m
+
+[24;1H[?1049l[23;0;0t[?1l>[I 2024-07-08 10:28:40.675 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+[I 2024-07-08 10:29:30.228 ServerApp] 302 GET / (@127.0.0.1) 0.32ms
+[I 2024-07-08 10:29:30.383 LabApp] 302 GET /lab? (@127.0.0.1) 0.79ms
+[W 2024-07-08 10:29:36.458 ServerApp] 401 POST /login?next=%2Flab%3F (@127.0.0.1) 435.09ms referer=http://localhost:8892/login?next=%2Flab%3F
+[I 2024-07-08 10:29:41.142 ServerApp] User 4639c631d1e7412dad2db633b71303b2 logged in.
+[I 2024-07-08 10:29:41.142 ServerApp] 302 POST /login?next=%2Flab%3F (4639c631d1e7412dad2db633b71303b2@127.0.0.1) 25.40ms
+0.03s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+[W 2024-07-08 10:29:55.348 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2024-07-08 10:29:56.814 ServerApp] New terminal with automatic name: 8
+[I 2024-07-08 10:32:56.324 ServerApp] Kernel started: 2ea7398c-d400-45f1-a89a-b8610cbbb113
+[I 2024-07-08 10:32:59.797 ServerApp] Connecting to kernel 2ea7398c-d400-45f1-a89a-b8610cbbb113.
+[I 2024-07-08 10:33:00.085 ServerApp] Connecting to kernel 2ea7398c-d400-45f1-a89a-b8610cbbb113.
+[I 2024-07-08 10:33:00.293 ServerApp] Connecting to kernel 2ea7398c-d400-45f1-a89a-b8610cbbb113.
+[I 2024-07-08 10:34:02.190 ServerApp] Kernel restarted: 2ea7398c-d400-45f1-a89a-b8610cbbb113
+[I 2024-07-08 10:34:02.264 ServerApp] Starting buffering for 2ea7398c-d400-45f1-a89a-b8610cbbb113:bc230b8d-616d-4f97-8a67-2bf81b49ffb6
+[I 2024-07-08 10:34:02.399 ServerApp] Connecting to kernel 2ea7398c-d400-45f1-a89a-b8610cbbb113.
+[I 2024-07-08 10:34:02.399 ServerApp] Restoring connection for 2ea7398c-d400-45f1-a89a-b8610cbbb113:bc230b8d-616d-4f97-8a67-2bf81b49ffb6
+[I 2024-07-08 10:34:55.814 ServerApp] Saving file at /scripts/16_Make_tables_stage2_MWAS_a3-faster.ipynb
+[I 2024-07-08 10:41:12.567 ServerApp] Saving file at /scripts/16_Make_tables_stage2_MWAS_a3-faster.ipynb
+[I 2024-07-08 10:41:13.166 ServerApp] Saving file at /scripts/16_Make_tables_stage2_MWAS_a3-faster.ipynb
+[I 2024-07-08 10:41:13.398 ServerApp] Saving file at /scripts/16_Make_tables_stage2_MWAS_a3-faster.ipynb
+[I 2024-07-08 11:30:38.754 ServerApp] Saving file at /scripts/16_Make_tables_stage2_MWAS_a3-faster.ipynb
+[I 2024-07-08 11:31:37.278 ServerApp] AsyncIOLoopKernelRestarter: restarting kernel (1/5), keep random ports
+[W 2024-07-08 11:31:37.285 ServerApp] kernel 2ea7398c-d400-45f1-a89a-b8610cbbb113 restarted
+[I 2024-07-08 11:31:37.435 ServerApp] Starting buffering for 2ea7398c-d400-45f1-a89a-b8610cbbb113:bc230b8d-616d-4f97-8a67-2bf81b49ffb6
+[I 2024-07-08 11:31:37.494 ServerApp] Connecting to kernel 2ea7398c-d400-45f1-a89a-b8610cbbb113.
+[I 2024-07-08 11:31:37.494 ServerApp] Restoring connection for 2ea7398c-d400-45f1-a89a-b8610cbbb113:bc230b8d-616d-4f97-8a67-2bf81b49ffb6
+R_zmq_bind errno: 98 strerror: Address already in use
+R_zmq_bind errno: 98 strerror: Address already in use
+R_zmq_bind errno: 98 strerror: Address already in use
+R_zmq_bind errno: 98 strerror: Address already in use
+R_zmq_bind errno: 98 strerror: Address already in use
+[I 2024-07-08 11:32:39.572 ServerApp] Saving file at /scripts/16_Make_tables_stage2_MWAS_a3-faster.ipynb
+[I 2024-07-08 12:59:27.677 ServerApp] Saving file at /scripts/16_Make_tables_stage2_MWAS_a3-faster.ipynb
+[I 2024-07-08 13:02:21.483 ServerApp] Kernel restarted: 2ea7398c-d400-45f1-a89a-b8610cbbb113
+[I 2024-07-08 13:02:21.559 ServerApp] Starting buffering for 2ea7398c-d400-45f1-a89a-b8610cbbb113:bc230b8d-616d-4f97-8a67-2bf81b49ffb6
+[I 2024-07-08 13:02:21.698 ServerApp] Connecting to kernel 2ea7398c-d400-45f1-a89a-b8610cbbb113.
+[I 2024-07-08 13:02:21.698 ServerApp] Restoring connection for 2ea7398c-d400-45f1-a89a-b8610cbbb113:bc230b8d-616d-4f97-8a67-2bf81b49ffb6
+[I 2024-07-08 13:02:40.722 ServerApp] New terminal with automatic name: 1
+slurmstepd: error: *** JOB 31995568 ON exp-1-22 CANCELLED AT 2024-07-08T13:02:55 ***
+[C 2024-07-08 13:02:55.104 ServerApp] received signal 15, stopping
+[I 2024-07-08 13:02:55.132 ServerApp] Shutting down 5 extensions
+[I 2024-07-08 13:02:55.132 ServerApp] Shutting down 1 kernel
+[I 2024-07-08 13:02:55.133 ServerApp] Kernel shutdown: 2ea7398c-d400-45f1-a89a-b8610cbbb113
+slurmstepd: error: Detected 54 oom_kill events in StepId=31995568.batch. Some of the step tasks have been OOM Killed.

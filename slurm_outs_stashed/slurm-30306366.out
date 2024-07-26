@@ -1,0 +1,136 @@
+Fail to get yarn configuration. /home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyterlab/staging/yarn.js:4
+(()=>{var Qge=Object.create;var AS=Object.defineProperty;var bge=Object.getOwnPropertyDescriptor;var Sge=Object.getOwnPropertyNames;var vge=Object.getPrototypeOf,xge=Object.prototype.hasOwnProperty;var J=(r=>typeof require<"u"?require:typeof Proxy<"u"?new Proxy(r,{get:(e,t)=>(typeof require<"u"?require:e)[t]}):r)(function(r){if(typeof require<"u")return require.apply(this,arguments);throw new Error('Dynamic require of "'+r+'" is not supported')});var Pge=(r,e)=>()=>(r&&(e=r(r=0)),e);var w=(r,e)=>()=>(e||r((e={exports:{}}).exports,e),e.exports),ut=(r,e)=>{for(var t in e)AS(r,t,{get:e[t],enumerable:!0})},Dge=(r,e,t,i)=>{if(e&&typeof e=="object"||typeof e=="function")for(let n of Sge(e))!xge.call(r,n)&&n!==t&&AS(r,n,{get:()=>e[n],enumerable:!(i=bge(e,n))||i.enumerable});return r};var Pe=(r,e,t)=>(t=r!=null?Qge(vge(r)):{},Dge(e||!r||!r.__esModule?AS(t,"default",{value:r,enumerable:!0}):t,r));var QK=w((GXe,BK)=>{BK.expor
+
+SyntaxError: Unexpected token {
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.runMain (module.js:611:10)
+    at run (bootstrap_node.js:387:7)
+    at startup (bootstrap_node.js:153:9)
+
+[I 2024-05-04 19:05:05.875 ServerApp] Package jupyterlab took 0.0000s to import
+[I 2024-05-04 19:05:06.916 ServerApp] Package jupyter_lsp took 1.0403s to import
+[W 2024-05-04 19:05:06.916 ServerApp] A `_jupyter_server_extension_points` function was not found in jupyter_lsp. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2024-05-04 19:05:07.463 ServerApp] Package jupyter_server_terminals took 0.5467s to import
+[I 2024-05-04 19:05:07.463 ServerApp] Package notebook took 0.0000s to import
+[I 2024-05-04 19:05:07.489 ServerApp] Package notebook_shim took 0.0000s to import
+[W 2024-05-04 19:05:07.490 ServerApp] A `_jupyter_server_extension_points` function was not found in notebook_shim. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2024-05-04 19:05:07.505 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2024-05-04 19:05:07.511 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2024-05-04 19:05:07.518 ServerApp] jupyterlab | extension was successfully linked.
+[W 2024-05-04 19:05:07.543 JupyterNotebookApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2024-05-04 19:05:07.544 ServerApp] ServerApp.password config is deprecated in 2.0. Use PasswordIdentityProvider.hashed_password.
+[I 2024-05-04 19:05:07.545 ServerApp] notebook | extension was successfully linked.
+[I 2024-05-04 19:05:18.444 ServerApp] notebook_shim | extension was successfully linked.
+[I 2024-05-04 19:05:18.863 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2024-05-04 19:05:18.865 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2024-05-04 19:05:18.867 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2024-05-04 19:05:18.965 LabApp] JupyterLab extension loaded from /home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyterlab
+[I 2024-05-04 19:05:18.965 LabApp] JupyterLab application directory is /home/naglemi/miniconda3/envs/mwas/share/jupyter/lab
+[I 2024-05-04 19:05:18.965 LabApp] Extension Manager is 'pypi'.
+[I 2024-05-04 19:05:18.967 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2024-05-04 19:05:18.972 ServerApp] notebook | extension was successfully loaded.
+[I 2024-05-04 19:05:18.972 ServerApp] Serving notebooks from local directory: /expanse/lustre/projects/jhu152/naglemi/mwas/CpGWAS
+[I 2024-05-04 19:05:18.972 ServerApp] Jupyter Server 2.10.0 is running at:
+[I 2024-05-04 19:05:18.972 ServerApp] http://localhost:8888/lab
+[I 2024-05-04 19:05:18.972 ServerApp]     http://127.0.0.1:8888/lab
+[I 2024-05-04 19:05:18.972 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[?1049h[22;0;0t[1;24r(B[m[4l[?7h[?1h=[39;49m[39;49m[37m[40m[H[2J[37m[40m[J(B[m[39;49m[37m[40m[39;49m[37m[40m[J[39;49m(B[m[22d[93m[44mGetting file://localhost/home/naglemi/.local/share/jupyter/runtime/jpserver-693[K[39;49m(B[m
+
+[24;1H[?1049l[23;0;0t[?1l>[I 2024-05-04 19:05:37.007 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+0.09s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+[W 2024-05-04 19:09:44.719 LabApp] Could not determine jupyterlab build status without nodejs
+[W 2024-05-04 19:14:13.591 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2024-05-04 19:15:19.327 ServerApp] New terminal with automatic name: 1
+[W 2024-05-04 19:15:21.822 ServerApp] Notebook scripts/05_Inspect_SLURM_benchmarks_a2.ipynb is not trusted
+[I 2024-05-04 19:15:22.871 ServerApp] Kernel started: 6142a6ae-baf7-4941-8dbb-034d1faf3d0f
+[I 2024-05-04 19:15:22.886 ServerApp] Kernel started: b591d43b-de76-4768-a2ce-b97b5d12b3ca
+[I 2024-05-04 19:15:28.593 ServerApp] Connecting to kernel b591d43b-de76-4768-a2ce-b97b5d12b3ca.
+[I 2024-05-04 19:15:28.595 ServerApp] Connecting to kernel b591d43b-de76-4768-a2ce-b97b5d12b3ca.
+[I 2024-05-04 19:15:28.596 ServerApp] Connecting to kernel b591d43b-de76-4768-a2ce-b97b5d12b3ca.
+[I 2024-05-04 19:15:28.619 ServerApp] Connecting to kernel 6142a6ae-baf7-4941-8dbb-034d1faf3d0f.
+[I 2024-05-04 19:16:11.702 ServerApp] Kernel restarted: 6142a6ae-baf7-4941-8dbb-034d1faf3d0f
+[I 2024-05-04 19:16:11.780 ServerApp] Starting buffering for 6142a6ae-baf7-4941-8dbb-034d1faf3d0f:63ad07d0-d4a0-4b50-ba81-dd33c1635587
+[I 2024-05-04 19:16:11.949 ServerApp] Connecting to kernel 6142a6ae-baf7-4941-8dbb-034d1faf3d0f.
+[I 2024-05-04 19:16:11.949 ServerApp] Restoring connection for 6142a6ae-baf7-4941-8dbb-034d1faf3d0f:63ad07d0-d4a0-4b50-ba81-dd33c1635587
+Submitted batch job 30306636
+[I 2024-05-04 19:17:22.082 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30306650
+Submitted batch job 30306699
+[I 2024-05-04 19:19:22.988 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30306732
+Submitted batch job 30306761
+[I 2024-05-04 19:21:23.906 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30306789
+Submitted batch job 30306806
+[I 2024-05-04 19:23:24.799 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30306816
+Submitted batch job 30306834
+[I 2024-05-04 19:25:25.879 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30306853
+Submitted batch job 30306868
+[I 2024-05-04 19:27:26.873 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30306882
+[I 2024-05-04 19:29:27.805 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30306929
+Submitted batch job 30306945
+[I 2024-05-04 19:31:28.762 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30306964
+Submitted batch job 30306980
+[I 2024-05-04 19:33:29.607 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30306993
+Submitted batch job 30307004
+[I 2024-05-04 19:35:31.738 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+[I 2024-05-04 19:37:32.712 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+[I 2024-05-05 07:26:27.071 ServerApp] Kernel restarted: 6142a6ae-baf7-4941-8dbb-034d1faf3d0f
+[I 2024-05-05 07:26:27.219 ServerApp] Starting buffering for 6142a6ae-baf7-4941-8dbb-034d1faf3d0f:63ad07d0-d4a0-4b50-ba81-dd33c1635587
+[I 2024-05-05 07:26:27.382 ServerApp] Connecting to kernel 6142a6ae-baf7-4941-8dbb-034d1faf3d0f.
+[I 2024-05-05 07:26:27.383 ServerApp] Restoring connection for 6142a6ae-baf7-4941-8dbb-034d1faf3d0f:63ad07d0-d4a0-4b50-ba81-dd33c1635587
+Submitted batch job 30317077
+[I 2024-05-05 07:27:13.466 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30317080
+Submitted batch job 30317085
+[I 2024-05-05 07:29:14.335 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30317093
+Submitted batch job 30317101
+[I 2024-05-05 07:31:15.389 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30317109
+Submitted batch job 30317113
+[I 2024-05-05 07:33:16.358 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30317118
+[I 2024-05-05 07:35:17.153 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30317122
+Submitted batch job 30317123
+[I 2024-05-05 07:37:17.944 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30317126
+Submitted batch job 30317130
+[I 2024-05-05 07:39:18.740 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30317135
+Submitted batch job 30317138
+[I 2024-05-05 07:41:19.512 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30317150
+Submitted batch job 30317153
+[I 2024-05-05 07:43:20.286 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30317156
+Submitted batch job 30317157
+[I 2024-05-05 07:45:21.284 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+[I 2024-05-05 07:47:21.989 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+[W 2024-05-05 09:34:27.383 ServerApp] WebSocket ping timeout after 119854 ms.
+[W 2024-05-05 09:34:28.597 ServerApp] WebSocket ping timeout after 119516 ms.
+[I 2024-05-05 09:34:32.455 ServerApp] Starting buffering for 6142a6ae-baf7-4941-8dbb-034d1faf3d0f:63ad07d0-d4a0-4b50-ba81-dd33c1635587
+[I 2024-05-05 09:34:33.601 ServerApp] Starting buffering for b591d43b-de76-4768-a2ce-b97b5d12b3ca:72cc874c-712c-4799-a826-da2b7e2f2659
+[W 2024-05-05 09:34:49.738 TerminalsExtensionApp] WebSocket ping timeout after 119914 ms.
+slurmstepd: error: *** JOB 30306366 ON exp-1-01 CANCELLED AT 2024-05-06T19:04:45 DUE TO TIME LIMIT ***
+[C 2024-05-06 19:04:46.085 ServerApp] received signal 15, stopping
+[I 2024-05-06 19:04:46.133 ServerApp] Shutting down 5 extensions
+[I 2024-05-06 19:04:46.134 ServerApp] Shutting down 2 kernels
+[I 2024-05-06 19:04:46.135 ServerApp] Kernel shutdown: 6142a6ae-baf7-4941-8dbb-034d1faf3d0f
+[I 2024-05-06 19:04:46.136 ServerApp] Kernel shutdown: b591d43b-de76-4768-a2ce-b97b5d12b3ca

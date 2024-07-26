@@ -1,0 +1,48 @@
+Fail to get yarn configuration. /home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyterlab/staging/yarn.js:4
+(()=>{var Qge=Object.create;var AS=Object.defineProperty;var bge=Object.getOwnPropertyDescriptor;var Sge=Object.getOwnPropertyNames;var vge=Object.getPrototypeOf,xge=Object.prototype.hasOwnProperty;var J=(r=>typeof require<"u"?require:typeof Proxy<"u"?new Proxy(r,{get:(e,t)=>(typeof require<"u"?require:e)[t]}):r)(function(r){if(typeof require<"u")return require.apply(this,arguments);throw new Error('Dynamic require of "'+r+'" is not supported')});var Pge=(r,e)=>()=>(r&&(e=r(r=0)),e);var w=(r,e)=>()=>(e||r((e={exports:{}}).exports,e),e.exports),ut=(r,e)=>{for(var t in e)AS(r,t,{get:e[t],enumerable:!0})},Dge=(r,e,t,i)=>{if(e&&typeof e=="object"||typeof e=="function")for(let n of Sge(e))!xge.call(r,n)&&n!==t&&AS(r,n,{get:()=>e[n],enumerable:!(i=bge(e,n))||i.enumerable});return r};var Pe=(r,e,t)=>(t=r!=null?Qge(vge(r)):{},Dge(e||!r||!r.__esModule?AS(t,"default",{value:r,enumerable:!0}):t,r));var QK=w((GXe,BK)=>{BK.expor
+
+SyntaxError: Unexpected token {
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.runMain (module.js:611:10)
+    at run (bootstrap_node.js:387:7)
+    at startup (bootstrap_node.js:153:9)
+
+[I 2024-07-15 11:33:21.799 ServerApp] Package jupyterlab took 0.0000s to import
+[I 2024-07-15 11:33:21.853 ServerApp] Package jupyter_lsp took 0.0539s to import
+[W 2024-07-15 11:33:21.854 ServerApp] A `_jupyter_server_extension_points` function was not found in jupyter_lsp. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2024-07-15 11:33:21.878 ServerApp] Package jupyter_server_terminals took 0.0247s to import
+[I 2024-07-15 11:33:21.879 ServerApp] Package notebook took 0.0000s to import
+[I 2024-07-15 11:33:21.880 ServerApp] Package notebook_shim took 0.0000s to import
+[W 2024-07-15 11:33:21.880 ServerApp] A `_jupyter_server_extension_points` function was not found in notebook_shim. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2024-07-15 11:33:21.881 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2024-07-15 11:33:21.887 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2024-07-15 11:33:21.893 ServerApp] jupyterlab | extension was successfully linked.
+[W 2024-07-15 11:33:21.896 JupyterNotebookApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2024-07-15 11:33:21.898 ServerApp] ServerApp.password config is deprecated in 2.0. Use PasswordIdentityProvider.hashed_password.
+[I 2024-07-15 11:33:21.898 ServerApp] notebook | extension was successfully linked.
+[I 2024-07-15 11:33:22.588 ServerApp] notebook_shim | extension was successfully linked.
+[I 2024-07-15 11:33:22.615 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2024-07-15 11:33:22.617 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2024-07-15 11:33:22.618 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2024-07-15 11:33:22.741 LabApp] JupyterLab extension loaded from /home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyterlab
+[I 2024-07-15 11:33:22.741 LabApp] JupyterLab application directory is /home/naglemi/miniconda3/envs/mwas/share/jupyter/lab
+[I 2024-07-15 11:33:22.742 LabApp] Extension Manager is 'pypi'.
+[I 2024-07-15 11:33:22.744 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2024-07-15 11:33:22.747 ServerApp] notebook | extension was successfully loaded.
+[I 2024-07-15 11:33:22.747 ServerApp] Serving notebooks from local directory: /expanse/lustre/projects/jhu152/naglemi/mwas/CpGWAS
+[I 2024-07-15 11:33:22.748 ServerApp] Jupyter Server 2.10.0 is running at:
+[I 2024-07-15 11:33:22.748 ServerApp] http://localhost:8888/lab
+[I 2024-07-15 11:33:22.748 ServerApp]     http://127.0.0.1:8888/lab
+[I 2024-07-15 11:33:22.748 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[?1049h[22;0;0t[1;24r(B[m[4l[?7h[?1h=[39;49m[39;49m[37m[40m[H[2J[37m[40m[J(B[m[39;49m[37m[40m[39;49m[37m[40m[J[39;49m(B[m[22d[93m[44mGetting file://localhost/home/naglemi/.local/share/jupyter/runtime/jpserver-196[K[39;49m(B[m
+
+[24;1H[?1049l[23;0;0t[?1l>[I 2024-07-15 11:33:24.464 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+slurmstepd: error: *** JOB 32293861 ON exp-5-48 CANCELLED AT 2024-07-15T15:37:02 ***
+[C 2024-07-15 15:37:02.492 ServerApp] received signal 15, stopping
+[I 2024-07-15 15:37:02.508 ServerApp] Shutting down 5 extensions

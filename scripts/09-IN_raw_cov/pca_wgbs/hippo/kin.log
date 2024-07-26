@@ -1,0 +1,29 @@
+PLINK v2.00a4.6LM 64-bit Intel (29 Aug 2023)
+Options in effect:
+  --extract snps.prune.in
+  --king-table-filter 0.05
+  --make-king-table
+  --out kin
+  --pfile hippo_gwas
+
+Hostname: compute-103.cm.cluster
+Working directory: /dcs04/lieber/statsgen/shizhong/database/libd/genotype/postmortem/topmed/merge_H650_1M_2.5M_5M/EA_AA/all/pca_wgbs/hippo
+Start time: Sat Mar  2 19:51:27 2024
+
+Random number seed: 1709427087
+128474 MiB RAM detected, ~114838 available; reserving 64237 MiB for main
+workspace.
+Using up to 2 compute threads.
+179 samples (0 females, 0 males, 179 ambiguous; 179 founders) loaded from
+hippo_gwas.psam.
+6857627 variants loaded from hippo_gwas.pvar.
+Note: No phenotype data present.
+--extract: 127932 variants remaining.
+127932 variants remaining after main filters.
+--make-king-table pass 1/1: Scanning for rare variants... done.
+0 variants handled by initial scan (127932 remaining).
+--make-king-table: 127932 variants processed.
+Results written to kin.kin0 .
+--king-table-filter: 1 relationship reported (15930 filtered out).
+
+End time: Sat Mar  2 19:51:30 2024

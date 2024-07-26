@@ -1,0 +1,202 @@
+Fail to get yarn configuration. /home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyterlab/staging/yarn.js:4
+(()=>{var Qge=Object.create;var AS=Object.defineProperty;var bge=Object.getOwnPropertyDescriptor;var Sge=Object.getOwnPropertyNames;var vge=Object.getPrototypeOf,xge=Object.prototype.hasOwnProperty;var J=(r=>typeof require<"u"?require:typeof Proxy<"u"?new Proxy(r,{get:(e,t)=>(typeof require<"u"?require:e)[t]}):r)(function(r){if(typeof require<"u")return require.apply(this,arguments);throw new Error('Dynamic require of "'+r+'" is not supported')});var Pge=(r,e)=>()=>(r&&(e=r(r=0)),e);var w=(r,e)=>()=>(e||r((e={exports:{}}).exports,e),e.exports),ut=(r,e)=>{for(var t in e)AS(r,t,{get:e[t],enumerable:!0})},Dge=(r,e,t,i)=>{if(e&&typeof e=="object"||typeof e=="function")for(let n of Sge(e))!xge.call(r,n)&&n!==t&&AS(r,n,{get:()=>e[n],enumerable:!(i=bge(e,n))||i.enumerable});return r};var Pe=(r,e,t)=>(t=r!=null?Qge(vge(r)):{},Dge(e||!r||!r.__esModule?AS(t,"default",{value:r,enumerable:!0}):t,r));var QK=w((GXe,BK)=>{BK.expor
+
+SyntaxError: Unexpected token {
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.runMain (module.js:611:10)
+    at run (bootstrap_node.js:387:7)
+    at startup (bootstrap_node.js:153:9)
+
+[I 2024-02-26 10:20:53.372 ServerApp] Package jupyterlab took 0.0000s to import
+[I 2024-02-26 10:20:53.397 ServerApp] Package jupyter_lsp took 0.0242s to import
+[W 2024-02-26 10:20:53.397 ServerApp] A `_jupyter_server_extension_points` function was not found in jupyter_lsp. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2024-02-26 10:20:53.407 ServerApp] Package jupyter_server_terminals took 0.0094s to import
+[I 2024-02-26 10:20:53.407 ServerApp] Package notebook took 0.0000s to import
+[I 2024-02-26 10:20:53.409 ServerApp] Package notebook_shim took 0.0000s to import
+[W 2024-02-26 10:20:53.409 ServerApp] A `_jupyter_server_extension_points` function was not found in notebook_shim. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2024-02-26 10:20:53.409 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2024-02-26 10:20:53.415 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2024-02-26 10:20:53.421 ServerApp] jupyterlab | extension was successfully linked.
+[W 2024-02-26 10:20:53.424 JupyterNotebookApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2024-02-26 10:20:53.426 ServerApp] ServerApp.password config is deprecated in 2.0. Use PasswordIdentityProvider.hashed_password.
+[I 2024-02-26 10:20:53.426 ServerApp] notebook | extension was successfully linked.
+[I 2024-02-26 10:20:53.782 ServerApp] notebook_shim | extension was successfully linked.
+[I 2024-02-26 10:20:53.809 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2024-02-26 10:20:53.811 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2024-02-26 10:20:53.811 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2024-02-26 10:20:53.817 LabApp] JupyterLab extension loaded from /home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyterlab
+[I 2024-02-26 10:20:53.817 LabApp] JupyterLab application directory is /home/naglemi/miniconda3/envs/mwas/share/jupyter/lab
+[I 2024-02-26 10:20:53.818 LabApp] Extension Manager is 'pypi'.
+[I 2024-02-26 10:20:53.820 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2024-02-26 10:20:53.823 ServerApp] notebook | extension was successfully loaded.
+[I 2024-02-26 10:20:53.823 ServerApp] Serving notebooks from local directory: /expanse/lustre/projects/jhu152/naglemi/mwas/CpGWAS
+[I 2024-02-26 10:20:53.823 ServerApp] Jupyter Server 2.10.0 is running at:
+[I 2024-02-26 10:20:53.823 ServerApp] http://localhost:8888/lab
+[I 2024-02-26 10:20:53.823 ServerApp]     http://127.0.0.1:8888/lab
+[I 2024-02-26 10:20:53.823 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[?1049h[22;0;0t[1;24r(B[m[4l[?7h[?1h=[39;49m[39;49m[37m[40m[H[2J[37m[40m[J(B[m[39;49m[37m[40m[39;49m[37m[40m[J[39;49m(B[m[22d[93m[44mGetting file://localhost/home/naglemi/.local/share/jupyter/runtime/jpserver-143[K[39;49m(B[m
+
+[24;1H[?1049l[23;0;0t[?1l>[I 2024-02-26 10:20:54.638 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+[W 2024-02-26 10:21:14.885 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2024-02-26 10:21:17.506 ServerApp] Kernel started: ea16bf05-0863-4e8a-aeca-8b260ec2a156
+[I 2024-02-26 10:21:17.509 ServerApp] Kernel started: a8b5ffcb-1baa-4ba0-b540-52c4a9a7fbc0
+[I 2024-02-26 10:21:18.653 ServerApp] Connecting to kernel ea16bf05-0863-4e8a-aeca-8b260ec2a156.
+[I 2024-02-26 10:21:18.860 ServerApp] Connecting to kernel a8b5ffcb-1baa-4ba0-b540-52c4a9a7fbc0.
+[I 2024-02-26 10:21:18.861 ServerApp] Connecting to kernel a8b5ffcb-1baa-4ba0-b540-52c4a9a7fbc0.
+[I 2024-02-26 10:21:18.862 ServerApp] Connecting to kernel a8b5ffcb-1baa-4ba0-b540-52c4a9a7fbc0.
+[I 2024-02-26 10:21:53.016 ServerApp] Kernel restarted: a8b5ffcb-1baa-4ba0-b540-52c4a9a7fbc0
+[I 2024-02-26 10:21:53.094 ServerApp] Starting buffering for a8b5ffcb-1baa-4ba0-b540-52c4a9a7fbc0:9d06e603-d062-4474-b723-1af4747e6ade
+[I 2024-02-26 10:21:53.247 ServerApp] Connecting to kernel a8b5ffcb-1baa-4ba0-b540-52c4a9a7fbc0.
+[I 2024-02-26 10:21:53.247 ServerApp] Restoring connection for a8b5ffcb-1baa-4ba0-b540-52c4a9a7fbc0:9d06e603-d062-4474-b723-1af4747e6ade
+[I 2024-02-26 10:23:17.114 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files.ipynb
+[I 2024-02-26 10:25:17.630 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files.ipynb
+[I 2024-02-26 10:27:18.062 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files.ipynb
+[I 2024-02-26 10:29:18.634 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files.ipynb
+[I 2024-02-26 10:31:19.326 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files.ipynb
+[I 2024-02-26 10:33:19.766 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files.ipynb
+[31mERROR[39m: Error in handle_error! Error in skip_repeated(calls): no slot of name "as_sparse" for this object of class "HDF5ArraySeed"
+
+[31mERROR[39m: Caused when handling Error in .Call2("C_h5getdimscales", filepath, name, scalename, PACKAGE = "HDF5Array"): file '/dcl02/lieber/WGBS/psychENCODE_szControl/Batch3/bs_objs/batch3_combined/CpGassays.h5' does not exist
+
+[I 2024-02-26 10:35:20.227 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files.ipynb
+[I 2024-02-26 10:37:20.943 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files.ipynb
+[I 2024-02-26 10:39:21.359 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files.ipynb
+[I 2024-02-26 10:41:21.990 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files.ipynb
+[I 2024-02-26 10:41:39.440 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files.ipynb
+[I 2024-02-26 10:43:39.850 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files.ipynb
+[I 2024-02-26 11:11:40.615 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files.ipynb
+[I 2024-02-26 11:15:41.287 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files.ipynb
+[I 2024-02-26 12:15:50.432 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files.ipynb
+[W 2024-02-26 12:16:05.591 ServerApp] 404 GET /api/contents/scripts/09_Match_SNP_methylation_files_a2%5C.ipynb?1708978565500 (127.0.0.1): No such file or directory: scripts/09_Match_SNP_methylation_files_a2\.ipynb
+[W 2024-02-26 12:16:05.591 ServerApp] wrote error: 'No such file or directory: scripts/09_Match_SNP_methylation_files_a2\\.ipynb'
+    Traceback (most recent call last):
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_server/services/contents/handlers.py", line 121, in get
+        model = await ensure_async(
+                ^^^^^^^^^^^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 189, in ensure_async
+        result = await obj
+                 ^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_server/services/contents/filemanager.py", line 863, in get
+        raise web.HTTPError(404, "No such file or directory: %s" % path)
+    tornado.web.HTTPError: HTTP 404: Not Found (No such file or directory: scripts/09_Match_SNP_methylation_files_a2\.ipynb)
+[W 2024-02-26 12:16:05.597 ServerApp] 404 GET /api/contents/scripts/09_Match_SNP_methylation_files_a2%5C.ipynb?1708978565500 (f406b51829c04f75a21c912f4e62bf04@127.0.0.1) 6.44ms referer=http://localhost:8892/lab/tree/scripts
+[I 2024-02-26 12:16:06.408 ServerApp] Uploading file to /scripts/09_Match_SNP_methylation_files_a2\.ipynb
+[I 2024-02-26 12:16:08.287 ServerApp] Kernel started: f2fa08a0-9c6e-44be-b15c-849b7e61034e
+[I 2024-02-26 12:16:08.981 ServerApp] Connecting to kernel f2fa08a0-9c6e-44be-b15c-849b7e61034e.
+[W 2024-02-26 12:16:16.391 ServerApp] 404 GET /api/contents/scripts/07_Deploy_SLURM_a2.ipynb?1708978576296 (127.0.0.1): No such file or directory: scripts/07_Deploy_SLURM_a2.ipynb
+[W 2024-02-26 12:16:16.391 ServerApp] wrote error: 'No such file or directory: scripts/07_Deploy_SLURM_a2.ipynb'
+    Traceback (most recent call last):
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_server/services/contents/handlers.py", line 121, in get
+        model = await ensure_async(
+                ^^^^^^^^^^^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 189, in ensure_async
+        result = await obj
+                 ^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_server/services/contents/filemanager.py", line 863, in get
+        raise web.HTTPError(404, "No such file or directory: %s" % path)
+    tornado.web.HTTPError: HTTP 404: Not Found (No such file or directory: scripts/07_Deploy_SLURM_a2.ipynb)
+[W 2024-02-26 12:16:16.392 ServerApp] 404 GET /api/contents/scripts/07_Deploy_SLURM_a2.ipynb?1708978576296 (f406b51829c04f75a21c912f4e62bf04@127.0.0.1) 2.23ms referer=http://localhost:8892/lab/tree/scripts/07_Deploy_SLURM.ipynb
+[I 2024-02-26 12:16:16.473 ServerApp] Uploading file to /scripts/07_Deploy_SLURM_a2.ipynb
+[I 2024-02-26 12:16:16.752 ServerApp] Starting buffering for ea16bf05-0863-4e8a-aeca-8b260ec2a156:4709b03d-171f-4f57-8eef-7bc495f67fb3
+[I 2024-02-26 12:16:17.277 ServerApp] Kernel started: 899a635d-0bd2-4dec-8adc-c85f57cdb20e
+[I 2024-02-26 12:16:17.923 ServerApp] Connecting to kernel 899a635d-0bd2-4dec-8adc-c85f57cdb20e.
+[I 2024-02-26 12:17:51.652 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files.ipynb
+[I 2024-02-26 12:18:17.250 ServerApp] Saving file at /scripts/07_Deploy_SLURM_a2.ipynb
+[I 2024-02-26 12:20:17.739 ServerApp] Saving file at /scripts/07_Deploy_SLURM_a2.ipynb
+[I 2024-02-26 12:22:23.292 ServerApp] Saving file at /scripts/07_Deploy_SLURM_a2.ipynb
+[I 2024-02-26 12:24:27.951 ServerApp] Saving file at /scripts/07_Deploy_SLURM_a2.ipynb
+[I 2024-02-26 12:26:28.643 ServerApp] Saving file at /scripts/07_Deploy_SLURM_a2.ipynb
+[I 2024-02-26 12:28:29.470 ServerApp] Saving file at /scripts/07_Deploy_SLURM_a2.ipynb
+Warning messages:
+1: In .helpForCall(topicExpr, parent.frame()) :
+  no method defined for function ‘$’ and signature ‘x = "data.table"’
+2: In .helpForCall(topicExpr, parent.frame()) :
+  no method defined for function ‘$’ and signature ‘x = "NULL"’
+[I 2024-02-26 12:30:27.594 ServerApp] Kernel restarted: 899a635d-0bd2-4dec-8adc-c85f57cdb20e
+[I 2024-02-26 12:30:27.732 ServerApp] Starting buffering for 899a635d-0bd2-4dec-8adc-c85f57cdb20e:89688a76-779a-4efd-bbd6-685a841a50a4
+[I 2024-02-26 12:30:28.007 ServerApp] Connecting to kernel 899a635d-0bd2-4dec-8adc-c85f57cdb20e.
+[I 2024-02-26 12:30:28.007 ServerApp] Restoring connection for 899a635d-0bd2-4dec-8adc-c85f57cdb20e:89688a76-779a-4efd-bbd6-685a841a50a4
+[I 2024-02-26 12:30:30.094 ServerApp] Saving file at /scripts/07_Deploy_SLURM_a2.ipynb
+[I 2024-02-26 12:30:54.405 ServerApp] Kernel restarted: 899a635d-0bd2-4dec-8adc-c85f57cdb20e
+[I 2024-02-26 12:30:54.539 ServerApp] Starting buffering for 899a635d-0bd2-4dec-8adc-c85f57cdb20e:89688a76-779a-4efd-bbd6-685a841a50a4
+[I 2024-02-26 12:30:54.795 ServerApp] Connecting to kernel 899a635d-0bd2-4dec-8adc-c85f57cdb20e.
+[I 2024-02-26 12:30:54.795 ServerApp] Restoring connection for 899a635d-0bd2-4dec-8adc-c85f57cdb20e:89688a76-779a-4efd-bbd6-685a841a50a4
+Submitted batch job 28937759
+Submitted batch job 28937760
+[I 2024-02-26 12:32:30.698 ServerApp] Saving file at /scripts/07_Deploy_SLURM_a2.ipynb
+[I 2024-02-26 12:36:31.192 ServerApp] Saving file at /scripts/07_Deploy_SLURM_a2.ipynb
+[I 2024-02-26 12:38:24.050 ServerApp] Kernel restarted: 899a635d-0bd2-4dec-8adc-c85f57cdb20e
+[I 2024-02-26 12:38:24.187 ServerApp] Starting buffering for 899a635d-0bd2-4dec-8adc-c85f57cdb20e:89688a76-779a-4efd-bbd6-685a841a50a4
+[I 2024-02-26 12:38:24.443 ServerApp] Connecting to kernel 899a635d-0bd2-4dec-8adc-c85f57cdb20e.
+[I 2024-02-26 12:38:24.443 ServerApp] Restoring connection for 899a635d-0bd2-4dec-8adc-c85f57cdb20e:89688a76-779a-4efd-bbd6-685a841a50a4
+Submitted batch job 28937832
+Submitted batch job 28937833
+Submitted batch job 28937834
+Submitted batch job 28937835
+Submitted batch job 28937837
+Submitted batch job 28937838
+Submitted batch job 28937840
+[I 2024-02-26 12:38:31.745 ServerApp] Saving file at /scripts/07_Deploy_SLURM_a2.ipynb
+Submitted batch job 28937841
+Submitted batch job 28937843
+Submitted batch job 28937845
+[I 2024-02-26 12:40:32.285 ServerApp] Saving file at /scripts/07_Deploy_SLURM_a2.ipynb
+[I 2024-02-26 12:40:56.236 ServerApp] Saving file at /scripts/CLI.R
+[I 2024-02-26 12:41:25.067 ServerApp] Kernel restarted: 899a635d-0bd2-4dec-8adc-c85f57cdb20e
+[I 2024-02-26 12:41:25.205 ServerApp] Starting buffering for 899a635d-0bd2-4dec-8adc-c85f57cdb20e:89688a76-779a-4efd-bbd6-685a841a50a4
+[I 2024-02-26 12:41:25.465 ServerApp] Connecting to kernel 899a635d-0bd2-4dec-8adc-c85f57cdb20e.
+[I 2024-02-26 12:41:25.466 ServerApp] Restoring connection for 899a635d-0bd2-4dec-8adc-c85f57cdb20e:89688a76-779a-4efd-bbd6-685a841a50a4
+Submitted batch job 28937886
+Submitted batch job 28937887
+Submitted batch job 28937889
+Submitted batch job 28937890
+Submitted batch job 28937891
+Submitted batch job 28937892
+Submitted batch job 28937893
+Submitted batch job 28937894
+Submitted batch job 28937895
+Submitted batch job 28937896
+[I 2024-02-26 12:42:08.211 ServerApp] Saving file at /scripts/09_Match_SNP_methylation_files_a2\.ipynb
+[I 2024-02-26 12:42:33.034 ServerApp] Saving file at /scripts/07_Deploy_SLURM_a2.ipynb
+[W 2024-02-26 14:27:08.982 ServerApp] WebSocket ping timeout after 99091 ms.
+[I 2024-02-26 14:27:14.029 ServerApp] Starting buffering for f2fa08a0-9c6e-44be-b15c-849b7e61034e:b7c48302-cc19-4d18-9c21-f4e6770f1410
+[W 2024-02-26 14:27:23.249 ServerApp] WebSocket ping timeout after 113358 ms.
+[W 2024-02-26 14:27:25.467 ServerApp] WebSocket ping timeout after 115576 ms.
+[I 2024-02-26 14:27:28.251 ServerApp] Starting buffering for a8b5ffcb-1baa-4ba0-b540-52c4a9a7fbc0:9d06e603-d062-4474-b723-1af4747e6ade
+[I 2024-02-26 14:27:30.469 ServerApp] Starting buffering for 899a635d-0bd2-4dec-8adc-c85f57cdb20e:89688a76-779a-4efd-bbd6-685a841a50a4
+[I 2024-02-26 14:28:40.696 ServerApp] Connecting to kernel f2fa08a0-9c6e-44be-b15c-849b7e61034e.
+[I 2024-02-26 14:28:40.696 ServerApp] Restoring connection for f2fa08a0-9c6e-44be-b15c-849b7e61034e:b7c48302-cc19-4d18-9c21-f4e6770f1410
+[I 2024-02-26 14:28:40.766 ServerApp] Connecting to kernel a8b5ffcb-1baa-4ba0-b540-52c4a9a7fbc0.
+[I 2024-02-26 14:28:40.766 ServerApp] Restoring connection for a8b5ffcb-1baa-4ba0-b540-52c4a9a7fbc0:9d06e603-d062-4474-b723-1af4747e6ade
+[I 2024-02-26 14:28:40.920 ServerApp] Connecting to kernel 899a635d-0bd2-4dec-8adc-c85f57cdb20e.
+[I 2024-02-26 14:28:40.920 ServerApp] Restoring connection for 899a635d-0bd2-4dec-8adc-c85f57cdb20e:89688a76-779a-4efd-bbd6-685a841a50a4
+[W 2024-02-26 14:30:10.697 ServerApp] WebSocket ping timeout after 90001 ms.
+[W 2024-02-26 14:30:10.767 ServerApp] WebSocket ping timeout after 90000 ms.
+[W 2024-02-26 14:30:10.920 ServerApp] WebSocket ping timeout after 90000 ms.
+[I 2024-02-26 14:30:15.700 ServerApp] Starting buffering for f2fa08a0-9c6e-44be-b15c-849b7e61034e:b7c48302-cc19-4d18-9c21-f4e6770f1410
+[I 2024-02-26 14:30:15.768 ServerApp] Starting buffering for a8b5ffcb-1baa-4ba0-b540-52c4a9a7fbc0:9d06e603-d062-4474-b723-1af4747e6ade
+[I 2024-02-26 14:30:15.922 ServerApp] Starting buffering for 899a635d-0bd2-4dec-8adc-c85f57cdb20e:89688a76-779a-4efd-bbd6-685a841a50a4
+slurmstepd: error: *** JOB 28936009 ON exp-1-07 CANCELLED AT 2024-02-26T18:20:55 DUE TO TIME LIMIT ***
+[C 2024-02-26 18:20:55.667 ServerApp] received signal 15, stopping
+[I 2024-02-26 18:20:55.748 ServerApp] Shutting down 5 extensions
+[I 2024-02-26 18:20:55.748 ServerApp] Shutting down 4 kernels
+[I 2024-02-26 18:20:55.749 ServerApp] Kernel shutdown: ea16bf05-0863-4e8a-aeca-8b260ec2a156
+[I 2024-02-26 18:20:55.750 ServerApp] Kernel shutdown: a8b5ffcb-1baa-4ba0-b540-52c4a9a7fbc0
+[I 2024-02-26 18:20:55.750 ServerApp] Kernel shutdown: 899a635d-0bd2-4dec-8adc-c85f57cdb20e
+[I 2024-02-26 18:20:55.750 ServerApp] Kernel shutdown: f2fa08a0-9c6e-44be-b15c-849b7e61034e

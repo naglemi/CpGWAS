@@ -1,0 +1,976 @@
+Fail to get yarn configuration. /home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyterlab/staging/yarn.js:4
+(()=>{var Qge=Object.create;var AS=Object.defineProperty;var bge=Object.getOwnPropertyDescriptor;var Sge=Object.getOwnPropertyNames;var vge=Object.getPrototypeOf,xge=Object.prototype.hasOwnProperty;var J=(r=>typeof require<"u"?require:typeof Proxy<"u"?new Proxy(r,{get:(e,t)=>(typeof require<"u"?require:e)[t]}):r)(function(r){if(typeof require<"u")return require.apply(this,arguments);throw new Error('Dynamic require of "'+r+'" is not supported')});var Pge=(r,e)=>()=>(r&&(e=r(r=0)),e);var w=(r,e)=>()=>(e||r((e={exports:{}}).exports,e),e.exports),ut=(r,e)=>{for(var t in e)AS(r,t,{get:e[t],enumerable:!0})},Dge=(r,e,t,i)=>{if(e&&typeof e=="object"||typeof e=="function")for(let n of Sge(e))!xge.call(r,n)&&n!==t&&AS(r,n,{get:()=>e[n],enumerable:!(i=bge(e,n))||i.enumerable});return r};var Pe=(r,e,t)=>(t=r!=null?Qge(vge(r)):{},Dge(e||!r||!r.__esModule?AS(t,"default",{value:r,enumerable:!0}):t,r));var QK=w((GXe,BK)=>{BK.expor
+
+SyntaxError: Unexpected token {
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.runMain (module.js:611:10)
+    at run (bootstrap_node.js:387:7)
+    at startup (bootstrap_node.js:153:9)
+
+[I 2024-05-01 09:46:18.885 ServerApp] Package jupyterlab took 0.0000s to import
+[I 2024-05-01 09:46:19.574 ServerApp] Package jupyter_lsp took 0.6881s to import
+[W 2024-05-01 09:46:19.574 ServerApp] A `_jupyter_server_extension_points` function was not found in jupyter_lsp. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2024-05-01 09:46:19.856 ServerApp] Package jupyter_server_terminals took 0.2816s to import
+[I 2024-05-01 09:46:19.856 ServerApp] Package notebook took 0.0000s to import
+[I 2024-05-01 09:46:19.876 ServerApp] Package notebook_shim took 0.0000s to import
+[W 2024-05-01 09:46:19.877 ServerApp] A `_jupyter_server_extension_points` function was not found in notebook_shim. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2024-05-01 09:46:19.895 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2024-05-01 09:46:19.899 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2024-05-01 09:46:19.904 ServerApp] jupyterlab | extension was successfully linked.
+[W 2024-05-01 09:46:19.933 JupyterNotebookApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2024-05-01 09:46:19.935 ServerApp] ServerApp.password config is deprecated in 2.0. Use PasswordIdentityProvider.hashed_password.
+[I 2024-05-01 09:46:19.935 ServerApp] notebook | extension was successfully linked.
+[I 2024-05-01 09:46:25.537 ServerApp] notebook_shim | extension was successfully linked.
+[I 2024-05-01 09:46:25.775 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2024-05-01 09:46:25.777 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2024-05-01 09:46:25.778 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2024-05-01 09:46:25.840 LabApp] JupyterLab extension loaded from /home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyterlab
+[I 2024-05-01 09:46:25.840 LabApp] JupyterLab application directory is /home/naglemi/miniconda3/envs/mwas/share/jupyter/lab
+[I 2024-05-01 09:46:25.840 LabApp] Extension Manager is 'pypi'.
+[I 2024-05-01 09:46:25.842 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2024-05-01 09:46:25.844 ServerApp] notebook | extension was successfully loaded.
+[I 2024-05-01 09:46:25.845 ServerApp] Serving notebooks from local directory: /expanse/lustre/projects/jhu152/naglemi/mwas/CpGWAS
+[I 2024-05-01 09:46:25.845 ServerApp] Jupyter Server 2.10.0 is running at:
+[I 2024-05-01 09:46:25.845 ServerApp] http://localhost:8888/lab
+[I 2024-05-01 09:46:25.845 ServerApp]     http://127.0.0.1:8888/lab
+[I 2024-05-01 09:46:25.845 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[?1049h[22;0;0t[1;24r(B[m[4l[?7h[?1h=[39;49m[39;49m[37m[40m[H[2J[37m[40m[J(B[m[39;49m[37m[40m[39;49m[37m[40m[J[39;49m(B[m[22d[93m[44mGetting file://localhost/home/naglemi/.local/share/jupyter/runtime/jpserver-256[K[39;49m(B[m
+
+[24;1H[?1049l[23;0;0t[?1l>[I 2024-05-01 09:46:34.537 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+[I 2024-05-01 11:26:59.248 ServerApp] 302 GET / (@127.0.0.1) 0.33ms
+[I 2024-05-01 11:26:59.336 LabApp] 302 GET /lab? (@127.0.0.1) 0.76ms
+[W 2024-05-01 11:27:21.063 ServerApp] 401 POST /login?next=%2Flab%3F (@127.0.0.1) 287.84ms referer=http://localhost:8892/login?next=%2Flab%3F
+[I 2024-05-01 11:27:28.574 ServerApp] User 3695167255a04b43bea4a2413776ac5a logged in.
+[I 2024-05-01 11:27:28.575 ServerApp] 302 POST /login?next=%2Flab%3F (3695167255a04b43bea4a2413776ac5a@127.0.0.1) 58.97ms
+0.02s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+[W 2024-05-01 11:27:35.963 LabApp] Could not determine jupyterlab build status without nodejs
+[W 2024-05-01 11:30:08.065 LabApp] Could not determine jupyterlab build status without nodejs
+[W 2024-05-01 11:30:15.605 ServerApp] 404 GET /api/contents/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb?content=0&1714588215569 (127.0.0.1): No such file or directory: 10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+[W 2024-05-01 11:30:15.605 ServerApp] wrote error: 'No such file or directory: 10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb'
+    Traceback (most recent call last):
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_server/services/contents/handlers.py", line 121, in get
+        model = await ensure_async(
+                ^^^^^^^^^^^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 189, in ensure_async
+        result = await obj
+                 ^^^^^^^^^
+      File "/home/naglemi/miniconda3/envs/mwas/lib/python3.11/site-packages/jupyter_server/services/contents/filemanager.py", line 863, in get
+        raise web.HTTPError(404, "No such file or directory: %s" % path)
+    tornado.web.HTTPError: HTTP 404: Not Found (No such file or directory: 10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb)
+[W 2024-05-01 11:30:15.708 ServerApp] 404 GET /api/contents/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb?content=0&1714588215569 (3695167255a04b43bea4a2413776ac5a@127.0.0.1) 103.06ms referer=http://localhost:8892/lab?
+[I 2024-05-01 11:30:15.910 ServerApp] New terminal with automatic name: 1
+[W 2024-05-01 11:30:30.499 ServerApp] Notebook scripts/05_Inspect_SLURM_benchmarks_a2.ipynb is not trusted
+[I 2024-05-01 11:30:31.679 ServerApp] Kernel started: b49440c2-7f3e-4e85-a452-0b431f0ee252
+[I 2024-05-01 11:30:33.554 ServerApp] Connecting to kernel b49440c2-7f3e-4e85-a452-0b431f0ee252.
+[I 2024-05-01 11:30:33.555 ServerApp] Connecting to kernel b49440c2-7f3e-4e85-a452-0b431f0ee252.
+[I 2024-05-01 11:30:33.557 ServerApp] Connecting to kernel b49440c2-7f3e-4e85-a452-0b431f0ee252.
+[I 2024-05-01 11:30:35.960 ServerApp] Kernel started: d8aa035b-5126-4f6f-90f9-b291848127ff
+[I 2024-05-01 11:30:36.488 ServerApp] Connecting to kernel d8aa035b-5126-4f6f-90f9-b291848127ff.
+[I 2024-05-01 11:32:14.807 ServerApp] Kernel restarted: d8aa035b-5126-4f6f-90f9-b291848127ff
+[I 2024-05-01 11:32:14.883 ServerApp] Starting buffering for d8aa035b-5126-4f6f-90f9-b291848127ff:be988528-9385-49f4-89e0-2f356ebdecd5
+[I 2024-05-01 11:32:15.018 ServerApp] Connecting to kernel d8aa035b-5126-4f6f-90f9-b291848127ff.
+[I 2024-05-01 11:32:15.018 ServerApp] Restoring connection for d8aa035b-5126-4f6f-90f9-b291848127ff:be988528-9385-49f4-89e0-2f356ebdecd5
+Submitted batch job 30237559
+[I 2024-05-01 11:32:35.776 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30237849
+[I 2024-05-01 11:34:47.518 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30237865
+[I 2024-05-01 11:37:11.711 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30237886
+[I 2024-05-01 11:39:12.492 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30237902
+[I 2024-05-01 11:41:19.904 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30238082
+[I 2024-05-01 11:43:20.685 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30238100
+[I 2024-05-01 11:45:22.144 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30238110
+[I 2024-05-01 11:47:23.068 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30238122
+[I 2024-05-01 11:49:23.943 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30238129
+Submitted batch job 30238141
+Submitted batch job 30238154
+Submitted batch job 30238167
+Submitted batch job 30238184
+[I 2024-05-01 12:00:47.508 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30238200
+Submitted batch job 30238210
+[I 2024-05-01 12:03:09.503 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30238225
+[I 2024-05-01 12:05:11.227 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30238236
+[I 2024-05-01 12:07:13.074 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30238246
+[I 2024-05-01 12:09:37.595 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30238489
+Submitted batch job 30238505
+Submitted batch job 30238618
+Submitted batch job 30238682
+Submitted batch job 30238711
+Submitted batch job 30238726
+Submitted batch job 30238743
+[I 2024-05-01 12:24:31.542 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30238747
+[I 2024-05-01 12:26:33.176 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30238758
+[I 2024-05-01 12:28:34.152 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30238769
+[I 2024-05-01 12:30:35.159 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30238773
+[I 2024-05-01 12:32:36.180 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30238818
+[I 2024-05-01 12:34:38.171 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30238821
+[I 2024-05-01 12:36:39.230 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30238828
+[I 2024-05-01 12:38:40.153 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30238858
+Submitted batch job 30238868
+Submitted batch job 30238874
+Submitted batch job 30238880
+Submitted batch job 30238909
+Submitted batch job 30238938
+Submitted batch job 30238945
+Submitted batch job 30238979
+Submitted batch job 30239030
+[I 2024-05-01 12:56:01.491 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30239069
+[I 2024-05-01 12:58:03.297 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30239090
+[I 2024-05-01 13:00:04.674 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30239117
+[I 2024-05-01 13:03:18.170 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30239190
+[I 2024-05-01 13:05:19.631 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30239214
+[I 2024-05-01 13:07:21.309 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30239250
+Submitted batch job 30239273
+Submitted batch job 30239304
+Submitted batch job 30239364
+Submitted batch job 30239393
+Submitted batch job 30239453
+Submitted batch job 30239508
+Submitted batch job 30239562
+Submitted batch job 30239597
+Submitted batch job 30239626
+Submitted batch job 30239656
+Submitted batch job 30239663
+Submitted batch job 30239680
+Submitted batch job 30239693
+[I 2024-05-01 13:34:48.146 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30239701
+[I 2024-05-01 13:36:49.642 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30239712
+[I 2024-05-01 13:38:50.854 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30239718
+[I 2024-05-01 13:40:51.864 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30239738
+Submitted batch job 30239746
+[I 2024-05-01 13:44:43.225 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30239760
+[I 2024-05-01 13:46:49.686 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30239778
+[I 2024-05-01 13:48:50.590 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30239789
+[I 2024-05-01 13:50:51.835 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30239809
+[I 2024-05-01 13:52:52.658 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30239823
+Submitted batch job 30239829
+Submitted batch job 30239845
+Submitted batch job 30239851
+Submitted batch job 30239956
+[I 2024-05-01 14:02:30.652 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30239976
+[I 2024-05-01 14:04:34.362 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30239987
+[I 2024-05-01 14:06:35.498 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30240003
+[I 2024-05-01 14:08:36.657 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30240012
+[I 2024-05-01 14:10:38.512 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30240028
+[I 2024-05-01 14:12:42.907 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30240039
+[I 2024-05-01 14:14:45.201 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30240045
+[I 2024-05-01 14:16:46.165 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30240057
+[I 2024-05-01 14:18:47.587 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30240068
+[I 2024-05-01 14:20:48.554 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30240082
+[I 2024-05-01 14:23:12.721 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30240091
+[I 2024-05-01 14:25:13.864 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30240098
+Submitted batch job 30240111
+Submitted batch job 30240115
+Submitted batch job 30240128
+[W 2024-05-01 14:33:03.557 ServerApp] WebSocket ping timeout after 98662 ms.
+[I 2024-05-01 14:33:08.559 ServerApp] Starting buffering for b49440c2-7f3e-4e85-a452-0b431f0ee252:e1d51fac-ac4f-4f0c-90f0-ba48b167fd69
+[W 2024-05-01 14:33:15.018 ServerApp] WebSocket ping timeout after 110123 ms.
+[W 2024-05-01 14:33:16.192 TerminalsExtensionApp] WebSocket ping timeout after 111297 ms.
+[I 2024-05-01 14:33:20.021 ServerApp] Starting buffering for d8aa035b-5126-4f6f-90f9-b291848127ff:be988528-9385-49f4-89e0-2f356ebdecd5
+Submitted batch job 30240139
+Submitted batch job 30240148
+Submitted batch job 30240161
+Submitted batch job 30240168
+Submitted batch job 30240181
+Submitted batch job 30240194
+Submitted batch job 30240203
+Submitted batch job 30240215
+Submitted batch job 30240239
+Submitted batch job 30240289
+Submitted batch job 30240416
+Submitted batch job 30240439
+Submitted batch job 30240459
+Submitted batch job 30240479
+Submitted batch job 30240488
+Submitted batch job 30240541
+Submitted batch job 30240565
+Submitted batch job 30240587
+Submitted batch job 30240595
+Submitted batch job 30240602
+Submitted batch job 30240659
+Submitted batch job 30240697
+Submitted batch job 30240712
+Submitted batch job 30240728
+Submitted batch job 30240741
+Submitted batch job 30240779
+Submitted batch job 30240808
+Submitted batch job 30240839
+Submitted batch job 30240867
+Submitted batch job 30241022
+Submitted batch job 30241069
+Submitted batch job 30241096
+Submitted batch job 30241130
+Submitted batch job 30241149
+Submitted batch job 30241171
+Submitted batch job 30241184
+Submitted batch job 30241200
+Submitted batch job 30241205
+Submitted batch job 30241213
+Submitted batch job 30241225
+Submitted batch job 30241236
+Submitted batch job 30241717
+Submitted batch job 30241749
+Submitted batch job 30241791
+Submitted batch job 30241799
+Submitted batch job 30241804
+Submitted batch job 30241815
+Submitted batch job 30241822
+Submitted batch job 30241827
+Submitted batch job 30241834
+Submitted batch job 30241840
+Submitted batch job 30241850
+Submitted batch job 30241857
+Submitted batch job 30241873
+Submitted batch job 30241901
+Submitted batch job 30241907
+Submitted batch job 30241918
+Submitted batch job 30241926
+Submitted batch job 30241934
+Submitted batch job 30241942
+Submitted batch job 30241945
+Submitted batch job 30241961
+Submitted batch job 30242584
+Submitted batch job 30242593
+Submitted batch job 30242610
+Submitted batch job 30242622
+Submitted batch job 30242635
+Submitted batch job 30242649
+Submitted batch job 30242665
+Submitted batch job 30242682
+Submitted batch job 30242691
+Submitted batch job 30242709
+Submitted batch job 30242737
+Submitted batch job 30242760
+Submitted batch job 30242782
+Submitted batch job 30242798
+Submitted batch job 30242811
+Submitted batch job 30242820
+Submitted batch job 30242829
+Submitted batch job 30242844
+Submitted batch job 30242849
+Submitted batch job 30242861
+Submitted batch job 30242881
+Submitted batch job 30242890
+Submitted batch job 30242906
+Submitted batch job 30242911
+Submitted batch job 30242920
+Submitted batch job 30242930
+Submitted batch job 30242972
+Submitted batch job 30243056
+Submitted batch job 30243059
+Submitted batch job 30243068
+Submitted batch job 30243077
+Submitted batch job 30243093
+Submitted batch job 30243198
+Submitted batch job 30243209
+Submitted batch job 30243229
+Submitted batch job 30243248
+Submitted batch job 30243265
+Submitted batch job 30243279
+Submitted batch job 30243300
+Submitted batch job 30243314
+Submitted batch job 30243330
+Submitted batch job 30243354
+Submitted batch job 30243370
+Submitted batch job 30243380
+Submitted batch job 30243398
+Submitted batch job 30243405
+Submitted batch job 30243420
+Submitted batch job 30243429
+Submitted batch job 30243440
+Submitted batch job 30243450
+Submitted batch job 30243456
+Submitted batch job 30243466
+Submitted batch job 30243469
+Submitted batch job 30243474
+Submitted batch job 30243490
+Submitted batch job 30243494
+Submitted batch job 30243496
+Submitted batch job 30243513
+Submitted batch job 30243516
+Submitted batch job 30243533
+Submitted batch job 30243536
+Submitted batch job 30243539
+Submitted batch job 30243550
+Submitted batch job 30243556
+Submitted batch job 30243569
+Submitted batch job 30243573
+Submitted batch job 30243582
+Submitted batch job 30243616
+Submitted batch job 30243619
+Submitted batch job 30243698
+Submitted batch job 30243700
+Submitted batch job 30243716
+Submitted batch job 30243717
+Submitted batch job 30243719
+Submitted batch job 30243736
+Submitted batch job 30243739
+Submitted batch job 30243743
+Submitted batch job 30243754
+Submitted batch job 30243781
+Submitted batch job 30243789
+Submitted batch job 30243802
+Submitted batch job 30243834
+Submitted batch job 30243867
+Submitted batch job 30243906
+Submitted batch job 30243962
+Submitted batch job 30243968
+Submitted batch job 30244055
+Submitted batch job 30244061
+Submitted batch job 30244067
+Submitted batch job 30244167
+Submitted batch job 30244173
+Submitted batch job 30244183
+Submitted batch job 30244215
+Submitted batch job 30244228
+Submitted batch job 30244233
+Submitted batch job 30244239
+Submitted batch job 30244252
+Submitted batch job 30244258
+Submitted batch job 30244266
+Submitted batch job 30244273
+Submitted batch job 30244279
+Submitted batch job 30244351
+Submitted batch job 30244369
+Submitted batch job 30244376
+Submitted batch job 30244407
+Submitted batch job 30244414
+Submitted batch job 30244420
+Submitted batch job 30244456
+Submitted batch job 30244459
+Submitted batch job 30244478
+Submitted batch job 30244486
+Submitted batch job 30244489
+Submitted batch job 30244502
+Submitted batch job 30244503
+Submitted batch job 30244525
+Submitted batch job 30244528
+Submitted batch job 30244533
+Submitted batch job 30244540
+Submitted batch job 30244544
+Submitted batch job 30244566
+Submitted batch job 30244572
+Submitted batch job 30244579
+Submitted batch job 30244596
+Submitted batch job 30244645
+Submitted batch job 30244704
+Submitted batch job 30244710
+Submitted batch job 30244715
+Submitted batch job 30244734
+Submitted batch job 30244743
+Submitted batch job 30244767
+Submitted batch job 30244773
+Submitted batch job 30244781
+Submitted batch job 30244823
+Submitted batch job 30244845
+Submitted batch job 30244898
+Submitted batch job 30244911
+Submitted batch job 30244919
+Submitted batch job 30244981
+Submitted batch job 30245010
+Submitted batch job 30245016
+Submitted batch job 30245023
+Submitted batch job 30245039
+Submitted batch job 30245075
+Submitted batch job 30245082
+Submitted batch job 30245132
+Submitted batch job 30245144
+Submitted batch job 30245158
+Submitted batch job 30245206
+Submitted batch job 30245218
+Submitted batch job 30245220
+Submitted batch job 30245228
+Submitted batch job 30245284
+Submitted batch job 30245383
+Submitted batch job 30245407
+Submitted batch job 30245410
+Submitted batch job 30245424
+Submitted batch job 30245428
+Submitted batch job 30245439
+Submitted batch job 30245449
+Submitted batch job 30245489
+Submitted batch job 30245495
+Submitted batch job 30245503
+Submitted batch job 30245527
+Submitted batch job 30245534
+Submitted batch job 30245546
+Submitted batch job 30245549
+Submitted batch job 30245554
+Submitted batch job 30245565
+Submitted batch job 30245568
+Submitted batch job 30245581
+Submitted batch job 30245586
+Submitted batch job 30245592
+Submitted batch job 30245602
+Submitted batch job 30245608
+Submitted batch job 30245629
+Submitted batch job 30245634
+Submitted batch job 30245640
+Submitted batch job 30245758
+Submitted batch job 30245764
+Submitted batch job 30245778
+Submitted batch job 30245784
+Submitted batch job 30245794
+Submitted batch job 30245815
+Submitted batch job 30245824
+Submitted batch job 30245840
+Submitted batch job 30245849
+Submitted batch job 30245858
+Submitted batch job 30245881
+Submitted batch job 30245906
+Submitted batch job 30245927
+Submitted batch job 30245941
+Submitted batch job 30246019
+Submitted batch job 30246041
+Submitted batch job 30246056
+Submitted batch job 30246077
+Submitted batch job 30246082
+Submitted batch job 30246090
+Submitted batch job 30246111
+Submitted batch job 30246115
+Submitted batch job 30246129
+Submitted batch job 30246136
+Submitted batch job 30246143
+Submitted batch job 30246155
+Submitted batch job 30246426
+Submitted batch job 30246442
+Submitted batch job 30246450
+Submitted batch job 30246453
+Submitted batch job 30246466
+Submitted batch job 30246475
+Submitted batch job 30246487
+Submitted batch job 30246492
+Submitted batch job 30246499
+Submitted batch job 30246510
+Submitted batch job 30246517
+Submitted batch job 30246535
+Submitted batch job 30246539
+Submitted batch job 30246548
+Submitted batch job 30246562
+Submitted batch job 30246566
+Submitted batch job 30246581
+Submitted batch job 30246585
+Submitted batch job 30246589
+Submitted batch job 30246603
+Submitted batch job 30246607
+Submitted batch job 30246631
+Submitted batch job 30246633
+Submitted batch job 30246641
+Submitted batch job 30246653
+Submitted batch job 30246665
+Submitted batch job 30246681
+Submitted batch job 30246694
+Submitted batch job 30246700
+Submitted batch job 30246714
+Submitted batch job 30246725
+Submitted batch job 30246731
+Submitted batch job 30246736
+Submitted batch job 30246739
+Submitted batch job 30246745
+Submitted batch job 30246769
+Submitted batch job 30246777
+Submitted batch job 30246780
+Submitted batch job 30246791
+Submitted batch job 30246795
+Submitted batch job 30246797
+Submitted batch job 30246806
+Submitted batch job 30246810
+Submitted batch job 30246812
+Submitted batch job 30246817
+Submitted batch job 30246824
+Submitted batch job 30246830
+Submitted batch job 30246836
+Submitted batch job 30246848
+Submitted batch job 30246855
+Submitted batch job 30246862
+Submitted batch job 30246867
+Submitted batch job 30246877
+Submitted batch job 30246886
+Submitted batch job 30246891
+Submitted batch job 30246895
+Submitted batch job 30246901
+Submitted batch job 30246902
+Submitted batch job 30246906
+Submitted batch job 30246915
+Submitted batch job 30246921
+Submitted batch job 30246934
+Submitted batch job 30246943
+Submitted batch job 30246953
+Submitted batch job 30246957
+Submitted batch job 30246965
+Submitted batch job 30246969
+Submitted batch job 30246973
+Submitted batch job 30246975
+Submitted batch job 30246980
+Submitted batch job 30246987
+Submitted batch job 30246990
+Submitted batch job 30246993
+Submitted batch job 30246998
+Submitted batch job 30247005
+Submitted batch job 30247040
+Submitted batch job 30247044
+Submitted batch job 30247050
+Submitted batch job 30247055
+Submitted batch job 30247065
+Submitted batch job 30247074
+Submitted batch job 30247076
+Submitted batch job 30247082
+Submitted batch job 30247086
+Submitted batch job 30247089
+Submitted batch job 30247091
+Submitted batch job 30247100
+Submitted batch job 30247103
+Submitted batch job 30247107
+Submitted batch job 30247122
+Submitted batch job 30247126
+Submitted batch job 30247129
+Submitted batch job 30247133
+Submitted batch job 30247204
+Submitted batch job 30247224
+Submitted batch job 30247238
+Submitted batch job 30247241
+Submitted batch job 30247246
+Submitted batch job 30247253
+Submitted batch job 30247260
+Submitted batch job 30247264
+Submitted batch job 30247271
+Submitted batch job 30247275
+Submitted batch job 30247277
+Submitted batch job 30247282
+Submitted batch job 30247285
+Submitted batch job 30247292
+Submitted batch job 30247294
+Submitted batch job 30247297
+Submitted batch job 30247298
+Submitted batch job 30247301
+Submitted batch job 30247304
+Submitted batch job 30247308
+Submitted batch job 30247312
+Submitted batch job 30247313
+Submitted batch job 30247315
+Submitted batch job 30247319
+Submitted batch job 30247322
+Submitted batch job 30247332
+Submitted batch job 30247340
+Submitted batch job 30247342
+Submitted batch job 30247347
+Submitted batch job 30247352
+Submitted batch job 30247355
+Submitted batch job 30247358
+Submitted batch job 30247373
+Submitted batch job 30247375
+Submitted batch job 30247381
+Submitted batch job 30247385
+Submitted batch job 30247389
+Submitted batch job 30247393
+Submitted batch job 30247398
+Submitted batch job 30247402
+Submitted batch job 30247405
+Submitted batch job 30247409
+Submitted batch job 30247412
+Submitted batch job 30247416
+Submitted batch job 30247421
+Submitted batch job 30247423
+Submitted batch job 30247429
+Submitted batch job 30247433
+Submitted batch job 30247441
+Submitted batch job 30247450
+Submitted batch job 30247454
+Submitted batch job 30247459
+Submitted batch job 30247465
+Submitted batch job 30247470
+Submitted batch job 30247474
+Submitted batch job 30247476
+Submitted batch job 30247480
+Submitted batch job 30247484
+Submitted batch job 30247488
+Submitted batch job 30247492
+Submitted batch job 30247497
+Submitted batch job 30247507
+Submitted batch job 30247511
+Submitted batch job 30247516
+Submitted batch job 30247522
+Submitted batch job 30247524
+Submitted batch job 30247528
+Submitted batch job 30247539
+Submitted batch job 30247545
+Submitted batch job 30247552
+Submitted batch job 30247562
+Submitted batch job 30247572
+Submitted batch job 30247579
+Submitted batch job 30247583
+Submitted batch job 30247585
+Submitted batch job 30247591
+Submitted batch job 30247594
+Submitted batch job 30247597
+Submitted batch job 30247599
+Submitted batch job 30247706
+Submitted batch job 30247714
+Submitted batch job 30247715
+Submitted batch job 30247718
+Submitted batch job 30247722
+Submitted batch job 30247727
+Submitted batch job 30247736
+Submitted batch job 30247749
+Submitted batch job 30247754
+Submitted batch job 30247758
+Submitted batch job 30247765
+Submitted batch job 30247769
+Submitted batch job 30247773
+Submitted batch job 30247783
+Submitted batch job 30247795
+Submitted batch job 30247800
+Submitted batch job 30247803
+Submitted batch job 30247810
+Submitted batch job 30247818
+Submitted batch job 30247950
+Submitted batch job 30247957
+Submitted batch job 30247961
+Submitted batch job 30247966
+Submitted batch job 30247971
+Submitted batch job 30247977
+Submitted batch job 30247979
+Submitted batch job 30247981
+Submitted batch job 30248018
+Submitted batch job 30248022
+Submitted batch job 30248307
+Submitted batch job 30248394
+Submitted batch job 30248488
+Submitted batch job 30248585
+Submitted batch job 30248684
+Submitted batch job 30248782
+Submitted batch job 30248881
+Submitted batch job 30248986
+Submitted batch job 30249067
+Submitted batch job 30249069
+Submitted batch job 30249085
+Submitted batch job 30249093
+Submitted batch job 30249104
+Submitted batch job 30249107
+Submitted batch job 30249133
+Submitted batch job 30249138
+Submitted batch job 30249141
+Submitted batch job 30249147
+Submitted batch job 30249152
+Submitted batch job 30249154
+Submitted batch job 30249521
+Submitted batch job 30249634
+Submitted batch job 30249682
+Submitted batch job 30249687
+Submitted batch job 30249692
+Submitted batch job 30249696
+Submitted batch job 30249700
+Submitted batch job 30249703
+Submitted batch job 30249712
+Submitted batch job 30249717
+Submitted batch job 30249725
+Submitted batch job 30249727
+Submitted batch job 30249736
+Submitted batch job 30249739
+Submitted batch job 30249745
+Submitted batch job 30249751
+Submitted batch job 30249758
+Submitted batch job 30249762
+Submitted batch job 30249780
+Submitted batch job 30249784
+Submitted batch job 30249795
+Submitted batch job 30249800
+Submitted batch job 30249808
+Submitted batch job 30249825
+Submitted batch job 30249829
+Submitted batch job 30249846
+Submitted batch job 30249853
+Submitted batch job 30249860
+Submitted batch job 30249867
+Submitted batch job 30249876
+Submitted batch job 30249893
+Submitted batch job 30249901
+Submitted batch job 30249908
+Submitted batch job 30249919
+Submitted batch job 30249952
+Submitted batch job 30249956
+Submitted batch job 30249965
+Submitted batch job 30249973
+Submitted batch job 30249983
+Submitted batch job 30249992
+Submitted batch job 30250008
+Submitted batch job 30250017
+Submitted batch job 30250023
+Submitted batch job 30250033
+Submitted batch job 30250038
+Submitted batch job 30250049
+Submitted batch job 30250062
+Submitted batch job 30250068
+Submitted batch job 30250075
+Submitted batch job 30250083
+Submitted batch job 30250094
+Submitted batch job 30250389
+Submitted batch job 30250469
+Submitted batch job 30250476
+Submitted batch job 30250488
+Submitted batch job 30250498
+Submitted batch job 30250542
+Submitted batch job 30250552
+Submitted batch job 30250567
+Submitted batch job 30250574
+Submitted batch job 30250585
+Submitted batch job 30250610
+Submitted batch job 30250619
+Submitted batch job 30250625
+Submitted batch job 30250637
+Submitted batch job 30250645
+Submitted batch job 30250654
+Submitted batch job 30250670
+Submitted batch job 30250678
+Submitted batch job 30250709
+Submitted batch job 30250836
+Submitted batch job 30250952
+Submitted batch job 30251072
+Submitted batch job 30251127
+Submitted batch job 30251139
+Submitted batch job 30251146
+Submitted batch job 30251159
+Submitted batch job 30251166
+Submitted batch job 30251174
+Submitted batch job 30251179
+Submitted batch job 30251182
+Submitted batch job 30251187
+Submitted batch job 30251240
+Submitted batch job 30251278
+Submitted batch job 30251347
+Submitted batch job 30251404
+Submitted batch job 30251536
+Submitted batch job 30251573
+Submitted batch job 30251679
+Submitted batch job 30251746
+Submitted batch job 30251850
+Submitted batch job 30251900
+Submitted batch job 30251905
+Submitted batch job 30251918
+Submitted batch job 30251924
+Submitted batch job 30251932
+Submitted batch job 30251940
+Submitted batch job 30251954
+Submitted batch job 30251972
+Submitted batch job 30251989
+Submitted batch job 30251996
+Submitted batch job 30252006
+Submitted batch job 30252014
+Submitted batch job 30252017
+Submitted batch job 30252031
+Submitted batch job 30252039
+Submitted batch job 30252044
+Submitted batch job 30252048
+Submitted batch job 30252065
+Submitted batch job 30252069
+Submitted batch job 30252204
+Submitted batch job 30252348
+Submitted batch job 30252353
+Submitted batch job 30252368
+Submitted batch job 30252375
+Submitted batch job 30252434
+Submitted batch job 30252446
+Submitted batch job 30252455
+Submitted batch job 30252464
+Submitted batch job 30252472
+Submitted batch job 30252489
+Submitted batch job 30252498
+Submitted batch job 30252515
+Submitted batch job 30252521
+Submitted batch job 30252563
+Submitted batch job 30252581
+Submitted batch job 30252593
+Submitted batch job 30252598
+Submitted batch job 30252605
+Submitted batch job 30252612
+Submitted batch job 30252625
+Submitted batch job 30252635
+Submitted batch job 30252648
+Submitted batch job 30252657
+Submitted batch job 30252667
+Submitted batch job 30252685
+Submitted batch job 30252729
+Submitted batch job 30252742
+Submitted batch job 30252748
+Submitted batch job 30252762
+Submitted batch job 30252775
+Submitted batch job 30252784
+Submitted batch job 30252789
+Submitted batch job 30252795
+Submitted batch job 30252810
+Submitted batch job 30252847
+Submitted batch job 30252854
+Submitted batch job 30252862
+Submitted batch job 30252866
+Submitted batch job 30252873
+Submitted batch job 30252882
+Submitted batch job 30252891
+Submitted batch job 30252905
+Submitted batch job 30252917
+Submitted batch job 30252925
+Submitted batch job 30252942
+Submitted batch job 30252964
+Submitted batch job 30252970
+Submitted batch job 30253085
+Submitted batch job 30253094
+Submitted batch job 30253098
+Submitted batch job 30253102
+Submitted batch job 30253118
+Submitted batch job 30253160
+Submitted batch job 30253166
+Submitted batch job 30253173
+Submitted batch job 30253184
+Submitted batch job 30253294
+Submitted batch job 30253336
+Submitted batch job 30253394
+Submitted batch job 30253437
+Submitted batch job 30253443
+Submitted batch job 30253550
+Submitted batch job 30253557
+Submitted batch job 30253565
+Submitted batch job 30253575
+Submitted batch job 30253585
+Submitted batch job 30253599
+Submitted batch job 30253609
+Submitted batch job 30253629
+Submitted batch job 30253739
+Submitted batch job 30253744
+Submitted batch job 30253757
+Submitted batch job 30253764
+Submitted batch job 30253778
+Submitted batch job 30253804
+Submitted batch job 30253810
+Submitted batch job 30253887
+Submitted batch job 30253937
+Submitted batch job 30253955
+Submitted batch job 30253965
+Submitted batch job 30253974
+Submitted batch job 30253982
+Submitted batch job 30253984
+Submitted batch job 30253993
+Submitted batch job 30254008
+Submitted batch job 30254017
+Submitted batch job 30254027
+Submitted batch job 30254042
+Submitted batch job 30254059
+Submitted batch job 30254070
+Submitted batch job 30254078
+Submitted batch job 30254094
+Submitted batch job 30254231
+Submitted batch job 30254241
+Submitted batch job 30254261
+Submitted batch job 30254274
+Submitted batch job 30254281
+Submitted batch job 30254294
+Submitted batch job 30254307
+[I 2024-05-03 06:18:09.158 ServerApp] 302 GET / (@127.0.0.1) 0.97ms
+[W 2024-05-03 06:18:12.985 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2024-05-03 06:18:13.010 ServerApp] Connecting to kernel b49440c2-7f3e-4e85-a452-0b431f0ee252.
+[I 2024-05-03 06:18:13.120 ServerApp] Connecting to kernel d8aa035b-5126-4f6f-90f9-b291848127ff.
+[I 2024-05-03 06:18:13.128 ServerApp] Discarding 1405 buffered messages for d8aa035b-5126-4f6f-90f9-b291848127ff:be988528-9385-49f4-89e0-2f356ebdecd5
+[I 2024-05-03 06:18:13.241 ServerApp] Starting buffering for b49440c2-7f3e-4e85-a452-0b431f0ee252:3d49c596-8817-4d99-b57e-cb45c16abc18
+[I 2024-05-03 06:18:13.352 ServerApp] Starting buffering for d8aa035b-5126-4f6f-90f9-b291848127ff:60c9d08b-9a50-4ffe-8801-8249999409ba
+[W 2024-05-03 06:21:45.999 ServerApp] Notebook scripts/05_Inspect_SLURM_benchmarks_a2.ipynb is not trusted
+[I 2024-05-03 06:21:57.655 ServerApp] Connecting to kernel b49440c2-7f3e-4e85-a452-0b431f0ee252.
+[I 2024-05-03 06:21:57.905 ServerApp] Connecting to kernel d8aa035b-5126-4f6f-90f9-b291848127ff.
+[I 2024-05-03 06:25:49.830 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+[I 2024-05-03 06:28:19.805 ServerApp] Kernel restarted: d8aa035b-5126-4f6f-90f9-b291848127ff
+[I 2024-05-03 06:28:21.160 ServerApp] Starting buffering for d8aa035b-5126-4f6f-90f9-b291848127ff:8fdc027e-e144-48cd-9721-f57d89d69df2
+[I 2024-05-03 06:28:21.335 ServerApp] Connecting to kernel d8aa035b-5126-4f6f-90f9-b291848127ff.
+[I 2024-05-03 06:28:21.335 ServerApp] Restoring connection for d8aa035b-5126-4f6f-90f9-b291848127ff:8fdc027e-e144-48cd-9721-f57d89d69df2
+Submitted batch job 30260733
+Submitted batch job 30260768
+[I 2024-05-03 06:29:50.915 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30260780
+Submitted batch job 30260785
+[I 2024-05-03 06:31:51.824 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30260803
+[I 2024-05-03 06:33:52.354 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30260818
+Submitted batch job 30260832
+[I 2024-05-03 06:35:52.924 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30260836
+Submitted batch job 30260846
+[I 2024-05-03 06:37:56.419 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30260851
+Submitted batch job 30260856
+[I 2024-05-03 06:39:56.984 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30260858
+Submitted batch job 30260861
+[I 2024-05-03 06:41:57.563 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30260864
+Submitted batch job 30260870
+[I 2024-05-03 06:44:29.481 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30260872
+Submitted batch job 30260875
+[I 2024-05-03 06:46:29.973 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+Submitted batch job 30260883
+[I 2024-05-03 06:48:30.498 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+[I 2024-05-03 06:50:31.354 ServerApp] Saving file at /scripts/10_Deploy_SLURM_EXPANSE_chr7_a2_pre-chunked.ipynb
+[I 2024-05-03 08:05:00.903 ServerApp] Starting buffering for d8aa035b-5126-4f6f-90f9-b291848127ff:8fdc027e-e144-48cd-9721-f57d89d69df2
+[I 2024-05-03 08:05:00.954 ServerApp] Starting buffering for b49440c2-7f3e-4e85-a452-0b431f0ee252:7afceea3-5ce0-4825-8008-97adf59d3777
+slurmstepd: error: *** JOB 30235411 ON exp-1-07 CANCELLED AT 2024-05-03T09:46:15 DUE TO TIME LIMIT ***
+[C 2024-05-03 09:46:15.839 ServerApp] received signal 15, stopping
+[I 2024-05-03 09:46:15.918 ServerApp] Shutting down 5 extensions
+[I 2024-05-03 09:46:15.919 ServerApp] Shutting down 2 kernels
+[I 2024-05-03 09:46:15.919 ServerApp] Kernel shutdown: d8aa035b-5126-4f6f-90f9-b291848127ff
+[I 2024-05-03 09:46:15.920 ServerApp] Kernel shutdown: b49440c2-7f3e-4e85-a452-0b431f0ee252

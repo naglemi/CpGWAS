@@ -1,0 +1,27 @@
+PLINK v2.00a4.6LM 64-bit Intel (29 Aug 2023)
+Options in effect:
+  --indep-pairwise 100 5 0.1
+  --maf 0.05
+  --out snps
+  --pfile dlpfc_gwas
+
+Hostname: compute-103.cm.cluster
+Working directory: /dcs04/lieber/statsgen/shizhong/database/libd/genotype/postmortem/topmed/merge_H650_1M_2.5M_5M/EA_AA/all/pca_wgbs/dlpfc
+Start time: Sat Mar  2 18:00:39 2024
+
+Random number seed: 1709420439
+128474 MiB RAM detected, ~111932 available; reserving 64237 MiB for main
+workspace.
+Using up to 2 compute threads.
+164 samples (0 females, 0 males, 164 ambiguous; 164 founders) loaded from
+dlpfc_gwas.psam.
+6857627 variants loaded from dlpfc_gwas.pvar.
+Note: No phenotype data present.
+Calculating allele frequencies... done.
+974599 variants removed due to allele frequency threshold(s)
+(--maf/--max-maf/--mac/--max-mac).
+5883028 variants remaining after main filters.
+--indep-pairwise (2 compute threads): 5754555/5883028 variants removed.
+Variant lists written to snps.prune.in and snps.prune.out .
+
+End time: Sat Mar  2 18:01:16 2024
