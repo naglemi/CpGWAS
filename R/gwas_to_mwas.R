@@ -100,6 +100,10 @@ process_model <- function(methylationBase, my_SNPs, summary_stats) {
   # w <- methylationBase@snpWeights[relevant_SNP_indices]
   
   # Ensuring the order matches and handling unmatched positions
+  
+  # Check my_SNPs
+  #recover()
+  
   if(!identical(summary_stats_sub$BP, SNP_split_dt$post)){
     # Order summary_stats_sub by BP
     summary_stats_sub <- summary_stats_sub[order(summary_stats_sub$BP), ]
@@ -138,11 +142,34 @@ process_model <- function(methylationBase, my_SNPs, summary_stats) {
   #     methylationBase@snpWeights[not_matching] * -1
   # }
   
+  #recover()
+  
+  #print(SNP_split_dt)
+  #print(summary_stats_sub)
+  #cat("\n")
+  
   # need to make sure direction is right but use SNP_split_dt now
-  if(!identical(SNP_split_dt$alt, summary_stats_sub$A2) |
-     !identical(SNP_split_dt$ref, summary_stats_sub$A1)){
+  #if(!identical(SNP_split_dt$alt, summary_stats_sub$A2) |
+  #   !identical(SNP_split_dt$ref, summary_stats_sub$A1)){
     #recover()
-    not_matching <- which(SNP_split_dt$alt != summary_stats_sub$A2)
+  #  not_matching <- which(SNP_split_dt$alt != summary_stats_sub$A2)
+
+  these_SNPs_pvar_dt <- my_SNPs$pvar_dt[relevant_SNP_indices]
+  
+  
+  if(!all(these_SNPs_pvar_dt$POS == summary_stats_sub$BP)) {
+    stop("ERROR! Mismatch between reference dataset SNPs and summary statistics.")
+  }
+  
+  # need to make sure direction is right but use SNP_split_dt now
+  if(!identical(these_SNPs_pvar_dt$ALT, summary_stats_sub$A2) |
+     !identical(these_SNPs_pvar_dt$REF, summary_stats_sub$A1)){
+    #recover()
+    print("We're flipping alleles")
+    print(SNP_split_dt)
+    print(summary_stats_sub)
+    cat("\n")
+    not_matching <- which(summary_stats_sub$A2 != these_SNPs_pvar_dt$ALT)
     # Flip our data to match the summary stats for these
     summary_stats_A1_flipped <- summary_stats_sub$A1[not_matching]
     summary_stats_A2_flipped <- summary_stats_sub$A2[not_matching]
@@ -155,6 +182,9 @@ process_model <- function(methylationBase, my_SNPs, summary_stats) {
     summary_stats_sub$BETA[not_matching] <- summary_stats_sub$BETA[not_matching] * -1
   }
   
+  
+  
+  
   # Subset the genotype data
   G <- pgenlibr::ReadList(my_SNPs$pgen,
                           variant_subset = relevant_SNP_indices)
@@ -163,9 +193,12 @@ process_model <- function(methylationBase, my_SNPs, summary_stats) {
                    w = methylationBase@snpWeights,
                    G = G)
   
-  MWASmodel(methylationBase,
-            #summary_stats_sub,
-            mwas_out)
+  # Too bulky
+  #MWASmodel(methylationBase,
+  #          #summary_stats_sub,
+  #          mwas_out)
+  
+  return(mwas_out)
 }
 
 

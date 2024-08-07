@@ -355,7 +355,7 @@ loadSNPData <- function(pvar_path, pgen_path, psam_path) {
   pvar_pointer <- pgenlibr::NewPvar(pvar_path)
   list(
     pvar_pointer = pvar_pointer,
-    pvar_dt = fread(pvar_path)[, 1:3],
+    pvar_dt = fread(pvar_path)[, 1:5],
     pgen = pgenlibr::NewPgen(pgen_path, pvar = pvar_pointer),
     psam = fread(psam_path)
   )
