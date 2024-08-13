@@ -2,12 +2,13 @@
 #'
 #' Performs methylation-wide association study analysis.
 #'
-#' @param z Z-scores for effect of SNPs on external phenotype.
+#' @param z Z-scores (log(OR)/SE) for effect of SNPs on external phenotype.
 #' @param w Weights for effect of SNPs on methylation.
 #' @param G SNP genotype matrix.
 #' @return Named vector containing z-score, p-value, and the number of weights.
 #' @export
 mwas <- function(z, w, G){   
+  #recover()
   if(length(w) > 1){
     #recover()
     # z-scores for effect of SNPs on external phenotype
@@ -73,16 +74,20 @@ MWASmodel <- function(methylationBase,
 #' @importFrom pgenlibr ReadList
 process_model <- function(methylationBase, my_SNPs, summary_stats) {
   
+  #recover()
   SNP_split <- stringr::str_split_fixed(names(methylationBase@snpWeights), ":", 4)
-  SNP_split[,1] <- gsub("chr", "", SNP_split[,1])
+
   # Convert SNP_split to data.table and set integer types
-  SNP_split_dt <- as.data.table(SNP_split)
-  setnames(SNP_split_dt, c("chr", "post", "ref", "alt"))
-  SNP_split_dt[, `:=`(chr = as.integer(chr), post = as.integer(post))]
+  SNP_split_dt <- data.table(chr = as.integer(gsub("chr", "", SNP_split[,1])),
+                             post = as.integer(SNP_split[, 2]),
+                             ref = SNP_split[, 3],
+                             alt = SNP_split[, 4],
+                             key = c("chr", "post"))
   
-  setkey(SNP_split_dt, chr, post)
+  #setkey(SNP_split_dt, chr, post)
   
   # Use a join with the keys
+  #recover()
   relevant_SNP_indices <- my_SNPs$pvar_dt[SNP_split_dt, on = .(`#CHROM` = chr, POS = post), which = TRUE, nomatch = 0]
   # We only want summary stats for the specific SNPs contributing to this
   #. methylation site in our model
@@ -161,15 +166,31 @@ process_model <- function(methylationBase, my_SNPs, summary_stats) {
     stop("ERROR! Mismatch between reference dataset SNPs and summary statistics.")
   }
   
+  #recover()
   # need to make sure direction is right but use SNP_split_dt now
   if(!identical(these_SNPs_pvar_dt$ALT, summary_stats_sub$A2) |
      !identical(these_SNPs_pvar_dt$REF, summary_stats_sub$A1)){
     #recover()
-    print("We're flipping alleles")
-    print(SNP_split_dt)
-    print(summary_stats_sub)
+    #print("We're flipping alleles")
+    #print(SNP_split_dt)
+    #print(summary_stats_sub)
     cat("\n")
     not_matching <- which(summary_stats_sub$A2 != these_SNPs_pvar_dt$ALT)
+    
+    if (length(not_matching) > 0) {
+      cat("\nWe're flipping alleles due to non-matching entries:\n")
+      
+      # Print non-matching rows from summary_stats_sub
+      print("Non-matching entries in summary_stats_sub:")
+      print(summary_stats_sub[not_matching,])
+      
+      # Print non-matching rows from these_SNPs_pvar_dt
+      print("Non-matching entries in these_SNPs_pvar_dt:")
+      print(these_SNPs_pvar_dt[not_matching,])
+    } else {
+      cat("All alleles match.\n")
+    }
+    
     # Flip our data to match the summary stats for these
     summary_stats_A1_flipped <- summary_stats_sub$A1[not_matching]
     summary_stats_A2_flipped <- summary_stats_sub$A2[not_matching]
@@ -179,7 +200,7 @@ process_model <- function(methylationBase, my_SNPs, summary_stats) {
     # actually instead flip in summary_stats_sub
     #methylationBase@snpWeights[not_matching] <-
     #  methylationBase@snpWeights[not_matching] * -1
-    summary_stats_sub$BETA[not_matching] <- summary_stats_sub$BETA[not_matching] * -1
+    summary_stats_sub$Z[not_matching] <- summary_stats_sub$Z[not_matching] * -1
   }
   
   
@@ -189,7 +210,7 @@ process_model <- function(methylationBase, my_SNPs, summary_stats) {
   G <- pgenlibr::ReadList(my_SNPs$pgen,
                           variant_subset = relevant_SNP_indices)
   
-  mwas_out <- mwas(z = summary_stats_sub$BETA,
+  mwas_out <- mwas(z = summary_stats_sub$Z,
                    w = methylationBase@snpWeights,
                    G = G)
   
@@ -259,6 +280,7 @@ clean_and_standardize_colnames <- function(summary_stats) {
   colnames(summary_stats) <- gsub("LogOR", "logOR", colnames(summary_stats))
   colnames(summary_stats) <- gsub("StdErrLogOR", "SE", colnames(summary_stats))
   colnames(summary_stats) <- gsub("StdErrlogOR", "SE", colnames(summary_stats))
+  colnames(summary_stats) <- gsub("BETA", "logOR", colnames(summary_stats))
   
   # If there's no logOR columns, create one, which will be log of OR column
   # but we only do this if there's already an OR column
@@ -269,8 +291,11 @@ clean_and_standardize_colnames <- function(summary_stats) {
   }
   
   #colnames(summary_stats) <- gsub("logOR", "BETA", colnames(summary_stats))
-  if(!"BETA" %in% colnames(summary_stats)) {
-    summary_stats[, BETA := logOR/SE]
+  if(!"Z" %in% colnames(summary_stats)) {
+    print("Setting Z")
+    summary_stats[, Z := logOR/SE]
+  } else {
+    print("Z set already")
   }
   # Convert summary_stats to a keyed data.table for fast lookups
 
