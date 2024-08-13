@@ -166,15 +166,31 @@ process_model <- function(methylationBase, my_SNPs, summary_stats) {
     stop("ERROR! Mismatch between reference dataset SNPs and summary statistics.")
   }
   
+  recover()
   # need to make sure direction is right but use SNP_split_dt now
   if(!identical(these_SNPs_pvar_dt$ALT, summary_stats_sub$A2) |
      !identical(these_SNPs_pvar_dt$REF, summary_stats_sub$A1)){
     #recover()
-    print("We're flipping alleles")
-    print(SNP_split_dt)
-    print(summary_stats_sub)
+    #print("We're flipping alleles")
+    #print(SNP_split_dt)
+    #print(summary_stats_sub)
     cat("\n")
     not_matching <- which(summary_stats_sub$A2 != these_SNPs_pvar_dt$ALT)
+    
+    if (length(not_matching) > 0) {
+      cat("\nWe're flipping alleles due to non-matching entries:\n")
+      
+      # Print non-matching rows from summary_stats_sub
+      print("Non-matching entries in summary_stats_sub:")
+      print(summary_stats_sub[not_matching,])
+      
+      # Print non-matching rows from these_SNPs_pvar_dt
+      print("Non-matching entries in these_SNPs_pvar_dt:")
+      print(these_SNPs_pvar_dt[not_matching,])
+    } else {
+      cat("All alleles match.\n")
+    }
+    
     # Flip our data to match the summary stats for these
     summary_stats_A1_flipped <- summary_stats_sub$A1[not_matching]
     summary_stats_A2_flipped <- summary_stats_sub$A2[not_matching]
