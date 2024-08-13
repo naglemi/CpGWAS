@@ -166,7 +166,7 @@ process_model <- function(methylationBase, my_SNPs, summary_stats) {
     stop("ERROR! Mismatch between reference dataset SNPs and summary statistics.")
   }
   
-  recover()
+  #recover()
   # need to make sure direction is right but use SNP_split_dt now
   if(!identical(these_SNPs_pvar_dt$ALT, summary_stats_sub$A2) |
      !identical(these_SNPs_pvar_dt$REF, summary_stats_sub$A1)){
