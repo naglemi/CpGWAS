@@ -116,7 +116,7 @@ process_model <- function(methylationBase, my_SNPs, summary_stats) {
       # Identify positions in SNP_split not found in summary_stats_sub$BP
       unmatched_positions <- !SNP_split_dt$post %in% summary_stats_sub$BP
       if (any(unmatched_positions)) {
-        #recover()
+        recover()
         # Remove rows from SNP_split where positions do not match any in summary_stats_sub$BP
         SNP_split_dt <- SNP_split_dt[!unmatched_positions, ]
         methylationBase@snpWeights <- methylationBase@snpWeights[!unmatched_positions]
@@ -222,6 +222,168 @@ process_model <- function(methylationBase, my_SNPs, summary_stats) {
   return(mwas_out)
 }
 
+
+#' Process a single MWAS model given weigths in matrix format
+#'
+#' @param this_cg_data matrix with six columns for chr, cg, snp, snp effect, A1, A2
+#' @param my_SNPs SNP data
+#' @param summary_stats Data table of summary statistics
+#' @return MWASmodel object
+#' @export
+#' @importFrom stringr str_split_fixed
+#' @importFrom data.table as.data.table setnames setkey
+#' @importFrom data.table `%chin%`
+#' @importFrom pgenlibr ReadList
+process_model_csv <- function(this_cg_data, my_SNPs, summary_stats) {
+  
+  # #recover()
+  # SNP_split <- stringr::str_split_fixed(names(methylationBase@snpWeights), ":", 4)
+  # 
+  # # Convert SNP_split to data.table and set integer types
+  # SNP_split_dt <- data.table(chr = as.integer(gsub("chr", "", SNP_split[,1])),
+  #                            post = as.integer(SNP_split[, 2]),
+  #                            ref = SNP_split[, 3],
+  #                            alt = SNP_split[, 4],
+  #                            key = c("chr", "post"))
+  
+  #setkey(SNP_split_dt, chr, post)
+  
+  # Use a join with the keys
+  #recover()
+  # relevant_SNP_indices <- my_SNPs$pvar_dt[this_cg_data, on = .(`#CHROM` = chr, POS = features), which = TRUE, nomatch = 0]
+  # # We only want summary stats for the specific SNPs contributing to this
+  # #. methylation site in our model
+  # relevant_ids <- my_SNPs$pvar_dt$ID[relevant_SNP_indices]
+  # 
+  # # Subset summary_stats in constant time using a keyed join
+  # #recover()
+  # summary_stats_sub <- summary_stats[relevant_ids, nomatch = 0]
+  
+  summary_stats_sub <- summary_stats[which(summary_stats$BP %in% this_cg_data$features), ]
+  if(nrow(summary_stats_sub) == 0){ # SNPs in MWAS stage 1 model weights not found in summary stats
+    return(c(z=NA, p=NA, n=NA))
+  }
+  
+  #summary_stats_sub <- summary_stats[SNP %chin% relevant_ids]
+  # # z is a vector of the SNP weights from GWAS summary statistics
+  # z <- summary_stats_sub$logOR
+  # 
+  # # w is a vector of the SNP weights from the CpGWAS model
+  # w <- methylationBase@snpWeights[relevant_SNP_indices]
+  
+  # Ensuring the order matches and handling unmatched positions
+  
+  # Check my_SNPs
+  #recover()
+  
+  if(!identical(summary_stats_sub$BP, this_cg_data$features)){
+    # Order summary_stats_sub by BP
+    summary_stats_sub <- summary_stats_sub[order(summary_stats_sub$BP), ]
+    if(!identical(summary_stats_sub$BP, this_cg_data$features)){
+      # Identify positions in SNP_split not found in summary_stats_sub$BP
+      unmatched_positions <- !this_cg_data$features %in% summary_stats_sub$BP
+      if (any(unmatched_positions)) {
+        recover()
+        # Remove rows from SNP_split where positions do not match any in summary_stats_sub$BP
+        this_cg_data <- this_cg_data[!unmatched_positions, ]
+      }
+      # Check again after removing unmatched positions
+      if(!identical(summary_stats_sub$BP, this_cg_data$features)) {
+        stop("SNP order does not match even after removing unmatched positions. This should not happen. Code is broken.")
+      }
+    }
+  }
+  
+  
+  # # need to make sure direction is right
+  # if(!identical(SNP_split[, 4], summary_stats_sub$A2) |
+  #    !identical(SNP_split[, 3], summary_stats_sub$A1)){
+  #   recover()
+  #   not_matching <- which(SNP_split[, 4] != summary_stats_sub$A2)
+  #   # Flip our data to match the summary stats for these
+  #   summary_stats_ref_flipped <- SNP_split[, 3][not_matching]
+  #   summary_stats_alt_flipped <- SNP_split[, 4][not_matching]
+  #   SNP_split[, 3][not_matching] <- summary_stats_alt_flipped
+  #   SNP_split[, 4][not_matching] <- summary_stats_ref_flipped
+  #   methylationBase@snpWeights[not_matching] <-
+  #     methylationBase@snpWeights[not_matching] * -1
+  # }
+  
+  #recover()
+  
+  #print(SNP_split_dt)
+  #print(summary_stats_sub)
+  #cat("\n")
+  
+  # need to make sure direction is right but use SNP_split_dt now
+  #if(!identical(SNP_split_dt$alt, summary_stats_sub$A2) |
+  #   !identical(SNP_split_dt$ref, summary_stats_sub$A1)){
+  #recover()
+  #  not_matching <- which(SNP_split_dt$alt != summary_stats_sub$A2)
+  
+  relevant_SNP_indices <- which(my_SNPs$pvar_dt$POS %in% this_cg_data$features)
+  these_SNPs_pvar_dt <- my_SNPs$pvar_dt[relevant_SNP_indices]
+  
+  
+  if(!all(these_SNPs_pvar_dt$POS == summary_stats_sub$BP)) {
+    stop("ERROR! Mismatch between reference dataset SNPs and summary statistics.")
+  }
+  
+  #recover()
+  # need to make sure direction is right but use SNP_split_dt now
+  if(!identical(these_SNPs_pvar_dt$ALT, summary_stats_sub$A2) |
+     !identical(these_SNPs_pvar_dt$REF, summary_stats_sub$A1)){
+    #recover()
+    #print("We're flipping alleles")
+    #print(SNP_split_dt)
+    #print(summary_stats_sub)
+    cat("\n")
+    not_matching <- which(summary_stats_sub$A2 != these_SNPs_pvar_dt$ALT)
+    
+    if (length(not_matching) > 0) {
+      cat("\nWe're flipping alleles due to non-matching entries:\n")
+      
+      # Print non-matching rows from summary_stats_sub
+      print("Non-matching entries in summary_stats_sub:")
+      print(summary_stats_sub[not_matching,])
+      
+      # Print non-matching rows from these_SNPs_pvar_dt
+      print("Non-matching entries in these_SNPs_pvar_dt:")
+      print(these_SNPs_pvar_dt[not_matching,])
+    } else {
+      cat("All alleles match.\n")
+    }
+    
+    # Flip our data to match the summary stats for these
+    summary_stats_A1_flipped <- summary_stats_sub$A1[not_matching]
+    summary_stats_A2_flipped <- summary_stats_sub$A2[not_matching]
+    summary_stats_sub$A1[not_matching] <- summary_stats_A2_flipped
+    summary_stats_sub$A2[not_matching] <- summary_stats_A1_flipped
+    
+    # actually instead flip in summary_stats_sub
+    #methylationBase@snpWeights[not_matching] <-
+    #  methylationBase@snpWeights[not_matching] * -1
+    summary_stats_sub$Z[not_matching] <- summary_stats_sub$Z[not_matching] * -1
+  }
+  
+  
+  
+  
+  # Subset the genotype data
+  G <- pgenlibr::ReadList(my_SNPs$pgen,
+                          variant_subset = relevant_SNP_indices)
+  
+  mwas_out <- mwas(z = summary_stats_sub$Z,
+                   w = this_cg_data$coef,
+                   G = G)
+  
+  # Too bulky
+  #MWASmodel(methylationBase,
+  #          #summary_stats_sub,
+  #          mwas_out)
+  
+  return(mwas_out)
+}
 
 #' MWASresults class
 #' @export
@@ -330,7 +492,7 @@ process_MWAS_models <- function(my_rds, my_SNPs, paths, summary_stats_path, rds_
 
   for (i in seq_along(my_rds@models)) {
     this_MethylationBase <- my_rds@models[[i]]
-    MWASmodels[[i]] <- process_model(this_MethylationBase, my_SNPs, summary_stats)
+    MWASmodels[[i]] <- process_model_csv(this_MethylationBase, my_SNPs, summary_stats)
     #pb$tick()
   }
   
