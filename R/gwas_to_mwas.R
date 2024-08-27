@@ -116,7 +116,7 @@ process_model <- function(methylationBase, my_SNPs, summary_stats) {
       # Identify positions in SNP_split not found in summary_stats_sub$BP
       unmatched_positions <- !SNP_split_dt$post %in% summary_stats_sub$BP
       if (any(unmatched_positions)) {
-        recover()
+        #recover()
         # Remove rows from SNP_split where positions do not match any in summary_stats_sub$BP
         SNP_split_dt <- SNP_split_dt[!unmatched_positions, ]
         methylationBase@snpWeights <- methylationBase@snpWeights[!unmatched_positions]
