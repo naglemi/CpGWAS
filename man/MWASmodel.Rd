@@ -4,14 +4,14 @@
 \alias{MWASmodel}
 \title{MWASmodel constructor}
 \usage{
-MWASmodel(methylationBase, summary_stats, mwas_out)
+MWASmodel(methylationBase, mwas_out)
 }
 \arguments{
 \item{methylationBase}{MethylationBase object}
 
-\item{summary_stats}{Data table of summary statistics}
-
 \item{mwas_out}{Numeric vector of MWAS output}
+
+\item{summary_stats}{Data table of summary statistics}
 }
 \value{
 MWASmodel object

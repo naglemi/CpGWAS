@@ -7,10 +7,10 @@
 process_MWAS_models(
   my_rds,
   my_SNPs,
-  summary_stats,
   paths,
   summary_stats_path,
-  output_path
+  rds_path,
+  summary_stats = NULL
 )
 }
 \arguments{
@@ -18,13 +18,11 @@ process_MWAS_models(
 
 \item{my_SNPs}{SNP data}
 
-\item{summary_stats}{Data table of summary statistics}
-
 \item{paths}{List of paths to data files}
 
 \item{summary_stats_path}{Path to summary statistics file}
 
-\item{output_path}{Path to output file}
+\item{summary_stats}{Data table of summary statistics}
 }
 \value{
 MWASresults object
