@@ -7,7 +7,7 @@
 mwas(z, w, G)
 }
 \arguments{
-\item{z}{Z-scores for effect of SNPs on external phenotype.}
+\item{z}{Z-scores (log(OR)/SE) for effect of SNPs on external phenotype.}
 
 \item{w}{Weights for effect of SNPs on methylation.}
 
