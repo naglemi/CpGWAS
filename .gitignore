@@ -16,3 +16,57 @@ data/stage2_testing/paths.txt
 20-IN_sanity_test_fold_id
 20-IN_sanity_test_Xmatrix
 20-IN_sanity_test_y
+
+# Ignore Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore Untitled notebooks and scripts
+Untitled*.ipynb
+untitled*
+*.r
+
+# Ignore Slurm output files
+slurm_output_*.out
+
+# Ignore slurm_scripts directory
+slurm_scripts/
+
+# Ignore temporary log files
+temp.log
+worker_log_*.txt
+process_log*.txt
+
+# Ignore temporary directories and files
+temp_temp/
+output/
+plink2/
+*.bed
+*.bim
+*.fam
+*.grm.*
+test_out.txt
+
+# Ignore additional unwanted files and directories
+annovar.latest.tar
+error_dump_*.rda.rda
+gcta_output/
+heritability_inspection/
+heritability_results/
+gwas_results/
+hail-*.log
+id
+log_*.txt
+timing_measurements*.txt
+run_heritability_stashed.R
+
+*.txt
+plink*
+*.out
+*.log
+gcta_output*
+all_gcta_output*
+
+41-OUT_heritability_*
+*.yml
+*note.txt*
+*41-OUT*
