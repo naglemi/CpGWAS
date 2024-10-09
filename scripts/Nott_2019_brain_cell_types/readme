@@ -1,0 +1,16 @@
+# promoter annotation
+# copied from TableS5 sheet1, NeuN_active_promoter=TRUE, with ensemble genes id
+neuron_promoter_anno.bed
+
+# interactome annotation
+awk 'BEGIN{OFS="\t"}NR>1{print $1,$2,$3,$4,$5,$6}' Neuronal_interactome > Neuronal_interactome_way1.bed
+awk 'BEGIN{OFS="\t"}NR>1{print $4,$5,$6,$1,$2,$3}' Neuronal_interactome > Neuronal_interactome_way2.bed
+
+awk 'BEGIN{OFS="\t"}NR>1{print $1,$2,$3}' Neuronal_interactome | sort | uniq > Neuronal_interactome1.bed
+awk 'BEGIN{OFS="\t"}NR>1{print $4,$5,$6}' Neuronal_interactome | sort | uniq > Neuronal_interactome2.bed
+bedtools intersect -a Neuronal_interactome1.bed -b neuron_promoter_anno.bed -wa -wb > Neuronal_interactome1_anno.bed
+bedtools intersect -a Neuronal_interactome2.bed -b neuron_promoter_anno.bed -wa -wb > Neuronal_interactome2_anno.bed
+
+perl interactome_anno.pl
+
+
